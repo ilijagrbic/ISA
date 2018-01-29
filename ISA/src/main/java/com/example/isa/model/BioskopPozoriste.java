@@ -19,8 +19,8 @@ public class BioskopPozoriste {
 	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
 	
-	//@OneToOne
-	//Repertoar
+	@OneToOne(fetch = FetchType.EAGER)
+	private Repertoire repertoire;
 	
 	//@OneToMany
 	//Promotivne karte
