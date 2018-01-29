@@ -1,4 +1,4 @@
-package model;
+package com.example.isa.model;
 
 import javax.persistence.*;
 
