@@ -18,7 +18,8 @@ public abstract class User {
 	@Column(name="email", unique = true, nullable = false)
 	protected String email;
 	
-	//City
+	//City - dodat grad 
+	protected String city;
 	
 	protected String phone;
 	
@@ -27,6 +28,8 @@ public abstract class User {
 	@Column(nullable = false)
 	protected String password;
 
+
+	
 	public User() {
 		
 	}
@@ -85,6 +88,14 @@ public abstract class User {
 
 	public void setActiaved(boolean actiaved) {
 		this.actiaved = actiaved;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	
