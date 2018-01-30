@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sr">
+    	
+    <head>
+    	
+        <script src="js/angular.js"></script>
+		<script src="js/angular-resource.js"></script>
+		<script src="https://cdn.jsdelivr.net/angular.ui-router/1.0.1/stateEvents.js"></script>
+	    <script src="js/angular-ui-router.js"></script>
+	    <script src="js/ngStorage.js"></script>
+	    <script src="js/angular-jwt.js"></script>
+		<script src="js/authentication.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/styleRegistration.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="img/logo-icon.png" />
+		<title>Registracija</title>
+</head>
+<body>
+
+
+	<div id="fullscreen_bg" class="fullscreen_bg" >
+		<div class="container">
+			<div  class="card card-containerReg" ng-init="user={email:'andjelovskiolja@gmail.com',name:'Olja'}">
+				<h2 class='login_title text-center'>
+					Registracija <a href="Welcome">Odustani</a>
+				</h2>
+				<hr>
+				<form class="form-signin" id="registrationForm" ng-app="" ng-init="user={email:'andjelovskiolja@gmail.com',name:'Olja'}">
+			
+					<p class="input_title">E-mail</p>
+					<input type="text" id="inputEmail" class="registration_box"
+					name="email" ng-model="user.email">
+
+			
+					<p class="input_title">Lozinka</p>
+					<input type="text" id="inputPassword" class="registration_box"
+					name="password" ng-model="user.password">
+
+					<p class="input_title">Ponovi lozinku</p>
+					<input type="text" id="inputRepeatPassword" class="registration_box"
+					name="repeatPassword" ng-model="user.repeatPassword">
+
+					<p class="input_title">Ime</p>
+					<input type="text" id="inputFirstName" class="registration_box"
+					name="firstName" ng-model="user.name">
+
+					<p class="input_title">Prezime</p>
+					<input type="text" id="inputSecondName" class="registration_box"
+					name="lastName" ng-model="user.surname">
+
+					<p class="input_title">Grad</p>
+					<input type="text" id="inputCity" class="registration_box"
+					name="city" ng-model="user.city">
+
+					<p class="input_title">Telefon</p>
+					<input type="text" id="inputPhoneNumber" class="registration_box"
+					name="phoneNumber" ng-model="user.phone">
+
+
+					<button class="btnReg btn-lg btn-primary" type="submit" id="registration" ng-click="">Registruj se</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

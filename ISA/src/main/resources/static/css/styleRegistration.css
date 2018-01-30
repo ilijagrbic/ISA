@@ -1,0 +1,183 @@
+ body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+  }
+  .fullscreen_bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url("../img/login.jpg");
+  }
+  
+  .registration_box{
+    background:#f7f7f7;
+    border:3px solid #060202;
+    padding-left: 15px;
+    margin-bottom: 5px;
+    }
+.login_box{
+    background:#f7f7f7;
+    border:3px solid #060202;
+    padding-left: 15px;
+    margin-bottom:25px;
+    }
+.input_title{
+    color:rgba(164, 164, 164, 0.9);
+    padding-left:3px;
+        margin-bottom: 2px;
+    }
+.input_titleRegistration{
+    color:rgba(164, 164, 164, 0.9);
+    padding-left:3px;
+        margin-bottom: 1px;
+    }
+hr{
+    width:100%;
+}
+    
+.welcome{
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    color:#FFFFFF;
+    margin-bottom:25px;
+    margin-top:50px;
+
+}
+
+.login_title{
+    font-family: font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    color:rgb(255, 255, 255);
+}
+
+.card-containerReg.card {
+     
+    max-width: 350px;
+
+}
+
+.card-container.card {
+    margin-top: 100px;
+    max-width: 350px;
+
+}
+
+.btn {
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    height: 40px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    border-radius:0;
+    background:#858e94;
+    height: 55px;
+    margin-bottom:10px;
+}
+
+a {
+	color: white;
+	float: right
+}
+.btnReg {
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    height: 35px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    border-radius:0;
+    background:#858e94;
+    height: 55px;
+    margin-bottom:10px;
+}
+
+/*
+ * Card component
+ */
+.card {
+    background-color: rgba(39, 37, 37, 0.97);
+    /* just in case there no content*/
+    padding: 1px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 15%x;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+select {
+  font-size: 16px;
+  	width: 100%;
+   height: 35px;
+   overflow: hidden;
+   background: url(new_arrow.png) no-repeat right #ddd;
+   border: 1px solid #ccc;
+   position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+   }
+
+/*
+ * Form styles
+ */
+.form-signin #inputRules,
+.form-signin #inputReceiver,
+.form-signin #inputImage,
+.form-signin #inputDescription,
+.form-signin #inputTitle,
+.form-signin #inputContent,
+.form-signin #inputDate,
+.form-signin #inputFirstName,
+.form-signin #inputSecondName,
+.form-signin #inputEmail,
+.form-signin #inputCity,
+.form-signin #inputRepeatPassword,
+.form-signin #inputPhoneNumber,
+.form-signin #inputUsername,
+.form-signin #inputUsername,
+.form-signin #inputPassword {
+    direction: ltr;
+    height: 35px;
+    font-size: 16px;
+}
+
+
+.form-signin input[type=password],
+.form-signin input[type=text],
+.form-signin button {
+    width: 100%;
+    display: block;
+
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    border-color: rgb(104, 145, 162);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+}
+
+
+
