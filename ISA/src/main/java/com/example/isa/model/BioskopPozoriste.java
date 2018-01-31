@@ -1,6 +1,18 @@
 package com.example.isa.model;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
+import com.example.isa.model.users.AdmUser;
 
 @Entity
 public class BioskopPozoriste {
@@ -25,9 +37,8 @@ public class BioskopPozoriste {
 	//@OneToMany
 	//Promotivne karte
 	
-	//admini
-	
-	//rekviziti
+	@ManyToMany
+	private List<AdmUser> admini;
 	
 	public BioskopPozoriste() {
 		

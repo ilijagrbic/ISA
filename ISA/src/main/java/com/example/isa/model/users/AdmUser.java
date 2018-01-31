@@ -1,6 +1,13 @@
 package com.example.isa.model.users;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
+
+import com.example.isa.model.BioskopPozoriste;
 
 public class AdmUser extends User{
 
@@ -8,7 +15,8 @@ public class AdmUser extends User{
 	@Enumerated(EnumType.STRING)
 	private AdminType type;
 	
-	//srediti ovde dosta
+	@ManyToMany
+	private List<BioskopPozoriste> bioskopi;
 	
 	private boolean firstTime = true;
 
