@@ -25,6 +25,10 @@ public class BioskopPozoriste {
 	//@OneToMany
 	//Promotivne karte
 	
+	//admini
+	
+	//rekviziti
+	
 	public BioskopPozoriste() {
 		
 	}

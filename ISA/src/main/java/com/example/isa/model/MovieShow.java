@@ -1,5 +1,7 @@
 package com.example.isa.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,17 +21,15 @@ public class MovieShow {
 	
 	private String description;
 	
-	//director
+	private String director;
 	
-	//glumci
+	@ManyToMany
+	private List<Glumac> glumci;//proveri kako ide manymany
 	
-	//genre
-	
-	//manymany
-	//sale
-	
-	//manymany
-	//termini
+	private String genre;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Projekcija> projekcije;
 	
 	private double price;
 	

@@ -8,6 +8,8 @@ public class AdmUser extends User{
 	@Enumerated(EnumType.STRING)
 	private AdminType type;
 	
+	//srediti ovde dosta
+	
 	private boolean firstTime = true;
 
 	public AdmUser() {

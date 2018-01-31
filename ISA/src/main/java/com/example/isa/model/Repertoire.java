@@ -12,10 +12,41 @@ public class Repertoire {
     private long id;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "repertoar")
-	private List<MovieShow> projections;
+	private List<MovieShow> movies;
 	
 	@OneToOne(fetch = FetchType.EAGER, optional = false)
-	private BioskopPozoriste restaurant;
+	private BioskopPozoriste bioskop;
+
+	public Repertoire() {
+		super();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<MovieShow> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(List<MovieShow> movies) {
+		this.movies = movies;
+	}
+
+	public BioskopPozoriste getBioskop() {
+		return bioskop;
+	}
+
+	public void setBioskop(BioskopPozoriste bioskop) {
+		this.bioskop = bioskop;
+	}
+
+
+	
 	
 	
 }
