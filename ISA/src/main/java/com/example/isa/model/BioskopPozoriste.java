@@ -32,7 +32,7 @@ public class BioskopPozoriste {
 	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Repertoire repertoire;
 	
 	//@OneToMany
