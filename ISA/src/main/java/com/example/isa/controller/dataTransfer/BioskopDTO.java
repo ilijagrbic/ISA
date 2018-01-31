@@ -1,25 +1,10 @@
-package com.example.isa.model;
+package com.example.isa.controller.dataTransfer;
 
-import java.util.List;
+import com.example.isa.model.BioskopPozoriste;
+import com.example.isa.model.BioskopPozoristeType;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-
-import com.example.isa.model.users.AdmUser;
-
-@Entity
-public class BioskopPozoriste {
-
-	@Id
-	@GeneratedValue
+public class BioskopDTO {
+	
 	private long id;
 	
 	private String name;
@@ -28,18 +13,7 @@ public class BioskopPozoriste {
 	
 	private String address;
 	
-	@Column(nullable=false)
-	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
-	
-	@OneToOne(fetch = FetchType.EAGER)
-	private Repertoire repertoire;
-	
-	//@OneToMany
-	//Promotivne karte
-	
-	@ManyToMany
-	private List<AdmUser> admini;
 	
 	private int bronzeTreshold;
 	
@@ -47,19 +21,33 @@ public class BioskopPozoriste {
 	
 	private int goldTreshold;
 	
-	public BioskopPozoriste() {
+	public BioskopPozoriste getBioskop() {
 		
-	}
-	
-	public BioskopPozoriste update(BioskopPozoriste updated) {
-		this.name=updated.getName();
-		this.description=updated.getDescription();
-		this.address=updated.getAddress();
-		this.type=updated.getType();
+		BioskopPozoriste retVal = new BioskopPozoriste();
+		retVal.setName(name);
+		retVal.setDescription(description);
+		retVal.setAddress(address);
+		retVal.setType(type);
+		retVal.setBronzeTreshold(bronzeTreshold);
+		retVal.setSilverTreshold(silverTreshold);
+		retVal.setGoldTreshold(goldTreshold);
 		
-		return this;
+		return retVal;
+		
 	}
 
+	public BioskopDTO(String name, String description, String address, BioskopPozoristeType type, int bronzeTreshold,
+			int silverTreshold, int goldTreshold) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.address = address;
+		this.type = type;
+		this.bronzeTreshold = bronzeTreshold;
+		this.silverTreshold = silverTreshold;
+		this.goldTreshold = goldTreshold;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -98,22 +86,6 @@ public class BioskopPozoriste {
 
 	public void setType(BioskopPozoristeType type) {
 		this.type = type;
-	}
-
-	public Repertoire getRepertoire() {
-		return repertoire;
-	}
-
-	public void setRepertoire(Repertoire repertoire) {
-		this.repertoire = repertoire;
-	}
-
-	public List<AdmUser> getAdmini() {
-		return admini;
-	}
-
-	public void setAdmini(List<AdmUser> admini) {
-		this.admini = admini;
 	}
 
 	public int getBronzeTreshold() {

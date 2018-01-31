@@ -17,6 +17,8 @@ public class RegUser extends User{
 	@OneToMany
 	private List<Rezervacija> rezervacije;
 	
+	private int bodovi;
+	
 	//rekviziti
 	
 	//rezervacije
