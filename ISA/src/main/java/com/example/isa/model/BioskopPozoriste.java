@@ -56,6 +56,9 @@ public class BioskopPozoriste {
 		this.description=updated.getDescription();
 		this.address=updated.getAddress();
 		this.type=updated.getType();
+		this.bronzeTreshold=updated.getBronzeTreshold();
+		this.silverTreshold=updated.getSilverTreshold();
+		this.goldTreshold=updated.getGoldTreshold();
 		
 		return this;
 	}

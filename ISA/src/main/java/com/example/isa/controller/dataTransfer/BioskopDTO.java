@@ -24,6 +24,7 @@ public class BioskopDTO {
 	public BioskopPozoriste getBioskop() {
 		
 		BioskopPozoriste retVal = new BioskopPozoriste();
+		retVal.setId(id);
 		retVal.setName(name);
 		retVal.setDescription(description);
 		retVal.setAddress(address);
@@ -35,10 +36,15 @@ public class BioskopDTO {
 		return retVal;
 		
 	}
+	
+	public BioskopDTO() {
+		super();
+	}
 
-	public BioskopDTO(String name, String description, String address, BioskopPozoristeType type, int bronzeTreshold,
+	public BioskopDTO(long id, String name, String description, String address, BioskopPozoristeType type, int bronzeTreshold,
 			int silverTreshold, int goldTreshold) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.address = address;

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,8 +59,9 @@ public class BioskopPozoristeController {
 	@RequestMapping(
 			value = "/api/cinnemas",
 			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BioskopPozoriste> newCinnema(BioskopDTO creatingCinema){
+	public ResponseEntity<BioskopPozoriste> newCinnema(@RequestBody BioskopDTO creatingCinema){
 		BioskopPozoriste retVal = bioskopService.create(creatingCinema.getBioskop());
 		if(retVal!=null) {
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
@@ -72,16 +74,17 @@ public class BioskopPozoristeController {
 	@RequestMapping(
 			value = "/api/cinnemas/{id}",
 			method = RequestMethod.PUT,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BioskopPozoriste> updateCinnema(BioskopDTO updateCinema, @PathVariable("id") Long id){
+	public ResponseEntity<BioskopPozoriste> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){		
 		updateCinema.setId(id);
+		
 		BioskopPozoriste retVal = bioskopService.update(updateCinema.getBioskop());
 		if(retVal!=null) {
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.BAD_REQUEST);
 		}
-
 	}
 	
 	@RequestMapping(
