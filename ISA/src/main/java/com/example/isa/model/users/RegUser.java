@@ -8,12 +8,8 @@ import com.example.isa.model.Rezervacija;
 import com.example.isa.model.UserMesto;
 
 @Entity
-@Table(name="registeredUsers")
+@Table(name="RegUser")
 public class RegUser extends User{
-
-	@Id
-	@GeneratedValue
-	private long id;
 	
 	@OneToMany
 	private List<UserMesto> pozivi;

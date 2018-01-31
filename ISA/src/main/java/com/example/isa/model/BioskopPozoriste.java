@@ -2,6 +2,7 @@ package com.example.isa.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +32,7 @@ public class BioskopPozoriste {
 	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne
 	private Repertoire repertoire;
 	
 	//@OneToMany

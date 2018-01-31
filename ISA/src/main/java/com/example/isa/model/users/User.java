@@ -3,8 +3,8 @@ package com.example.isa.model.users;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "allUsers")
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name = "koriscnici")
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class User {
 
 	@Id
