@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,10 +60,43 @@ public class BioskopPozoristeController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BioskopPozoriste> newCinnema(BioskopDTO creatingCinema){
-		bioskopService.create(creatingCinema.getBioskop());
+		BioskopPozoriste retVal = bioskopService.create(creatingCinema.getBioskop());
+		if(retVal!=null) {
+			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.BAD_REQUEST);
+		}
 
-		
-		
-		return null;
 	}
+	
+	@RequestMapping(
+			value = "/api/cinnemas/{id}",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BioskopPozoriste> updateCinnema(BioskopDTO updateCinema, @PathVariable("id") Long id){
+		updateCinema.setId(id);
+		BioskopPozoriste retVal = bioskopService.update(updateCinema.getBioskop());
+		if(retVal!=null) {
+			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.BAD_REQUEST);
+		}
+
+	}
+	
+	@RequestMapping(
+			value = "/api/cinnemas/{id}",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BioskopPozoriste> getBioskopPozoristee(@PathVariable("id") Long id){
+		
+		BioskopPozoriste retVal = bioskopService.getById(id);
+		
+		return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+		
+	}
+	
+	/*
+	 * DELETE metoda nije uradjena za bioskop, meni jos nije trebalo, ako nekom treba, nek doda dole ili nek mi javi
+	 */
 }
