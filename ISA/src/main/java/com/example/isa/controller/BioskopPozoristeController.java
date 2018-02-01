@@ -62,6 +62,7 @@ public class BioskopPozoristeController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BioskopPozoriste> newCinnema(@RequestBody BioskopDTO creatingCinema){
+		
 		BioskopPozoriste retVal = bioskopService.create(creatingCinema.getBioskop());
 		if(retVal!=null) {
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);

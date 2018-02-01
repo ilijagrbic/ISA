@@ -8,6 +8,6 @@ import com.example.isa.model.Repertoire;
 
 public interface RepertoireRepository extends JpaRepository<Repertoire, Long>{
 
-	Optional<Repertoire> findByBioskopId(long id);
+	Repertoire findByBioskopId(long id);
 	
 }

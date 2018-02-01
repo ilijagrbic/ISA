@@ -29,9 +29,9 @@ public class MovieShowService {
 	 * metoda ne radi jos uvek, testiranje potrebno
 	 */
 	public List<MovieShow> getFromCinema(Long id){
-		Optional<Repertoire> retVal = repertoarRepository.findByBioskopId(id);
-		if(retVal.isPresent()) {
-			return movieRepository.findByRepertoarId(retVal.get().getId());
+		Repertoire retVal = repertoarRepository.findByBioskopId(id);
+		if(retVal!=null) {
+			return movieRepository.findByRepertoarId(retVal.getId());
 		}else {
 			return null;
 		}
@@ -42,9 +42,10 @@ public class MovieShowService {
 	}
 	
 	public MovieShow create(MovieShow newMovie, long cinId) {
-		Optional<Repertoire> parent = repertoarRepository.findByBioskopId(cinId);
-		if(parent.isPresent()) {
-			newMovie.setRepertoar(parent.get());
+		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
+		//System.out.println("HEJ USO SAM I DOBIO SAM OVO ZA BIOSKOP: "+parent.getId());
+		if(parent!=null) {
+			newMovie.setRepertoar(parent);
 			return movieRepository.save(newMovie);
 		}else {
 			return null;
