@@ -9,9 +9,9 @@ import com.example.isa.model.BioskopPozoristeType;
 
 public interface BioskopPozoristeRepository extends JpaRepository<BioskopPozoriste, Long>{
 
-	public BioskopPozoriste findById(Long id);//nontested
+	public BioskopPozoriste findById(Long id);//TESTED
 	
-	public List<BioskopPozoriste> findByType(BioskopPozoristeType type);//nontested
+	public List<BioskopPozoriste> findByType(BioskopPozoristeType type);//TESTED
 	
 	
 }

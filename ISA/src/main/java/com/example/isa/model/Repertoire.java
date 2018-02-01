@@ -2,7 +2,14 @@ package com.example.isa.model;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Repertoire {
@@ -14,7 +21,8 @@ public class Repertoire {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "repertoar")
 	private List<MovieShow> movies;
 	
-	@OneToOne(fetch = FetchType.EAGER, optional = false)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
 	private BioskopPozoriste bioskop;
 
 	public Repertoire() {

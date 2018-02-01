@@ -1,5 +1,6 @@
 package com.example.isa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.BioskopPozoristeType;
+import com.example.isa.model.MovieShow;
+import com.example.isa.model.Repertoire;
 import com.example.isa.repository.BioskopPozoristeRepository;
+import com.example.isa.repository.RepertoireRepository;
 
 @Service
 public class BioskopPozoristeService {
 
 	@Autowired
 	private BioskopPozoristeRepository bioskopPozoristeRepository;
+	@Autowired
+	private RepertoireRepository repertoarRepository;
 	
 	public List<BioskopPozoriste> getAll(){
 		return bioskopPozoristeRepository.findAll();
@@ -48,6 +54,10 @@ public class BioskopPozoristeService {
     		/*
     		 * Verovatno treba instancirati repertoar potencijalno i admine
     		 */
+    		Repertoire temp = new Repertoire();
+    		temp.setBioskop(newCinnema);
+    		temp.setMovies(new ArrayList<MovieShow>());
+    		newCinnema.setRepertoire(temp);
     		return bioskopPozoristeRepository.save(newCinnema);
     	}
     	

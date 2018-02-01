@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import com.example.isa.model.users.AdmUser;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class BioskopPozoriste {
@@ -32,7 +33,8 @@ public class BioskopPozoriste {
 	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JsonManagedReference
 	private Repertoire repertoire;
 	
 	//@OneToMany

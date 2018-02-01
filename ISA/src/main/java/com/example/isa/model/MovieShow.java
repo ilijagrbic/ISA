@@ -88,6 +88,46 @@ public class MovieShow {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public List<Glumac> getGlumci() {
+		return glumci;
+	}
+
+	public void setGlumci(List<Glumac> glumci) {
+		this.glumci = glumci;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public List<Projekcija> getProjekcije() {
+		return projekcije;
+	}
+
+	public void setProjekcije(List<Projekcija> projekcije) {
+		this.projekcije = projekcije;
+	}
+
+	public Repertoire getRepertoar() {
+		return repertoar;
+	}
+
+	public void setRepertoar(Repertoire repertoar) {
+		this.repertoar = repertoar;
+	}
 	
 	
 	
