@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
+import com.example.isa.controller.dataTransfer.RegDTO;
 import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.AdmUserRepository;
@@ -27,16 +28,15 @@ public class AuthenticationService {
 		}
 	}
 	
-	public User findUser(User user) {
-		if((regUserRepository.findByEmailAndPassword(user.getEmail(), user.getPassword())==null)){
-			return admUserRepository.findByEmail(user.getEmail());
+	public User findUser(RegDTO regDTO) {
+		if((regUserRepository.findByEmailAndPassword(regDTO.getEmail(), regDTO.getPassword())==null)){
+			return admUserRepository.findByEmail(regDTO.getEmail());
 		}
 		else {
-			return regUserRepository.findByEmail(user.getEmail());	
+			return regUserRepository.findByEmail(regDTO.getEmail());	
 		}
 		
 	}
-	
 	
 
 }
