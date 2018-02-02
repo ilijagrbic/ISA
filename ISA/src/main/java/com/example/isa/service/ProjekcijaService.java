@@ -54,10 +54,21 @@ public class ProjekcijaService {
 	}
 	
 	public Projekcija create(Projekcija newProj) {
-		return null;
+		/*if(projekcijaRepository.exists(newProj.getId())) {
+			return null;
+		}else {
+			
+		}*/
+		return projekcijaRepository.save(newProj);
 	}
 	
 	public Projekcija update(Projekcija newProj) {
-		return null;
+		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
+		if(toUpdate==null) {
+			return null;
+		}
+		else {
+			return projekcijaRepository.save(newProj);
+		}
 	}
 }

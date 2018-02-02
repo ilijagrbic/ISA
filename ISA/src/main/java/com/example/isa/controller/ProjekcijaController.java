@@ -87,7 +87,10 @@ public class ProjekcijaController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Projekcija> updProjecions(@RequestBody ProjekcijaDTO createProjekcija, @PathVariable("id") Long id){
-		Projekcija retVal = projService.update(createProjekcija.getProjekcija());
+		
+		Projekcija temp = createProjekcija.getProjekcija();
+		temp.setId(id);
+		Projekcija retVal = projService.update(temp);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);

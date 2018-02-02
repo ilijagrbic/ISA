@@ -47,19 +47,19 @@ public class BioskopPozoristeService {
     }
 
     public BioskopPozoriste create(BioskopPozoriste newCinnema) {
-    	if(bioskopPozoristeRepository.exists(newCinnema.getId())) {
+    	/*if(bioskopPozoristeRepository.exists(newCinnema.getId())) {
     		return null;
     	}
-    	else {
+    	else {*/
     		/*
     		 * Verovatno treba instancirati repertoar potencijalno i admine
     		 */
-    		Repertoire temp = new Repertoire();
-    		temp.setBioskop(newCinnema);
-    		temp.setMovies(new ArrayList<MovieShow>());
-    		newCinnema.setRepertoire(temp);
-    		return bioskopPozoristeRepository.save(newCinnema);
-    	}
+		Repertoire temp = new Repertoire();
+		temp.setBioskop(newCinnema);
+		temp.setMovies(new ArrayList<MovieShow>());
+		newCinnema.setRepertoire(temp);
+		return bioskopPozoristeRepository.save(newCinnema);
+    	//}
     	
     }
 }
