@@ -24,10 +24,7 @@ public class MovieShowService {
 	public List<MovieShow> getAll(){
 		return movieRepository.findAll();
 	}
-	
-	/*
-	 * metoda ne radi jos uvek, testiranje potrebno
-	 */
+
 	public List<MovieShow> getFromCinema(Long id){
 		Repertoire retVal = repertoarRepository.findByBioskopId(id);
 		if(retVal!=null) {
@@ -43,7 +40,6 @@ public class MovieShowService {
 	
 	public MovieShow create(MovieShow newMovie, long cinId) {
 		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
-		//System.out.println("HEJ USO SAM I DOBIO SAM OVO ZA BIOSKOP: "+parent.getId());
 		if(parent!=null) {
 			newMovie.setRepertoar(parent);
 			return movieRepository.save(newMovie);

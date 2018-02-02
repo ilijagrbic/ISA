@@ -23,6 +23,7 @@ public class Projekcija {
 	@OneToMany
 	private List<Sediste> sedista;
 	
+	@Column(nullable = false)
 	@ManyToOne
 	private MovieShow film;
 
@@ -70,6 +71,14 @@ public class Projekcija {
 
 	public void setSedista(List<Sediste> sedista) {
 		this.sedista = sedista;
+	}
+
+	public MovieShow getFilm() {
+		return film;
+	}
+
+	public void setFilm(MovieShow film) {
+		this.film = film;
 	}
 		
 	
