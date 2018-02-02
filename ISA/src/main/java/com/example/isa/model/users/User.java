@@ -34,6 +34,13 @@ public abstract class User {
 		
 	}
 
+	public void update(User u) {
+		this.name = u.name;
+		this.surname = u.surname;
+		this.city = u.city;
+		this.phone = u.phone;
+		
+	}
 	public long getId() {
 		return id;
 	}

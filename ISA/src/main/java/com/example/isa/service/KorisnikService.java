@@ -27,4 +27,10 @@ public class KorisnikService {
 		return regUserRepository.save(regUser);
 	}
 	
+	public RegUser updateUser(long id, User user) {
+		RegUser toUpdate = regUserRepository.findById(id);
+		toUpdate.update(user);
+		return regUserRepository.save(toUpdate);
+	}
+	
 }

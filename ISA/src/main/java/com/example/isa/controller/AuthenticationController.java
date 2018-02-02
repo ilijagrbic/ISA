@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
-import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
