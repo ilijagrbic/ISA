@@ -23,8 +23,8 @@ public class Projekcija {
 	@OneToMany
 	private List<Sediste> sedista;
 	
-	@Column(nullable = false)
 	@ManyToOne
+	@JoinColumn(nullable = false)
 	private MovieShow film;
 
 	//mozda i rezervacija
