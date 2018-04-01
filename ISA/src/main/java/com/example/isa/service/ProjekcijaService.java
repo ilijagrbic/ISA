@@ -43,6 +43,25 @@ public class ProjekcijaService {
 		return retVal;
 	}
 	
+	public List<Projekcija> findAllInCinemaByMovie(long id, long idMovie) {
+		Repertoire retVal1 = repertoarRepository.findByBioskopId(id);
+		MovieShow retVal2 = movieRepository.findById(idMovie);
+		
+		if(retVal1==null||retVal2==null) return null;
+		ArrayList<MovieShow> filmovi = (ArrayList<MovieShow>)movieRepository.findByRepertoarId(retVal1.getId());
+
+		ArrayList<Projekcija> retVal = new ArrayList<Projekcija>();
+		for(MovieShow mov:filmovi) {
+			if(mov.getId()==idMovie) {
+				retVal.addAll((ArrayList<Projekcija>)(projekcijaRepository.findByFilmId(mov.getId()))); 
+				break;
+			}
+			
+		}
+		
+		return retVal;
+	}
+	
 	public Projekcija delete(long id) {
 		Projekcija temp = projekcijaRepository.findById(id);
 		if(temp==null) {
@@ -71,4 +90,5 @@ public class ProjekcijaService {
 			return projekcijaRepository.save(newProj);
 		}
 	}
+	
 }

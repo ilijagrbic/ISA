@@ -21,6 +21,8 @@ public class Rezervacija {
 	
 	@ManyToOne
 	private RegUser host;
+	
+	private int status;
 
 	public Rezervacija() {
 		super();

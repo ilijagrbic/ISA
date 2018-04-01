@@ -13,4 +13,5 @@ public interface ProjekcijaRepository extends JpaRepository<Projekcija, Long>{
 	
 	public Projekcija findById(long id);
 	
+	
 }

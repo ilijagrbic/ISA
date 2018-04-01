@@ -38,6 +38,20 @@ public class ProjekcijaController {
 	}
 	
 	@RequestMapping(
+			value = "/api/cinnemas/{id}/movies/{idm}/projections",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Projekcija>> getProjecionsByMovie(@PathVariable("id") Long id, @PathVariable("idm") Long idMovie){
+		ArrayList<Projekcija> retVal = (ArrayList<Projekcija>)projService.findAllInCinemaByMovie(id, idMovie);
+		
+		if(retVal!=null) {
+			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(
 			value = "/api/projections/{id}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
