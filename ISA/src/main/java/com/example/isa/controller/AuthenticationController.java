@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
+import com.example.isa.controller.dataTransfer.RegDTO;
 import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
@@ -63,13 +64,25 @@ public class AuthenticationController {
 			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity regIn(@RequestBody RegUser regUser){
+	public ResponseEntity regIn(@RequestBody RegDTO regDTO){
 		// Mora da proveri u adminima i u obicnim korisnicima
-		User foundUser = authenticationService.findUser(regUser);
+		User foundUser = authenticationService.findUser(regDTO);
 		
 		if(foundUser==null) {
-			RegUser addedUser = korisnikService.createNewUser(regUser);
-			return new ResponseEntity<RegUser>(addedUser, HttpStatus.OK);
+			if(!regDTO.populatedFields()) {
+				return new ResponseEntity<String>("Nisu popunjena polja!", HttpStatus.BAD_REQUEST); 
+			}
+			if(!regDTO.passwordMatch()){
+				return new ResponseEntity<String>("Sifre se ne poklapaju!", HttpStatus.BAD_REQUEST);
+			}
+			RegUser addedUser = korisnikService.createNewUser(regDTO.createRegUser());
+			
+			if(addedUser==null) {
+				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
+			}
+			else {
+				return new ResponseEntity<RegUser>(addedUser, HttpStatus.OK);
+			}
 		}
 		
 		// Bolje da baca mozda exception

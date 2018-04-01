@@ -8,12 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.users.AdmUser;
 import com.example.isa.model.users.RegUser;
+import com.example.isa.model.users.User;
 import com.example.isa.service.AdminService;
 import com.example.isa.service.KorisnikService;
 
@@ -40,6 +42,23 @@ public class KorisnikController {
 		}
 		else {
 			return new ResponseEntity(regUser, HttpStatus.OK);
+		}
+	}
+	
+	// Azuriranje podataka korisnika
+	@RequestMapping(
+			value = "/api/users/{id}",
+			method = RequestMethod.PUT,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity updateRegKorsinik(@PathVariable long id, @RequestBody User user) {
+		
+		RegUser updatedUser = korisnikService.updateUser(id, user);
+		if(updatedUser == null) {
+			return new ResponseEntity<String>("Nije uspeo update", HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<RegUser>(updatedUser, HttpStatus.OK);
 		}
 	}
 	
