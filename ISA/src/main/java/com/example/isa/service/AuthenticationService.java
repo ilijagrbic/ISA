@@ -19,24 +19,15 @@ public class AuthenticationService {
 	@Autowired
 	private AdmUserRepository admUserRepository;
 	
-	public User findRegUser(LoginDTO loginDTO) {
-		if((regUserRepository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword())==null)){
-			return admUserRepository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+	public User findUser(RegUser regUser) {
+		if((regUserRepository.findByEmailAndPassword(regUser.getEmail(), regUser.getPassword())==null)){
+			return admUserRepository.findByEmailAndPassword(regUser.getEmail(), regUser.getPassword());
 		}
 		else {
-			return regUserRepository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());	
+			return regUserRepository.findByEmailAndPassword(regUser.getEmail(), regUser.getPassword());	
 		}
 	}
-	
-	public User findUser(RegDTO regDTO) {
-		if((regUserRepository.findByEmailAndPassword(regDTO.getEmail(), regDTO.getPassword())==null)){
-			return admUserRepository.findByEmail(regDTO.getEmail());
-		}
-		else {
-			return regUserRepository.findByEmail(regDTO.getEmail());	
-		}
-		
-	}
+
 	
 
 }

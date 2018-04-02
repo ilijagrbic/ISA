@@ -18,6 +18,7 @@ import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.KorisnikService;
 
 @RestController
+@RequestMapping(value = "/api/")
 public class AuthenticationController {
 
 	@Autowired
@@ -26,56 +27,45 @@ public class AuthenticationController {
 	@Autowired
 	private KorisnikService korisnikService;
 
-	@RequestMapping(
-			value = "/api/signin",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO) {
-		User user = authenticationService.findRegUser(loginDTO);
+		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
-		if (!user.isActiaved()) {
-			return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
+		if(user!=null) {
+			if (!user.isActiaved()) {
+				return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
+			}
+			else {
+				return new ResponseEntity<User>(user, HttpStatus.OK);
+			}
 		}
-
-		// Ovde mi mozda nedostaje neki deo!
-		return new ResponseEntity<User>(user, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	// U nekom delu treba dodati za verifikaciju maila
 	
 	
 	// Odjavljivanje
-	@RequestMapping(
-			value = "/api/signout",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="signout", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<String> signout() {
 		SecurityContextHolder.clearContext();
         return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
 	
-	// Registracija korisnika
-	// Polazim kroz obicne korisnike
+	// Registracija korisni
 	// Registracija admina se ovde ne radi - to radi predefinisani ADMIN
-	@RequestMapping(
-			value = "api/regin",
-			method = RequestMethod.POST,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="regin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity regIn(@RequestBody RegDTO regDTO){
-		// Mora da proveri u adminima i u obicnim korisnicima
-		User foundUser = authenticationService.findUser(regDTO);
 		
-		if(foundUser==null) {
+		User user = authenticationService.findUser(regDTO.createRegUser(regDTO));
+		
+		if(user==null) {
 			if(!regDTO.populatedFields()) {
 				return new ResponseEntity<String>("Nisu popunjena polja!", HttpStatus.BAD_REQUEST); 
 			}
 			if(!regDTO.passwordMatch()){
 				return new ResponseEntity<String>("Sifre se ne poklapaju!", HttpStatus.BAD_REQUEST);
 			}
-			RegUser addedUser = korisnikService.createNewUser(regDTO.createRegUser());
+			RegUser addedUser = korisnikService.createNewUser(regDTO.createRegUser(regDTO));
 			
 			if(addedUser==null) {
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
@@ -85,7 +75,6 @@ public class AuthenticationController {
 			}
 		}
 		
-		// Bolje da baca mozda exception
 		return new ResponseEntity<String>("Korisnik vec postoji", HttpStatus.OK);
 	}
 

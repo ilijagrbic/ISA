@@ -28,11 +28,7 @@ public abstract class User {
 	@Column(nullable = false)
 	protected String password;
 
-
-	
-	public User() {
-		
-	}
+	public User() {	}
 
 	public void update(User u) {
 		this.name = u.name;

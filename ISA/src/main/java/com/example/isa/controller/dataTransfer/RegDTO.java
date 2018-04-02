@@ -24,17 +24,17 @@ public class RegDTO {
 
 	private boolean actiaved;
 	
-	public RegUser createRegUser() {
+	public RegUser createRegUser(RegDTO source) {
 		// Sta se desava za id
-		RegUser newUser = new RegUser();
-		newUser.setName(name);
-		newUser.setSurname(surname);
-		newUser.setEmail(email);
-		newUser.setCity(city);
-		newUser.setPhone(phone);
-		newUser.setPassword(password);
-		newUser.setActiaved(false);
-		return newUser;
+		RegUser user = new RegUser();
+		user.setName(source.getName());
+		user.setSurname(source.getSurname());
+		user.setEmail(source.getEmail());
+		user.setCity(source.getCity());
+		user.setPhone(source.getPhone());
+		user.setPassword(source.getPassword());
+		user.setActiaved(false);
+		return user;
 	}
 	
 	public boolean populatedFields() {
