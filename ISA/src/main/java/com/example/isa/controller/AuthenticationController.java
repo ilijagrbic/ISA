@@ -1,14 +1,18 @@
 package com.example.isa.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
@@ -16,6 +20,7 @@ import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.KorisnikService;
+import com.example.isa.service.MailService;
 
 @RestController
 @RequestMapping(value = "/api/")
@@ -25,7 +30,14 @@ public class AuthenticationController {
 	private AuthenticationService authenticationService;
 	
 	@Autowired
+	private  MailService mailService;
+	
+	@Autowired
 	private KorisnikService korisnikService;
+	
+	// Proveri da li treba jos nesto kod slanja maila
+	private HttpServletRequest request;
+	    
 
 	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO) {
@@ -71,11 +83,19 @@ public class AuthenticationController {
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
 			}
 			else {
-				return new ResponseEntity<RegUser>(addedUser, HttpStatus.OK);
+				mailService.sendVerificationMail(request.getRequestURL().toString(), addedUser.getVerificationCode(), addedUser.getEmail());
+				return new ResponseEntity<RegUser>(addedUser, HttpStatus.CREATED);
 			}
 		}
 		
 		return new ResponseEntity<String>("Korisnik vec postoji", HttpStatus.OK);
 	}
+	
+	// Proveri za front
+	@RequestMapping(value="signup/{verificationCode}")
+    public ModelAndView verify(@PathVariable String verificationCode) {
+		authenticationService.verifyUser(verificationCode);
+        return new ModelAndView(new RedirectView("/", true));
+    }
 
 }

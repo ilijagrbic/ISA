@@ -28,6 +28,13 @@ public class AuthenticationService {
 		}
 	}
 
+	// Verifikacija na osnovu maila
+	 public User verifyUser(String verificationCode) {
+	        RegUser regUser = regUserRepository.findByVerificationCode(verificationCode);
+	        regUser.setActiaved(true);
+	        regUserRepository.save(regUser);
+	        return regUser;
+	    }
 	
 
 }

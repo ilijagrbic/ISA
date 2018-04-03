@@ -1,6 +1,7 @@
 package com.example.isa.model.users;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -17,6 +18,9 @@ public class RegUser extends User{
 	@OneToMany
 	private List<Rezervacija> rezervacije;
 	
+	// Za verifikaciju
+	private String verificationCode;
+	
 	private int bodovi;
 	
 	//rekviziti
@@ -25,6 +29,7 @@ public class RegUser extends User{
 	
 	public RegUser() {
 		super();
+		this.verificationCode = UUID.randomUUID().toString();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -51,6 +56,16 @@ public class RegUser extends User{
 	public void setRezervacije(List<Rezervacija> rezervacije) {
 		this.rezervacije = rezervacije;
 	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+	
+	
 	
 	
 }
