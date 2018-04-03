@@ -3,6 +3,7 @@ package com.example.isa.model.users;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Invite")
 public class Invite {
 
 	@Id
@@ -10,7 +11,7 @@ public class Invite {
 	private long id;
 	
 	@ManyToOne
-	private RegUser posaljilac;
+	private RegUser posiljalac;
 	
 	@ManyToOne
 	private RegUser primalac;
@@ -30,11 +31,11 @@ public class Invite {
 	}
 
 	public RegUser getPosaljilac() {
-		return posaljilac;
+		return posiljalac;
 	}
 
-	public void setPosaljilac(RegUser posaljilac) {
-		this.posaljilac = posaljilac;
+	public void setPosaljalac(RegUser posiljalac) {
+		this.posiljalac = posiljalac;
 	}
 
 	public RegUser getPrimalac() {

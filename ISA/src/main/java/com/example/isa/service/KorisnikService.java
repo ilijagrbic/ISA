@@ -29,8 +29,13 @@ public class KorisnikService {
 	
 	public RegUser updateUser(long id, User user) {
 		RegUser toUpdate = regUserRepository.findById(id);
-		toUpdate.update(user);
-		return regUserRepository.save(toUpdate);
+		toUpdate.setCity(user.getCity());
+		toUpdate.setEmail(user.getEmail());
+		toUpdate.setName(user.getName());
+		toUpdate.setPassword(user.getPassword());
+		toUpdate.setPhone(user.getPhone());;
+		toUpdate.setSurname(user.getSurname());
+		return toUpdate;
 	}
 	
 }
