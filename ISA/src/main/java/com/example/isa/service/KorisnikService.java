@@ -1,19 +1,25 @@
 package com.example.isa.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.isa.model.Rezervacija;
+import com.example.isa.model.UserMesto;
 import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.RegUserRepository;
+import com.example.isa.repository.RezervacijaRepository;
 
 @Service
 public class KorisnikService {
 	@Autowired
 	private RegUserRepository regUserRepository;
 	
+	@Autowired
+	private RezervacijaRepository rezervacijaRepository;
 	
 	public List<RegUser> findAll(){
 		return regUserRepository.findAll();
@@ -37,5 +43,24 @@ public class KorisnikService {
 		toUpdate.setSurname(user.getSurname());
 		return toUpdate;
 	}
+	
+	public List<Rezervacija> getReservations(User user){
+		RegUser regUser = regUserRepository.findById(user.getId());
+		return regUser.getRezervacije();
+	}
+	
+	public List<UserMesto> getTickets(User user){
+		RegUser regUser = regUserRepository.findById(user.getId());
+		return regUser.getPozivi();
+	}
+	
+	public void cancelReservation(Long id, User user) {
+		//RegUser regUser = regUserRepository.findById(user.getId());
+		//Rezervacija reservation = rezervacijaRepository.getOne(id);
+		// Da li se brise i u jednom i u drugom?	
+		rezervacijaRepository.delete(id);
+	}
+	
+	
 	
 }

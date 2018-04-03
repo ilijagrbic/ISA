@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.isa.model.users.AdmUser;
+import com.example.isa.model.Rezervacija;
+import com.example.isa.model.UserMesto;
 import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AdminService;
@@ -79,7 +80,7 @@ public class KorisnikController {
 		ArrayList<RegUser> regUsers = (ArrayList<RegUser>)korisnikService.findAll();
 		return new ResponseEntity<Collection<RegUser>>(regUsers, HttpStatus.OK);
 	}
-	/*
+	
 	// Prijatelji
 	@RequestMapping(value="/friends", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<RegUser>> getFriends() {
@@ -102,6 +103,32 @@ public class KorisnikController {
 		RegUser user = (RegUser)authenticationService.getCurrentUser();
 		ArrayList<RegUser> nonFriends = (ArrayList<RegUser>)friendshipService.findFriendshipRequest(user);
 		return new ResponseEntity<Collection<RegUser>>(nonFriends, HttpStatus.OK);
-	}*/
+	}
+	
+	
+	// Lista rezervacija
+	@RequestMapping(value="/getReservations", method=RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<Rezervacija>> getReservations() {
+		RegUser user = (RegUser)authenticationService.getCurrentUser();
+		ArrayList<Rezervacija> reservations = (ArrayList<Rezervacija>)korisnikService.getReservations(user); 
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
+	// Lista karata
+	@RequestMapping(value="/getTickets", method=RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<UserMesto>> getTickets() {
+		RegUser user = (RegUser)authenticationService.getCurrentUser();
+		ArrayList<UserMesto> tickets = (ArrayList<UserMesto>) korisnikService.getTickets(user);
+		return new ResponseEntity<Collection<UserMesto>>(tickets, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/cancelReservation/{id}", method=RequestMethod.DELETE, produces = "application/json")
+	public ResponseEntity<Rezervacija> cancelReservation(@PathVariable Long id) {
+		RegUser user = (RegUser)authenticationService.getCurrentUser();
+		 
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 }
+
+

@@ -1,36 +1,52 @@
 package com.example.isa.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-/*import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;*/
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class MailService {
-/*
-	private final MailSender mailSender;
 
-	@Autowired
-	public MailService(MailSender mailSender) {
-		this.mailSender = mailSender;
-	}
+	public MailService() {}
 
 	@Async
 	public void sendVerificationMail(String url, String confirmationCode, String emailAddress) {
-		final SimpleMailMessage message = new SimpleMailMessage();
-		message.setSubject("Verify Account");
-		message.setFrom("Email address hidden in public repository."); // Email address hidden in public repository.
-		message.setTo(emailAddress);
-		message.setText(url + "/" + confirmationCode);
+		// final SimpleMailMessage message = new SimpleMailMessage();
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		
+		final String username = "mail.isaprojekat@gmail.com";
+		final String password = "projekatisa";
+		
+		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage message = new MimeMessage(session);
 
 		try {
-			mailSender.send(message);
-		} catch (MailException e) {
-			System.out.println(e);
+			message.setSubject("Verify Account");
+			message.setFrom(new InternetAddress("mail.isaprojekat@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
+			message.setText(url + "/" + confirmationCode);
+
+			Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
-	}*/
+	}
 
 }

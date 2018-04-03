@@ -25,7 +25,9 @@
 	</properties>
 
 	<dependencies>	
-	<!--  
+	
+	<!--
+	
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-support</artifactId>
@@ -39,6 +41,19 @@
 		    <version>3.2.0.RELEASE</version>
 		</dependency>
 	 -->
+	 
+	 	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+	 
+	 
+	 
+	 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -71,6 +86,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 	</dependencies>
 

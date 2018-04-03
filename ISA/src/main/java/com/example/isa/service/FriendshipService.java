@@ -13,7 +13,7 @@ import com.example.isa.repository.RegUserRepository;
 
 @Service
 public class FriendshipService {
-/*
+
 	@Autowired
 	private RegUserRepository regUserRepository;
 
@@ -31,14 +31,14 @@ public class FriendshipService {
 
 	// Ili da uzmem trenutnog korisnika
 	public Invite acceptFriendshipRequest(Long idSender, Long idReceiver) {
-		Invite invitationToUpdate = inviteRepository.findBySenderIdAndReceiverId(idSender, idReceiver);
+		Invite invitationToUpdate = inviteRepository.findByPosiljalacIdAndPrimalacId(idSender, idReceiver);
 		invitationToUpdate.setPrihvatio(true);
 		return inviteRepository.save(invitationToUpdate);
 	}
 
 	public void deleteFriend(Long idSender, Long idReceiver) {
-		Invite deleteFriend = inviteRepository.findBySenderIdAndReceiverId(idSender, idReceiver);
-		inviteRepository.delete(deleteFriend);
+		//Invite deleteFriend = inviteRepository.findBySenderIdAndReceiverId(idSender, idReceiver);
+		//inviteRepository.delete(deleteFriend);
 	}
 
 	public List<RegUser> findFriends(RegUser regUser) {
@@ -63,7 +63,7 @@ public class FriendshipService {
 
 	public List<RegUser> findNonFriends(RegUser regUser) {
 		List<RegUser> regUsers = regUserRepository.findAll();
-		List<Invite> friendships = inviteRepository.findBySenderIdOrReceiverId(regUser.getId(), regUser.getId());
+		List<Invite> friendships = inviteRepository.findByPosiljalacIdOrPrimalacId(regUser.getId(), regUser.getId());
 		for (Invite friendship : friendships) {
 			if (regUser.getId() == friendship.getPosaljilac().getId()) {
 				regUsers.remove(friendship.getPrimalac());
@@ -75,5 +75,5 @@ public class FriendshipService {
 
 		return regUsers;
 	}
-*/
+
 }

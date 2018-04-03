@@ -35,9 +35,6 @@ public class AuthenticationController {
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	// Proveri da li treba jos nesto kod slanja maila
-	//private HttpServletRequest request;
-	    
 
 	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO) {
@@ -67,7 +64,7 @@ public class AuthenticationController {
 	// Registracija admina se ovde ne radi - to radi predefinisani ADMIN
 	@RequestMapping(value="regin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity regIn(@RequestBody RegDTO regDTO){
-		
+		// Znci sad cu ti pokazati sta imam
 		User user = authenticationService.findUser(regDTO.createRegUser(regDTO));
 		
 		if(user==null) {
@@ -83,7 +80,8 @@ public class AuthenticationController {
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
 			}
 			else {
-				//mailService.sendVerificationMail(request.getRequestURL().toString(), addedUser.getVerificationCode(), addedUser.getEmail());
+			//CCCC :D 
+				mailService.sendVerificationMail("http://localhost:8124/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.CREATED);
 			}
 		}
@@ -92,10 +90,12 @@ public class AuthenticationController {
 	}
 	
 	// Proveri za front
-	@RequestMapping(value="signup/{verificationCode}")
+	@RequestMapping(value="regin/{verificationCode}")
     public ModelAndView verify(@PathVariable String verificationCode) {
 		authenticationService.verifyUser(verificationCode);
         return new ModelAndView(new RedirectView("/", true));
     }
+	
+	
 
 }
