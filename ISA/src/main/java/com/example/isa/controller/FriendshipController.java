@@ -1,8 +1,5 @@
 package com.example.isa.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +18,7 @@ import com.example.isa.service.FriendshipService;
 @RestController
 @RequestMapping(value = "/api/friendships")
 public class FriendshipController {
-
+/*
 	@Autowired
 	private FriendshipService friendshipService;
 	
@@ -57,5 +54,5 @@ public class FriendshipController {
 		friendshipService.deleteFriend(senderId, receiver.getId());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+*/
 }

@@ -36,7 +36,7 @@ public class AuthenticationController {
 	private KorisnikService korisnikService;
 	
 	// Proveri da li treba jos nesto kod slanja maila
-	private HttpServletRequest request;
+	//private HttpServletRequest request;
 	    
 
 	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
@@ -83,7 +83,7 @@ public class AuthenticationController {
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
 			}
 			else {
-				mailService.sendVerificationMail(request.getRequestURL().toString(), addedUser.getVerificationCode(), addedUser.getEmail());
+				//mailService.sendVerificationMail(request.getRequestURL().toString(), addedUser.getVerificationCode(), addedUser.getEmail());
 				return new ResponseEntity<RegUser>(addedUser, HttpStatus.CREATED);
 			}
 		}

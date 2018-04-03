@@ -79,7 +79,7 @@ public class KorisnikController {
 		ArrayList<RegUser> regUsers = (ArrayList<RegUser>)korisnikService.findAll();
 		return new ResponseEntity<Collection<RegUser>>(regUsers, HttpStatus.OK);
 	}
-	
+	/*
 	// Prijatelji
 	@RequestMapping(value="/friends", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<RegUser>> getFriends() {
@@ -102,6 +102,6 @@ public class KorisnikController {
 		RegUser user = (RegUser)authenticationService.getCurrentUser();
 		ArrayList<RegUser> nonFriends = (ArrayList<RegUser>)friendshipService.findFriendshipRequest(user);
 		return new ResponseEntity<Collection<RegUser>>(nonFriends, HttpStatus.OK);
-	}
+	}*/
 	
 }

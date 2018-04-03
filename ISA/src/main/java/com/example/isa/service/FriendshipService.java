@@ -13,7 +13,7 @@ import com.example.isa.repository.RegUserRepository;
 
 @Service
 public class FriendshipService {
-
+/*
 	@Autowired
 	private RegUserRepository regUserRepository;
 
@@ -75,5 +75,5 @@ public class FriendshipService {
 
 		return regUsers;
 	}
-
+*/
 }

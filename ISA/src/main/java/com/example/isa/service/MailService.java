@@ -1,16 +1,16 @@
 package com.example.isa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
+/*import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.SimpleMailMessage;*/
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class MailService {
-
+/*
 	private final MailSender mailSender;
 
 	@Autowired
@@ -31,6 +31,6 @@ public class MailService {
 		} catch (MailException e) {
 			System.out.println(e);
 		}
-	}
+	}*/
 
 }

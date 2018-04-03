@@ -25,7 +25,7 @@
 	</properties>
 
 	<dependencies>	
-	<!--  Za mail  -->
+	<!--  
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-support</artifactId>
@@ -38,7 +38,7 @@
 		    <artifactId>spring-context-support</artifactId>
 		    <version>3.2.0.RELEASE</version>
 		</dependency>
-	<!--   -->
+	 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
