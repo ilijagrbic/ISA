@@ -1,0 +1,7 @@
+<nav>
+	<ul class="nav navbar-nav navbar-right">
+        <li ng-if="USER == null"><a ui-sref="signup">Sign up</a></li>
+        <li ng-if="USER == null"><a ui-sref="signin">Sign in</a></li>
+        <li ng-if="USER != null"><a ui-sref="signout">Sign out</a></li>
+    </ul>
+</nav>

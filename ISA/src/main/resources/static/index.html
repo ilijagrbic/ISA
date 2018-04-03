@@ -1,16 +1,35 @@
 <html>
 <head>
+ 	<meta charset="UTF-8">
     <title>CinemaTheatres</title>
 
 	
 </head>
-<body ng-app="app">
+<body ng-app="app" >
+	
+	<div ui-view="header">
+	
+	</div>
+	
+	<div ui-view="content">
+	{{1+1}}
+	</div>
+	
+	<div ui-view="notify">
+	</div>
+	
 	<!-- Angular --> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
-	<script src="rootApp.js"></script>
 	
-	<div ></div>
+	<!-- Root stuff -->
+	<script src="rootApp.js"></script>
+	<script src="defaultStates.js"></script>
+	
+	<!-- Header -->
+	<script src="header/headerController.js"></script>
+	
+	
 
 </body>
 </html>
