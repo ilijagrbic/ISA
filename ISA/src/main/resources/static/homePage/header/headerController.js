@@ -6,29 +6,9 @@ angular.module('app')
     	}
     	else if($state.$current=="cinemas"){
     		$scope.headerState="cine";
-    		cinemaTheatreService.getCinemas(
-    				function(info){//succes function
-    					$scope.cinemas=info.data;
-    					
-    				},
-    				function(info){//fail function
-    					$scope.cinemas=[];
-    					
-    				}
-    		);
     	}
     	else if($state.$current=="theatres"){
     		$scope.headerState="thea";
-    		cinemaTheatreService.getTheatres(
-    				function(info){//succes function
-    					$scope.theatres=info.data;
-    					
-    				},
-    				function(info){//fail function
-    					$scope.theatres=[];
-    					
-    				}
-    		);
     	}
     	
     	

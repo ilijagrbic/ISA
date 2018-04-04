@@ -1,1 +1,23 @@
-cinemas
+<h1>
+Cinemas
+</h1>
+<div>
+	<div class="container" ng-repeat="cinema in cinemas">
+	
+	  <div class="row">
+	    <div class="col-sm">
+	      {{cinema.name}}
+	    </div>
+	    <div class="col-sm">
+	      {{cinema.address}}
+	    </div>
+	  </div>
+	  
+	  <div class="row">
+	    <div class="col-sm">
+	      {{cinema.description}}
+	    </div>
+	  </div>
+	  
+	</div>
+</div>
