@@ -29,6 +29,8 @@ public class BioskopPozoriste {
 	
 	private String address;
 	
+	private String gmapsUrl;
+	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private BioskopPozoristeType type;
@@ -48,6 +50,12 @@ public class BioskopPozoriste {
 	private int silverTreshold;
 	
 	private int goldTreshold;
+	
+	private int bronzeSale;
+	
+	private int silverSale;
+	
+	private int goldSale;
 	
 	public BioskopPozoriste() {
 		
