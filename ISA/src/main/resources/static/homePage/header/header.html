@@ -1,0 +1,11 @@
+<div>
+	<p>
+		<span ng-if="USER == null">Sign up</span>
+		<span ng-if="USER == null">Sign in</span>
+		<span ng-if="USER != null">Sign out</span>
+	</p>
+	<p>
+		<span ng-if="USER == null"><a ui-sref="cinemas">Cinemas</a></span>
+		<span ng-if="USER == null"><a ui-sref="theatres">Theatres</a></span>
+	</p>
+</div>

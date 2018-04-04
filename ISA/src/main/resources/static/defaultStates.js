@@ -5,8 +5,11 @@ angular.module('app')
                 url: '/defaultState',
                 views: {
                     'header': {
-                        templateUrl: 'header/header.html',
+                        templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: ''
                     }
                 }
             })
