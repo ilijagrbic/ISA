@@ -14,6 +14,13 @@ angular.module('app')
                     url: '/api/onlytheatres'
                 };
                 $http(req).then(onSuccess, onError);
-            }
+            },
+            getCinemaTheatreById: function (cinTheId, onSuccess, onError) {
+                var req = {
+                        method: 'GET',
+                        url: '/api/cinnemas/'+cinTheId
+                    };
+                $http(req).then(onSuccess, onError);
+            },
         }
     });

@@ -4,10 +4,10 @@ angular.module('app')
     	if($state.$current=="defaultState"){
     		$scope.headerState="home";
     	}
-    	else if($state.$current=="cinemas"){
+    	else if($state.$current=="cinemas"||$state.$current=="cinemasAdmin"){
     		$scope.headerState="cine";
     	}
-    	else if($state.$current=="theatres"){
+    	else if($state.$current=="theatres"||$state.$current=="theatresAdmin"){
     		$scope.headerState="thea";
     	}
     	

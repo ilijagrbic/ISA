@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('cinemaAdminController', function ($scope, cinemaTheatreService) {
+    .controller('cinemaAdminController', function ($scope, $state, cinemaTheatreService) {
 		cinemaTheatreService.getCinemas(
 				function(info){//succes function
 					$scope.cinemas=info.data;
@@ -10,4 +10,9 @@ angular.module('app')
 					
 				}
 		);
+		
+		$scope.editPlace = function(id){
+			$state.go("adminEditPlace", {cinemaTheatreId: id});
+			
+		}
     });

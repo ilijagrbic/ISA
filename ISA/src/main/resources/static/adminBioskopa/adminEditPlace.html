@@ -1,0 +1,19 @@
+<h1>
+Edit cinema 
+</h1>
+<div>
+	<div class="containter">
+		Naziv:<span>{{curentCinemaTheatre.name}}</span><br/>
+		Adresa:{{curentCinemaTheatre.address}}<br/>
+		Opis:{{curentCinemaTheatre.description}}<br/>
+		Tip:{{curentCinemaTheatre.type}}<br/>
+		<!-- promotivne karte -->
+		<button ng-click="backToTheatres()">Back</button>
+	</div>
+	
+	<ol>
+		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
+			movie.name
+		</li>
+	</ol>
+</div>

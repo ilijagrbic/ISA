@@ -23,7 +23,20 @@ angular.module('app')
                     },
                     'content': {
                     	templateUrl: 'adminBioskopa/theatresAdmin.html',
-                        controller: 'theatresController'
+                        controller: 'theatreAdminController'
+                    }
+                }
+            })
+            .state('adminEditPlace', {
+                url: '/adminEditPlace/:cinemaTheatreId',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'adminBioskopa/adminEditPlace.html',
+                        controller: 'adminEditPlaceController'
                     }
                 }
             })
