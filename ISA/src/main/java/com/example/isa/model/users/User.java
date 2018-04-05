@@ -15,6 +15,8 @@ public abstract class User {
 	
 	protected String surname;
 	
+	protected UserType role;
+	
 	@Column(name="email", unique = true, nullable = false)
 	protected String email;
 	
