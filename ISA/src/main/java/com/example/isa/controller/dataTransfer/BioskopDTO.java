@@ -24,6 +24,7 @@ public class BioskopDTO {
 	public BioskopPozoriste getBioskop() {
 		
 		BioskopPozoriste retVal = new BioskopPozoriste();
+		retVal.setId(id);
 		retVal.setName(name);
 		retVal.setDescription(description);
 		retVal.setAddress(address);

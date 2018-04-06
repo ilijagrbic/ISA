@@ -1,14 +1,16 @@
 <h1>
-Edit cinema 
+Edit place
 </h1>
 <div>
 	<div class="containter">
-		Naziv:<span>{{curentCinemaTheatre.name}}</span><br/>
-		Adresa:{{curentCinemaTheatre.address}}<br/>
-		Opis:{{curentCinemaTheatre.description}}<br/>
+		Naziv:<input type=text ng-model="curentCinemaTheatre.name"><br/>
+		Adresa:<input type=text ng-model="curentCinemaTheatre.address"><br/>
+		Opis:<input type=text ng-model="curentCinemaTheatre.description"><br/>
 		Tip:{{curentCinemaTheatre.type}}<br/>
+		<div ng-if="currentCinemaTheatre.gmapsUrl!=null||currentCinemaTheatre.gmapsUrl!=''"></div>
 		<!-- promotivne karte -->
 		<button ng-click="backToTheatres()">Back</button>
+		<button ng-click="commitChanges()">Save</button>
 	</div>
 	
 	<ol>

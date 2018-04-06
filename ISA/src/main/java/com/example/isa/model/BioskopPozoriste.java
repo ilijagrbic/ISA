@@ -1,5 +1,6 @@
 package com.example.isa.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,8 +40,7 @@ public class BioskopPozoriste {
 	@JsonManagedReference
 	private Repertoire repertoire;
 	
-	//@OneToMany
-	//Promotivne karte
+	private HashMap<Integer, Sediste> promotivneKarte;
 	
 	@ManyToMany
 	private List<AdmUser> admini;

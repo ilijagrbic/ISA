@@ -34,6 +34,7 @@ public class BioskopPozoristeService {
 	} 
 	
 	public BioskopPozoriste getById(long id) {
+		System.out.println(id);
 		return bioskopPozoristeRepository.findById(id);
 	}
 	

@@ -22,5 +22,16 @@ angular.module('app')
                     };
                 $http(req).then(onSuccess, onError);
             },
+            setCinemaTheatreById: function (cinTheId, data, onSuccess, onError) {
+                var req = {
+                        method: 'PUT',
+                        url: '/api/cinnemas/'+cinTheId,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: data
+                    };
+                $http(req).then(onSuccess, onError);
+            },
         }
     });
