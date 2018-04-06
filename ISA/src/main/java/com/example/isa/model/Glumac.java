@@ -16,6 +16,16 @@ public class Glumac {
 	public Glumac() {
 		super();
 	}
+	
+	
+
+	public Glumac(String ime, String prezime) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+	}
+
+
 
 	public long getId() {
 		return id;

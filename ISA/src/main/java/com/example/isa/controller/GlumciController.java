@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.BioskopDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Glumac;
 import com.example.isa.service.GlumciService;
@@ -44,6 +46,38 @@ public class GlumciController {
 		
 		return new ResponseEntity<Glumac>(retVal, HttpStatus.OK);
 		
+	}
+	
+	@RequestMapping(
+			value = "/api/actors",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Glumac> newCinnema(@RequestBody Glumac creatingGlumac){
+		
+		Glumac retVal = glumciService.create(new Glumac(creatingGlumac.getIme(), creatingGlumac.getPrezime()));
+		
+		if(retVal!=null) {
+			return new ResponseEntity<Glumac>(retVal, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Glumac>(retVal, HttpStatus.BAD_REQUEST);
+		}
+
+	}
+	
+	@RequestMapping(
+			value = "/api/actors/{id}",
+			method = RequestMethod.PUT,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Glumac> updateCinnema(@RequestBody Glumac creatingGlumac, @PathVariable("id") Long id){		
+
+		Glumac retVal = glumciService.update(creatingGlumac);
+		if(retVal!=null) {
+			return new ResponseEntity<Glumac>(retVal, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Glumac>(retVal, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 }

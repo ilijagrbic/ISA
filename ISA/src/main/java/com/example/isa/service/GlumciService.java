@@ -22,4 +22,12 @@ public class GlumciService {
 	public Glumac getById(long id) {
 		return glumciRepository.findById(id);
 	}
+	
+	public Glumac update(Glumac updatedGlumac) {
+		return null;
+	}
+	
+	public Glumac create(Glumac newGlumac) {
+		return null;
+	}
 }
