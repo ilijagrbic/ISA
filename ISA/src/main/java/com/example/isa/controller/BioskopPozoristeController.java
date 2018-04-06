@@ -79,7 +79,6 @@ public class BioskopPozoristeController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BioskopPozoriste> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){		
 		updateCinema.setId(id);
-		System.out.println(updateCinema.getId());
 		
 		BioskopPozoriste retVal = bioskopService.update(updateCinema.getBioskop());
 		if(retVal!=null) {
