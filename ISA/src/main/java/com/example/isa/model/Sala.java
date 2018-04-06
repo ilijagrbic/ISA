@@ -32,6 +32,16 @@ public class Sala {
 
 	
 	
+	public Sala(String nazivBroj, int visina, int duzina, BioskopPozoriste bioskop) {
+		super();
+		this.nazivBroj = nazivBroj;
+		this.visina = visina;
+		this.duzina = duzina;
+		this.bioskop = bioskop;
+	}
+
+
+
 	public String getNazivBroj() {
 		return nazivBroj;
 	}

@@ -8,16 +8,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.isa.controller.dataTransfer.MovieShowDTO;
+import com.example.isa.model.BioskopPozoriste;
+import com.example.isa.model.MovieShow;
 import com.example.isa.model.Sala;
+import com.example.isa.service.BioskopPozoristeService;
 import com.example.isa.service.SalaService;
 
 public class SalaController {
 	
 	@Autowired
 	SalaService salaService;
+	
+	@Autowired
+	BioskopPozoristeService bioskopService;
 
 	@RequestMapping(
 			value = "/api/cinnemas/{id}/sale",
@@ -32,6 +40,24 @@ public class SalaController {
 		
 	}
 	
+	@RequestMapping(
+			value = "/api/cinnemas/{id}/sale",
+			method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Sala> addMovie(@RequestBody Sala newSala, @PathVariable("id") Long id){
+		BioskopPozoriste parent = bioskopService.getById(id);
+		Sala nova = new Sala(newSala.getNazivBroj(), newSala.getVisina(), newSala.getDuzina(), parent);
+		
+		Sala retVal = salaService.create(nova);
+		
+		if(retVal!=null) {
+			return new ResponseEntity<Sala>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Sala>(retVal, HttpStatus.BAD_REQUEST);
+		}
 	
+	}
 	
 }
