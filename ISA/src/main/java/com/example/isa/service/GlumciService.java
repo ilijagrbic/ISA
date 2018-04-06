@@ -13,7 +13,7 @@ import com.example.isa.repository.GlumacRepository;
 public class GlumciService {
 	
 	@Autowired
-	GlumacRepository glumciRepository;
+	private GlumacRepository glumciRepository;
 	
 	public List<Glumac> getAll(){
 		return glumciRepository.findAll();

@@ -24,7 +24,7 @@ public class Sala {
 	@ManyToOne()
 	@JoinColumn(name = "sale")
 	@JsonBackReference
-	private BioskopPozoriste parentCinema;
+	private BioskopPozoriste bioskop;
 
 	public Sala() {
 		super();
