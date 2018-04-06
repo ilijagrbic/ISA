@@ -24,10 +24,17 @@ public class GlumciService {
 	}
 	
 	public Glumac update(Glumac updatedGlumac) {
+		Glumac toUpdate = getById(updatedGlumac.getId());
+		if(toUpdate!=null) {
+			toUpdate.setIme(updatedGlumac.getIme());
+			toUpdate.setPrezime(updatedGlumac.getPrezime());
+			return glumciRepository.save(toUpdate);
+		}
+		
 		return null;
 	}
 	
 	public Glumac create(Glumac newGlumac) {
-		return null;
+		return glumciRepository.save(newGlumac);
 	}
 }
