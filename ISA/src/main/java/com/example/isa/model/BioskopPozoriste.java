@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.example.isa.model.users.AdmUser;
@@ -41,6 +42,9 @@ public class BioskopPozoriste {
 	private Repertoire repertoire;
 	
 	private HashMap<Integer, Sediste> promotivneKarte;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sale")
+	private List<Sala> sale;
 	
 	@ManyToMany
 	private List<AdmUser> admini;
