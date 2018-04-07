@@ -22,7 +22,7 @@ public class Sala {
 	private int duzina;
 	
 	@ManyToOne()
-	@JoinColumn(name = "sale")
+	@JoinColumn(name = "bioskop")
 	@JsonBackReference
 	private BioskopPozoriste bioskop;
 

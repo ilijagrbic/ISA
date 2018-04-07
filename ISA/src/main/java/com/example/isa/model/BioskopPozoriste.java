@@ -43,7 +43,7 @@ public class BioskopPozoriste {
 	
 	private HashMap<Integer, Sediste> promotivneKarte;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "sale")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bioskop")
 	private List<Sala> sale;
 	
 	@ManyToMany
