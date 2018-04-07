@@ -1,13 +1,11 @@
 package com.example.isa.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
@@ -19,7 +17,7 @@ public class AuthenticationService {
 
 	@Autowired
 	private UserRepository userRepository;
-
+	
 	public User findUser(User user) {
 		return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
 	}
@@ -33,16 +31,19 @@ public class AuthenticationService {
 	}
 
 	public User getCurrentUser() {
+		System.out.println("Uzimamo korisnika trenutno zakacenog");
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println("**\n\n"+(Long)auth.getPrincipal());
+		System.out.println("**\n\n"+auth.getPrincipal());
 		return userRepository.findById((Long) auth.getPrincipal());
 	}
-
+	
 	public void setCurrentUser(User user) {
-		final Collection<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
-		final Authentication authentication = new PreAuthenticatedAuthenticationToken(user.getId(), null, authorities);
+		System.out.println(" * USER "+ user.getId());
+		final Authentication authentication = new PreAuthenticatedAuthenticationToken(user.getId(), null);
+		System.out.println(" *PRINCIPAL "+(Long)authentication.getPrincipal());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("**\n\n"+(Long)auth.getPrincipal());
 	}
-
+	
 }

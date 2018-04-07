@@ -1,7 +1,12 @@
 package com.example.isa.controller;
 
 
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,9 +39,11 @@ public class AuthenticationController {
 	@Autowired
 	private KorisnikService korisnikService;
 	
+	@Value("${server.port}")
+	private String port;
 	// Aktivacija admina?
-	@RequestMapping(value="login", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
-	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
+	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {
@@ -47,6 +54,7 @@ public class AuthenticationController {
 			}
 			else {
 				System.out.println("Aktiviran je");
+				
 				authenticationService.setCurrentUser(user);
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}
@@ -65,9 +73,9 @@ public class AuthenticationController {
 	
 	// Registracija korisni
 	// Registracija admina se ovde ne radi - to radi predefinisani ADMIN
-	@PreAuthorize("hasRole('USER')")
-	@RequestMapping(value="regin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
-	public ResponseEntity regIn(@RequestBody RegDTO regDTO){
+	@PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value="signup", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	public ResponseEntity signup(@RequestBody RegDTO regDTO){
 		
 		User user = authenticationService.findUser(regDTO.createUser(regDTO));
 		
@@ -84,7 +92,9 @@ public class AuthenticationController {
 				return new ResponseEntity<User>(addedUser, HttpStatus.BAD_REQUEST);	
 			}
 			else {
-				mailService.sendVerificationMail("http://localhost:8126/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
+			
+				System.out.println("**PORT\n"+port);
+				mailService.sendVerificationMail("http://localhost:"+port+"/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
 				return new ResponseEntity<User>(addedUser, HttpStatus.CREATED);
 			}
 		}
@@ -101,8 +111,8 @@ public class AuthenticationController {
 	
 	@RequestMapping(value="authenticate")
     public ResponseEntity<User> authenticate() {
-        final User currentUser = authenticationService.getCurrentUser();
-        return new ResponseEntity<>(currentUser, HttpStatus.OK);
+        User user = authenticationService.getCurrentUser();
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	
 

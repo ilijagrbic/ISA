@@ -1,0 +1,26 @@
+<h2>Registracija</h2>
+			
+<form name="signupForm">			
+	<Label>E-mail</Label>
+	<input type="email" required ng-model="user.email">
+
+	<Label>Lozinka</Label>
+	<input type="password" required ng-model="user.password">
+
+	<Label>Ponovi lozinku</Label>
+	<input type="password" required ng-model="user.confPassword">
+
+	<Label>Ime</Label>
+	<input type="text" required ng-model="user.name">
+
+	<Label>Prezime</Label>
+	<input type="text" required ng-model="user.surname">
+
+	<Label>Grad</Label>
+	<input type="text" required ng-model="user.city">
+
+	<Label>Telefon</Label>
+	<input type="text" required ng-model="user.phone">
+
+	<button ng-click="">Registruj se</button>
+</form>

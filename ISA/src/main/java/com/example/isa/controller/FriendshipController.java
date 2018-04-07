@@ -27,7 +27,7 @@ public class FriendshipController {
 	private AuthenticationService authenticationService;
 	
 	// Slanje zahteva za prijateljstvo 
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/sendInvitation",method=RequestMethod.POST)
 	public ResponseEntity<Invite> sendFriendshipRequest(@RequestBody InviteDTO inviteDTO) {
 		Invite friendshipInvite = friendshipService.createFriendshipRequest(inviteDTO.getIdSender(),inviteDTO.getIdReceiver());
@@ -37,7 +37,7 @@ public class FriendshipController {
 	
 	
 	// Prihvanje zahteva za prijateljstvo
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/{senderId}",method=RequestMethod.PUT)
 	public ResponseEntity<Invite> acceptFriendshipRequest(@PathVariable long senderId) {
 		User receiver = authenticationService.getCurrentUser();
@@ -51,7 +51,7 @@ public class FriendshipController {
 	}
 	
 	// Brisanje prijatelja
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/{senderId}",method=RequestMethod.DELETE)
 	public ResponseEntity<Invite> deleteFriend(@PathVariable long senderId) {
 		User receiver = authenticationService.getCurrentUser();
