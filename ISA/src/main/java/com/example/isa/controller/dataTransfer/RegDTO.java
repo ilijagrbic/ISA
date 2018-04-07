@@ -1,8 +1,7 @@
 package com.example.isa.controller.dataTransfer;
 
-import javax.persistence.Column;
-
-import com.example.isa.model.users.RegUser;
+import com.example.isa.model.users.Role;
+import com.example.isa.model.users.User;
 
 public class RegDTO {
 	// Mozda ce mi biti potreban id
@@ -24,9 +23,8 @@ public class RegDTO {
 
 	private boolean actiaved;
 	
-	public RegUser createRegUser(RegDTO source) {
-		// Sta se desava za id
-		RegUser user = new RegUser();
+	public User createUser(RegDTO source) {
+		User user = new User();
 		user.setName(source.getName());
 		user.setSurname(source.getSurname());
 		user.setEmail(source.getEmail());
@@ -34,6 +32,7 @@ public class RegDTO {
 		user.setPhone(source.getPhone());
 		user.setPassword(source.getPassword());
 		user.setActiaved(false);
+		user.setRole(Role.REG_USER);
 		return user;
 	}
 	

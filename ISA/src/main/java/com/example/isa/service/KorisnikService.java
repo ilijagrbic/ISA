@@ -8,33 +8,32 @@ import org.springframework.stereotype.Service;
 
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.UserMesto;
-import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
-import com.example.isa.repository.RegUserRepository;
+import com.example.isa.repository.UserRepository;
 import com.example.isa.repository.RezervacijaRepository;
 
 @Service
 public class KorisnikService {
 	@Autowired
-	private RegUserRepository regUserRepository;
+	private UserRepository regUserRepository;
 	
 	@Autowired
 	private RezervacijaRepository rezervacijaRepository;
 	
-	public List<RegUser> findAll(){
+	public List<User> findAll(){
 		return regUserRepository.findAll();
 	}
 	
-	public RegUser findById(long id) {
+	public User findById(long id) {
 		return regUserRepository.findById(id);
 	}
 	
-	public RegUser createNewUser(RegUser regUser) {
-		return regUserRepository.save(regUser);
+	public User createNewUser(User user) {
+		return regUserRepository.save(user);
 	}
 	
-	public RegUser updateUser(long id, User user) {
-		RegUser toUpdate = regUserRepository.findById(id);
+	public User updateUser(long id, User user) {
+		User toUpdate = regUserRepository.findById(id);
 		toUpdate.setCity(user.getCity());
 		toUpdate.setEmail(user.getEmail());
 		toUpdate.setName(user.getName());
@@ -45,13 +44,13 @@ public class KorisnikService {
 	}
 	
 	public List<Rezervacija> getReservations(User user){
-		RegUser regUser = regUserRepository.findById(user.getId());
-		return regUser.getRezervacije();
+		User u = regUserRepository.findById(user.getId());
+		return u.getRezervacije();
 	}
 	
 	public List<UserMesto> getTickets(User user){
-		RegUser regUser = regUserRepository.findById(user.getId());
-		return regUser.getPozivi();
+		User u = regUserRepository.findById(user.getId());
+		return u.getPozivi();
 	}
 	
 	public void cancelReservation(Long id, User user) {

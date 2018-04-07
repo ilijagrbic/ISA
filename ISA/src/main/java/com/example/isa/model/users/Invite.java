@@ -11,10 +11,10 @@ public class Invite {
 	private long id;
 	
 	@ManyToOne
-	private RegUser posiljalac;
+	private User posiljalac;
 	
 	@ManyToOne
-	private RegUser primalac;
+	private User primalac;
 	
 	private boolean prihvatio;
 
@@ -30,19 +30,19 @@ public class Invite {
 		this.id = id;
 	}
 
-	public RegUser getPosaljilac() {
+	public User getPosaljilac() {
 		return posiljalac;
 	}
 
-	public void setPosaljalac(RegUser posiljalac) {
+	public void setPosaljalac(User posiljalac) {
 		this.posiljalac = posiljalac;
 	}
 
-	public RegUser getPrimalac() {
+	public User getPrimalac() {
 		return primalac;
 	}
 
-	public void setPrimalac(RegUser primalac) {
+	public void setPrimalac(User primalac) {
 		this.primalac = primalac;
 	}
 

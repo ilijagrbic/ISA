@@ -5,7 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.example.isa.model.users.RegUser;
+import com.example.isa.model.users.User;
+
 
 @Entity
 public class UserMesto {
@@ -15,7 +16,7 @@ public class UserMesto {
 	private long id;
 	
 	@ManyToOne
-	private RegUser rezervant;
+	private User rezervant;
 	
 	@ManyToOne
 	private Sediste rezervisanoMesto;
@@ -43,11 +44,11 @@ public class UserMesto {
 		this.id = id;
 	}
 
-	public RegUser getRezervant() {
+	public User getRezervant() {
 		return rezervant;
 	}
 
-	public void setRezervant(RegUser rezervant) {
+	public void setRezervant(User rezervant) {
 		this.rezervant = rezervant;
 	}
 

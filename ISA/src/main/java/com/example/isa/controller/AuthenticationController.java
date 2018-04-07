@@ -1,10 +1,10 @@
 package com.example.isa.controller;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
-import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.KorisnikService;
@@ -35,16 +34,20 @@ public class AuthenticationController {
 	@Autowired
 	private KorisnikService korisnikService;
 	
-
-	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
-	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO) {
+	// Aktivacija admina?
+	@RequestMapping(value="login", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {
 			if (!user.isActiaved()) {
+				System.out.println("Nije aktiviran");
 				return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
+				
 			}
 			else {
+				System.out.println("Aktiviran je");
+				authenticationService.setCurrentUser(user);
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}
 		}
@@ -62,10 +65,11 @@ public class AuthenticationController {
 	
 	// Registracija korisni
 	// Registracija admina se ovde ne radi - to radi predefinisani ADMIN
+	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value="regin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity regIn(@RequestBody RegDTO regDTO){
-		// Znci sad cu ti pokazati sta imam
-		User user = authenticationService.findUser(regDTO.createRegUser(regDTO));
+		
+		User user = authenticationService.findUser(regDTO.createUser(regDTO));
 		
 		if(user==null) {
 			if(!regDTO.populatedFields()) {
@@ -74,15 +78,14 @@ public class AuthenticationController {
 			if(!regDTO.passwordMatch()){
 				return new ResponseEntity<String>("Sifre se ne poklapaju!", HttpStatus.BAD_REQUEST);
 			}
-			RegUser addedUser = korisnikService.createNewUser(regDTO.createRegUser(regDTO));
+			User addedUser = korisnikService.createNewUser(regDTO.createUser(regDTO));
 			
 			if(addedUser==null) {
-				return new ResponseEntity<RegUser>(addedUser, HttpStatus.BAD_REQUEST);	
+				return new ResponseEntity<User>(addedUser, HttpStatus.BAD_REQUEST);	
 			}
 			else {
-			//CCCC :D 
-				mailService.sendVerificationMail("http://localhost:8124/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
-				return new ResponseEntity<RegUser>(addedUser, HttpStatus.CREATED);
+				mailService.sendVerificationMail("http://localhost:8126/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
+				return new ResponseEntity<User>(addedUser, HttpStatus.CREATED);
 			}
 		}
 		
@@ -96,6 +99,11 @@ public class AuthenticationController {
         return new ModelAndView(new RedirectView("/", true));
     }
 	
+	@RequestMapping(value="authenticate")
+    public ResponseEntity<User> authenticate() {
+        final User currentUser = authenticationService.getCurrentUser();
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
+    }
 	
 
 }

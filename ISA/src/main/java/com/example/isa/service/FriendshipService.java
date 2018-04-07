@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.isa.model.users.Invite;
-import com.example.isa.model.users.RegUser;
+import com.example.isa.model.users.User;
 import com.example.isa.repository.InviteRepository;
-import com.example.isa.repository.RegUserRepository;
+import com.example.isa.repository.UserRepository;
 
 @Service
 public class FriendshipService {
 
 	@Autowired
-	private RegUserRepository regUserRepository;
+	private UserRepository regUserRepository;
 
 	@Autowired
 	private InviteRepository inviteRepository;
@@ -37,43 +37,43 @@ public class FriendshipService {
 	}
 
 	public void deleteFriend(Long idSender, Long idReceiver) {
-		//Invite deleteFriend = inviteRepository.findBySenderIdAndReceiverId(idSender, idReceiver);
-		//inviteRepository.delete(deleteFriend);
+		Invite deleteFriend = inviteRepository.findByPosiljalacIdAndPrimalacId(idSender, idReceiver);
+		inviteRepository.delete(deleteFriend);
 	}
 
-	public List<RegUser> findFriends(RegUser regUser) {
-		List<RegUser> friends = new ArrayList<RegUser>();
+	public List<User> findFriends(User user) {
+		List<User> friends = new ArrayList<User>();
 		for (Invite i : inviteRepository.findAll()) {
-			if (i.getPrimalac().equals(regUser) && i.isPrihvatio() == true) {
+			if (i.getPrimalac().equals(user) && i.isPrihvatio() == true) {
 				friends.add(i.getPosaljilac());
 			}
 		}
 		return friends;
 	}
 
-	public List<RegUser> findFriendshipRequest(RegUser regUser) {
-		List<RegUser> nonfriends = new ArrayList<RegUser>();
+	public List<User> findFriendshipRequest(User user) {
+		List<User> nonfriends = new ArrayList<User>();
 		for (Invite i : inviteRepository.findAll()) {
-			if (i.getPosaljilac().equals(regUser) && i.isPrihvatio() == false) {
+			if (i.getPosaljilac().equals(user) && i.isPrihvatio() == false) {
 				nonfriends.add(i.getPrimalac());
 			}
 		}
 		return nonfriends;
 	}
 
-	public List<RegUser> findNonFriends(RegUser regUser) {
-		List<RegUser> regUsers = regUserRepository.findAll();
-		List<Invite> friendships = inviteRepository.findByPosiljalacIdOrPrimalacId(regUser.getId(), regUser.getId());
+	public List<User> findNonFriends(User user) {
+		List<User> users = regUserRepository.findAll();
+		List<Invite> friendships = inviteRepository.findByPosiljalacIdOrPrimalacId(user.getId(), user.getId());
 		for (Invite friendship : friendships) {
-			if (regUser.getId() == friendship.getPosaljilac().getId()) {
-				regUsers.remove(friendship.getPrimalac());
+			if (user.getId() == friendship.getPosaljilac().getId()) {
+				users.remove(friendship.getPrimalac());
 			} else {
-				regUsers.remove(friendship.getPosaljilac());
+				users.remove(friendship.getPosaljilac());
 			}
 		}
-		regUsers.remove(regUser);
+		users.remove(user);
 
-		return regUsers;
+		return users;
 	}
 
 }

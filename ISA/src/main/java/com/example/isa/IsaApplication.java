@@ -1,8 +1,5 @@
 package com.example.isa;
 
-import java.sql.SQLException;
-
-import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

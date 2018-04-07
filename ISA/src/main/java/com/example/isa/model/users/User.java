@@ -1,44 +1,71 @@
 package com.example.isa.model.users;
 
+import java.util.List;
+import java.util.UUID;
+
 import javax.persistence.*;
+
+import com.example.isa.model.Rezervacija;
+import com.example.isa.model.UserMesto;
 
 @Entity
 @Table(name = "koriscnici")
-@Inheritance(strategy=InheritanceType.JOINED)
-public abstract class User {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User {
 
 	@Id
 	@GeneratedValue
 	protected long id;
-	
+
 	protected String name;
-	
+
 	protected String surname;
-	
-	protected UserType role;
-	
-	@Column(name="email", unique = true, nullable = false)
+
+	@Column(name = "email", unique = true, nullable = false)
 	protected String email;
-	
-	//City - dodat grad 
+
+	// City - dodat grad
 	protected String city;
-	
+
 	protected String phone;
-	
+
 	protected boolean actiaved = false;
-	
+
 	@Column(nullable = false)
 	protected String password;
 
-	public User() {	}
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	//////// RegUser
+	@OneToMany
+	private List<UserMesto> pozivi;
+
+	@OneToMany
+	private List<Rezervacija> rezervacije;
+
+	// Za verifikaciju
+	private String verificationCode;
+
+	private int bodovi;
+	/////////
+
+	// Admin
+	private boolean firstTime = true;
+
+	public User() {
+		this.verificationCode = UUID.randomUUID().toString();
+	}
 
 	public void update(User u) {
 		this.name = u.name;
 		this.surname = u.surname;
 		this.city = u.city;
 		this.phone = u.phone;
-		
+
 	}
+
 	public long getId() {
 		return id;
 	}
@@ -102,8 +129,53 @@ public abstract class User {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	
-	
-	
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public List<UserMesto> getPozivi() {
+		return pozivi;
+	}
+
+	public void setPozivi(List<UserMesto> pozivi) {
+		this.pozivi = pozivi;
+	}
+
+	public List<Rezervacija> getRezervacije() {
+		return rezervacije;
+	}
+
+	public void setRezervacije(List<Rezervacija> rezervacije) {
+		this.rezervacije = rezervacije;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public int getBodovi() {
+		return bodovi;
+	}
+
+	public void setBodovi(int bodovi) {
+		this.bodovi = bodovi;
+	}
+
+	public boolean isFirstTime() {
+		return firstTime;
+	}
+
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
+	}
+
 }

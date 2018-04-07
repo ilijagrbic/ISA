@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.example.isa.model.users.AdmUser;
+import com.example.isa.model.users.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -47,7 +47,7 @@ public class BioskopPozoriste {
 	private List<Sala> sale;
 	
 	@ManyToMany
-	private List<AdmUser> admini;
+	private List<User> admini;
 	
 	private int bronzeTreshold;
 	
@@ -125,11 +125,11 @@ public class BioskopPozoriste {
 		this.repertoire = repertoire;
 	}
 
-	public List<AdmUser> getAdmini() {
+	public List<User> getAdmini() {
 		return admini;
 	}
 
-	public void setAdmini(List<AdmUser> admini) {
+	public void setAdmini(List<User> admini) {
 		this.admini = admini;
 	}
 

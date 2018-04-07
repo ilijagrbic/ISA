@@ -2,9 +2,14 @@ package com.example.isa.model;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.example.isa.model.users.RegUser;
+import com.example.isa.model.users.User;
+
 
 @Entity
 public class Rezervacija {
@@ -20,7 +25,7 @@ public class Rezervacija {
 	private List<UserMesto> sviPozvani;
 	
 	@ManyToOne
-	private RegUser host;
+	private User host;
 	
 	private int status;
 
@@ -52,11 +57,11 @@ public class Rezervacija {
 		this.sviPozvani = sviPozvani;
 	}
 
-	public RegUser getHost() {
+	public User getHost() {
 		return host;
 	}
 
-	public void setHost(RegUser host) {
+	public void setHost(User host) {
 		this.host = host;
 	}
 	

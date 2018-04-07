@@ -1,6 +1,5 @@
 package com.example.isa.controller.dataTransfer;
 
-import com.example.isa.model.users.RegUser;
 import com.example.isa.model.users.User;
 
 public class LoginDTO {
@@ -18,11 +17,11 @@ public class LoginDTO {
     }
     
     // konvertujemo u registrovanog korisnika
-    public RegUser getUserFromLogin(LoginDTO source) {
-    	RegUser ru = new RegUser();
-    	ru.setPassword(source.getPassword());
-    	ru.setEmail(source.getEmail());
-    	return ru;
+    public User getUserFromLogin(LoginDTO source) {
+    	User user = new User();
+    	user.setPassword(source.getPassword());
+    	user.setEmail(source.getEmail());
+    	return user;
     }
 
     public String getEmail() {
