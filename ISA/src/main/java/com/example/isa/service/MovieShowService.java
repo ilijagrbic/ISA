@@ -1,7 +1,7 @@
 package com.example.isa.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Repertoire;
+import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.RepertoireRepository;
 
@@ -40,6 +41,11 @@ public class MovieShowService {
 	
 	public MovieShow create(MovieShow newMovie, long cinId) {
 		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
+		
+		for(Repertoire bp:repertoarRepository.findAll()) {
+			System.out.println("Trenutni id-evi:"+bp.getId());
+		}
+		
 		if(parent!=null) {
 			newMovie.setRepertoar(parent);
 			return movieRepository.save(newMovie);

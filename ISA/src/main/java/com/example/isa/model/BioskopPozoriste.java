@@ -156,6 +156,54 @@ public class BioskopPozoriste {
 	public void setGoldTreshold(int goldTreshold) {
 		this.goldTreshold = goldTreshold;
 	}
+
+	public String getGmapsUrl() {
+		return gmapsUrl;
+	}
+
+	public void setGmapsUrl(String gmapsUrl) {
+		this.gmapsUrl = gmapsUrl;
+	}
+
+	public HashMap<Integer, Sediste> getPromotivneKarte() {
+		return promotivneKarte;
+	}
+
+	public void setPromotivneKarte(HashMap<Integer, Sediste> promotivneKarte) {
+		this.promotivneKarte = promotivneKarte;
+	}
+
+	public List<Sala> getSale() {
+		return sale;
+	}
+
+	public void setSale(List<Sala> sale) {
+		this.sale = sale;
+	}
+
+	public int getBronzeSale() {
+		return bronzeSale;
+	}
+
+	public void setBronzeSale(int bronzeSale) {
+		this.bronzeSale = bronzeSale;
+	}
+
+	public int getSilverSale() {
+		return silverSale;
+	}
+
+	public void setSilverSale(int silverSale) {
+		this.silverSale = silverSale;
+	}
+
+	public int getGoldSale() {
+		return goldSale;
+	}
+
+	public void setGoldSale(int goldSale) {
+		this.goldSale = goldSale;
+	}
 	
 	
 	
