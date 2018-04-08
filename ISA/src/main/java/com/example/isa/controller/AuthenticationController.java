@@ -94,7 +94,7 @@ public class AuthenticationController {
 			else {
 			
 				System.out.println("**PORT\n"+port);
-				mailService.sendVerificationMail("http://localhost:"+port+"/api/authentication/signin", addedUser.getVerificationCode(), addedUser.getEmail());
+				mailService.sendVerificationMail("http://localhost:"+port+"/api/authentication/signup", addedUser.getVerificationCode(), addedUser.getEmail());
 				return new ResponseEntity<User>(addedUser, HttpStatus.CREATED);
 			}
 		}
@@ -103,7 +103,7 @@ public class AuthenticationController {
 	}
 	
 	// Proveri za front
-	@RequestMapping(value="regin/{verificationCode}")
+	@RequestMapping(value="signup/{verificationCode}")
     public ModelAndView verify(@PathVariable String verificationCode) {
 		authenticationService.verifyUser(verificationCode);
         return new ModelAndView(new RedirectView("/", true));
