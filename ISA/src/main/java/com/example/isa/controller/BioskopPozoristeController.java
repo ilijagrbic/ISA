@@ -80,7 +80,9 @@ public class BioskopPozoristeController {
 	public ResponseEntity<BioskopPozoriste> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){		
 		updateCinema.setId(id);
 		
-		BioskopPozoriste retVal = bioskopService.update(updateCinema.getBioskop());
+		BioskopPozoriste temp = updateCinema.getBioskop();
+		temp.setId(id);
+		BioskopPozoriste retVal = bioskopService.update(temp);
 		if(retVal!=null) {
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
 		}else {

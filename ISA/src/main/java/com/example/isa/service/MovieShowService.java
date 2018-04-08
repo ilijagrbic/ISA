@@ -41,11 +41,7 @@ public class MovieShowService {
 	
 	public MovieShow create(MovieShow newMovie, long cinId) {
 		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
-		
-		for(Repertoire bp:repertoarRepository.findAll()) {
-			System.out.println("Trenutni id-evi:"+bp.getId());
-		}
-		
+
 		if(parent!=null) {
 			newMovie.setRepertoar(parent);
 			return movieRepository.save(newMovie);
