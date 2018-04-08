@@ -7,5 +7,5 @@
 	<Label>Lozinka</Label>
 	<input type="password" required ng-model="user.password">
 
-	<button ng-click="">Logovanje</button>
+	<button ng-disabled="signin.$invalid" ng-click="signin()">Logovanje</button>
 </form>

@@ -22,5 +22,5 @@
 	<Label>Telefon</Label>
 	<input type="text" required ng-model="user.phone">
 
-	<button ng-click="">Registruj se</button>
+	<button ng-disabled="signupForm.$invalid" ng-click="signup()">Registruj se</button>
 </form>

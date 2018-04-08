@@ -27,7 +27,7 @@ import com.example.isa.service.KorisnikService;
 import com.example.isa.service.MailService;
 
 @RestController
-@RequestMapping(value = "/api/")
+@RequestMapping(value = "/api/authentication")
 public class AuthenticationController {
 
 	@Autowired
@@ -94,7 +94,7 @@ public class AuthenticationController {
 			else {
 			
 				System.out.println("**PORT\n"+port);
-				mailService.sendVerificationMail("http://localhost:"+port+"/api/regin", addedUser.getVerificationCode(), addedUser.getEmail());
+				mailService.sendVerificationMail("http://localhost:"+port+"/api/authentication/signin", addedUser.getVerificationCode(), addedUser.getEmail());
 				return new ResponseEntity<User>(addedUser, HttpStatus.CREATED);
 			}
 		}
@@ -109,7 +109,7 @@ public class AuthenticationController {
         return new ModelAndView(new RedirectView("/", true));
     }
 	
-	@RequestMapping(value="authenticate")
+	@RequestMapping(value="authenticate", method=RequestMethod.GET)
     public ResponseEntity<User> authenticate() {
         User user = authenticationService.getCurrentUser();
         return new ResponseEntity<User>(user, HttpStatus.OK);

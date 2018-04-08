@@ -1,8 +1,8 @@
 <div ng>
 	<p>
-		<span ng-if="USER == null">Sign up</span>
-		<span ng-if="USER == null">Sign in</span>
-		<span ng-if="USER != null">Sign out</span>
+		<span ng-if="USER == null"><a ui-sref="signup">Sign up</a></span>
+		<span ng-if="USER == null"><a ui-sref="signin">Sign in</a></span>
+		<span ng-if="USER != null"><a ui-sref="signout">Sign out</a></span>
 	</p>
 	<p>		
 		<div ng-if="USER == null">
