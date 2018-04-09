@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 public class BioskopPozoriste {
 
+	//dodaj sliku ovde
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -62,7 +64,7 @@ public class BioskopPozoriste {
 	private int silverSale;
 	
 	private int goldSale;
-	
+
 	public BioskopPozoriste() {
 		
 	}

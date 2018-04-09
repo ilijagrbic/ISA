@@ -15,7 +15,20 @@ Edit place
 	
 	<ol>
 		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
-			movie.name
+			{{movie.name}} <span><button ng-click="editMovie(movie)">Edit</button></span>
 		</li>
 	</ol>
+	<div ng-show = "enterMovieState==true">
+		Naziv:<input type=text ng-model="enterMoviename"><br/>
+		Zanr:<input type=text ng-model="enterMoviegenre"><br/>
+		Tip:<input type=text ng-model="enterMovietype"><br/>
+		Reziser:<input type=text ng-model="enterMoviedirector"><br/>
+		Trajanje:<input type=text ng-model="enterMovieduration"><br/>
+		Cena:<input type=text ng-model="enterMovieprice"><br/>
+		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="enterMoviedescription"></textarea><br/>
+		<!-- Sale, termini, poster, glumci-->
+		<button ng-click="cancelEntery()">Cancel entry</button>
+		<button ng-click="saveEntery()">Save entry</button>
+	</div>
+	<button ng-click="newMovie()">New</button>
 </div>

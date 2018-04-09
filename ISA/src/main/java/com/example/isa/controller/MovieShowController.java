@@ -82,4 +82,13 @@ public class MovieShowController {
 		
 		//TODO Uraditi brisanje i update filma ukoliko bude potrebno.
 	}
+	
+	@RequestMapping(
+			value = "/api/movies/{id}",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<MovieShow> updateMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long idMovie){
+		return null; //TODO Uraditi backend za put
+	}
 }

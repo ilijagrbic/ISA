@@ -19,6 +19,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class MovieShow {
 	
+	
+	//dodaj sliku ovde
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -50,9 +53,25 @@ public class MovieShow {
 	@JsonBackReference
 	private Repertoire repertoar;
 
+	private double avgReview;
+		
 	public MovieShow() {
 		
 	}
+	
+	
+
+	public double getAvgReview() {
+		return avgReview;
+	}
+
+
+
+	public void setAvgReview(double avgReview) {
+		this.avgReview = avgReview;
+	}
+
+
 
 	public long getId() {
 		return id;
