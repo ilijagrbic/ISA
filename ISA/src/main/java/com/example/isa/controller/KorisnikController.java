@@ -36,7 +36,6 @@ public class KorisnikController {
 	
 	
 	// Vracanje registrovanog korisnika
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
 	public ResponseEntity<User> findRegKorisnik(@PathVariable Long id){
 		User regUser = korisnikService.findById(id);
@@ -60,7 +59,6 @@ public class KorisnikController {
 	
 	// Azuriranje podataka korisnika
 	// Da li treba i admina
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes="application/json", produces="application/json")
 	public ResponseEntity<User> updateRegKorsinik(@PathVariable Long id, @RequestBody User user) {
 		
@@ -74,7 +72,6 @@ public class KorisnikController {
 	}
 	
 	// Vracanje svih (obicnih) registrovanih korisnika - mozda ce trebati i admina
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(method=RequestMethod.GET, produces="application/json")
 	public ResponseEntity<Collection<User>> getRegKorisnici() {
 		ArrayList<User> regUsers = (ArrayList<User>)korisnikService.findAll();
@@ -82,7 +79,6 @@ public class KorisnikController {
 	}
 	
 	// Prijatelji
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/friends", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<User>> getFriends() {
 		User user = (User)authenticationService.getCurrentUser();
@@ -91,8 +87,7 @@ public class KorisnikController {
 	}
 	
 	// Osobe kojima mozemo da posaljemo zahtev
-	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value="/findNonFriends", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/nonFriends", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<User>> getNonFriends() {
 		User user = (User)authenticationService.getCurrentUser();
 		ArrayList<User> nonFriends = (ArrayList<User>)friendshipService.findNonFriends(user);
@@ -101,7 +96,6 @@ public class KorisnikController {
 	
 	
 	// Pronalazenje dobijenih zahteva za prijateljstvo
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/findRequests", method=RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<User>> getRequests() {
 		User user = (User)authenticationService.getCurrentUser();

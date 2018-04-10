@@ -18,7 +18,7 @@ angular.module('app')
 
 
                     $scope.user = {};
-                    $state.go('defaultState');
+                    $state.go('regUser'); // Ide na usera
                     
 
                 }, function (res) {
