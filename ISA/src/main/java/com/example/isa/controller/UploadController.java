@@ -42,10 +42,10 @@ public class UploadController {
 	public ResponseEntity<UploadDTO> handleFileUpload(@RequestParam("file") MultipartFile file) {
 		String message = "";
 		try {
-			storageService.store(file);
+			message = storageService.store(file);
 			files.add(file.getOriginalFilename());
  
-			message = "You successfully uploaded " + file.getOriginalFilename() + "!";
+			//message = "You successfully uploaded " + file.getOriginalFilename() + "!";
 			return ResponseEntity.status(HttpStatus.OK).body(new UploadDTO(message));
 		} catch (Exception e) {
 			message = "FAIL to upload " + file.getOriginalFilename() + "!";

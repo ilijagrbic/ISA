@@ -16,6 +16,7 @@ angular.module('app')
 			}
 		}
 		getMovieDTO = function(param){
+			console.log($scope.imgPath);
 			return {
 				"name": $scope.enterMoviename,
 				"description": $scope.enterMoviedescription,
@@ -84,28 +85,23 @@ angular.module('app')
 		}
 		
 		$scope.saveEntery = function(){
-			if($scope.myFile==undefined){
-				console.log("file:"+$scope.myFile);
-				console.log("genre:"+$scope.enterMoviegenre);
-			}else{
-				console.log("radiiiiiiiiiii");
-				uploadService.postImage($scope.myFile, 
-					function (response) {
-			            $scope.imgPath = response;
-			            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
-			    				function(info){
-			    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
-			    				},
-			    				function(){
-			    					
-			    				}
-			    			);
-			              
-		          }, 
-		          function () {
-		        	  console.log("upload error")
-		          });
-			}
+			uploadService.postImage($scope.myFile, 
+				function (response) {
+		            $scope.imgPath = response.data.message;
+		            getMovieDTO();
+		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
+		    				function(info){
+		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
+		    				},
+		    				function(){
+		    					
+		    				}
+		    			);
+		              
+	          }, 
+	          function () {
+	        	  console.log("upload error")
+	          });
 		}
 		
 		

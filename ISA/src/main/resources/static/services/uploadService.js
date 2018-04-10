@@ -5,13 +5,7 @@ angular.module('app')
         	
         	var fd = new FormData();
         	fd.append('file', file);
-        	fd.append('data', 'string');/*
-        	$http.post('api/postFile', fd, {
-        	   transformRequest: angular.identity,
-        	   headers: {'Content-Type': undefined}
-        	})
-        	.then(onSuccess);*/
-        	
+        	fd.append('data', 'string');
             var req = {
                 method: 'POST',
                 url: 'api/postFile',

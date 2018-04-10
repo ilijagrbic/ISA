@@ -53,6 +53,18 @@ public class MovieShowDTO {
 
 
 
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
 	public MovieShowDTO(MovieShowType type, String name, int duration, String description, String director,
 			List<Glumac> glumci, String genre, double price, long cinnemaId) {
 		super();
