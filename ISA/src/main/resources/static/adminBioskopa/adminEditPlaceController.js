@@ -90,6 +90,10 @@ angular.module('app')
 			)
 		}
 		
+		$scope.viewMovie = function(movie){
+			$state.go("adminViewMovie", {cinemaId: $scope.curentCinemaTheatre.id, movieId: movie.id, cinType: $scope.curentCinemaTheatre.type});
+		}
+		
 		$scope.newMovie = function(){
 			$scope.enterMovieState = true;
 		}

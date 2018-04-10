@@ -1,0 +1,16 @@
+<div>
+	<h1>Movie</h1>
+	<div class="containter">
+		Naziv:{{curentMovie.name}}<br/>
+		Zanr:{{curentMovie.genre}}<br/>
+		Reziser:{{curentMovie.director}}<br/>
+		Trajanje:{{curentMovie.duration}}<br/>
+		Prosecna osena:{{curentMovie.avgReview}}<br/>
+		Cena:{{curentMovie.price}}<br/>
+		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description"></textarea><br/>
+		Poster:<img ng-src="/api/files/{{curentMovie.image}}"><br/>
+		<button ng-click="backToParentMovie()">Back</button>
+	</div>
+	
+	<!-- Sale, termini, poster, glumci-->
+</div>

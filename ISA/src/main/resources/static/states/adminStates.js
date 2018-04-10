@@ -53,4 +53,17 @@ angular.module('app')
                     }
                 }
             })
+            .state('adminViewMovie', {
+                url: '/adminEditMovie/:movieId/cinema/:cinemaId/type/:cinType',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'adminBioskopa/adminViewMovie.html',
+                        controller: 'adminMovieViewController'
+                    }
+                }
+            })
     });
