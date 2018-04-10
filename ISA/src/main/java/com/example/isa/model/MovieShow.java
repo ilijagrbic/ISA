@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class MovieShow {
 	
 	
-	//dodaj sliku ovde
+	private String image;
 	
 	@Id
 	@GeneratedValue
@@ -60,6 +60,18 @@ public class MovieShow {
 	}
 	
 	
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
 
 	public double getAvgReview() {
 		return avgReview;

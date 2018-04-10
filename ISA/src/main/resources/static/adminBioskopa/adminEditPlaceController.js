@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService) {
+    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService, uploadService) {
 		/*
 		 * Utility functions
 		 */
@@ -24,7 +24,8 @@ angular.module('app')
 				"director":$scope.enterMoviedirector,
 				"duration":$scope.enterMovieduration,
 				"type":$scope.enterMovietype,
-				"cinnemaId":$stateParams.cinemaTheatreId
+				"cinnemaId":$stateParams.cinemaTheatreId,
+				"image":$scope.imgPath
 			}
 		}
 		goBack = function(){
@@ -51,6 +52,7 @@ angular.module('app')
 		 * Utility functions
 		 */
 		loadData();
+		var something = this;
 		$scope.enterMovie = false;
 		
 		$scope.backToTheatres = function(){
@@ -82,16 +84,49 @@ angular.module('app')
 		}
 		
 		$scope.saveEntery = function(){
-			movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
-				function(info){
-					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
-				},
-				function(){
-					
-				}
-			);
+			if($scope.myFile==undefined){
+				console.log("file:"+$scope.myFile);
+				console.log("genre:"+$scope.enterMoviegenre);
+			}
+			else{
+				uploadService.postImage($scope.myFile, function (response) {
+		            $scope.imgPath = response;
+		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
+		    				function(info){
+		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
+		    				},
+		    				function(){
+		    					
+		    				}
+		    			);
+		              
+		          }, 
+		          function (response) {
+		            console.log("upload error")
+		          });
+			}
 		}
 		
 		
 		
-    });
+    }).directive('fileUpload', fileUpload);
+
+    fileUpload.$inject = ['$parse'];
+
+    function fileUpload($parse) {
+      var directive = {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+          var model = $parse(attrs.fileUpload);
+          var modelSetter = model.assign;
+
+          element.bind('change', function () {
+            scope.$apply(function () {
+              modelSetter(scope, element[0].files[0]);
+            });
+          });
+        }
+      };
+      return directive;
+
+    }

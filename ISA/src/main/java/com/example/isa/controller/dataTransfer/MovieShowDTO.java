@@ -27,6 +27,8 @@ public class MovieShowDTO {
 	private double price;
 	
 	private long cinnemaId;
+	
+	private String image;
 
 	public MovieShow getMovieShow() {
 		MovieShow retVal = new MovieShow();
@@ -39,6 +41,7 @@ public class MovieShowDTO {
 		retVal.setGenre(genre);
 		retVal.setPrice(price);
 		retVal.setProjekcije(new ArrayList<Projekcija>());
+		retVal.setImage(image);
 		return retVal;
 	}
 	

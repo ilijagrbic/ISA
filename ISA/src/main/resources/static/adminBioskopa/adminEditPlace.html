@@ -2,6 +2,7 @@
 Edit place
 </h1>
 <div>
+<img src="/api/files/file_icon.png">
 	<div class="containter">
 		Naziv:<input type=text ng-model="curentCinemaTheatre.name"><br/>
 		Adresa:<input type=text ng-model="curentCinemaTheatre.address"><br/>
@@ -26,6 +27,10 @@ Edit place
 		Trajanje:<input type=text ng-model="enterMovieduration"><br/>
 		Cena:<input type=text ng-model="enterMovieprice"><br/>
 		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="enterMoviedescription"></textarea><br/>
+		Poster:
+		<input type="file" file-upload="something.myFile"/>
+		<br/>
+              
 		<!-- Sale, termini, poster, glumci-->
 		<button ng-click="cancelEntery()">Cancel entry</button>
 		<button ng-click="saveEntery()">Save entry</button>
