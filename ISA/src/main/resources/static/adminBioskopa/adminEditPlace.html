@@ -15,8 +15,8 @@ Edit place
 	
 	<ol>
 		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
-			Naziv filma:{{movie.name}} 
-			<img ng-src="/api/files/{{movie.image}}">		
+			Naziv filma:{{movie.name}} <br/>
+			<img ng-src="/api/files/{{movie.image}}"><br/>		
 			<button ng-click="editMovie(movie)">Edit</button>
 		</li>
 	</ol>

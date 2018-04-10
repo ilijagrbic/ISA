@@ -26,7 +26,7 @@ public class StorageService {
 		String fileName = UUID.randomUUID().toString();
 		String[] tokens = file.getOriginalFilename().split("\\.(?=[^\\.]+$)");
 		String extension = tokens[1];
-		String fullName = fileName+"."+extension;
+		String fullName = fileName;//+"."+extension;
 		try {
 			Files.copy(file.getInputStream(), this.rootLocation.resolve(fullName));
 			return fullName;
@@ -42,6 +42,7 @@ public class StorageService {
 			if (resource.exists() || resource.isReadable()) {
 				return resource;
 			} else {
+				System.out.println(file.toString());
 				throw new RuntimeException("FAIL!");
 			}
 		} catch (MalformedURLException e) {
