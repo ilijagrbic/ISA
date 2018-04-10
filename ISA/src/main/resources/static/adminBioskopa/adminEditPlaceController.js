@@ -84,13 +84,13 @@ angular.module('app')
 		}
 		
 		$scope.saveEntery = function(){
-			if($scope.myFile==undefined){
+			/*if($scope.myFile==undefined){
 				console.log("file:"+$scope.myFile);
 				console.log("genre:"+$scope.enterMoviegenre);
-			}
-			else{
-				uploadService.postImage($scope.myFile, function (response) {
-		            $scope.imgPath = response;
+			}*/
+			//else{
+				/*uploadService.postImage($scope.myFile, function (response) {
+		            $scope.imgPath = response;*/
 		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
 		    				function(info){
 		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
@@ -100,11 +100,11 @@ angular.module('app')
 		    				}
 		    			);
 		              
-		          }, 
-		          function (response) {
+		         /* }, 
+		          function () {
 		            console.log("upload error")
-		          });
-			}
+		          });*/
+			//}
 		}
 		
 		
