@@ -89,6 +89,28 @@ public class MovieShowController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MovieShow> updateMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long idMovie){
-		return null; //TODO Uraditi backend za put
+		MovieShow temp = createMovie.getMovieShow();
+		temp.setId(createMovie.getId());
+		MovieShow retVal = movieService.update(temp, idMovie);
+		if(retVal!=null) {
+			return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<MovieShow>(retVal, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(
+			value = "/api/movies/{id}",
+			method = RequestMethod.DELETE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> updateMovie(@PathVariable("id") Long idMovie){
+		Long retVal = movieService.delete(idMovie);
+		if(retVal!=null) {
+			return new ResponseEntity<Long>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Long>(retVal, HttpStatus.BAD_REQUEST);
+		}
 	}
 }

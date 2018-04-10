@@ -9,6 +9,8 @@ import com.example.isa.model.MovieShowType;
 import com.example.isa.model.Projekcija;
 
 public class MovieShowDTO {
+	
+	private long id;
 
 	private MovieShowType type;
 	
@@ -47,6 +49,18 @@ public class MovieShowDTO {
 	
 	
 	
+	public long getId() {
+		return id;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+
 	public MovieShowDTO() {
 		super();
 	}

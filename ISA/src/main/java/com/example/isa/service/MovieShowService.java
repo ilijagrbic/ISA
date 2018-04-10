@@ -39,6 +39,15 @@ public class MovieShowService {
 		return movieRepository.findById(id);
 	}
 	
+	public MovieShow update(MovieShow updated, long movId) {
+		MovieShow toUpdate = movieRepository.findById(updated.getId());
+		if(toUpdate!=null) {
+			return movieRepository.save(toUpdate.update(updated));
+		}
+		
+		return null;
+	}
+	
 	public MovieShow create(MovieShow newMovie, long cinId) {
 		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
 
@@ -48,5 +57,14 @@ public class MovieShowService {
 		}else {
 			return null;
 		}
+	}
+	
+	public Long delete(long id) {
+		MovieShow toDelete = movieRepository.findById(id);
+		if(toDelete!=null) {
+			movieRepository.delete(id);
+			return id;
+		}
+		return null;
 	}
 }

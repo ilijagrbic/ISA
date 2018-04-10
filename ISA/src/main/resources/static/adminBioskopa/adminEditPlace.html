@@ -18,6 +18,8 @@ Edit place
 			Naziv filma:{{movie.name}} <br/>
 			<img ng-src="/api/files/{{movie.image}}"><br/>		
 			<button ng-click="editMovie(movie)">Edit</button>
+			<button ng-click="deleteMovie(movie.id)">Delete</button>	
+			<button ng-click="viewMovie(movie)">View</button>
 		</li>
 	</ol>
 	<div ng-show = "enterMovieState==true">

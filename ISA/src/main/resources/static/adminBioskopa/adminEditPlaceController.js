@@ -16,7 +16,6 @@ angular.module('app')
 			}
 		}
 		getMovieDTO = function(param){
-			console.log($scope.imgPath);
 			return {
 				"name": $scope.enterMoviename,
 				"description": $scope.enterMoviedescription,
@@ -74,6 +73,21 @@ angular.module('app')
 
 		$scope.editMovie = function(movie){
 			$state.go("adminEditMovie", {cinemaId: $scope.curentCinemaTheatre.id, movieId: movie.id, cinType: $scope.curentCinemaTheatre.type})
+		}
+		
+		$scope.deleteMovie = function(movieId){
+			movieShowService.deleteMovieShow(movieId,
+				function(info){
+					for(var i=0;i<$scope.curentCinemaTheatre.repertoire.movies.length;i++){
+						if($scope.curentCinemaTheatre.repertoire.movies[i].id==info.data){
+							$scope.curentCinemaTheatre.repertoire.movies.splice(i,1);
+						}
+					}
+				},
+				function(){
+					
+				}
+			)
 		}
 		
 		$scope.newMovie = function(){

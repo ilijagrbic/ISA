@@ -8,6 +8,8 @@
 		Prosecna osena:{{curentMovie.avgReview}}<br/>
 		Cena:<input type=text ng-model="curentMovie.price"><br/>
 		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description"></textarea><br/>
+		Poster:<img ng-src="/api/files/{{curentMovie.image}}"><br/>
+		Novi poster:<input type="file" file-upload="myFile"/><br/>
 		<button ng-click="backToParentMovie()">Back</button>
 		<button ng-click="commitChanges()">Save</button>
 	</div>

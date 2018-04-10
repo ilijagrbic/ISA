@@ -18,6 +18,27 @@ angular.module('app')
                 data: data
 	        };
 	        $http(req).then(onSuccess, onError);
+	    },
+	    putMovieShow: function (cinemaId, movieId, data, onSuccess, onError) {
+	        var req = {
+	            method: 'PUT',
+	            url: '/api/movies/'+movieId,
+	            headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+	        };
+	        $http(req).then(onSuccess, onError);
+	    },
+	    deleteMovieShow: function (movieId, onSuccess, onError) {
+	        var req = {
+	            method: 'DELETE',
+	            url: '/api/movies/'+movieId,
+	            headers: {
+                    'Content-Type': 'application/json'
+                }
+	        };
+	        $http(req).then(onSuccess, onError);
 	    }
     }
 });

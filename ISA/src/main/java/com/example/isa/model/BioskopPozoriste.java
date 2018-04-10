@@ -77,7 +77,10 @@ public class BioskopPozoriste {
 		this.bronzeTreshold=updated.getBronzeTreshold();
 		this.silverTreshold=updated.getSilverTreshold();
 		this.goldTreshold=updated.getGoldTreshold();
-		
+		this.bronzeSale=updated.getBronzeSale();
+		this.silverSale=updated.getSilverSale();
+		this.goldSale=updated.getGoldSale();
+		this.gmapsUrl=updated.getGmapsUrl();
 		return this;
 	}
 

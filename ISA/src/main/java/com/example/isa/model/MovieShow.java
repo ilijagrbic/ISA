@@ -58,8 +58,21 @@ public class MovieShow {
 	public MovieShow() {
 		
 	}
-	
-	
+
+	public MovieShow update(MovieShow update) {
+		this.image = update.getImage();
+		this.type = update.getType();
+		this.name = update.getName();
+		this.duration = update.getDuration();
+		this.description = update.getDescription();
+		this.director = update.getDirector();
+		//this.glumci = update.getGlumci();
+		this.genre = update.getGenre();
+		//this.projekcije = update.getProjekcije();
+		this.price = update.getPrice();
+		//this.repertoar = update.getRepertoar();
+		return this;
+	}
 
 	public String getImage() {
 		return image;
