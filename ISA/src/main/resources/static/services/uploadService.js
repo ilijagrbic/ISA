@@ -3,21 +3,23 @@ angular.module('app')
     return {
         postImage: function (file, onSuccess, onError) {
         	
-        	/*var fd = new FormData();
+        	var fd = new FormData();
         	fd.append('file', file);
-        	fd.append('data', 'string');
+        	fd.append('data', 'string');/*
         	$http.post('api/postFile', fd, {
         	   transformRequest: angular.identity,
         	   headers: {'Content-Type': undefined}
-        	}).then(onSuccess, onError);*/
+        	})
+        	.then(onSuccess);*/
         	
-            /*var req = {
+            var req = {
                 method: 'POST',
                 url: 'api/postFile',
-                headers: {'Content-Type': 'multipart/form-data'},
-                data: file
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined},
+                data: fd
             };
-            $http(req).then(onSuccess, onError);*/
+            $http(req).then(onSuccess, onError);
             
         }
     }

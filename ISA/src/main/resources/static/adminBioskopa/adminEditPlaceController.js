@@ -84,27 +84,28 @@ angular.module('app')
 		}
 		
 		$scope.saveEntery = function(){
-			/*if($scope.myFile==undefined){
+			if($scope.myFile==undefined){
 				console.log("file:"+$scope.myFile);
 				console.log("genre:"+$scope.enterMoviegenre);
-			}*/
-			//else{
-				/*uploadService.postImage($scope.myFile, function (response) {
-		            $scope.imgPath = response;*/
-		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
-		    				function(info){
-		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
-		    				},
-		    				function(){
-		    					
-		    				}
-		    			);
-		              
-		         /* }, 
+			}else{
+				console.log("radiiiiiiiiiii");
+				uploadService.postImage($scope.myFile, 
+					function (response) {
+			            $scope.imgPath = response;
+			            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
+			    				function(info){
+			    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
+			    				},
+			    				function(){
+			    					
+			    				}
+			    			);
+			              
+		          }, 
 		          function () {
-		            console.log("upload error")
-		          });*/
-			//}
+		        	  console.log("upload error")
+		          });
+			}
 		}
 		
 		
@@ -120,11 +121,13 @@ angular.module('app')
           var model = $parse(attrs.fileUpload);
           var modelSetter = model.assign;
 
-          element.bind('change', function () {
+          element.bind('change', function (event) {
             scope.$apply(function () {
-              modelSetter(scope, element[0].files[0]);
+              scope.myFile = event.target.files[0];
+              event.preventDefault();
             });
           });
+
         }
       };
       return directive;
