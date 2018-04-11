@@ -1,7 +1,14 @@
 angular.module('app')
     .service('regUserService', function ($http) {
         return {
-            getRegUsers: function (onSuccess, onError) {
+        	findById: function (id, onSuccess, onError) {
+                var req = {
+                    method: 'GET',
+                    url: '/api/users/' + id
+                };
+                $http(req).then(onSuccess, onError);
+            },
+        	getRegUsers: function (onSuccess, onError) {
                 var req = {
                     method: 'GET',
                     url: '/api/users',
