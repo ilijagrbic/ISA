@@ -50,7 +50,7 @@ public class MovieShowService {
 		System.out.println("Updejtujem: (toupadate)"+toUpdate.getId());
 		boolean update = true;
 		if(toUpdate!=null) {
-			for(Glumac g:updated.getGlumci()) {
+			/*for(Glumac g:updated.getGlumci()) {
 				if(glumacRepository.findById(g.getId())==null||g.getId()!=null) { 
 					for(Glumac gs:toUpdate.getGlumci()) {
 						if(gs.getId()==g.getId()) {
@@ -62,7 +62,7 @@ public class MovieShowService {
 					}
 					
 				}
-			}
+			}*/
 			if(update==true) {
 				toUpdate.update(updated);
 				System.out.println("Updejtujem before commit: (toupadate)"+toUpdate.getId());
