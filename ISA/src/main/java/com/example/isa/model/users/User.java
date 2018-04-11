@@ -9,7 +9,7 @@ import com.example.isa.model.Rezervacija;
 import com.example.isa.model.UserMesto;
 
 @Entity
-@Table(name = "koriscnici")
+@Table(name = "korisnici")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
