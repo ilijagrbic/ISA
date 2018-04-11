@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.ChangePasswordDTO;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.UserMesto;
 import com.example.isa.model.users.User;
@@ -61,7 +62,7 @@ public class KorisnikController {
 	// Da li treba i admina
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes="application/json", produces="application/json")
 	public ResponseEntity<User> updateRegKorsinik(@PathVariable Long id, @RequestBody User user) {
-		
+		System.out.println("\n*** Izmena korisnika " + id + "***\n");
 		User updatedUser = korisnikService.updateUser(id, user);
 		if(updatedUser == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -125,6 +126,17 @@ public class KorisnikController {
 		User user = (User)authenticationService.getCurrentUser();
 		 // Treba da se doda deo za brisanje
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/changePassword/{id}", method=RequestMethod.PUT, consumes="application/json", produces="application/json")
+	 public ResponseEntity<User> updatePassword(@RequestBody ChangePasswordDTO changePasswordDTO, @PathVariable long id) {
+        User user = (User)authenticationService.getCurrentUser();
+
+        User updatedUser = korisnikService.updatePassword(changePasswordDTO, user);
+        if (updatedUser!=null) {
+        	return new ResponseEntity<>(updatedUser, HttpStatus.OK); 
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
 }

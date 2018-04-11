@@ -42,6 +42,15 @@ angular.module('app')
 	                url: '/api/users/findRequests',
 	            };
 	            $http(req).then(onSuccess, onError);
-	        }
+	        },
+	        updatePassword: function (passwords, id, onSuccess, onError) {
+                var req = {
+                    method: 'PUT',
+                    url: '/api/users/changePassword' + id,
+                    data: passwords
+                };
+                $http(req).then(onSuccess, onError);
+            }
+	        
         }
     });

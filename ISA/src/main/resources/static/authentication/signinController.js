@@ -16,8 +16,9 @@ angular.module('app')
                         //sifra,pozivi,rezervacije,verificationCode,bodovi,firstTime
                     };
 
-
+                    
                     $scope.user = {};
+                    
                     $state.go('regUser'); // Ide na usera
                     
 
