@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('cinemaController', function ($scope, cinemaTheatreService) {
+    .controller('cinemaController', function ($scope,  $sce, cinemaTheatreService) {
 		cinemaTheatreService.getCinemas(
 				function(info){//succes function
 					$scope.cinemas=info.data;
@@ -10,4 +10,8 @@ angular.module('app')
 					
 				}
 		);
+		
+		$scope.trustSrc = function(url){
+			return $sce.trustAsResourceUrl(url);
+		}
     });

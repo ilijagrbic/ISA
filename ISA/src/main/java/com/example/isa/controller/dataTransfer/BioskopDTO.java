@@ -13,6 +13,8 @@ public class BioskopDTO {
 	
 	private String address;
 	
+	private String gmaps;
+	
 	private BioskopPozoristeType type;
 	
 	private int bronzeTreshold;
@@ -20,6 +22,12 @@ public class BioskopDTO {
 	private int silverTreshold;
 	
 	private int goldTreshold;
+	
+	private int bronzeSale;
+	
+	private int silverSale;
+	
+	private int goldSale;	
 	
 	public BioskopPozoriste getBioskop() {
 		
@@ -31,6 +39,10 @@ public class BioskopDTO {
 		retVal.setBronzeTreshold(bronzeTreshold);
 		retVal.setSilverTreshold(silverTreshold);
 		retVal.setGoldTreshold(goldTreshold);
+		retVal.setBronzeSale(bronzeSale);
+		retVal.setSilverSale(silverSale);
+		retVal.setGoldSale(goldSale);
+		retVal.setGmapsUrl(gmaps);
 		
 		return retVal;
 		
@@ -38,6 +50,40 @@ public class BioskopDTO {
 	
 	public BioskopDTO() {
 		super();
+	}
+	
+	
+
+	public String getGmaps() {
+		return gmaps;
+	}
+
+	public void setGmaps(String gmaps) {
+		this.gmaps = gmaps;
+	}
+
+	public int getBronzeSale() {
+		return bronzeSale;
+	}
+
+	public void setBronzeSale(int bronzeSale) {
+		this.bronzeSale = bronzeSale;
+	}
+
+	public int getSilverSale() {
+		return silverSale;
+	}
+
+	public void setSilverSale(int silverSale) {
+		this.silverSale = silverSale;
+	}
+
+	public int getGoldSale() {
+		return goldSale;
+	}
+
+	public void setGoldSale(int goldSale) {
+		this.goldSale = goldSale;
 	}
 
 	public BioskopDTO(long id, String name, String description, String address, BioskopPozoristeType type, int bronzeTreshold,

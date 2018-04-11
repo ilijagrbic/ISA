@@ -12,7 +12,8 @@ angular.module('app')
 				"type": param.type,
 				"bronzeTreshold":param.bronzeTreshold,
 				"silverTreshold":param.silverTreshold,
-				"goldTreshold":param.goldTreshold
+				"goldTreshold":param.goldTreshold,
+				"gmaps":param.gmapsUrl
 			}
 		}
 		getMovieDTO = function(param){

@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.example.isa.model.users.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -34,6 +36,7 @@ public class BioskopPozoriste {
 	
 	private String address;
 	
+	@Length(max=2084)
 	private String gmapsUrl;
 	
 	@Column(nullable=false)

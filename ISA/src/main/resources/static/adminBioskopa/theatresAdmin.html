@@ -19,6 +19,11 @@ Theatres
 	      {{theatre.description}}
 	    </div>
 	  </div>
-	  <button ng-click="editPlace(theatre.id)">Edit</button>
+	  <button ng-click="editPlace(theatre.id)">Edit</button><br/>
+
+	  <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+	  
+	  
 	</div>
 </div>
