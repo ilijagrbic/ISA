@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.isa.model.BioskopPozoriste;
+import com.example.isa.model.Glumac;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Repertoire;
 import com.example.isa.repository.BioskopPozoristeRepository;
+import com.example.isa.repository.GlumacRepository;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.RepertoireRepository;
 
@@ -21,6 +23,9 @@ public class MovieShowService {
 	
 	@Autowired
 	private MovieShowRepository movieRepository;
+	
+	@Autowired
+	private GlumacRepository glumacRepository;
 		
 	public List<MovieShow> getAll(){
 		return movieRepository.findAll();
@@ -53,6 +58,11 @@ public class MovieShowService {
 
 		if(parent!=null) {
 			newMovie.setRepertoar(parent);
+			for(Glumac g:newMovie.getGlumci()) {
+				if(glumacRepository.findById(g.getId())==null) {
+					glumacRepository.save(g);
+				}
+			}
 			return movieRepository.save(newMovie);
 		}else {
 			return null;

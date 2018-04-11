@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService) {
+    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService) {
 		movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
@@ -8,6 +8,46 @@ angular.module('app')
 					$scope.curentMovie = null;
 				}
 		)
+		
+		actorService.getActors(
+				function(info){
+					$scope.listGlumci = info.data
+				},
+				function(){
+					
+				}
+		)
+		
+		$scope.imePrezime = function(x){
+			return x.ime+" "+x.prezime;
+		}
+		
+		$scope.enterGlumacVal = null;
+		$scope.enterGlumac = false;
+		$scope.newActroPanelActiaved=false;
+		
+		$scope.addGlumac = function(x){
+			if(x==null){
+				console.log("shiiiiteet");
+			}
+			$scope.curentMovie.glumci.splice($scope.curentMovie.glumci.length, "0", x);
+		}
+		
+		$scope.showNewGlumacPanel = function(){
+			$scope.enterGlumac = true;
+		}
+		
+		$scope.dontShowNewGlumacPanel = function(){
+			$scope.enterGlumac = false;
+		}
+		
+		$scope.deleteGlumac = function(id){
+			for(var i=0;i<$scope.curentMovie.glumci.length;i++){
+				if($scope.curentMovie.glumci[i].id==id){
+					$scope.curentMovie.glumci.splice(i,1);
+				}
+			}
+		}
 		
 		$scope.commitChanges = function(){
 			uploadService.postImage($scope.myFile, 
@@ -40,6 +80,7 @@ angular.module('app')
 				"description": $scope.curentMovie.description,
 				"price": $scope.curentMovie.price,
 				"genre": $scope.curentMovie.genre,
+				"glumci": $scope.curentMovie.glumci,
 				"director":$scope.curentMovie.director,
 				"duration":$scope.curentMovie.duration,
 				"type":$scope.curentMovie.type,

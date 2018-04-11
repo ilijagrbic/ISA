@@ -38,12 +38,12 @@ public class MovieShow {
 	
 	private String director;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Glumac> glumci;//proveri kako ide manymany
 	
 	private String genre;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany
 	private List<Projekcija> projekcije;
 	
 	private double price;
@@ -66,7 +66,7 @@ public class MovieShow {
 		this.duration = update.getDuration();
 		this.description = update.getDescription();
 		this.director = update.getDirector();
-		//this.glumci = update.getGlumci();
+		this.glumci = update.getGlumci();
 		this.genre = update.getGenre();
 		//this.projekcije = update.getProjekcije();
 		this.price = update.getPrice();

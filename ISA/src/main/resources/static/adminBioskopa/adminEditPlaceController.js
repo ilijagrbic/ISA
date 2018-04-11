@@ -22,6 +22,7 @@ angular.module('app')
 				"description": $scope.enterMoviedescription,
 				"price": $scope.enterMovieprice,
 				"genre": $scope.enterMoviegenre,
+				"glumci":[],
 				"director":$scope.enterMoviedirector,
 				"duration":$scope.enterMovieduration,
 				"type":$scope.enterMovietype,
@@ -55,6 +56,7 @@ angular.module('app')
 		loadData();
 		var something = this;
 		$scope.enterMovie = false;
+		$scope.types = ["MOVIE", "PERFORMANCE"];
 		
 		$scope.backToTheatres = function(){
 			goBack();
