@@ -47,6 +47,13 @@ public class MovieShowService {
 	public MovieShow update(MovieShow updated, long movId) {
 		MovieShow toUpdate = movieRepository.findById(updated.getId());
 		if(toUpdate!=null) {
+			for(Glumac g:updated.getGlumci()) {
+				System.out.println(g.getId()+"--"+g.getIme()+"--"+g.getPrezime());
+				if(glumacRepository.findById(g.getId())==null||g.getId()!=null) { 
+					
+					glumacRepository.save(g);
+				}
+			}
 			return movieRepository.save(toUpdate.update(updated));
 		}
 		

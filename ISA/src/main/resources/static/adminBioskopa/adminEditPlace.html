@@ -19,6 +19,7 @@ Edit place
 	<ol>
 		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
 			Naziv filma:{{movie.name}} <br/>
+			Id:{{movie.id}} <br/>
 			<img ng-src="/api/files/{{movie.image}}"><br/>		
 			<button ng-click="editMovie(movie)">Edit</button>
 			<button ng-click="deleteMovie(movie.id)">Delete</button>	

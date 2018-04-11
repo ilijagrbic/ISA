@@ -12,5 +12,13 @@
 		<button ng-click="backToParentMovie()">Back</button>
 	</div>
 	
+	<h4>Glumci</h4>
+	<ol>
+		<li ng-repeat="glumac in curentMovie.glumci">
+			{{glumac.ime}} {{glumac.prezime}} 
+		</li>
+		
+	</ol>
+	
 	<!-- Sale, termini, poster, glumci-->
 </div>

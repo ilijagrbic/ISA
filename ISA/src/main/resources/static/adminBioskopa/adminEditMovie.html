@@ -25,7 +25,11 @@
 			<div ng-show="newActroPanelActiaved==false">
 				<select  ng-model="enterGlumacVal" ng-options="x as imePrezime(x) for x in listGlumci"></select><br/>
 			</div>
-			<button ng-click="addGlumac(enterGlumacVal)">Add</button><button ng-click="dontShowNewGlumacPanel()">Back</button><button ng-click="newActorPanel()">New actor</button>
+			<div ng-show="newActroPanelActiaved==true">
+				Ime: <input type=text ng-model="newActorName">
+				Prezime: <input type=text ng-model="newActorSurname">
+			</div>
+			<button ng-click="addGlumac(enterGlumacVal, newActorName, newActorSurname)">Add</button><button ng-click="dontShowNewGlumacPanel()">Back</button><button ng-click="newActorPanel()">New/Select old</button>
 		</div>
 		<button ng-click="showNewGlumacPanel()">New</button>
 	</div>

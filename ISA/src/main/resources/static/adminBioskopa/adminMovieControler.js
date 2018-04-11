@@ -26,11 +26,25 @@ angular.module('app')
 		$scope.enterGlumac = false;
 		$scope.newActroPanelActiaved=false;
 		
-		$scope.addGlumac = function(x){
-			if(x==null){
-				console.log("shiiiiteet");
+		$scope.addGlumac = function(x, ime, prezime){
+			if($scope.newActroPanelActiaved==false){
+				if(x==null){
+					console.log("shiiiiteet");
+				}
+				$scope.curentMovie.glumci.splice($scope.curentMovie.glumci.length, "0", x);
 			}
-			$scope.curentMovie.glumci.splice($scope.curentMovie.glumci.length, "0", x);
+			else{
+				xx={
+						"id":null,
+						"ime":ime,
+						"prezime":prezime
+				}
+				$scope.curentMovie.glumci.splice($scope.curentMovie.glumci.length, "0", xx);
+			}
+		}
+		
+		$scope.newActorPanel = function(){
+			$scope.newActroPanelActiaved=!$scope.newActroPanelActiaved;
 		}
 		
 		$scope.showNewGlumacPanel = function(){
