@@ -46,15 +46,31 @@ public class MovieShowService {
 	
 	public MovieShow update(MovieShow updated, long movId) {
 		MovieShow toUpdate = movieRepository.findById(updated.getId());
+		System.out.println("Ono sto saljem: (toupadate)"+updated.getId()+"--"+movId);
+		System.out.println("Updejtujem: (toupadate)"+toUpdate.getId());
+		boolean update = true;
 		if(toUpdate!=null) {
 			for(Glumac g:updated.getGlumci()) {
-				System.out.println(g.getId()+"--"+g.getIme()+"--"+g.getPrezime());
 				if(glumacRepository.findById(g.getId())==null||g.getId()!=null) { 
+					for(Glumac gs:toUpdate.getGlumci()) {
+						if(gs.getId()==g.getId()) {
+							update = false;
+						}
+					}
+					if(update==true) {
+						glumacRepository.save(g);
+					}
 					
-					glumacRepository.save(g);
 				}
 			}
-			return movieRepository.save(toUpdate.update(updated));
+			if(update==true) {
+				toUpdate.update(updated);
+				System.out.println("Updejtujem before commit: (toupadate)"+toUpdate.getId());
+				
+				return movieRepository.save(toUpdate);
+			}else {
+				return toUpdate;
+			}
 		}
 		
 		return null;
