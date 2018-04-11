@@ -26,6 +26,7 @@ import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.KorisnikService;
 import com.example.isa.service.MailService;
 
+
 @RestController
 @RequestMapping(value = "/api/authentication")
 public class AuthenticationController {
@@ -44,6 +45,7 @@ public class AuthenticationController {
 	// Aktivacija admina?
 	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+	
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {

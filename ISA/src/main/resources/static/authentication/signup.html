@@ -1,25 +1,25 @@
 <form name="signupForm">			
 	<h2>Registracija</h2>
-	<Label>E-mail</Label>
-	<input type="email" required ng-model="user.email">
+	<div><Label>E-mail</Label>
+	<input type="email" required ng-model="user.email"></div>
 
-	<Label>Lozinka</Label>
-	<input type="password" required ng-model="user.password">
+	<div><Label>Lozinka</Label>
+	<input type="password" required ng-model="user.password"></div>
 
-	<Label>Ponovi lozinku</Label>
-	<input type="password" required ng-model="user.confPassword">
+	<div><Label>Ponovi lozinku</Label>
+	<input type="password" required ng-model="user.confPassword"></div>
 
-	<Label>Ime</Label>
-	<input type="text" required ng-model="user.name">
+	<div><Label>Ime</Label>
+	<input type="text" required ng-model="user.name"></div>
 
-	<Label>Prezime</Label>
-	<input type="text" required ng-model="user.surname">
+	<div><Label>Prezime</Label>
+	<input type="text" required ng-model="user.surname"></div>
 
-	<Label>Grad</Label>
-	<input type="text" required ng-model="user.city">
+	<div><Label>Grad</Label>
+	<input type="text" required ng-model="user.city"></div>
 
-	<Label>Telefon</Label>
-	<input type="text" required ng-model="user.phone">
+	<div><Label>Telefon</Label>
+	<input type="text" required ng-model="user.phone"></div>
 
 	<button ng-disabled="signupForm.$invalid" ng-click="signup()">Registruj se</button>
 </form>

@@ -1,10 +1,12 @@
-<form name="signinForm">			
-	<h2>Logovanje</h2>
-	<Label>E-mail</Label>
-	<input type="text" required ng-model="user.email">
-
-	<Label>Lozinka</Label>
-	<input type="password" required ng-model="user.password">
-
-	<button ng-disabled="signin.$invalid" ng-click="signin()">Logovanje</button>
-</form>
+<div>
+	<form name="signinForm">			
+		<h2>Logovanje</h2>
+		<div><Label>E-mail</Label>
+		<input type="text" required ng-model="user.email"></div>
+	
+		<div><Label>Lozinka</Label>
+		<input type="password" required ng-model="user.password"></div>
+	
+		<button ng-disabled="signin.$invalid" ng-click="signin()">Logovanje</button>
+	</form>
+</div>

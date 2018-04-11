@@ -19,7 +19,9 @@ angular.module('app')
 	            var req = {
 	                method: 'PUT',
 	                url: '/api/users/' + id,
+	                data: user
 	            };
+	            // console.log()
 	            $http(req).then(onSuccess, onError);
 	        },
 	        findFriends: function (onSuccess, onError) {

@@ -1,6 +1,6 @@
 angular.module('app')
     .controller('regUserController', function ($rootScope, $scope, $state, regUserService) {
-    	 if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
+    	 if ($scope.user == null/*$rootScope.USER == null || $rootScope.USER.role != 'REG_USER'*/) {
              $state.go("signin");
          } else {
         	 regUserService.findById($rootScope.USER.id, function (res) {
@@ -23,10 +23,15 @@ angular.module('app')
          $scope.saveUserDetails = function () {
     		 $scope.notChanged = true;
              $scope.changed = false;
+      
+             alert(JSON.stringify($scope.user))
+             
              regUserService.update($scope.user.id, $scope.user, function (res) {
                   $scope.user = res.data;
+                  
               }, function (res) {
-                  toastr.error(res.data.error);
+                 
+            	 // alert(res.data.error);
               });
          };
          

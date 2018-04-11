@@ -3,7 +3,7 @@ angular.module('app')
         $stateProvider.state('regUser', {
             url: '/regUser',
             views: {
-                'navbar': {
+                'header': {
                 	 templateUrl: 'homePage/header/header.html',
                      controller: 'headerController'
                 },
