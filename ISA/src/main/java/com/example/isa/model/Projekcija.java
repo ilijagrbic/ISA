@@ -5,6 +5,11 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Projekcija {
 
@@ -20,11 +25,12 @@ public class Projekcija {
 	
 	private double cena;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Sediste> sedista;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
+	@JsonBackReference
 	private MovieShow film;
 
 	//mozda i rezervacija
