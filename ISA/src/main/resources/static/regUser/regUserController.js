@@ -3,7 +3,7 @@ angular.module('app')
     	 if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
              $state.go("signin");
          } else {
-             userService.findById($rootScope.USER.id, function (res) {
+        	 regUserService.findById($rootScope.USER.id, function (res) {
                  $scope.user = res.data;
              }, function (res) {
                  $scope.user = {};
