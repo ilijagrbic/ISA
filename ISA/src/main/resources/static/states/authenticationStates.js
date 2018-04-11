@@ -4,7 +4,7 @@ angular.module('app')
             .state('signin', {
                 url: '/signin',
                 views: {
-                    'navbar': {
+                    'header': {
                         templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
                     },

@@ -23,7 +23,7 @@ import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
-import com.example.isa.service.KorisnikService;
+import com.example.isa.service.UserService;
 import com.example.isa.service.MailService;
 
 
@@ -38,7 +38,7 @@ public class AuthenticationController {
 	private  MailService mailService;
 	
 	@Autowired
-	private KorisnikService korisnikService;
+	private UserService korisnikService;
 	
 	@Value("${server.port}")
 	private String port;

@@ -2,14 +2,11 @@ package com.example.isa;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.isa.model.users.Role;
-import com.example.isa.model.users.User;
-import com.example.isa.service.KorisnikService;
 import com.example.isa.service.StorageService;
 
 @SpringBootApplication

@@ -4,7 +4,7 @@ angular.module('app')
             .state('friendship', {
                 url: '/friendship',
                 views: {
-                    'navbar': {
+                    'header': {
                         templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
                     },

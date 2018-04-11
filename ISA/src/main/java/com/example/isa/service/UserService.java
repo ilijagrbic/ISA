@@ -14,7 +14,7 @@ import com.example.isa.repository.UserRepository;
 import com.example.isa.repository.RezervacijaRepository;
 
 @Service
-public class KorisnikService {
+public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
