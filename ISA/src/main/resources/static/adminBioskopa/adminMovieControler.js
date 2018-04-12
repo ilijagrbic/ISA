@@ -48,17 +48,16 @@ angular.module('app')
 		$scope.curentlyEditedProj = null;
 		$scope.opdNewSalaEditing = true;
 		
-		$scope.dontShowOldSalaEditing = function(){
+		/*$scope.dontShowOldSalaEditing = function(){
 			$scope.opdNewSalaEditing = !$scope.opdNewSalaEditing;
 		}
 		
 		$scope.backFromSeats = function(){
 			$scope.noShowSeats=true;
-		}
+		}*/
 		
 		$scope.manageSetas = function(proj){
-			$scope.noShowSeats=false;
-			$scope.curentlyEditedProj = proj;
+			$state.go("editProj", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType, projId: proj.id});
 		}
 		
 		$scope.saveNewProj = function(x){

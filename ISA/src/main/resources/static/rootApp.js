@@ -19,7 +19,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider){
     	
     }).run(function ($rootScope) {
     	
-            /*$rootScope.USER = {
+            $rootScope.USER = {
                 role:"CINEMA_THEATRE_ADMIN"
-            }*/
+            }
         })

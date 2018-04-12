@@ -97,7 +97,7 @@ public class ProjekcijaController {
 	
 	//not sure
 	@RequestMapping(
-			value = "/api/projections/",
+			value = "/api/projections/{id}",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -105,7 +105,7 @@ public class ProjekcijaController {
 		
 		Projekcija temp = createProjekcija.getProjekcija();
 		temp.setId(id);
-		Projekcija retVal = projService.update(temp);
+		Projekcija retVal = projService.update(temp, createProjekcija.getFilm());
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);

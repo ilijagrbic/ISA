@@ -8,6 +8,13 @@ angular.module('app')
             };
             $http(req).then(onSuccess, onError);
         },
+        getProjekcija: function (projId, onSuccess, onError) {
+            var req = {
+                method: 'GET',
+                url: '/api/projections/'+projId
+            };
+            $http(req).then(onSuccess, onError);
+        },
         deleteProjekcija: function (projId, onSuccess, onError) {
             var req = {
                 method: 'DELETE',
@@ -19,6 +26,17 @@ angular.module('app')
             var req = {
                 method: 'POST',
                 url: 'api/projections/',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            $http(req).then(onSuccess, onError);
+        },
+        putProjekcija: function (projId, data, onSuccess, onError) {
+            var req = {
+                method: 'PUT',
+                url: 'api/projections/'+projId,
                 headers: {
                     'Content-Type': 'application/json'
                 },

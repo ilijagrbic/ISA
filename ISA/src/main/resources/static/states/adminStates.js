@@ -66,4 +66,17 @@ angular.module('app')
                     }
                 }
             })
+            .state('editProj', {
+                url: '/proj/:movieId/cinema/:cinemaId/type/:cinType/proj/:projId',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'adminBioskopa/editProj.html',
+                        controller: 'editProjController'
+                    }
+                }
+            })
     });

@@ -95,12 +95,14 @@ public class ProjekcijaService {
 		
 	}
 	
-	public Projekcija update(Projekcija newProj) {
+	public Projekcija update(Projekcija newProj, long id) {
 		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
-		if(toUpdate==null) {
+		MovieShow mov = movieRepository.findById(id);
+		if(toUpdate==null||mov==null) {
 			return null;
 		}
 		else {
+			newProj.setFilm(mov);
 			return projekcijaRepository.save(newProj);
 		}
 	}
