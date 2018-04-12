@@ -25,7 +25,7 @@ public class Projekcija {
 	
 	private double cena;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Sediste> sedista;
 	
 	@ManyToOne

@@ -51,8 +51,29 @@ angular.module('app')
 			return x.nazivBroj+"("+x.visina+","+x.duzina+")";
 		}
     	
+    	$scope.handlingSeat = null;
+    	$scope.shotSeatEdit = false;
+    	$scope.seatTypes = [
+    		"ODRINARY",
+    		"VIP",
+    		"PROMOTION",
+    		"CLOSED"
+    	]
+    	
     	$scope.handleButton = function(id){
-    		
+    		$scope.handlingSeat = id;
+    		$scope.shotSeatEdit = true;
+    	}
+    	
+    	$scope.updateSeat = function(ss){
+    		for(i=0;i<$scope.curentlyEditedProj.sedista.length;i++){
+    			if(ss.id==$scope.curentlyEditedProj.sedista[i].id){
+    				$scope.curentlyEditedProj.sedista[i].type=ss.type;
+    				if($scope.curentlyEditedProj.sedista[i].type=='PROMOTION'){
+    					$scope.curentlyEditedProj.sedista[i].deltaCena=ss.deltaCena;
+    				}
+    			}
+    		}
     	}
     	
     })

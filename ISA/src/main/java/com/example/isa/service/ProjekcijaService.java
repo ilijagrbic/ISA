@@ -10,6 +10,7 @@ import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Repertoire;
 import com.example.isa.model.Sala;
+import com.example.isa.model.Sediste;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.ProjekcijaRepository;
 import com.example.isa.repository.RepertoireRepository;
@@ -98,12 +99,24 @@ public class ProjekcijaService {
 	public Projekcija update(Projekcija newProj, long id) {
 		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
 		MovieShow mov = movieRepository.findById(id);
+		
+		
+		System.out.println("Pre updatea, da vidim dal su promene poslate na server:");
+		for(Sediste s:newProj.getSedista()) {
+			System.out.println(s.getType()+"---"+s.getDeltaCena());
+		}
+		
 		if(toUpdate==null||mov==null) {
 			return null;
 		}
 		else {
 			newProj.setFilm(mov);
-			return projekcijaRepository.save(newProj);
+			Projekcija updated = projekcijaRepository.save(newProj);
+			System.out.println("Posle da vidim sta ima.");
+			for(Sediste s:updated.getSedista()) {
+				System.out.println(s.getType()+"---"+s.getDeltaCena());
+			}
+			return updated;
 		}
 	}
 	
