@@ -1,9 +1,8 @@
 package com.example.isa.controller.dataTransfer;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Sala;
 import com.example.isa.model.Sediste;
@@ -16,7 +15,7 @@ public class ProjekcijaDTO {
 	
 	private double cena;
 	
-	//private List<Sediste> sedista;
+	private List<Sediste> sedista;
 
 	private Long film;
 	
@@ -25,7 +24,7 @@ public class ProjekcijaDTO {
 		retVal.setDate(date);
 		retVal.setSala(sala);
 		retVal.setCena(cena);
-		retVal.setSedista(new ArrayList<Sediste>());
+		retVal.setSedista(sedista);
 		
 		return retVal;
 	}
@@ -37,6 +36,18 @@ public class ProjekcijaDTO {
 	}
 	
 	
+
+	public List<Sediste> getSedista() {
+		return sedista;
+	}
+
+
+
+	public void setSedista(List<Sediste> sedista) {
+		this.sedista = sedista;
+	}
+
+
 
 	public ProjekcijaDTO(Date date, Sala sala, double cena, Long film) {
 		super();

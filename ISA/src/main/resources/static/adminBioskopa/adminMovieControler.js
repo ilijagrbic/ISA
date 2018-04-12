@@ -44,6 +44,15 @@ angular.module('app')
 		$scope.newProjekcijaPanelActivated=false;
 		$scope.dt = new Date();
 		$scope.opdNewSala = true;
+		$scope.noShowSeats=true;
+		
+		$scope.backFromSeats = function(){
+			$scope.noShowSeats=true;
+		}
+		
+		$scope.manageSetas = function(proj){
+			$scope.noShowSeats=false;
+		}
 		
 		$scope.saveNewProj = function(x){
 			var sala;
@@ -58,12 +67,13 @@ angular.module('app')
 			else{
 				sala = x;
 			}
+			var sedista = getArrSedista(sala);
 			var DTO = {
 					"date": $scope.newProjDate,
 					"sala":sala,
 					"cena":$scope.newProjCena,
-					"film":$stateParams.movieId
-					
+					"film":$stateParams.movieId,
+					"sedista":sedista
 				}
 			
 			projekcijeService.postProjekcija(DTO,
@@ -74,6 +84,29 @@ angular.module('app')
 						
 					}
 			)
+		}
+		
+		getArrSedista = function(x){
+			var retVal = [];
+			var defSed = {
+					"visKord":0,
+					"duzKord":0,
+					"type":"ODRINARY",
+					"deltaCena":0
+			}
+			for(i=0;i<x.visina;i++){
+				for(j=0;j<x.duzina;j++){
+					var temp = {
+							"visKord":i,
+							"duzKord":j,
+							"type":"ODRINARY",
+							"deltaCena":0
+					};
+					retVal.splice(retVal, "0", temp);
+				}
+			}
+			
+			return retVal;
 		}
 		
 		$scope.dontShowOldSala = function(){

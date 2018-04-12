@@ -1,4 +1,4 @@
-<div>
+<div ng-show="noShowSeats==true">
 	<h1>Movie</h1>
 	<div class="containter">
 		Naziv:<input type=text ng-model="curentMovie.name"><br/>
@@ -39,8 +39,8 @@
 		<li ng-repeat="projekcija in listProjekcije">
 			{{projekcija.date}}<br/>
 			Cena:{{projekcija.cena}}<br/>
-			<button ng-click="manageSetas(projekcija)">Manage seats</button>
-			<button ng-click="editProjekcija(projekcija)">Edit</button>
+			<button ng-click="manageSetas(projekcija)">Manage seats/Edit</button>
+			<!--  <button ng-click="editProjekcija(projekcija)">Edit</button>  -->
 			<button ng-click="deleteProjekcija(projekcija)">Delete</button>
 		</li>
 	</ol>
@@ -88,3 +88,14 @@
 	<button ng-click="commitChanges()">Save</button>
 	<!-- Sale, termini, poster, glumci-->
 </div>
+
+<div ng-show="noShowSeats==false">
+<h3>Edit projection and seats.</h3>
+
+
+<button ng-click="backFromSeats()">Back</button>
+</div>
+
+
+
+
