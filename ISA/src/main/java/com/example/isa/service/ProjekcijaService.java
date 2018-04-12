@@ -72,13 +72,15 @@ public class ProjekcijaService {
 		}
 	}
 	
-	public Projekcija create(Projekcija newProj) {
-		/*if(projekcijaRepository.exists(newProj.getId())) {
-			return null;
+	public Projekcija create(Projekcija newProj, Long movieId) {
+		MovieShow movie = movieRepository.findById(movieId);
+		if(movie != null) {
+			newProj.setFilm(movie);
+			return projekcijaRepository.save(newProj);
 		}else {
-			
-		}*/
-		return projekcijaRepository.save(newProj);
+			return null;
+		}
+		
 	}
 	
 	public Projekcija update(Projekcija newProj) {

@@ -1,11 +1,20 @@
 angular.module('app')
-    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService) {
+    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService) {
 		movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
 				},
 				function(){
 					$scope.curentMovie = null;
+				}
+		)
+		
+		projekcijeService.getProjekcijeInMovie($stateParams.cinemaId, $stateParams.movieId,
+				function(info){
+					$scope.listProjekcije = info.data;
+				},
+				function(){
+					
 				}
 		)
 		
@@ -18,13 +27,25 @@ angular.module('app')
 				}
 		)
 		
-		$scope.imePrezime = function(x){
-			return x.ime+" "+x.prezime;
-		}
 		
 		$scope.enterGlumacVal = null;
 		$scope.enterGlumac = false;
 		$scope.newActroPanelActiaved=false;
+		
+		$scope.deleteProjekcija = function(proj){
+			projekcijeService.deleteProjekcija(proj.id,
+					function(info){
+						for(var i=0;i<$scope.listProjekcije.length;i++){
+							if($scope.listProjekcije[i].id==info.data.id){
+								$scope.listProjekcije.splice(i,1);
+							}
+						}
+					},
+					function(){
+						
+					}
+			)
+		}
 		
 		$scope.addGlumac = function(x, ime, prezime){
 			if($scope.newActroPanelActiaved==false){
@@ -111,6 +132,10 @@ angular.module('app')
 			}else{
 				$state.go("home");
 			}	
+		}
+
+		$scope.imePrezime = function(x){
+			return x.ime+" "+x.prezime;
 		}
     }).directive('fileUpload', fileUpload);
 

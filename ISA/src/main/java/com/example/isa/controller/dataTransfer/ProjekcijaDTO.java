@@ -18,30 +18,35 @@ public class ProjekcijaDTO {
 	
 	//private List<Sediste> sedista;
 
-	private MovieShow film;
+	private Long film;
 	
 	public Projekcija getProjekcija() {
 		Projekcija retVal = new Projekcija();
 		retVal.setDate(date);
 		retVal.setSala(sala);
 		retVal.setCena(cena);
-		retVal.setFilm(film);
 		retVal.setSedista(new ArrayList<Sediste>());
 		
 		return retVal;
 	}
 	
+	
+
 	public ProjekcijaDTO() {
 		super();
 	}
+	
+	
 
-	public ProjekcijaDTO(Date date, Sala sala, double cena, MovieShow film) {
+	public ProjekcijaDTO(Date date, Sala sala, double cena, Long film) {
 		super();
 		this.date = date;
 		this.sala = sala;
 		this.cena = cena;
 		this.film = film;
 	}
+
+
 
 	public Date getDate() {
 		return date;
@@ -67,13 +72,15 @@ public class ProjekcijaDTO {
 		this.cena = cena;
 	}
 
-	public MovieShow getFilm() {
+	public Long getFilm() {
 		return film;
 	}
 
-	public void setFilm(MovieShow film) {
+	public void setFilm(Long film) {
 		this.film = film;
 	}
+	
+	
 	
 	
 }

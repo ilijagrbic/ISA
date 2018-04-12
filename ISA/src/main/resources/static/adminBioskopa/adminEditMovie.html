@@ -12,14 +12,23 @@
 		Novi poster:<input type="file" file-upload="myFile"/><br/>
 	</div>
 	
-	<h4>Glumci</h4>
+	<h4>Glumci:</h4>
 	<ol>
 		<li ng-repeat="glumac in curentMovie.glumci">
 			{{glumac.ime}} {{glumac.prezime}} 
 			<button ng-click="deleteGlumac(glumac.id)">Delete</button>
 		</li>
-		
 	</ol>
+	
+	<h4>Projekcije:</h4>
+	<ol>
+		<li ng-repeat="projekcija in listProjekcije">
+			{{projekcija.date}}<br/>
+			Cena:{{projekcija.cena}}<br/>
+			<button ng-click="deleteProjekcija(projekcija)">Delete</button>
+		</li>
+	</ol>
+	
 	<div>
 		<div ng-if="enterGlumac==true">
 			<div ng-show="newActroPanelActiaved==false">

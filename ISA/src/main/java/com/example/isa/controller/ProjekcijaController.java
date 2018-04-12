@@ -78,14 +78,14 @@ public class ProjekcijaController {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(
 			value = "/api/projections/",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Projekcija> delProjecions(@RequestBody ProjekcijaDTO createProjekcija, @PathVariable("id") Long id){
-		Projekcija retVal = projService.create(createProjekcija.getProjekcija());
+	public ResponseEntity<Projekcija> delProjecions(@RequestBody ProjekcijaDTO createProjekcija){
+		Projekcija retVal = projService.create(createProjekcija.getProjekcija(), createProjekcija.getFilm());
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
@@ -95,6 +95,7 @@ public class ProjekcijaController {
 		}
 	}
 	
+	//not sure
 	@RequestMapping(
 			value = "/api/projections/",
 			method = RequestMethod.PUT,
