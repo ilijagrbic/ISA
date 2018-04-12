@@ -2,13 +2,14 @@
 <h3>Edit projection and seats.</h3>
 	<span  ng-repeat="sed in curentlyEditedProj.sedista">
 		<br ng-if="!($index % curentlyEditedProj.sala.visina)" />
-		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='ODRINARY'" ng-click="">O<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
-		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='VIP'" ng-click="">V<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
-		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='PROMOTION'" ng-click="">P<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
-		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='CLOSED'" ng-click="">C<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.id)" ng-if="sed.type=='ODRINARY'" ng-click="">O<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.id)" ng-if="sed.type=='VIP'" ng-click="">V<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.id)" ng-if="sed.type=='PROMOTION'" ng-click="">P<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.id)" ng-if="sed.type=='CLOSED'" ng-click="">C<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
 	</span>
 	
 	<br/>
+	<h5>Sediste()</h5>
 	<br/>
 		<div>
 			<h5>Edit projection:</h5>

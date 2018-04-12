@@ -51,4 +51,8 @@ angular.module('app')
 			return x.nazivBroj+"("+x.visina+","+x.duzina+")";
 		}
     	
+    	$scope.handleButton = function(id){
+    		
+    	}
+    	
     })
