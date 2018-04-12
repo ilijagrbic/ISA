@@ -91,9 +91,43 @@
 
 <div ng-show="noShowSeats==false">
 <h3>Edit projection and seats.</h3>
-
-
+	<span  ng-repeat="sed in curentlyEditedProj.sedista">
+		<br ng-if="!($index % curentlyEditedProj.sala.visina)" />
+		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='ODRINARY'" ng-click="">O<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='VIP'" ng-click="">V<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='PROMOTION'" ng-click="">P<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+		<button ng-click="handleButton(sed.visKord, sed.duzKord)" ng-if="sed.type=='CLOSED'" ng-click="">C<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
+	</span>
+	
+	<br/>
+	<br/>
+		<div>
+			<h5>Edit projection:</h5>
+			
+			Date:<br/>
+			<pre>Selected date is: <em>{{newProjDate | date:'fullDate' }}</em></pre>
+		    <div style="display:inline-block; min-height:290px;">
+		      <div uib-datepicker ng-model="curentlyEditedProj.date" class="well well-sm" datepicker-options="options"></div>
+		    </div><br/>
+		    Time:
+		    <div uib-timepicker ng-model="fff" ng-change="changed()" hour-step="1" minute-step="5" show-meridian="ismeridian"></div>
+		    
+		    
+			Cena:<input type=text ng-model="curentlyEditedProj.cena"><br/>
+			
+			Sala:<select ng-show="opdNewSalaEditing==true" ng-model="curentlyEditedProj.sala" ng-options="x as stringSala(x) for x in listSale"></select>
+			<div ng-show="opdNewSalaEditing==false">
+				Naziv: <input type=text ng-model="curentlyEditedProj.sala.nazivBroj">
+				Duzina: <input type=text ng-model="curentlyEditedProj.sala.duzina">
+				Visina: <input type=text ng-model="curentlyEditedProj.sala.visina">
+			</div>
+			<button ng-click="dontShowOldSalaEditing()">New sala/Old sala</button><br/>
+			
+			<button ng-click="saveNewProj(newProjSala)">Save</button>
+		</div>
+	<br/>
 <button ng-click="backFromSeats()">Back</button>
+<button ng-click="backFromSeats()">Save</button>
 </div>
 
 

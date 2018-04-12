@@ -45,6 +45,12 @@ angular.module('app')
 		$scope.dt = new Date();
 		$scope.opdNewSala = true;
 		$scope.noShowSeats=true;
+		$scope.curentlyEditedProj = null;
+		$scope.opdNewSalaEditing = true;
+		
+		$scope.dontShowOldSalaEditing = function(){
+			$scope.opdNewSalaEditing = !$scope.opdNewSalaEditing;
+		}
 		
 		$scope.backFromSeats = function(){
 			$scope.noShowSeats=true;
@@ -52,6 +58,7 @@ angular.module('app')
 		
 		$scope.manageSetas = function(proj){
 			$scope.noShowSeats=false;
+			$scope.curentlyEditedProj = proj;
 		}
 		
 		$scope.saveNewProj = function(x){
