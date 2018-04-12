@@ -43,6 +43,19 @@ public class SalaController {
 	}
 	
 	@RequestMapping(
+			value = "/api/movies/{id}/sale",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Sala>> getMoviesFromMovie(@PathVariable("id") Long id){
+		ArrayList<Sala> retVal = (ArrayList<Sala>)salaService.getAllInMovie(id);
+		if(retVal!=null)
+			return new ResponseEntity<Collection<Sala>>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<Collection<Sala>>(retVal, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@RequestMapping(
 			value = "/api/cinnemas/{id}/sale",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,

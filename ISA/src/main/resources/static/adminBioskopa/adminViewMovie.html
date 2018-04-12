@@ -20,5 +20,22 @@
 		
 	</ol>
 	
+	<h4>Projekcije:</h4>
+	<ol>
+		<li ng-repeat="projekcija in listProjekcije">
+			{{projekcija.date}}<br/>
+			Cena:{{projekcija.cena}}<br/>
+		</li>
+	</ol>
+	
+	<h4>Sale:</h4>
+	<ol>
+		<li ng-repeat="sala in listSale">
+			Naziv:{{sala.nazivBroj}}<br/>
+			Visina:{{sala.visina}}<br/>
+			Duzina:{{sala.duzina}}<br/>
+		</li>
+	</ol>
+	
 	<!-- Sale, termini, poster, glumci-->
 </div>

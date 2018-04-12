@@ -8,5 +8,12 @@ angular.module('app')
                 };
                 $http(req).then(onSuccess, onError);
             },
+        getSaleByMovie:function(movId, onSuccess, onError){
+        	var req = {
+                    method: 'GET',
+                    url: '/api/movies/'+movId+'/sale'
+                };
+                $http(req).then(onSuccess, onError);
+        }
     }
 });
