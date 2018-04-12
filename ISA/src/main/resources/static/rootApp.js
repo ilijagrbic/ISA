@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router']) 
+var app = angular.module('app', ['ui.router', 'ui.bootstrap']) 
 /////// Za logovanje    
 app.factory('authInterceptor', [function() {  
     return {

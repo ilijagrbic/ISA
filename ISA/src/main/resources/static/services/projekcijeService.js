@@ -14,6 +14,17 @@ angular.module('app')
                 url: 'api/projections/'+projId
             };
             $http(req).then(onSuccess, onError);
+        },
+        postProjekcija: function (data, onSuccess, onError) {
+            var req = {
+                method: 'POST',
+                url: 'api/projections/',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            $http(req).then(onSuccess, onError);
         }
     }
 });

@@ -42,6 +42,18 @@ public class Sala {
 
 
 
+	public long getId() {
+		return id;
+	}
+
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+
 	public String getNazivBroj() {
 		return nazivBroj;
 	}
@@ -54,29 +66,41 @@ public class Sala {
 
 
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public int getVisina() {
 		return visina;
 	}
+
+
 
 	public void setVisina(int visina) {
 		this.visina = visina;
 	}
 
+
+
 	public int getDuzina() {
 		return duzina;
 	}
 
+
+
 	public void setDuzina(int duzina) {
 		this.duzina = duzina;
 	}
+
+
+
+	public BioskopPozoriste getBioskop() {
+		return bioskop;
+	}
+
+
+
+	public void setBioskop(BioskopPozoriste bioskop) {
+		this.bioskop = bioskop;
+	}
+
+
 	
 	
 	

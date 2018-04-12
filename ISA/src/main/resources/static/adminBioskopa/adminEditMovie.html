@@ -19,16 +19,7 @@
 			<button ng-click="deleteGlumac(glumac.id)">Delete</button>
 		</li>
 	</ol>
-	
-	<h4>Projekcije:</h4>
-	<ol>
-		<li ng-repeat="projekcija in listProjekcije">
-			{{projekcija.date}}<br/>
-			Cena:{{projekcija.cena}}<br/>
-			<button ng-click="deleteProjekcija(projekcija)">Delete</button>
-		</li>
-	</ol>
-	
+	<br/>
 	<div>
 		<div ng-if="enterGlumac==true">
 			<div ng-show="newActroPanelActiaved==false">
@@ -42,6 +33,57 @@
 		</div>
 		<button ng-click="showNewGlumacPanel()">New</button>
 	</div>
+	
+	<h4>Projekcije:</h4>
+	<ol>
+		<li ng-repeat="projekcija in listProjekcije">
+			{{projekcija.date}}<br/>
+			Cena:{{projekcija.cena}}<br/>
+			<button ng-click="manageSetas(projekcija)">Manage seats</button>
+			<button ng-click="editProjekcija(projekcija)">Edit</button>
+			<button ng-click="deleteProjekcija(projekcija)">Delete</button>
+		</li>
+	</ol>
+	
+	<div>
+		<!-- edit deo -->
+		<div ng-if="true">
+		</div>
+		<!-- new proj deo -->
+		<div ng-show="newProjekcijaPanelActivated==true">
+			<h5>New projection:</h5>
+			
+			Date:<br/>
+			<pre>Selected date is: <em>{{newProjDate | date:'fullDate' }}</em></pre>
+		    <div style="display:inline-block; min-height:290px;">
+		      <div uib-datepicker ng-model="newProjDate" class="well well-sm" datepicker-options="options"></div>
+		    </div><br/>
+		    Time:
+		    <div uib-timepicker ng-model="newProjTime" ng-change="changed()" hour-step="1" minute-step="5" show-meridian="ismeridian"></div>
+		    
+		    
+			Cena:<input type=text ng-model="newProjCena"><br/>
+			
+			Sala:<select ng-show="opdNewSala==true" ng-model="newProjSala" ng-options="x as stringSala(x) for x in listSale"></select>
+			<div ng-show="opdNewSala==false">
+				Naziv: <input type=text ng-model="newProjSalaNaziv">
+				Duzina: <input type=text ng-model="newProjSalaDuz">
+				Visina: <input type=text ng-model="newProjSalaVis">
+			</div>
+			<button ng-click="dontShowOldSala()">New sala/Old sala</button><br/>
+			
+			<button ng-click="dontShowNewProjectionPanel()">Back</button>
+			<button ng-click="saveNewProj(newProjSala)">Save</button>
+		</div>
+		<button ng-click="showNewProjekcijaPanel()">New</button>
+	</div>
+	
+	
+	
+	
+	
+	
+	<br/>
 	<button ng-click="backToParentMovie()">Back</button>
 	<button ng-click="commitChanges()">Save</button>
 	<!-- Sale, termini, poster, glumci-->

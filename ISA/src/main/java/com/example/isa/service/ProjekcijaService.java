@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Repertoire;
+import com.example.isa.model.Sala;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.ProjekcijaRepository;
 import com.example.isa.repository.RepertoireRepository;
+import com.example.isa.repository.SalaRepository;
 
 @Service
 public class ProjekcijaService {
@@ -24,6 +26,9 @@ public class ProjekcijaService {
 	
 	@Autowired
 	private MovieShowRepository movieRepository;
+	
+	@Autowired
+	private SalaRepository salaPrepository;
 	
 	public Projekcija findById(long id) {
 		return projekcijaRepository.findById(id);
@@ -74,8 +79,15 @@ public class ProjekcijaService {
 	
 	public Projekcija create(Projekcija newProj, Long movieId) {
 		MovieShow movie = movieRepository.findById(movieId);
+		Sala temp = salaPrepository.findById(newProj.getSala().getId());
 		if(movie != null) {
 			newProj.setFilm(movie);
+			if(temp==null)
+			{
+				newProj.getSala().setBioskop(movie.getRepertoar().getBioskop());
+				salaPrepository.save(newProj.getSala());
+			}
+			
 			return projekcijaRepository.save(newProj);
 		}else {
 			return null;

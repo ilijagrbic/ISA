@@ -1,5 +1,6 @@
 angular.module('app')
-    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService) {
+    .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
+    	
 		movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
@@ -27,10 +28,65 @@ angular.module('app')
 				}
 		)
 		
+		salaService.getSaleByCinnema($stateParams.cinemaId,
+				function(info){
+					$scope.listSale = info.data;
+				},
+				function(){
+		
+				}
+			)
+		
 		
 		$scope.enterGlumacVal = null;
 		$scope.enterGlumac = false;
 		$scope.newActroPanelActiaved=false;
+		$scope.newProjekcijaPanelActivated=false;
+		$scope.dt = new Date();
+		$scope.opdNewSala = true;
+		
+		$scope.saveNewProj = function(x){
+			var sala;
+			if($scope.opdNewSala == false){
+				sala = {
+						"id":null,
+						"nazivBroj":$scope.newProjSalaNaziv,
+						"duzina":$scope.newProjSalaDuz,
+						"visina":$scope.newProjSalaVis
+					}
+			}
+			else{
+				sala = x;
+			}
+			var DTO = {
+					"date": $scope.newProjDate,
+					"sala":sala,
+					"cena":$scope.newProjCena,
+					"film":$stateParams.movieId
+					
+				}
+			
+			projekcijeService.postProjekcija(DTO,
+					function(info){
+						$scope.listProjekcije.splice($scope.listProjekcijelength, "0", info.data);
+					},
+					function(){
+						
+					}
+			)
+		}
+		
+		$scope.dontShowOldSala = function(){
+			$scope.opdNewSala = !$scope.opdNewSala;
+		}
+		
+		$scope.showNewProjekcijaPanel = function(){
+			$scope.newProjekcijaPanelActivated=true;
+		}
+		
+		$scope.dontShowNewProjectionPanel = function(){
+			$scope.newProjekcijaPanelActivated=false;
+		}
 		
 		$scope.deleteProjekcija = function(proj){
 			projekcijeService.deleteProjekcija(proj.id,
@@ -136,6 +192,10 @@ angular.module('app')
 
 		$scope.imePrezime = function(x){
 			return x.ime+" "+x.prezime;
+		}
+		
+		$scope.stringSala = function(x){
+			return x.nazivBroj+"("+x.visina+","+x.duzina+")";
 		}
     }).directive('fileUpload', fileUpload);
 
