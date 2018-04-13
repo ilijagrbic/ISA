@@ -19,7 +19,7 @@ angular.module('app')
                     
                     $scope.user = {};
                     
-                    $state.go('regUser'); // Ide na usera
+                    $state.go('user'); // Ide na usera
                     
 
                 }, function (res) {

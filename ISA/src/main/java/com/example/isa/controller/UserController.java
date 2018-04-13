@@ -65,7 +65,7 @@ public class UserController {
 		
 		return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
 	}
-
+/*
 	// Prijatelji
 	@RequestMapping(value = "/friends", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<User>> getFriends() {
@@ -123,6 +123,6 @@ public class UserController {
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
+	}*/
 
 }

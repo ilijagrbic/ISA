@@ -1,5 +1,5 @@
 angular.module('app')
-    .service('regUserService', function ($http) {
+    .service('userService', function ($http) {
         return {
         	findById: function (id, onSuccess, onError) {
                 var req = {

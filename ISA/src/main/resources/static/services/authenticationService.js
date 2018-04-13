@@ -29,13 +29,6 @@ angular.module('app')
                     url: '/api/authentication/signout'
                 };
                 $http(req).then(onSuccess, onError);
-            },
-            authenticate: function (onSuccess, onError) {
-                var req = {
-                    method: 'GET',
-                    url: '/api/authentication/authenticate'
-                };
-                $http(req).then(onSuccess, onError);
             }
         }
     });

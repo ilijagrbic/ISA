@@ -35,7 +35,7 @@ public class FriendshipController {
 		return new ResponseEntity<>(friendshipInvite, HttpStatus.CREATED);
 	}
 	
-	
+	/*
 	// Prihvanje zahteva za prijateljstvo
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="/{senderId}",method=RequestMethod.PUT)
@@ -58,5 +58,5 @@ public class FriendshipController {
 		friendshipService.deleteFriend(senderId, receiver.getId());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+*/
 }

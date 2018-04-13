@@ -1,15 +1,11 @@
 package com.example.isa.controller;
 
-
-import java.util.Properties;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,7 +53,7 @@ public class AuthenticationController {
 			else {
 				System.out.println("Aktiviran je");
 				
-				authenticationService.setCurrentUser(user);
+				//authenticationService.setCurrentUser(user);
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}
 		}
@@ -75,7 +71,6 @@ public class AuthenticationController {
 	
 	// Registracija korisni
 	// Registracija admina se ovde ne radi - to radi predefinisani ADMIN
-	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value="signup", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity signup(@RequestBody RegDTO regDTO){
 		
@@ -109,12 +104,6 @@ public class AuthenticationController {
     public ModelAndView verify(@PathVariable String verificationCode) {
 		authenticationService.verifyUser(verificationCode);
         return new ModelAndView(new RedirectView("/", true));
-    }
-	
-	@RequestMapping(value="authenticate", method=RequestMethod.GET)
-    public ResponseEntity<User> authenticate() {
-        User user = authenticationService.getCurrentUser();
-        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	
 

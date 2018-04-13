@@ -2,7 +2,6 @@ package com.example.isa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.core.Authentication;
 
@@ -29,7 +28,7 @@ public class AuthenticationService {
 		userRepository.save(user);
 		return user;
 	}
-
+	/*
 	public User getCurrentUser() {
 		System.out.println("Uzimamo korisnika trenutno zakacenog");
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -44,6 +43,6 @@ public class AuthenticationService {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println("**\n\n"+(Long)auth.getPrincipal());
-	}
+	}*/
 	
 }

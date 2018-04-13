@@ -1,9 +1,9 @@
 angular.module('app')
-    .controller('regUserController', function ($rootScope, $scope, $state, regUserService) {
-    	 if ($scope.user == null/*$rootScope.USER == null || $rootScope.USER.role != 'REG_USER'*/) {
+    .controller('userController', function ($rootScope, $scope, $state, userService) {
+    	 if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
              $state.go("signin");
          } else {
-        	 regUserService.findById($rootScope.USER.id, function (res) {
+        	 userService.findById($rootScope.USER.id, function (res) {
                  $scope.user = res.data;
                  $scope.notChanged = true;
                  $scope.changed = false;
@@ -26,7 +26,7 @@ angular.module('app')
       
              alert(JSON.stringify($scope.user))
              
-             regUserService.update($scope.user.id, $scope.user, function (res) {
+             userService.update($scope.user.id, $scope.user, function (res) {
                   $scope.user = res.data;
                   
               }, function (res) {
@@ -44,7 +44,7 @@ angular.module('app')
          $scope.savePass = function () {
         	 $scope.editedPassword = true;
         	 $scope.editPassword = false;
-        	 regUserService.updatePassword($scope.passwords, $scope.id,
+        	 userService.updatePassword($scope.passwords, $scope.id,
                      function (res) {
                          
                          if ($rootScope.USER === null) {
