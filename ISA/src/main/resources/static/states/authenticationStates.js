@@ -17,7 +17,7 @@ angular.module('app')
             .state('signout', {
                 url: '/signout',
                 views: {
-                    'navbar': {
+                    'header': {
                         templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
                     },
@@ -30,7 +30,7 @@ angular.module('app')
             .state('signup', {
                 url: '/signup',
                 views: {
-                    'navbar': {
+                    'header': {
                         templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
                     },
