@@ -1,6 +1,12 @@
 angular.module('app')
     .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
     	
+    	$scope.date = function(date){
+    		var dat = new Date(date);
+    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+    	}
+    	
+    	
 		movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
@@ -73,9 +79,12 @@ angular.module('app')
 			else{
 				sala = x;
 			}
+			//console.log($scope.newProjDate.getFullYear()+"---"+$scope.newProjDate.getMonth()+"---"+$scope.newProjDate.getDate());
+			//console.log($scope.newProjTime.getHours()+"---"+$scope.newProjTime.getMinutes());
+			var datumVreme = new Date($scope.newProjDate.getFullYear(), $scope.newProjDate.getMonth(), $scope.newProjDate.getDate(), $scope.newProjTime.getHours(), $scope.newProjTime.getMinutes(), 0, 0);
 			var sedista = getArrSedista(sala);
 			var DTO = {
-					"date": $scope.newProjDate,
+					"date": datumVreme,
 					"sala":sala,
 					"cena":$scope.newProjCena,
 					"film":$stateParams.movieId,

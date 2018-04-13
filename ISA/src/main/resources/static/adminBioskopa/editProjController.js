@@ -1,6 +1,11 @@
 angular.module('app')
     .controller('editProjController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
     	
+    	$scope.date = function(date){
+    		var dat = new Date(date);
+    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+    	}
+    	
     	projekcijeService.getProjekcija($stateParams.projId,
     			function(info){
     				$scope.curentlyEditedProj = info.data;
@@ -30,8 +35,9 @@ angular.module('app')
     	}
     	
     	$scope.saveSeats = function(){
+    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
     		var DTO = {
-					"date": $scope.curentlyEditedProj.date,
+					"date": datumVreme,//$scope.curentlyEditedProj.date,
 					"sala":$scope.curentlyEditedProj.sala,
 					"cena":$scope.curentlyEditedProj.cena,
 					"film":$stateParams.movieId,

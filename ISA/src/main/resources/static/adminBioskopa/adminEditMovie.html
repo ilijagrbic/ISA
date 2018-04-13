@@ -38,7 +38,7 @@
 	<h4>Projekcije:</h4>
 	<ol>
 		<li ng-repeat="projekcija in listProjekcije">
-			{{projekcija.date}}<br/>
+			{{date(projekcija.date)}}<br/>
 			Cena:{{projekcija.cena}}<br/>
 			<button ng-click="manageSetas(projekcija)">Manage seats/Edit</button>
 			<!--  <button ng-click="editProjekcija(projekcija)">Edit</button>  -->
@@ -47,9 +47,6 @@
 	</ol>
 	
 	<div>
-		<!-- edit deo -->
-		<div ng-if="true">
-		</div>
 		<!-- new proj deo -->
 		<div ng-show="newProjekcijaPanelActivated==true">
 			<h5>New projection:</h5>
