@@ -48,7 +48,7 @@ angular.module('app')
 	        updatePassword: function (passwords, id, onSuccess, onError) {
                 var req = {
                     method: 'PUT',
-                    url: '/api/users/changePassword' + id,
+                    url: '/api/users/changePassword/' + id,
                     data: passwords
                 };
                 $http(req).then(onSuccess, onError);

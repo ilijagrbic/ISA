@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,17 +112,19 @@ public class UserController {
 		// Treba da se doda deo za brisanje
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+*/
 	@RequestMapping(value = "/changePassword/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
 	public ResponseEntity<User> updatePassword(@RequestBody ChangePasswordDTO changePasswordDTO,
 			@PathVariable long id) {
-		User user = (User) authenticationService.getCurrentUser();
-
-		User updatedUser = userService.updatePassword(changePasswordDTO, user);
+		//User user = (User) SecurityContextHolder.getContext().getAuthentication();
+		// Kako da proradi ovo sa getAuthent
+		System.out.println("\nIZMENA SIFRE ZA KORISNIKA ID " + id);
+		User updatedUser = userService.updatePassword(changePasswordDTO, id);
 		if (updatedUser != null) {
+			System.out.println("Promenjena je sifra - sada je "+ updatedUser.getPassword());
 			return new ResponseEntity<>(updatedUser, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}*/
+	}
 
 }

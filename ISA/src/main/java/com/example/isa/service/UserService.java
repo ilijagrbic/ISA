@@ -40,6 +40,7 @@ public class UserService {
 		toUpdate.setPassword(user.getPassword());
 		toUpdate.setPhone(user.getPhone());;
 		toUpdate.setSurname(user.getSurname());
+		userRepository.save(toUpdate);
 		return toUpdate;
 	}
 	
@@ -60,12 +61,16 @@ public class UserService {
 		rezervacijaRepository.delete(id);
 	}
 	
-	public User updatePassword(ChangePasswordDTO changePasswordDTO, User currentUser) {
+	public User updatePassword(ChangePasswordDTO changePasswordDTO, Long id) {
+		User currentUser = userRepository.findById(id);
+		System.out.println("Korisnik kome menjamo sifru je " + currentUser.getName());
         if (!currentUser.getPassword().equals(changePasswordDTO.getOldPassword())) {
+        	System.out.println("Nije ista stara sifra");
             return null;
         }
         if (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmPassword())) {
-            return null;
+        	System.out.println("Ne poklapaju se nove");
+        	return null;
         }
         currentUser.setPassword(changePasswordDTO.getNewPassword());
  

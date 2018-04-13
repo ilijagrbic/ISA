@@ -1,5 +1,6 @@
+<span><a ui-sref="user" ng-hide="USER==null">Profil</a></span>
 <div>
-	<form name="signinForm">			
+	<form ng-hide="USER!=null" name="signinForm">			
 		<h2>Logovanje</h2>
 		<div><Label>E-mail</Label>
 		<input type="text" required ng-model="user.email"></div>

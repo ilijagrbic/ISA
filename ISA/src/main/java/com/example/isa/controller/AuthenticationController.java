@@ -40,8 +40,8 @@ public class AuthenticationController {
 	private String port;
 	// Aktivacija admina?
 	@RequestMapping(value="signin", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
-	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO, HttpServletRequest request) {
-	
+	public ResponseEntity<User> signin(@RequestBody LoginDTO loginDTO) {
+		System.out.println("Logovanje korisnika " + loginDTO.getEmail() + "," + loginDTO.getPassword());
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {
@@ -57,6 +57,7 @@ public class AuthenticationController {
 				return new ResponseEntity<User>(user, HttpStatus.OK);
 			}
 		}
+		System.out.println("Nije uspelo");
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	

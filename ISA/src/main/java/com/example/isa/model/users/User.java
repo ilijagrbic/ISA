@@ -39,7 +39,7 @@ public class User {
 
 	protected String phone;
 
-	protected boolean actiaved = false;
+	protected boolean activated = false;
 
 	@Column(nullable = false)
 	protected String password;
@@ -136,11 +136,11 @@ public class User {
 	}
 
 	public boolean isActiaved() {
-		return actiaved;
+		return activated;
 	}
 
 	public void setActiaved(boolean actiaved) {
-		this.actiaved = actiaved;
+		this.activated = actiaved;
 	}
 
 	public String getCity() {
