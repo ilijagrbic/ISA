@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
 
 import com.example.isa.model.users.User;
 
@@ -21,16 +23,40 @@ public class Rezervacija {
 	@ManyToOne
 	private Projekcija projekcija;
 	
-	@OneToMany
-	private List<UserMesto> sviPozvani;
-	
 	@ManyToOne
-	private User host;
+	private User rezervant;
 	
-	private int status;
+	private RezervacijaStatus status;
+
+	@OneToOne
+	private Sediste rezervisanoMesto;
+	
+	private int ocenaFilm;
+	
+	private int ocenaAmbijent;
+		
+	private int isHost;
+	
+	private int hostId;
+	
+	@Version
+	private int version;
 
 	public Rezervacija() {
 		super();
+	}
+
+	public Rezervacija(long id, Projekcija projekcija, User rezervant, RezervacijaStatus status,
+			Sediste rezervisanoMesto, int ocenaFilm, int ocenaAmbijent, int isHost) {
+		super();
+		this.id = id;
+		this.projekcija = projekcija;
+		this.rezervant = rezervant;
+		this.status = status;
+		this.rezervisanoMesto = rezervisanoMesto;
+		this.ocenaFilm = ocenaFilm;
+		this.ocenaAmbijent = ocenaAmbijent;
+		this.isHost = isHost;
 	}
 
 	public long getId() {
@@ -49,20 +75,52 @@ public class Rezervacija {
 		this.projekcija = projekcija;
 	}
 
-	public List<UserMesto> getSviPozvani() {
-		return sviPozvani;
+	public User getRezervant() {
+		return rezervant;
 	}
 
-	public void setSviPozvani(List<UserMesto> sviPozvani) {
-		this.sviPozvani = sviPozvani;
+	public void setRezervant(User rezervant) {
+		this.rezervant = rezervant;
 	}
 
-	public User getHost() {
-		return host;
+	public RezervacijaStatus getStatus() {
+		return status;
 	}
 
-	public void setHost(User host) {
-		this.host = host;
+	public void setStatus(RezervacijaStatus status) {
+		this.status = status;
+	}
+
+	public Sediste getRezervisanoMesto() {
+		return rezervisanoMesto;
+	}
+
+	public void setRezervisanoMesto(Sediste rezervisanoMesto) {
+		this.rezervisanoMesto = rezervisanoMesto;
+	}
+
+	public int getOcenaFilm() {
+		return ocenaFilm;
+	}
+
+	public void setOcenaFilm(int ocenaFilm) {
+		this.ocenaFilm = ocenaFilm;
+	}
+
+	public int getOcenaAmbijent() {
+		return ocenaAmbijent;
+	}
+
+	public void setOcenaAmbijent(int ocenaAmbijent) {
+		this.ocenaAmbijent = ocenaAmbijent;
+	}
+
+	public int getIsHost() {
+		return isHost;
+	}
+
+	public void setIsHost(int isHost) {
+		this.isHost = isHost;
 	}
 	
 	

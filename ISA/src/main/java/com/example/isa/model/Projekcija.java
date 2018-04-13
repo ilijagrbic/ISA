@@ -33,7 +33,8 @@ public class Projekcija {
 	@JsonBackReference
 	private MovieShow film;
 
-	//mozda i rezervacija
+	@OneToMany
+	private List<Rezervacija> rezervacije;
 	
 	public Projekcija() {
 		super();

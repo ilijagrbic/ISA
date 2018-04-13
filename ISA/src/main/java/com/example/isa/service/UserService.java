@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.isa.controller.dataTransfer.ChangePasswordDTO;
 import com.example.isa.model.Rezervacija;
-import com.example.isa.model.UserMesto;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.UserRepository;
 import com.example.isa.repository.RezervacijaRepository;
@@ -48,11 +47,11 @@ public class UserService {
 		User u = userRepository.findById(user.getId());
 		return u.getRezervacije();
 	}
-	
+	/*
 	public List<UserMesto> getTickets(User user){
 		User u = userRepository.findById(user.getId());
 		return u.getPozivi();
-	}
+	}*/
 	
 	public void cancelReservation(Long id, User user) {
 		//RegUser regUser = regUserRepository.findById(user.getId());

@@ -3,10 +3,20 @@ package com.example.isa.model.users;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Rezervacija;
-import com.example.isa.model.UserMesto;
 
 @Entity
 @Table(name = "korisnici")
@@ -39,8 +49,6 @@ public class User {
 	private Role role;
 
 	//////// RegUser
-	@OneToMany
-	private List<UserMesto> pozivi;
 
 	@OneToMany
 	private List<Rezervacija> rezervacije;
@@ -53,6 +61,9 @@ public class User {
 
 	// Admin
 	private boolean firstTime = true;
+	
+	@ManyToMany
+	private List<BioskopPozoriste> bioskopi;
 
 	public User() {
 		this.verificationCode = UUID.randomUUID().toString();
@@ -64,6 +75,16 @@ public class User {
 		this.city = u.city;
 		this.phone = u.phone;
 
+	}
+	
+	
+
+	public List<BioskopPozoriste> getBioskopi() {
+		return bioskopi;
+	}
+
+	public void setBioskopi(List<BioskopPozoriste> bioskopi) {
+		this.bioskopi = bioskopi;
 	}
 
 	public long getId() {
@@ -136,14 +157,6 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public List<UserMesto> getPozivi() {
-		return pozivi;
-	}
-
-	public void setPozivi(List<UserMesto> pozivi) {
-		this.pozivi = pozivi;
 	}
 
 	public List<Rezervacija> getRezervacije() {

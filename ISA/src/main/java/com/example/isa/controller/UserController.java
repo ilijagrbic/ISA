@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.ChangePasswordDTO;
 import com.example.isa.model.Rezervacija;
-import com.example.isa.model.UserMesto;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.FriendshipService;
