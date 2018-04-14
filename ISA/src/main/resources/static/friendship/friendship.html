@@ -1,0 +1,42 @@
+
+<div ng>
+	<p>
+		<span><a ui-sref="user">Profil</a></span>
+		<span><a ui-sref="friendship">Prijatelji</a></span>
+		<span><a ui-sref="signin">Pozorista</a></span>
+		<span><a ui-sref="signout">Bioskopi</a></span>
+		<span><a ui-sref="signout">Rezervacije</a></span>
+		<span><a ui-sref="defaultState">Nazad</a></span>
+	</p>
+</div>
+
+
+<h2> Prijatelji </h2>
+
+ <table>
+  <tr ng-repeat="user in friends | orderBy:['name', 'surname']">
+    <td>{{ user.name }}</td>
+    <td>{{ user.surname }}</td>
+    <td><button ng-click="deleteFriend(user, user.id, $index)">Obrisi</button></td>
+  </tr>
+</table> 
+
+<h2> Posalji zahtev </h2>
+ <table>
+  <tr ng-repeat="user in nonFriends | orderBy:['name', 'surname']">
+    <td>{{ user.name }}</td>
+    <td>{{ user.surname }}</td>
+    <td><button ng-click="sendRequest(user, user.id, $index)">Posalji zahtev</button></td>
+  </tr>
+</table> 
+
+<h2> Primljeni zahtevi </h2>
+ <table>
+  <tr ng-repeat="user in requests | orderBy:['name', 'surname']">
+    <td>{{ user.name }}</td>
+    <td>{{ user.surname }}</td>
+    <td><button ng-click="deleteRequest(user.id)">Obrisi</button></td>
+    <td><button ng-click="acceptRequest(user.id,user,$index)">Prihvati</button></td>
+  </tr>
+</table> 
+

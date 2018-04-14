@@ -1,5 +1,8 @@
 package com.example.isa.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,36 +30,34 @@ public class FriendshipController {
 	private AuthenticationService authenticationService;
 	
 	// Slanje zahteva za prijateljstvo 
-	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value="/sendInvitation",method=RequestMethod.POST)
-	public ResponseEntity<Invite> sendFriendshipRequest(@RequestBody InviteDTO inviteDTO) {
-		Invite friendshipInvite = friendshipService.createFriendshipRequest(inviteDTO.getIdSender(),inviteDTO.getIdReceiver());
+	@RequestMapping(value="/{userId}/send/{friendId}",method=RequestMethod.POST)
+	public ResponseEntity<Invite> sendFriendshipRequest(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
+		System.out.println("\n\nSlanje zahteva");
+		Invite friendshipInvite = friendshipService.createFriendshipRequest(userId,friendId);
 		
 		return new ResponseEntity<>(friendshipInvite, HttpStatus.CREATED);
 	}
 	
-	/*
+	
 	// Prihvanje zahteva za prijateljstvo
-	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value="/{senderId}",method=RequestMethod.PUT)
-	public ResponseEntity<Invite> acceptFriendshipRequest(@PathVariable long senderId) {
-		User receiver = authenticationService.getCurrentUser();
-		Invite acceptedInvite = friendshipService.acceptFriendshipRequest(senderId, receiver.getId());
-		if(acceptedInvite!=null){
-			return new ResponseEntity<Invite>(acceptedInvite, HttpStatus.CREATED);
+	@RequestMapping(value="/{userId}/accept/{friendId}",method=RequestMethod.PUT)
+	public ResponseEntity<Collection<User>> acceptFriendshipRequest(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
+		System.out.println("\n Prihvatanje zahteva od strane " + friendId);
+		ArrayList<User> invitationFromFriends = (ArrayList<User>)friendshipService.acceptFriendshipRequest(friendId, userId);
+		if(invitationFromFriends!=null){
+			return new ResponseEntity<Collection<User>>(invitationFromFriends, HttpStatus.CREATED);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	// Brisanje prijatelja
-	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value="/{senderId}",method=RequestMethod.DELETE)
-	public ResponseEntity<Invite> deleteFriend(@PathVariable long senderId) {
-		User receiver = authenticationService.getCurrentUser();
-		friendshipService.deleteFriend(senderId, receiver.getId());
-		return new ResponseEntity<>(HttpStatus.OK);
+	@RequestMapping(value="/{userId}/delete/{friendId}",method=RequestMethod.DELETE)
+	public ResponseEntity<Collection<User>> deleteFriend(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
+		System.out.println("\n*** Brisanje prijatelja *** \n");
+		ArrayList<User> friends = (ArrayList<User>)friendshipService.deleteFriend(friendId, userId);
+		return new ResponseEntity<Collection<User>>(friends, HttpStatus.OK);
 	}
-*/
+
 }

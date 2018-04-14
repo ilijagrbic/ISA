@@ -65,31 +65,31 @@ public class UserController {
 		
 		return new ResponseEntity<Collection<User>>(users, HttpStatus.OK);
 	}
-/*
+
 	// Prijatelji
-	@RequestMapping(value = "/friends", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Collection<User>> getFriends() {
-		User user = (User) authenticationService.getCurrentUser();
-		ArrayList<User> friends = (ArrayList<User>) friendshipService.findFriends(user);
+	@RequestMapping(value = "/friends/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<User>> getFriends(@PathVariable Long id) {
+		System.out.println("\n IZLISTAVANJE PRIJATELJA KORISNIKA " + id);
+		ArrayList<User> friends = (ArrayList<User>) friendshipService.findFriends(id);
 		return new ResponseEntity<Collection<User>>(friends, HttpStatus.OK);
 	}
 
 	// Osobe kojima mozemo da posaljemo zahtev
-	@RequestMapping(value = "/nonFriends", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Collection<User>> getNonFriends() {
-		User user = (User) authenticationService.getCurrentUser();
-		ArrayList<User> nonFriends = (ArrayList<User>) friendshipService.findNonFriends(user);
+	@RequestMapping(value = "/nonFriends/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<User>> getNonFriends(@PathVariable Long id) {
+		System.out.println("\n KOME MOZE DA POSALJE ZAHTEV, KORISNIK JE " + id);
+		ArrayList<User> nonFriends = (ArrayList<User>) friendshipService.findNonFriends(id);
 		return new ResponseEntity<Collection<User>>(nonFriends, HttpStatus.OK);
 	}
 
 	// Pronalazenje dobijenih zahteva za prijateljstvo
-	@RequestMapping(value = "/findRequests", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Collection<User>> getRequests() {
-		User user = (User) authenticationService.getCurrentUser();
-		ArrayList<User> nonFriends = (ArrayList<User>) friendshipService.findFriendshipRequest(user);
+	@RequestMapping(value = "/findRequests/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Collection<User>> getRequests(@PathVariable Long id) {
+		System.out.println("\n PRONALAZI ZAHTEVE ZA PRIJATELJSTVO " + id);
+		ArrayList<User> nonFriends = (ArrayList<User>) friendshipService.findFriendshipRequest(id);
 		return new ResponseEntity<Collection<User>>(nonFriends, HttpStatus.OK);
 	}
-
+/*
 	// Lista rezervacija
 	@RequestMapping(value = "/getReservations", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Collection<Rezervacija>> getReservations() {

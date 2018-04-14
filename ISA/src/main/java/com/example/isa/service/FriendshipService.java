@@ -30,48 +30,50 @@ public class FriendshipService {
 	}
 
 	// Ili da uzmem trenutnog korisnika
-	public Invite acceptFriendshipRequest(Long idSender, Long idReceiver) {
+	public List<User> acceptFriendshipRequest(Long idSender, Long idReceiver) {
 		Invite invitationToUpdate = inviteRepository.findByPosiljalacIdAndPrimalacId(idSender, idReceiver);
 		invitationToUpdate.setPrihvatio(true);
-		return inviteRepository.save(invitationToUpdate);
+		inviteRepository.save(invitationToUpdate);
+		return findFriendshipRequest(idReceiver);
 	}
 
-	public void deleteFriend(Long idSender, Long idReceiver) {
+	public List<User> deleteFriend(Long idSender, Long idReceiver) {
 		Invite deleteFriend = inviteRepository.findByPosiljalacIdAndPrimalacId(idSender, idReceiver);
 		inviteRepository.delete(deleteFriend);
+		return findFriends(idReceiver);
 	}
 
-	public List<User> findFriends(User user) {
+	public List<User> findFriends(Long id) {
 		List<User> friends = new ArrayList<User>();
 		for (Invite i : inviteRepository.findAll()) {
-			if (i.getPrimalac().equals(user) && i.isPrihvatio() == true) {
+			if (i.getPrimalac().getId() == id && i.isPrihvatio() == true) {
 				friends.add(i.getPosaljilac());
 			}
 		}
 		return friends;
 	}
 
-	public List<User> findFriendshipRequest(User user) {
+	public List<User> findFriendshipRequest(Long id) {
 		List<User> nonfriends = new ArrayList<User>();
 		for (Invite i : inviteRepository.findAll()) {
-			if (i.getPosaljilac().equals(user) && i.isPrihvatio() == false) {
-				nonfriends.add(i.getPrimalac());
+			if (i.getPrimalac().getId() == (id) && i.isPrihvatio() == false) {
+				nonfriends.add(i.getPosaljilac());
 			}
 		}
 		return nonfriends;
 	}
 
-	public List<User> findNonFriends(User user) {
+	public List<User> findNonFriends(Long id) {
 		List<User> users = regUserRepository.findAll();
-		List<Invite> friendships = inviteRepository.findByPosiljalacIdOrPrimalacId(user.getId(), user.getId());
+		List<Invite> friendships = inviteRepository.findByPosiljalacIdOrPrimalacId(id, id);
 		for (Invite friendship : friendships) {
-			if (user.getId() == friendship.getPosaljilac().getId()) {
+			if (id == friendship.getPosaljilac().getId()) {
 				users.remove(friendship.getPrimalac());
 			} else {
 				users.remove(friendship.getPosaljilac());
 			}
 		}
-		users.remove(user);
+		users.remove(regUserRepository.findById(id));
 
 		return users;
 	}
