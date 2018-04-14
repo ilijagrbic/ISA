@@ -1,0 +1,19 @@
+<div ng>
+	<p>
+		<span><a ui-sref="user">Profil</a></span>
+		<span><a ui-sref="friendship">Prijatelji</a></span>
+		<span><a ui-sref="signin">Pozorista</a></span>
+		<span><a ui-sref="signout">Bioskopi</a></span>
+		<span><a ui-sref="reservations">Rezervacije</a></span>
+		<span><a ui-sref="defaultState">Nazad</a></span>
+	</p>
+</div>
+
+<h1>Rezervacije</h1>
+
+<form name="findForm">
+	<div>
+		<input type="text" required ng-model="searchByName">
+		<button ng-click="search()">Pretrazi</button>
+	</div>
+</form>
