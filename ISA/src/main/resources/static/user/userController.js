@@ -2,7 +2,7 @@ angular.module('app').controller(
 		'userController',
 		function($rootScope, $scope, $state, userService) {
 			if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
-				alert("Null u userControlleru");
+				console.log("Null u userControlleru");
 				$state.go("signin");
 			} else {
 				userService.findById($rootScope.USER.id, function(res) {
@@ -28,14 +28,14 @@ angular.module('app').controller(
 				$scope.notChanged = true;
 				$scope.changed = false;
 
-				alert(JSON.stringify($scope.user))
+				console.log(JSON.stringify($scope.user))
 
 				userService.update($scope.user.id, $scope.user, function(res) {
 					$scope.user = res.data;
 
 				}, function(res) {
 
-					// alert(res.data.error);
+					// console.log(res.data.error);
 				});
 			};
 
@@ -48,12 +48,12 @@ angular.module('app').controller(
 			$scope.savePass = function() {
 				$scope.editedPassword = true;
 				$scope.editPassword = false;
-				alert($rootScope.USER.id);
+				console.log($rootScope.USER.id);
 				userService.updatePassword($scope.passwords,
 						$rootScope.USER.id, function(res) {
-							alert(JSON.stringify(res.data));
+							console.log(JSON.stringify(res.data));
 							/*if ($rootScope.USER == null) {
-								alert("Root je null");*/
+								console.log("Root je null");*/
 								$rootScope.USER = {
 									id : res.data.id,
 									role : res.data.role,
@@ -69,7 +69,7 @@ angular.module('app').controller(
 							$scope.user = res.data;
 							$scope.passwords={};
 						}, function(res) {
-							alert("Error neki");
+							console.log("Error neki");
 						});
 
 			};

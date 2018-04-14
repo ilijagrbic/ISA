@@ -16,8 +16,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider){
 		$httpProvider.interceptors.push('authInterceptor');
     	$urlRouterProvider.otherwise("/defaultState");
     }).run(function ($rootScope) {
-    	
+    	/*
             $rootScope.USER = {
                 role:"CINEMA_THEATRE_ADMIN"
-            }
+            }*/
         })

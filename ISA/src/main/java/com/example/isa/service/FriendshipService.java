@@ -78,5 +78,16 @@ public class FriendshipService {
 
 		return users;
 	}
+	
+	// idReceiver korisnik nas
+	public List<User> cancelFriendshipRequest(Long idSender, Long idReceiver) {
+		Invite req = inviteRepository.findByPosiljalacIdAndPrimalacId(idSender, idReceiver);
+		
+		if(req.isPrihvatio()==false) {
+			System.out.println("Brisanje zahteva");
+			inviteRepository.delete(req);
+		}
+		return findFriendshipRequest(idReceiver);
+	}
 
 }

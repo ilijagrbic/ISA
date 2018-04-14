@@ -46,8 +46,22 @@ angular.module('app').controller(
 					alert("Neki error kod kod slanja zahteva prijatelja");
 				});
 		 	};
+		 	
+		 	$scope.cancelRequest = function (index, user, indexOfRow) {
+	            alert("Odbijanje zahteva " + index + " trentuni user je " + $rootScope.USER.name);
+	            console.log( $rootScope.USER.id + " " + index );
+	            friendshipService.cancel($rootScope.USER.id, index, function(res) {
+	            	//$scope.nonFriends.splice(indexOfRow, 1);
+	            	$scope.nonFriends.push(user);
+	            	$scope.requests = res.data;
+	            	console.log(indexOfRow);
+	            	console.log(JSON.stringify(res.data));
+				}, function(res) {
+					alert("Neki error kod kod slanja zahteva prijatelja");
+				});
+		 	};
 		     
-		     $scope.acceptRequest = function (index,user,indexOfRow) {
+		     $scope.acceptRequest = function (index, user, indexOfRow) {
 		            alert("Zelimo da prihvatimo zahtev od " + index + " trentuni user je " + $rootScope.USER.name);
 		            friendshipService.accept($rootScope.USER.id, index, function(res) {
 		            	console.log(user.name + " " + index + " " + indexOfRow)

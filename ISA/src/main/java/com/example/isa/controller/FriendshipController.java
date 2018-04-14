@@ -52,6 +52,19 @@ public class FriendshipController {
 		}
 	}
 
+		// Odbijanje zahteva za prijateljstvo 
+		@RequestMapping(value="/{userId}/cancel/{friendId}",method=RequestMethod.DELETE)
+		public ResponseEntity<Collection<User>> cancelFriendshipRequest(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
+			System.out.println("\n Odbijanje zahteva za prijateljstvo  " + friendId);
+			ArrayList<User> cancelInvitation = (ArrayList<User>)friendshipService.cancelFriendshipRequest(friendId, userId);
+			if(cancelInvitation!=null){
+				return new ResponseEntity<Collection<User>>(cancelInvitation, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		}
+
 	// Brisanje prijatelja
 	@RequestMapping(value="/{userId}/delete/{friendId}",method=RequestMethod.DELETE)
 	public ResponseEntity<Collection<User>> deleteFriend(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {

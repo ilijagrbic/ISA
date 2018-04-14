@@ -46,6 +46,14 @@ angular.module('app')
                 };
                 console.log("Url " + req.url);
                 $http(req).then(onSuccess, onError);
+            },
+            cancel: function (id, idFriend, onSuccess, onError) {
+                var req = {
+                    method: 'DELETE',
+                    url: '/api/friendships/' + id + "/cancel/" + idFriend,
+                };
+                console.log("Url " + req.url);
+                $http(req).then(onSuccess, onError);
             }
         }
     });

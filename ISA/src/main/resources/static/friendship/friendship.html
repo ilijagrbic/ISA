@@ -26,7 +26,7 @@
   <tr ng-repeat="user in nonFriends | orderBy:['name', 'surname']">
     <td>{{ user.name }}</td>
     <td>{{ user.surname }}</td>
-    <td><button ng-click="sendRequest(user, user.id, $index)">Posalji zahtev</button></td>
+    <td><button ng-click="sendRequest(user, user.id, $index)">Posalji</button></td>
   </tr>
 </table> 
 
@@ -35,8 +35,8 @@
   <tr ng-repeat="user in requests | orderBy:['name', 'surname']">
     <td>{{ user.name }}</td>
     <td>{{ user.surname }}</td>
-    <td><button ng-click="deleteRequest(user.id)">Obrisi</button></td>
-    <td><button ng-click="acceptRequest(user.id,user,$index)">Prihvati</button></td>
+    <td><button ng-click="cancelRequest(user.id, user, $index)">Obrisi</button></td>
+    <td><button ng-click="acceptRequest(user.id, user, $index)">Prihvati</button></td>
   </tr>
 </table> 
 
