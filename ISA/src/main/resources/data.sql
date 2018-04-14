@@ -1,15 +1,15 @@
-/*INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (1, 'Olja', 'Andjelovski', 'andjelovskiolja@gmail.com', 'Novi Sad', '0611489531', 'true', 'olja', 'REG_USER', null, null, '111', 0, true);
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (2, 'Stefan', 'Tulac', 'schhhhhtef@gmail.com', 'Novi Sad', '0611489532', 'true', 'stefan', 'REG_USER', null, null, null, '222', 0, true);
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (3, 'Ilija', 'Grbic', 'ilijagrb.ns@gmail.com', 'Novi Sad', '0611489533', 'true', 'ilija', 'REG_USER', null, null, null, '333', 0, true);
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (4, 'Milos', 'Milosevic', 'milos@gmail.com', 'Beograd', '0637896536', 'true', 'milos', 'REG_USER', null, null, null, '444', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (5, 'Milica', 'Milic', 'milica@gmail.com', 'Kragujevac', '066382247', 'true', 'milica', 'REG_USER', null, null, null, '555', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (6, 'Matija', 'Matic', 'matija@gmail.com', 'Pancevo', '069352148', 'true', 'matija', 'REG_USER', null, null, null, '666', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (7, 'Tanja', 'Milenkovic', 'tanja@gmail.com', 'Pancevo', '063352148', 'true', 'tanja', 'REG_USER', null, null, null, '777', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (8, 'Uros', 'Urosevic', 'uros@gmail.com', 'Pancevo', '069352148', 'true', 'uros', 'REG_USER', null, null, null, '888', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (9, 'Luka', 'Lukic', 'luka@gmail.com', 'Novi Sad', '069478148', 'true', 'luka', 'REG_USER', null, null, null, '999', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (10, 'Sava', 'Savic', 'sava@gmail.com', 'Pancevo', '069222148', 'true', 'sava', 'REG_USER', null, null, null, '101010', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (11, 'Dule', 'Savic', 'dule@gmail.com', 'Beograd', '061882148', 'true', 'dule', 'REG_USER', null, null, null, '111111', 0, 'true');
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (12, 'Marko', 'Markovic', 'marko@gmail.com', 'Novi Sad', '061178148', 'true', 'marko', 'FAN_ZONE_ADMIN', null, null, null, '121212', 0, true);
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (13, 'Nikoa', 'Zigic', 'nikola@gmail.com', 'Beograd', '011222148', 'true', 'nikola', 'CINEMA_THEATRE_ADMIN', null, null, null, '131313', 0, true);
-INSERT INTO korisnici (id, name, surname, email, city, phone, activated, password, role, pozivi, rezervacije, verificationCode, bodovi, firstTime) VLAUES (14, 'Toma', 'Tomic', 'toma@gmail.com', 'Beograd', '069582148', 'true', 'toma', 'SYSTEM_ADMIN', null, null, null, '141414', 0, 'true');
-*/
+INSERT INTO KORISNICI VALUES (1,'true', 0, 'Novi Sad', 'andjelovskiolja@gmail.com', 'true', 'Olja', 'olja', '0611626739', 'REG_USER', 'Andjelovski', '111');
+INSERT INTO KORISNICI VALUES (2,'true', 0, 'Futog', 'schhhhhtef@gmail.com', 'true', 'Stefan', 'stefan', '0611626739', 'REG_USER', 'Tulac', '222');
+INSERT INTO korisnici VALUES (3, 'true', 0, 'Novi Sad', 'ilijagrb.ns@gmail.com', 'true', 'Ilija', 'ilija', '06116267389', 'REG_USER', 'Grbic', '333');
+INSERT INTO korisnici VALUES (4, 'true', 0, 'Beograd', 'milos@gmail.com', 'true',  'Milos', 'milos', '0637896536', 'REG_USER', 'Milosevic', '444');
+INSERT INTO korisnici VALUES (5, 'true', 0, 'Kragujevac', 'tanja@gmail.com', 'true',  'Tanja', 'tanja', '0638526536', 'REG_USER', 'Milic', '555');
+INSERT INTO korisnici VALUES (6, 'true', 0, 'Nis', 'milan@gmail.com', 'true',  'Milan', 'milan', '0637855536', 'REG_USER', 'Matic', '666');
+INSERT INTO korisnici VALUES (7, 'true', 0, 'Pancevo', 'matija@gmail.com', 'true',  'Matija', 'matija', '0657896666', 'REG_USER', 'Matija', '777');
+INSERT INTO korisnici VALUES (8, 'true', 0, 'Beograd', 'uros@gmail.com', 'true',  'Uros', 'uros', '0637896536', 'REG_USER', 'Urosevic', '888');
+INSERT INTO korisnici VALUES (9, 'true', 0, 'Beograd', 'marko@gmail.com', 'true',  'Marko', 'marko', '0652896536', 'REG_USER', 'Mitic', '999');
+INSERT INTO korisnici VALUES (10, 'true', 0, 'Novi Sad', 'sima@gmail.com', 'true',  'Sima', 'sima', '0666696536', 'REG_USER', 'Simic', '101010');
+INSERT INTO korisnici VALUES (11, 'true', 0, 'Subotica', 'nikola@gmail.com', 'true',  'Nikola', 'nikola', '0637896536', 'FAN_ZONE_ADMIN', 'Nikolic', '111111');
+INSERT INTO korisnici VALUES (12, 'true', 0, 'Novi Sad', 'dragana@gmail.com', 'true',  'Dragana', 'dragana', '0637896536', 'CINEMA_THEATRE_ADMIN', 'Dragic', '121212');
+INSERT INTO korisnici VALUES (13, 'true', 0, 'Novi Sad', 'kosta@gmail.com', 'true',  'Kosta', 'kosta', '0637896536', 'SYSTEM_ADMIN', 'Kostic', '131313');
+
+
