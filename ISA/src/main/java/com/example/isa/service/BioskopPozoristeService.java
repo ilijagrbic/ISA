@@ -62,4 +62,8 @@ public class BioskopPozoristeService {
     	//}
     	
     }
+    
+    public List<BioskopPozoriste> findCinemaTheatreByName(String toFind){
+    	return bioskopPozoristeRepository.findByNameContainingIgnoreCase(toFind);
+    }
 }

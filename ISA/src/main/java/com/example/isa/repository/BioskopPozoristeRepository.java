@@ -13,5 +13,7 @@ public interface BioskopPozoristeRepository extends JpaRepository<BioskopPozoris
 	
 	public List<BioskopPozoriste> findByType(BioskopPozoristeType type);//TESTED
 	
+	public List<BioskopPozoriste> findByNameContainingIgnoreCase(String name);
+	
 	
 }
