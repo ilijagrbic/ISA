@@ -1,5 +1,6 @@
-INSERT INTO KORISNICI VALUES (1,'true', 0, 'Novi Sad', 'andjelovskiolja@gmail.com', 'true', 'Olja', 'olja', '0611626739', 'REG_USER', 'Andjelovski', '111');
-INSERT INTO KORISNICI VALUES (2,'true', 0, 'Futog', 'schhhhhtef@gmail.com', 'true', 'Stefan', 'stefan', '0611626739', 'REG_USER', 'Tulac', '222');
+/* Insert za korisnike */
+INSERT INTO korisnici VALUES (1,'true', 0, 'Novi Sad', 'andjelovskiolja@gmail.com', 'true', 'Olja', 'olja', '0611626739', 'REG_USER', 'Andjelovski', '111');
+INSERT INTO korisnici VALUES (2,'true', 0, 'Futog', 'schhhhhtef@gmail.com', 'true', 'Stefan', 'stefan', '0611626739', 'REG_USER', 'Tulac', '222');
 INSERT INTO korisnici VALUES (3, 'true', 0, 'Novi Sad', 'ilijagrb.ns@gmail.com', 'true', 'Ilija', 'ilija', '06116267389', 'REG_USER', 'Grbic', '333');
 INSERT INTO korisnici VALUES (4, 'true', 0, 'Beograd', 'milos@gmail.com', 'true',  'Milos', 'milos', '0637896536', 'REG_USER', 'Milosevic', '444');
 INSERT INTO korisnici VALUES (5, 'true', 0, 'Kragujevac', 'tanja@gmail.com', 'true',  'Tanja', 'tanja', '0638526536', 'REG_USER', 'Milic', '555');
@@ -12,4 +13,12 @@ INSERT INTO korisnici VALUES (11, 'true', 0, 'Subotica', 'nikola@gmail.com', 'tr
 INSERT INTO korisnici VALUES (12, 'true', 0, 'Novi Sad', 'dragana@gmail.com', 'true',  'Dragana', 'dragana', '0637896536', 'CINEMA_THEATRE_ADMIN', 'Dragic', '121212');
 INSERT INTO korisnici VALUES (13, 'true', 0, 'Novi Sad', 'kosta@gmail.com', 'true',  'Kosta', 'kosta', '0637896536', 'SYSTEM_ADMIN', 'Kostic', '131313');
 
+/* Insert za invite */
+INSERT INTO invite VALUES (1, 'true', 2, 1);
+INSERT INTO invite VALUES (2, 'true', 2, 1);
+INSERT INTO invite VALUES (3, 'true', 3, 1);
+INSERT INTO invite VALUES (4, 'true', 2, 3);
+INSERT INTO invite VALUES (5, 'false', 4, 1);
+INSERT INTO invite VALUES (6, 'false', 5, 1);
+INSERT INTO invite VALUES (7, 'false', 6, 1);
 
