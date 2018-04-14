@@ -31,11 +31,11 @@ public class FriendshipController {
 	
 	// Slanje zahteva za prijateljstvo 
 	@RequestMapping(value="/{userId}/send/{friendId}",method=RequestMethod.POST)
-	public ResponseEntity<Invite> sendFriendshipRequest(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
-		System.out.println("\n\nSlanje zahteva");
-		Invite friendshipInvite = friendshipService.createFriendshipRequest(userId,friendId);
+	public ResponseEntity<Collection<User>> sendFriendshipRequest(@PathVariable("userId") long userId, @PathVariable("friendId") long friendId) {
+		System.out.println("\n\n***Slanje zahteva");
+		ArrayList<User> friendshipInvite = (ArrayList<User>) friendshipService.createFriendshipRequest(userId,friendId);
 		
-		return new ResponseEntity<>(friendshipInvite, HttpStatus.CREATED);
+		return new ResponseEntity<Collection<User>>(friendshipInvite, HttpStatus.CREATED);
 	}
 	
 	

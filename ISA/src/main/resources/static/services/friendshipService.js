@@ -41,7 +41,7 @@ angular.module('app')
             },
             send: function (id, idFriend, onSuccess, onError) {
                 var req = {
-                    method: 'PUT',
+                    method: 'POST',
                     url: '/api/friendships/' + id + "/send/" + idFriend,
                 };
                 console.log("Url " + req.url);

@@ -21,12 +21,13 @@ public class FriendshipService {
 	private InviteRepository inviteRepository;
 
 	// Slanje zahteva za prijateljstvo
-	public Invite createFriendshipRequest(Long idSender, Long idReceiver) {
+	public List<User> createFriendshipRequest(Long idSender, Long idReceiver) {
 		Invite invitation = new Invite();
 		invitation.setPosaljalac(regUserRepository.findById(idSender));
 		invitation.setPrimalac(regUserRepository.findById(idReceiver));
 		invitation.setPrihvatio(false);
-		return inviteRepository.save(invitation);
+		inviteRepository.save(invitation);
+		return findNonFriends(idSender);
 	}
 
 	// Ili da uzmem trenutnog korisnika
