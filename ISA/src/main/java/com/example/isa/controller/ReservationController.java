@@ -69,5 +69,18 @@ public class ReservationController {
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	@RequestMapping(
+			value = "/api/cinnema/{id}/reservations/oneClick",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<Rezervacija>> getRezFromCinema(@PathVariable("id") Long id){
+		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)resevationService.getOneClick(id);
+		if(retVal!=null)
+			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
+		
+	}
 
 }

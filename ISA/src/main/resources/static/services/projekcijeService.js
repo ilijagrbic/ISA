@@ -43,6 +43,13 @@ angular.module('app')
                 data: data
             };
             $http(req).then(onSuccess, onError);
-        }
+        },
+	    getParentId: function(projId, onSuccess, onError){
+	    	var req = {
+	                method: 'GET',
+	                url: '/api/projections/'+projId+'/movie'
+	            };
+		$http(req).then(onSuccess, onError);
+	    }
     }
 });

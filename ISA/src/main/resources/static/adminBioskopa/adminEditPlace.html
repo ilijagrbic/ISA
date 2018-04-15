@@ -12,6 +12,7 @@ Edit place
 		<!-- promotivne karte -->
 		<button ng-click="backToTheatres()">Back</button>
 		<button ng-click="commitChanges()">Save</button>
+		<button ng-click="commitChanges()">Show oneclick</button>
 	</div>
 	
 	
@@ -43,4 +44,18 @@ Edit place
 		<button ng-click="saveEntery()">Save entry</button>
 	</div>
 	<button ng-click="newMovie()">New</button>
+	
+	
+	<h3>Oneclick rezervacije:</h3>
+	<ol>
+		<li ng-repeat="rez in oneClick">
+			Naziv filma: {{rez.film.name}}<br/>
+			Datum: {{rez.projekcija.date}}<br/>
+			Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
+			Orginalna cena: {{rez.projekcija.cena}}<br/>
+			POPUST!: {{rez.rezervisanoMesto.deltaCena}}
+			<button ng-click="cancelEntery()">Delete</button>
+		</li>
+	</ol>
+	
 </div>

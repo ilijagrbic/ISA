@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -49,6 +51,7 @@ public class MovieShow {
 	private String genre;
 
 	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Projekcija> projekcije;
 	
 	private double price;

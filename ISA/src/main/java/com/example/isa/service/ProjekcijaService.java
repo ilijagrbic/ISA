@@ -49,6 +49,10 @@ public class ProjekcijaService {
 		return retVal;
 	}
 	
+	public Long findParentId(long id) {
+		return projekcijaRepository.findById(id).getFilm().getId();
+	}
+	
 	public List<Projekcija> findAllInCinemaByMovie(long id, long idMovie) {
 		Repertoire retVal1 = repertoarRepository.findByBioskopId(id);
 		MovieShow retVal2 = movieRepository.findById(idMovie);

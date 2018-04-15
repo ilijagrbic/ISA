@@ -78,6 +78,20 @@ public class ProjekcijaController {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(
+			value = "/api/projections/{id}/movie",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Long> getParent(@PathVariable("id") Long id){
+		Long retVal = projService.findParentId(id);
+		if(retVal!=null) {
+			return new ResponseEntity<Long>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Long>(retVal, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@RequestMapping(
 			value = "/api/projections/",

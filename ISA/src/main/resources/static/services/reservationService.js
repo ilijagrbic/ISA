@@ -18,6 +18,13 @@ angular.module('app')
 	             data: data
 	        };
 	        $http(req).then(onSuccess, onError);
+	    },
+	    getOneClick: function(cinId, onSuccess, onError){
+	    	var req = {
+	                method: 'GET',
+	                url: '/api/cinnema/'+cinId+'/reservations/oneClick'
+	            };
+		$http(req).then(onSuccess, onError);
 	    }
     }
 });

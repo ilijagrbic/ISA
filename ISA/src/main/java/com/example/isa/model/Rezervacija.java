@@ -43,7 +43,8 @@ public class Rezervacija {
 	@Version
 	private int version;
 
-	
+	@ManyToOne
+	private MovieShow film;
 
 	public Rezervacija(long id, Projekcija projekcija, User rezervant, RezervacijaStatus status,
 			Sediste rezervisanoMesto, int ocenaFilm, int ocenaAmbijent, Boolean isHost, Long hostId, int version) {
@@ -62,6 +63,16 @@ public class Rezervacija {
 
 	public Rezervacija() {
 		super();
+	}
+	
+	
+
+	public MovieShow getFilm() {
+		return film;
+	}
+
+	public void setFilm(MovieShow film) {
+		this.film = film;
 	}
 
 	public long getId() {

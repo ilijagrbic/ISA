@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService, uploadService) {
+    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService, uploadService, reservationService, projekcijeService) {
 		/*
 		 * Utility functions
 		 */
@@ -49,6 +49,14 @@ angular.module('app')
 						
 					}
 			);
+			reservationService.getOneClick($stateParams.cinemaTheatreId,
+					function(info){
+						$scope.oneClick=info.data;	
+					},
+					function(){
+						
+					}
+			)
 		}
 		/*
 		 * Utility functions
@@ -124,6 +132,22 @@ angular.module('app')
 	        	  console.log("upload error")
 	          });
 		}
+		
+		/*$scope.findMovie = function(id){
+			projekcijeService.getParentId(id, 
+					function(info){
+						for(i=0;i<$scope.curentCinemaTheatre.repertoire.movies.length;i++){
+							if($scope.curentCinemaTheatre.repertoire.movies[i].id==info.data){
+								return $scope.curentCinemaTheatre.repertoire.movies[i].name;
+							}
+						}
+					},
+					function(){
+						
+					}
+			)
+			
+		}*/
 		
 		
 		
