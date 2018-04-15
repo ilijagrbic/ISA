@@ -65,6 +65,27 @@ angular.module('app')
 		var something = this;
 		$scope.enterMovie = false;
 		$scope.types = ["MOVIE", "PERFORMANCE"];
+		$scope.showOneClick = true;
+		
+		$scope.deleteOneClickReservation = function(par){
+			reservationService.deleteReservation(par,
+					function(info){
+						for(i=0;i<$scope.oneClick.length;i++){
+							if($scope.oneClick[i].id==info.data.id){
+								$scope.oneClick.splice(i,1);
+							}
+						}
+					},
+					function(){
+						
+					}
+			)
+		}
+		
+		$scope.showHideOneClick = function(){
+			$scope.showOneClick = !$scope.showOneClick ;
+		}
+		
 		
 		$scope.backToTheatres = function(){
 			goBack();

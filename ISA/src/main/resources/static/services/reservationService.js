@@ -25,6 +25,13 @@ angular.module('app')
 	                url: '/api/cinnema/'+cinId+'/reservations/oneClick'
 	            };
 		$http(req).then(onSuccess, onError);
+	    },
+	    deleteReservation: function(resId, onSuccess, onError){
+	    	var req = {
+	                method: 'DELETE',
+	                url: 'api/reservations/'+resId
+	            };
+		$http(req).then(onSuccess, onError);
 	    }
     }
 });

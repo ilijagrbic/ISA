@@ -76,8 +76,10 @@ angular.module('app')
     	]
     	
     	$scope.handleButton = function(id){
-    		$scope.handlingSeat = id;
-    		$scope.shotSeatEdit = true;
+    		if($scope.existsInRez(id)){
+	    		$scope.handlingSeat = id;
+	    		$scope.shotSeatEdit = true;
+    		}
     	}
     	
     	$scope.updateSeat = function(ss){

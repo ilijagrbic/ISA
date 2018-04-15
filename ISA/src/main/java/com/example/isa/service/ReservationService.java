@@ -60,6 +60,15 @@ public class ReservationService {
 		
 	}
 	
+	public Rezervacija delete(long id) {
+		Rezervacija toDelete = reservationRepository.findById(id);
+		if(toDelete!=null) {
+			reservationRepository.delete(id);
+			return toDelete;
+		}
+		return null;
+	}
+	
 	public List<Rezervacija> getResFromUser(long id){
 		return reservationRepository.findByRezervantId(id);
 	}

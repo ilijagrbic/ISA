@@ -45,6 +45,19 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(
+			value = "/api/reservations/{id}",
+			method = RequestMethod.DELETE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Rezervacija> deleteReserv(@PathVariable("id") Long id){
+		Rezervacija retVal = (Rezervacija)resevationService.delete(id);
+		if(retVal!=null)
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@RequestMapping(
 			value = "/api/user/{id}/reservations",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
