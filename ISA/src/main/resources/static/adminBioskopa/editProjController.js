@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('editProjController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
+    .controller('editProjController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService, reservationService) {
     	
     	$scope.date = function(date){
     		var dat = new Date(date);
@@ -23,6 +23,15 @@ angular.module('app')
 		
 				}
 			)
+		
+		reservationService.getAllInProj($stateParams.projId,
+				function(info){
+					$scope.rezervacije = info.data;
+				},
+				function(){
+					
+				}
+		)
 			    	
     	$scope.opdNewSalaEditing=true;
     	
@@ -80,6 +89,54 @@ angular.module('app')
     				}
     			}
     		}
+    	}
+    	
+    	$scope.addOneClickReserve = function(s){
+    		if(!$scope.existsInRez(s)){
+    			alert("vec rezervisano");
+    		}else{
+    			var DTO ={
+					"projId":$stateParams.projId,
+			        "userId":null,
+			        "rezSedisteId":s.id,
+			        "status":"ONECLICK",
+			        "ocenaFilm":0,
+			        "ocenaAmbijent":0,
+			        "isHost":true,
+			        "hostId":null
+    			}
+    			reservationService.postReservation($stateParams.projId, DTO,
+    				function(info){
+    					$scope.rezervacije.splice($scope.rezervacije.length, "0", info.data);
+    				},
+    				function(){
+    					
+    				}
+    			)
+    			
+    		}
+    	}
+    	
+    	$scope.handleSeatBtn = function(sed){
+    		if($scope.rezervacije!=undefined){
+	    		if(!$scope.existsInRez(sed)){
+	    			return "R"
+	    		}else{
+	    			return "NR"
+	    		}
+    		}else{
+    			return ""
+    		}
+    	}
+    	
+    	$scope.existsInRez = function(sed){
+    		for(i=0;i<$scope.rezervacije.length;i++){
+    			if(sed.id==$scope.rezervacije[i].rezervisanoMesto.id){
+    				return false;
+    			}
+    		}
+    		return true;
+
     	}
     	
     })

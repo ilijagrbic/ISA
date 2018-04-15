@@ -3,8 +3,6 @@ package com.example.isa.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.isa.controller.dataTransfer.BioskopDTO;
-import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Glumac;
 import com.example.isa.service.GlumciService;
 

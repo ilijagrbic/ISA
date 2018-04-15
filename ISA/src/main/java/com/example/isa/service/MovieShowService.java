@@ -1,16 +1,13 @@
 package com.example.isa.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Glumac;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Repertoire;
-import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.GlumacRepository;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.RepertoireRepository;

@@ -15,6 +15,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Rezervacija;
 
@@ -51,6 +54,7 @@ public class User {
 	//////// RegUser
 
 	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Rezervacija> rezervacije;
 
 	// Za verifikaciju

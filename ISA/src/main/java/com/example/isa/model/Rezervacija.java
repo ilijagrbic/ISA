@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 import com.example.isa.model.users.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
@@ -35,19 +36,17 @@ public class Rezervacija {
 	
 	private int ocenaAmbijent;
 		
-	private int isHost;
+	private Boolean isHost;
 	
-	private int hostId;
+	private Long hostId;
 	
 	@Version
 	private int version;
 
-	public Rezervacija() {
-		super();
-	}
+	
 
 	public Rezervacija(long id, Projekcija projekcija, User rezervant, RezervacijaStatus status,
-			Sediste rezervisanoMesto, int ocenaFilm, int ocenaAmbijent, int isHost) {
+			Sediste rezervisanoMesto, int ocenaFilm, int ocenaAmbijent, Boolean isHost, Long hostId, int version) {
 		super();
 		this.id = id;
 		this.projekcija = projekcija;
@@ -57,6 +56,12 @@ public class Rezervacija {
 		this.ocenaFilm = ocenaFilm;
 		this.ocenaAmbijent = ocenaAmbijent;
 		this.isHost = isHost;
+		this.hostId = hostId;
+		this.version = version;
+	}
+
+	public Rezervacija() {
+		super();
 	}
 
 	public long getId() {
@@ -115,13 +120,32 @@ public class Rezervacija {
 		this.ocenaAmbijent = ocenaAmbijent;
 	}
 
-	public int getIsHost() {
+	public Boolean getIsHost() {
 		return isHost;
 	}
 
-	public void setIsHost(int isHost) {
+	public void setIsHost(Boolean isHost) {
 		this.isHost = isHost;
 	}
+
+	public Long getHostId() {
+		return hostId;
+	}
+
+	public void setHostId(Long hostId) {
+		this.hostId = hostId;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
+	
+
 	
 	
 	

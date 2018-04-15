@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.example.isa.controller.dataTransfer.ChangePasswordDTO;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.users.User;
-import com.example.isa.repository.UserRepository;
 import com.example.isa.repository.RezervacijaRepository;
+import com.example.isa.repository.UserRepository;
 
 @Service
 public class UserService {

@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.isa.controller.dataTransfer.BioskopDTO;
 import com.example.isa.controller.dataTransfer.MovieShowDTO;
-import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.service.MovieShowService;
 

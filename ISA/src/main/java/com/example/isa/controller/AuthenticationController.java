@@ -17,8 +17,8 @@ import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
-import com.example.isa.service.UserService;
 import com.example.isa.service.MailService;
+import com.example.isa.service.UserService;
 
 
 @RestController
