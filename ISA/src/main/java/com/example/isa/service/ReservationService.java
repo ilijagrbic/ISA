@@ -12,6 +12,7 @@ import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Rezervacija;
+import com.example.isa.model.RezervacijaStatus;
 import com.example.isa.model.Sediste;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.BioskopPozoristeRepository;
@@ -84,9 +85,100 @@ public class ReservationService {
 		for(MovieShow m:movieShowService.getFromCinema(b.getId())) {
 			for(Projekcija p:projRepository.findByFilmId(m.getId())) {
 				temp = (ArrayList<Rezervacija>)getFromProj(p.getId());
+				for(Rezervacija r:temp) {
+					if(r.getStatus()==RezervacijaStatus.ONECLICK) {
+						retVal.add(r);
+					}
+				}
+			}
+		}
+		return retVal;
+	}
+	
+	public List<Rezervacija> getInCinnema(long id){
+		BioskopPozoriste b = bioskoRepository.findById(id);
+		
+		ArrayList<Rezervacija> retVal = new ArrayList<Rezervacija>();
+		ArrayList<Rezervacija> temp = new ArrayList<Rezervacija>();
+		
+		for(MovieShow m:movieShowService.getFromCinema(b.getId())) {
+			for(Projekcija p:projRepository.findByFilmId(m.getId())) {
+				temp = (ArrayList<Rezervacija>)getFromProj(p.getId());
 				retVal.addAll(temp);
 			}
 		}
 		return retVal;
+	}
+	
+	public double getAvgAmbijent(long id) {
+		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
+		
+		double len = 0;
+		double sum = 0;
+		
+		for(Rezervacija r:retVal) {
+			if(r.getStatus()==RezervacijaStatus.WATCHED) {
+				len++;
+				sum+=r.getOcenaAmbijent();
+			}
+		}
+		
+		if(sum!=0) {
+			return sum/len;
+		}else {
+			return 0;
+		}
+		
+	}
+	
+	public double getAvgProjOcena(long id) {
+		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getFromProj(id);
+		
+		double len = 0;
+		double sum = 0;
+		
+		for(Rezervacija r:retVal) {
+			if(r.getStatus()==RezervacijaStatus.WATCHED) {
+				len++;
+				sum+=r.getOcenaAmbijent();
+			}
+		}
+		
+		if(sum!=0) {
+			return sum/len;
+		}else {
+			return 0;
+		}
+		
+	}
+	
+	public double getAvgMovOcena(long id) {
+		
+		ArrayList<Rezervacija> retVal = new ArrayList<Rezervacija>();
+		ArrayList<Rezervacija> temp = new ArrayList<Rezervacija>();
+		
+		for(Projekcija p:projRepository.findByFilmId(id)) {
+			temp = (ArrayList<Rezervacija>)getFromProj(p.getId());
+			retVal.addAll(temp);
+		}
+		
+		
+		
+		double len = 0;
+		double sum = 0;
+		
+		for(Rezervacija r:retVal) {
+			if(r.getStatus()==RezervacijaStatus.WATCHED) {
+				len++;
+				sum+=r.getOcenaFilm();
+			}
+		}
+		
+		if(sum!=0) {
+			return sum/len;
+		}else {
+			return 0;
+		}
+		
 	}
 }

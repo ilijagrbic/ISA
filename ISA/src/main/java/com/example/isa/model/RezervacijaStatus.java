@@ -4,5 +4,6 @@ public enum RezervacijaStatus {
 	ACCEPTED,
 	DECLINED,
 	WAITING,
-	ONECLICK
+	ONECLICK, 
+	WATCHED
 }
