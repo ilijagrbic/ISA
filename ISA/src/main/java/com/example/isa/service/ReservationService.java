@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.isa.controller.dataTransfer.IncomeReportDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
@@ -108,6 +109,21 @@ public class ReservationService {
 			}
 		}
 		return retVal;
+	}
+	
+	public double getIncome(long id, IncomeReportDTO datumi) {
+		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
+		
+		double sum = 0;
+		
+		for(Rezervacija r:retVal) {
+			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())) {
+				sum+=r.getProjekcija().getCena();
+			}
+		}
+		
+		return sum;
+		
 	}
 	
 	public double getAvgAmbijent(long id) {
