@@ -12,6 +12,7 @@ import com.example.isa.model.MovieShow;
 import com.example.isa.model.Repertoire;
 import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.RepertoireRepository;
+import com.example.isa.repository.UserRepository;
 
 @Service
 public class BioskopPozoristeService {
@@ -20,6 +21,32 @@ public class BioskopPozoristeService {
 	private BioskopPozoristeRepository bioskopPozoristeRepository;
 	@Autowired
 	private RepertoireRepository repertoarRepository;
+	@Autowired
+	private UserRepository userRepository;
+	
+	public List<BioskopPozoriste> getAllAdmin(long id){
+		return userRepository.findById(id).getBioskopi();
+	}
+	
+	public List<BioskopPozoriste> getAllAdminCin(long id){
+		ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
+		for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
+			if(b.getType()==BioskopPozoristeType.CINNEMA) {
+				retVal.add(b);
+			}
+		}
+		return retVal;
+	}
+	
+	public List<BioskopPozoriste> getAllAdminThe(long id){
+		ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
+		for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
+			if(b.getType()==BioskopPozoristeType.THEATRE) {
+				retVal.add(b);
+			}
+		}
+		return retVal;
+	}
 	
 	public List<BioskopPozoriste> getAll(){
 		return bioskopPozoristeRepository.findAll();

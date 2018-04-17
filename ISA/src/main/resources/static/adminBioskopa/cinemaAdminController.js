@@ -1,6 +1,6 @@
 angular.module('app')
-    .controller('cinemaAdminController', function ($scope, $state, $sce, cinemaTheatreService) {
-		cinemaTheatreService.getCinemas(
+    .controller('cinemaAdminController', function ($scope, $state, $sce, $rootScope, cinemaTheatreService) {
+		cinemaTheatreService.getAdminCinemas($rootScope.USER.id,
 				function(info){//succes function
 					$scope.cinemas=info.data;
 					
