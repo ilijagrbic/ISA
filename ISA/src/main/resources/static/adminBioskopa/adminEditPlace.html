@@ -8,16 +8,22 @@ Edit place
 		Opis:<input type=text ng-model="curentCinemaTheatre.description"><br/>
 		Tip:{{curentCinemaTheatre.type}}<br/>
 		Gmaps url:<input type=text ng-model="curentCinemaTheatre.gmapsUrl"><br/>
-		<div ng-if="currentCinemaTheatre.gmapsUrl!=null||currentCinemaTheatre.gmapsUrl!=''"></div>
+		Bronzana granica:<input type=text ng-model="curentCinemaTheatre.bronzeTreshold"><br/>
+		Srebrena granica:<input type=text ng-model="curentCinemaTheatre.silverTreshold"><br/>
+		Zlatna granica:<input type=text ng-model="curentCinemaTheatre.goldTreshold"><br/>
+		Bronzani popust:<input type=text ng-model="curentCinemaTheatre.bronzeSale"><br/>
+		Srebreni popust:<input type=text ng-model="curentCinemaTheatre.silverSale"><br/>
+		Zlatni popust:<input type=text ng-model="curentCinemaTheatre.goldSale"><br/>
 		<!-- promotivne karte -->
 		<button ng-click="backToTheatres()">Back</button>
 		<button ng-click="commitChanges()">Save</button>
+		<button ng-click="showReports()">Reports</button>
 		<button ng-click="showHideOneClick()">Show/Hide oneclick</button>
 	</div>
 	
 	
 	
-	<ol>
+	<ol ng-show="izvestajiShow==false">
 		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
 			Naziv filma:{{movie.name}} <br/>
 			Id:{{movie.id}} <br/>
@@ -27,6 +33,15 @@ Edit place
 			<button ng-click="viewMovie(movie)">View</button>
 		</li>
 	</ol>
+	
+	<div ng-show="izvestajiShow==true">
+	<h3>Reports</h3>
+	Prosecna ocena ambijenta:{{ambijentOcena}}<br/>
+	Prihodi u odredjenom intervalu:<br/>
+	Od:<input type=text ng-model="odPrihodi"><br/>
+	Do:<input type=text ng-model="doPrihodi"><br/>
+	</div>
+	
 	<div ng-show = "enterMovieState==true">
 		Naziv:<input type=text ng-model="enterMoviename"><br/>
 		Zanr:<input type=text ng-model="enterMoviegenre"><br/>
