@@ -14,6 +14,51 @@ angular.module('app')
                     }
                 }
             })
+            .state('fanZoneAdmin', {
+                url: '/fanZoneAdmin',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'fanZone/fanZoneAdmin.html',
+
+                    },
+                }
+            })
+              .state('fanZoneAdmin.zvanicna', {
+                url: '/zvanicna',
+                views: {
+                	'header': {
+
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'fanZone/fanZoneAdmin.html',
+                    },
+                    'rekviziti': {
+                    	templateUrl: 'fanZone/zvanicni.html',
+                    }
+                }
+            })
+                .state('fanZoneAdmin.polovna', {
+                url: '/polovna',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'fanZone/fanZoneAdmin.html',
+                    }
+                    ,
+                    'rekviziti': {
+                    	templateUrl: 'fanZone/polovni.html',
+                    }
+                }
+            })
             .state('theatresAdmin', {
                 url: '/theatresAdmin',
                 views: {
