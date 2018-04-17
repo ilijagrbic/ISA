@@ -21,12 +21,35 @@ INSERT INTO invite VALUES (3, 'false', 3, 0);
 INSERT INTO invite VALUES (4, 'false', 4, 0);
 INSERT INTO invite VALUES (5, 'false', 5, 0);
 
-INSERT INTO bioskop_pozoriste VALUES (1, 'Bulevar Jovana Ducica', 0, 0, 'Bioskop ladsada', 'koordinate', 0, 0, 'Bioskop Jovan Ducic', 0, 0, 'CINNEMA', null);
+/* Dodavanje bioskopa */
+INSERT INTO repertoire (id, bioskop_id) values (1, null);
+INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
+							  (1, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
+update repertoire set bioskop_id=1 where id=1;
 
-INSERT INTO repertoire VALUES (1,1);
+INSERT INTO repertoire (id, bioskop_id) values (2, null);
+INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
+							  (2, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
+update repertoire set bioskop_id=2 where id=2;
 
+INSERT INTO repertoire (id, bioskop_id) values (3, null);
+INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
+							  (3, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
+update repertoire set bioskop_id=3 where id=3;
 
-INSERT INTO movie_show VALUES (1, 5115, 'Opis neki', 'director', 1, 'akcija', null, 'Naziv filma', 1200, 'TIP NECEGA', 1);
+/* Dodavanje filmova*/
+INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
+(1, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+
+INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
+(2, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+
+INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
+(3, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+
 
 
 
