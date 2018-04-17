@@ -17,3 +17,13 @@
 		<button ng-click="search()">Pretrazi</button>
 	</div>
 </form>
+
+<table>
+  <tr ng-repeat="cinemaTheatre in cinemasAndTheathres | orderBy:['name']">
+    <td>{{ cinemaTheatre.name }}</td>
+    <td>{{ cinemaTheatre.gmapsUrl }}</td>
+    <td>{{ cinemaTheatre.address }}</td>
+    <td>{{ cinemaTheatre.description }}</td>
+    <td><button ng-click="deleteFriend(cinemaTheatre, $index)">Detalji</button></td>
+  </tr>
+</table> 

@@ -21,7 +21,7 @@ INSERT INTO invite VALUES (3, 'false', 3, 0);
 INSERT INTO invite VALUES (4, 'false', 4, 0);
 INSERT INTO invite VALUES (5, 'false', 5, 0);
 
-INSERT INTO bioskop_pozoriste VALUES (1, 'Bulevar Jovana Ducica', 0, 0, 'Bioskop ladsada', 'koordinate', 0, 0, 'Bioskop Jovan Ducic', 0x2, 0, 0, 'CINNEMA', null);
+INSERT INTO bioskop_pozoriste VALUES (1, 'Bulevar Jovana Ducica', 0, 0, 'Bioskop ladsada', 'koordinate', 0, 0, 'Bioskop Jovan Ducic', 0, 0, 'CINNEMA', null);
 
 INSERT INTO repertoire VALUES (1,1);
 
