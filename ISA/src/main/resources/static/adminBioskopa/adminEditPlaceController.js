@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService, uploadService, reservationService, projekcijeService) {
+    .controller('adminEditPlaceController', function ($scope, $state, $stateParams, cinemaTheatreService, movieShowService, uploadService, reservationService, projekcijeService, reportService) {
 		/*
 		 * Utility functions
 		 */
@@ -13,6 +13,9 @@ angular.module('app')
 				"bronzeTreshold":param.bronzeTreshold,
 				"silverTreshold":param.silverTreshold,
 				"goldTreshold":param.goldTreshold,
+				"bronzeSale":param.bronzeSale,
+				"silverSale":param.silverSale,
+				"goldSale":param.goldSale,
 				"gmaps":param.gmapsUrl
 			}
 		}
@@ -56,7 +59,15 @@ angular.module('app')
 					function(){
 						
 					}
-			)
+			);
+			reportService.getAmbijentReport($stateParams.cinemaTheatreId,
+					function(info){
+						$scope.ambijentOcena=info.data.avgOcena;	
+					},
+					function(){
+						
+					})
+			
 		}
 		/*
 		 * Utility functions
@@ -66,6 +77,11 @@ angular.module('app')
 		$scope.enterMovie = false;
 		$scope.types = ["MOVIE", "PERFORMANCE"];
 		$scope.showOneClick = true;
+		$scope.izvestajiShow =false;
+		
+		$scope.showReports = function(){
+			$scope.izvestajiShow = !$scope.izvestajiShow;
+		}
 		
 		$scope.deleteOneClickReservation = function(par){
 			reservationService.deleteReservation(par,

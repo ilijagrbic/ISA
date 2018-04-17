@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('adminMovieViewController', function ($scope, $state, $stateParams, movieShowService, uploadService, projekcijeService, salaService) {
+    .controller('adminMovieViewController', function ($scope, $state, $stateParams, movieShowService, uploadService, projekcijeService, salaService, reportService) {
     	movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
@@ -25,6 +25,15 @@ angular.module('app')
 				function(){
 					
 				}
+		)
+		
+		reportService.getMovieReport($stateParams.movieId,
+					function(info){
+						$scope.ocenaMovie=info.data.avgOcena;	
+					},
+					function(){
+						
+					}
 		)
 		
 		$scope.backToParentMovie = function(){

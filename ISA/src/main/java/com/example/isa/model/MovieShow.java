@@ -46,7 +46,7 @@ public class MovieShow {
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @Fetch(value = FetchMode.SUBSELECT)
-	private List<Glumac> glumci;//proveri kako ide manymany
+	private List<Glumac> glumci;
 	
 	private String genre;
 
