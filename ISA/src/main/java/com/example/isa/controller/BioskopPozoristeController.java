@@ -103,12 +103,20 @@ public class BioskopPozoristeController {
 	}
 	
 	// Pretraga po imenu
-	@RequestMapping(value="/api/findCinemaTheatreByName/{toFind}", method=RequestMethod.GET, produces="application/json")
-	public ResponseEntity<Collection<BioskopPozoriste>> findBioskopPozoriste(@PathVariable("toFind") String toFind){
-		System.out.println("\n***Pretraga po imenu \n" + toFind);
-		ArrayList<BioskopPozoriste> bioskopPozoriste = (ArrayList<BioskopPozoriste>) bioskopService.findCinemaTheatreByName(toFind); 
-		return new ResponseEntity<Collection<BioskopPozoriste>>(bioskopPozoriste, HttpStatus.OK);
-	}
+		@RequestMapping(value="/api/findCinemaTheatreByName/{toFind}", method=RequestMethod.GET, produces="application/json")
+		public ResponseEntity<Collection<BioskopPozoriste>> findBioskopPozoriste(@PathVariable("toFind") String toFind){
+			System.out.println("\n***Pretraga po imenu \n" + toFind);
+			ArrayList<BioskopPozoriste> bioskopPozoriste = null;
+			if(toFind.equals("undefined")) {
+				bioskopPozoriste = (ArrayList<BioskopPozoriste>)bioskopService.getAll();
+			}
+			else {
+				bioskopPozoriste = (ArrayList<BioskopPozoriste>) bioskopService.findCinemaTheatreByName(toFind); 
+			}
+			return new ResponseEntity<Collection<BioskopPozoriste>>(bioskopPozoriste, HttpStatus.OK);
+		}
+		
+
 	
 	
 	

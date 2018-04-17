@@ -13,17 +13,24 @@
 
 <form name="findForm">
 	<div>
-		<input type="text" required ng-model="searchByName">
+		<input type="text" ng-model="searchByName">
 		<button ng-click="search()">Pretrazi</button>
 	</div>
 </form>
 
-<table>
+<table border="1">
   <tr ng-repeat="cinemaTheatre in cinemasAndTheathres | orderBy:['name']">
     <td>{{ cinemaTheatre.name }}</td>
-    <td>{{ cinemaTheatre.gmapsUrl }}</td>
+   <!--  <td>{{ cinemaTheatre.gmapsUrl }}</td>-->
     <td>{{ cinemaTheatre.address }}</td>
     <td>{{ cinemaTheatre.description }}</td>
-    <td><button ng-click="deleteFriend(cinemaTheatre, $index)">Detalji</button></td>
+    <td><button ng-click="details(cinemaTheatre, cinemaTheatre.id)">Detalji</button></td>
   </tr>
 </table> 
+
+
+<div>
+<h6>Naziv bioskopa {{choosed.name}}, {{choosed.id}}</h6>
+
+
+</div>
