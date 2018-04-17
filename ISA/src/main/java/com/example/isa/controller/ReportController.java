@@ -1,5 +1,8 @@
 package com.example.isa.controller;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,6 +56,15 @@ public class ReportController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ReportDTO> getIncome(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
 		return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
+	}
+	
+	@RequestMapping(
+			value = "/cinnemas/{id}/income",
+			method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HashMap<Date, Integer>> getPosete(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
+		return new ResponseEntity<HashMap<Date, Integer>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
 	}
 	
 }

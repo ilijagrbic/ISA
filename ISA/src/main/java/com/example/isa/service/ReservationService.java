@@ -1,6 +1,8 @@
 package com.example.isa.service;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -196,5 +198,20 @@ public class ReservationService {
 			return 0;
 		}
 		
+	}
+	
+	public HashMap<Date, Integer> getPosete(long id, IncomeReportDTO datumi){
+		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
+		HashMap<Date, Integer> rv = new HashMap<Date, Integer>();
+		
+		double sum = 0;
+		
+		for(Rezervacija r:retVal) {
+			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())) {
+				rv.put(r.getProjekcija().getDate(), rv.get(r.getProjekcija().getDate())+1);
+			}
+		}
+		
+		return rv;
 	}
 }
