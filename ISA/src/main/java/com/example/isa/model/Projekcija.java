@@ -37,7 +37,7 @@ public class Projekcija {
 	private List<Sediste> sedista;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false) 
 	@JsonBackReference
 	private MovieShow film;
 

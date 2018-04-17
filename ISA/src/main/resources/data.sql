@@ -21,3 +21,18 @@ INSERT INTO invite VALUES (3, 'false', 3, 0);
 INSERT INTO invite VALUES (4, 'false', 4, 0);
 INSERT INTO invite VALUES (5, 'false', 5, 0);
 
+INSERT INTO bioskop_pozoriste VALUES (1, 'Bulevar Jovana Ducica', 0, 0, 'Bioskop ladsada', 'koordinate', 0, 0, 'Bioskop Jovan Ducic', 0x2, 0, 0, 'CINNEMA', null);
+
+INSERT INTO repertoire VALUES (1,1);
+
+
+INSERT INTO movie_show VALUES (1, 5115, 'Opis neki', 'director', 1, 'akcija', null, 'Naziv filma', 1200, 'TIP NECEGA', 1);
+
+
+
+INSERT INTO sala values(1,15151,'bROJ NAZIV', 15151,1);
+
+INSERT INTO projekcija VALUES (1, 1200, '2038-01-19 03:14:07', 1, 1);
+
+
+
