@@ -21,6 +21,7 @@ angular.module('app')
                     },
                     data: user
                 };
+
                 $http(req).then(onSuccess, onError);
             },
             signout: function (onSuccess, onError) {
@@ -29,6 +30,7 @@ angular.module('app')
                     url: '/api/authentication/signout'
                 };
                 $http(req).then(onSuccess, onError);
-            }
+            },
+            getuser: null
         }
     });

@@ -1,10 +1,10 @@
 angular.module('app').controller(
 		'userController',
 		function($rootScope, $scope, $state, userService) {
-			if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
+/*			if ($rootScope.USER == null || $rootScope.USER.role != 'REG_USER') {
 				console.log("Null u userControlleru");
 				$state.go("signin");
-			} else {
+			} else { */
 				userService.findById($rootScope.USER.id, function(res) {
 					$scope.user = res.data;
 					$scope.notChanged = true;
@@ -16,7 +16,7 @@ angular.module('app').controller(
 					$scope.user = {};
 					toastr.error(res.data.error);
 				});
-			}
+//			}
 
 			$scope.editUserDetails = function() {
 				$scope.notChanged = false;

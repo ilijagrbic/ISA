@@ -1,12 +1,12 @@
 angular.module('app')
-    .controller('signinController', function ($rootScope, $scope, $state, authenticationService) {
+    .controller('signinController', function ($window, $rootScope, $scope, $state, authenticationService) {
     	$scope.signin = function () {
-    		alert(JSON.stringify($scope.user));
+    		//alert(JSON.stringify($scope.user));
     		authenticationService.signin(
                 $scope.user,
                 function (res) {
-                	alert(JSON.stringify(res.data));
-                    $rootScope.USER = {
+                	// alert(JSON.stringify(res.data));
+                	$rootScope.USER = {
                         id: res.data.id,
                         role: res.data.role,
                         name: res.data.name,
@@ -17,8 +17,12 @@ angular.module('app')
                         phone: res.data.phone,
                         //sifra,pozivi,rezervacije,verificationCode,bodovi,firstTime
                     };
-
-                    
+                	 console.log($rootScope.USER);
+                      
+                	 localStorage.setItem("user", JSON.stringify($rootScope.USER));
+                	 
+                	 console.log(JSON.stringify(localStorage.getItem("user")));
+                	
                     $scope.user = {};
                     
                     $state.go('user'); // Ide na usera
