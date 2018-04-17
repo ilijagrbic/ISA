@@ -48,8 +48,6 @@ public class BioskopPozoriste {
 	@JsonManagedReference
 	private Repertoire repertoire;
 	
-	private HashMap<Integer, Sediste> promotivneKarte;
-	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bioskop")
 	private List<Sala> sale;
 	
@@ -173,14 +171,6 @@ public class BioskopPozoriste {
 
 	public void setGmapsUrl(String gmapsUrl) {
 		this.gmapsUrl = gmapsUrl;
-	}
-
-	public HashMap<Integer, Sediste> getPromotivneKarte() {
-		return promotivneKarte;
-	}
-
-	public void setPromotivneKarte(HashMap<Integer, Sediste> promotivneKarte) {
-		this.promotivneKarte = promotivneKarte;
 	}
 
 	public List<Sala> getSale() {
