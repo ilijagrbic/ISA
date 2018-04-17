@@ -37,4 +37,21 @@
 </select>
 
 <h6 ><font color="red">Izabran je film: {{selectedMovie.name}}, sa id {{selectedMovie.id}} </font></h6>
+
+<button ng-click="listProjection(selectedMovie.id)">Izlistaj projekcije</button>
+<table ng-if="list=='izlistaj' " border="1">
+  <tr ng-repeat="projekcija in projekcije">
+    <td>{{ projekcija.date }}</td>
+    <td>{{ projekcija.sala.nazivBroj }}</td>
+    <td>{{ projekcija.cena }}</td>
+    <td><button ng-click="chooseProjection(projekcija, projekcija.id)">Odaberi projekciju</button></td>
+  </tr>
+</table> 
+<h6><font color="red">Izabrana projekcija je: {{choosedProjection.date}}, sa id {{choosedProjection.id}} </font></h6>
+
+
+ <input type="checkbox"  ng-repeat="sediste in choosedProjection.sedista">
+
 </div>
+
+ 

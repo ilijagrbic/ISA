@@ -1,6 +1,6 @@
 angular.module('app').controller(
 		'reservationsController',
-		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService) {
+		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService) {
 			console.log("Rezervacije");
 			console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
@@ -45,10 +45,10 @@ angular.module('app').controller(
 				
 				$scope.details = function(cinemaTheatre, index) {
 					cinemaTheatreService.getCinemaTheatreById(index,
-							function(res){//succes function
+							function(res){
 								$scope.choosed = res.data; 
 							},
-							function(res){//fail function
+							function(res){
 								alert("Eror detalja o bioskopu ili pozoristu");
 								
 							}
@@ -63,10 +63,38 @@ angular.module('app').controller(
 						
 					}
 					);
+					
+					$scope.listProjection = function(idMovie){
+						$scope.list="izlistaj";
+						projekcijeService.getProjekcijeInMovie(index,idMovie,
+								function(res){//succes function
+							$scope.projekcije = res.data; 
+						},
+						function(res){//fail function
+							alert("Eror izlistavanje projekcija");
+							
+						}
+					);}
+					
+					$scope.chooseProjection = function(projekcija, idProjekcije){					
+						//alert("Bira projekciju");
+						projekcijeService.getProjekcija(idProjekcije,
+								function(res){//succes function
+									$scope.choosedProjection = res.data; 
+								},
+								function(res){//fail function
+									alert("Eror biranja projekcije");
+									
+								}
+						);
+						
+					};
 			
 					
 					
 				};
+				
+				/// getProjekcijeInMovie
 			
 			
 			

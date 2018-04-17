@@ -1,6 +1,8 @@
 package com.example.isa.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -14,7 +16,7 @@ public class Sediste {
 	private int visKord;
 	
 	private int duzKord;
-	
+	@Enumerated(EnumType.STRING)
 	private SedisteType type;
 	
 	private double deltaCena;

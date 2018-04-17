@@ -51,11 +51,19 @@ INSERT INTO movie_show (id, avg_review, description, director, duration, genre, 
 (3, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
 
 
-
-
 INSERT INTO sala values(1,15151,'bROJ NAZIV', 15151,1);
 
 INSERT INTO projekcija VALUES (1, 1200, '2038-01-19 03:14:07', 1, 1);
 
 
-
+INSERT INTO sediste VALUES(1, 100, 10, 'VIP', 5);
+INSERT INTO sediste VALUES(2, 200, 15, 'ODRINARY', 6);
+INSERT INTO sediste VALUES(3, 300, 10, 'PROMOTION', 7);
+INSERT INTO sediste VALUES(4, 200, 10, 'CLOSED', 8);
+INSERT INTO sediste VALUES(5, 50, 10, 'ODRINARY', 9);
+INSERT INTO sediste VALUES(6, 200, 10, 'CLOSED', 8);
+INSERT INTO sediste VALUES(7, 50, 10, 'PROMOTION', 9);
+INSERT INTO sediste VALUES(8, 200, 10, 'CLOSED', 8);
+INSERT INTO sediste VALUES(9, 50, 10, 'PROMOTION', 9);
+INSERT INTO sediste VALUES(10, 200, 10, 'VIP', 8);
+INSERT INTO sediste VALUES(11, 50, 10, 'VIP', 9);
