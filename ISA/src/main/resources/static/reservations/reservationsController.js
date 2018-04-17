@@ -1,6 +1,6 @@
 angular.module('app').controller(
 		'reservationsController',
-		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService) {
+		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService) {
 			console.log("Rezervacije");
 			console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
@@ -53,6 +53,19 @@ angular.module('app').controller(
 								
 							}
 					);
+					
+					movieShowService.getMoviesShow(index,
+							function(res){//succes function
+						$scope.movies = res.data; 
+					},
+					function(res){//fail function
+						alert("Eror izlistavanje filmova");
+						
+					}
+					);
+			
+					
+					
 				};
 			
 			

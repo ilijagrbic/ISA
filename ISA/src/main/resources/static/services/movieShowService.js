@@ -8,6 +8,13 @@ angular.module('app')
             };
             $http(req).then(onSuccess, onError);
         },
+        getMoviesShow: function (idCinnemas, onSuccess, onError) {
+            var req = {
+                method: 'GET',
+                url: '/api/cinnemas/' + idCinnemas + '/movies'
+            };
+            $http(req).then(onSuccess, onError);
+        },
 	    postMovieShow: function (cinemaId, data, onSuccess, onError) {
 	        var req = {
 	            method: 'POST',

@@ -30,7 +30,11 @@
 
 
 <div>
-<h6>Naziv bioskopa {{choosed.name}}, {{choosed.id}}</h6>
+<h6><font color="red">Naziv bioskopa {{choosed.name}}, {{choosed.id}}</font></h6>
 
+<select ng-model="selectedMovie" ng-options="movie.name for movie in movies">
+ <option class="placeholder" selected disabled value="">Izaberi fim</option>
+</select>
 
+<h6 ><font color="red">Izabran je film: {{selectedMovie.name}}, sa id {{selectedMovie.id}} </font></h6>
 </div>
