@@ -1,6 +1,20 @@
 angular.module('app')
     .service('cinemaTheatreService', function ($http) {
         return {
+        	getAdminCinemas: function(adminId, onSuccess, onError){
+        		 var req = {
+                         method: 'GET',
+                         url: '/api/admin/2/onlycinnemas'
+                     };
+                     $http(req).then(onSuccess, onError);
+        	},
+        	getAdminTheatres: function(adminId, onSuccess, onError){
+       		 var req = {
+                        method: 'GET',
+                        url: '/api/admin/2/onlythe'
+                    };
+                    $http(req).then(onSuccess, onError);
+        	},
             getCinemas: function (onSuccess, onError) {
                 var req = {
                     method: 'GET',

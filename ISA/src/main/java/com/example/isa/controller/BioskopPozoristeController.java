@@ -2,6 +2,7 @@ package com.example.isa.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,39 @@ public class BioskopPozoristeController {
 
 	@Autowired
 	private BioskopPozoristeService bioskopService;
+	
+	@RequestMapping(
+			value = "/api/admin/{id}/cinnemas",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdmin(@PathVariable("id") Long id){
+		List<BioskopPozoriste> retVal = bioskopService.getAllAdmin(id);
+		
+		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(
+			value = "/api/admin/{id}/onlycinnemas",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdminc(@PathVariable("id") Long id){
+		List<BioskopPozoriste> retVal = bioskopService.getAllAdminCin(id);
+		
+		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(
+			value = "/api/admin/{id}/onlythe",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdmint(@PathVariable("id") Long id){
+		List<BioskopPozoriste> retVal = bioskopService.getAllAdminThe(id);
+		
+		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		
+	}
 	
 	@RequestMapping(
 			value = "/api/cinnemas",

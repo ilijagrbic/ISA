@@ -40,6 +40,9 @@ INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, descri
 							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
 update repertoire set bioskop_id=3 where id=3;
 
+/* Setovanje adminu bioskopa */
+INSERT INTO korisnici_bioskopi(user_id, bioskopi_id) values(2,1);
+
 /* Dodavanje filmova*/
 INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
 (1, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
