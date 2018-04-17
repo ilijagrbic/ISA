@@ -59,7 +59,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping(
-			value = "/cinnemas/{id}/income",
+			value = "/cinnemas/{id}/posete",
 			method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
