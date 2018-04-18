@@ -82,12 +82,12 @@ public class ReservationController {
 			value = "/api/user/{id}/reservations",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Rezervacija>> getMoviesFromCinema(@PathVariable("id") Long id){
+	public ResponseEntity<?> getMoviesFromCinema(@PathVariable("id") Long id){
 		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)resevationService.getResFromUser(id);
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji korisnik sa trazenim id-em.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -95,12 +95,12 @@ public class ReservationController {
 			value = "/api/projection/{id}/reservations",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Rezervacija>> getMoviesFromProj(@PathVariable("id") Long id){
+	public ResponseEntity<?> getMoviesFromProj(@PathVariable("id") Long id){
 		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)resevationService.getFromProj(id);
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji projekcija sa trazenim id-em.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -108,12 +108,12 @@ public class ReservationController {
 			value = "/api/cinnema/{id}/reservations/oneClick",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Rezervacija>> getRezFromCinema(@PathVariable("id") Long id){
+	public ResponseEntity<?> getRezFromCinema(@PathVariable("id") Long id){
 		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)resevationService.getOneClick(id);
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji pozoriste sa trazenim id-em.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
