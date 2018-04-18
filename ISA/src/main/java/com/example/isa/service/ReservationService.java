@@ -276,4 +276,29 @@ public class ReservationService {
 		}
 		return reservations;
 	}
+	
+	public List<Rezervacija> cancelReservation(Long userId, Long reservationId){
+		List<Rezervacija> deletedReservations = new ArrayList<Rezervacija>();
+		for(Rezervacija r : reservationRepository.findAll()) {
+			if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
+				deletedReservations.add(r);
+				System.out.println(r.getId());
+				reservationRepository.delete(r);
+			}	
+			else if(r.getHostId()==userId && r.getId() == reservationId) {
+				// Brisem one koje mogu
+				deletedReservations.add(r);
+				reservationRepository.delete(r);
+			}
+		}
+		return getReservations(userId);
+	}
+	
+	
+	public List<Rezervacija> acceptReservation(Long userId, Long reservationId){
+		Rezervacija reservation = new Rezervacija();
+		reservation = reservationRepository.findById(reservationId);
+		reservation.setStatus(RezervacijaStatus.ACCEPTED);
+		return getReservations(userId);
+	}
 }

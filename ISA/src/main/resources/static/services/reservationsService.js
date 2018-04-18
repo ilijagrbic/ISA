@@ -30,7 +30,23 @@ angular.module('app')
                 };
                 console.log("Url " + req.url);
                 $http(req).then(onSuccess, onError);
-            }
+            },
+            cancelReservation: function (userId, reservationId, onSuccess, onError) {
+                var req = {
+                    method: 'DELETE',
+                    url: '/api/reservations/' + userId + '/cancelReservation/' + reservationId,
+                };
+                console.log("Url " + req.url);
+                $http(req).then(onSuccess, onError);
+            },
+            acceptReservation: function (userId, reservationId, onSuccess, onError) {
+                var req = {
+                    method: 'PUT',
+                    url: '/api/reservations/' + userId + '/acceptReservation/' + reservationId,
+                };
+                console.log("Url " + req.url);
+                $http(req).then(onSuccess, onError);
+            }     
 	        
 	        
 	        

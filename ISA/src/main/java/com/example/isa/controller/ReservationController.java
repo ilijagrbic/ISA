@@ -144,5 +144,22 @@ public class ReservationController {
 		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/api/reservations/{userId}/cancelReservation/{idReservation}", method=RequestMethod.DELETE) 
+	public ResponseEntity<Collection<Rezervacija>> cancelReservation(@PathVariable("userId") Long userId, @PathVariable("idReservation") Long idReservation){
+		System.out.println("\n\n*** Otkazivanje rezervacije");
+		ArrayList<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		reservations = (ArrayList<Rezervacija>)resevationService.cancelReservation(userId, idReservation);
+		
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/api/reservations/{userId}/acceptReservation/{idReservation}", method=RequestMethod.PUT) 
+	public ResponseEntity<Collection<Rezervacija>> acceptReservation(@PathVariable("userId") Long userId, @PathVariable("idReservation") Long idReservation){
+		System.out.println("\n\n*** Prihvatanje rezervacije");
+		ArrayList<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		reservations = (ArrayList<Rezervacija>)resevationService.acceptReservation(userId, idReservation);
+		
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
 
 }
