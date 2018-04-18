@@ -203,8 +203,8 @@ angular.module('app')
 			    			);
 			              
 		          }, 
-		          function () {
-		        	  console.log("upload error")
+		          function (error) {
+		        	  
 		          });
 		}
 		

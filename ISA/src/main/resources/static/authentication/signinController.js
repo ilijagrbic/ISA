@@ -18,11 +18,8 @@ angular.module('app')
 						firstTime : res.data.firstTime
                         //sifra,pozivi,rezervacije,verificationCode,bodovi,firstTime
                     };
-                	 console.log($rootScope.USER);
                       
                 	 localStorage.setItem("user", JSON.stringify($rootScope.USER));
-                	 
-                	 console.log(JSON.stringify(localStorage.getItem("user")));
                 	
                     $scope.user = {};
                     if($rootScope.USER.role!='CINEMA_THEATRE_ADMIN'){
