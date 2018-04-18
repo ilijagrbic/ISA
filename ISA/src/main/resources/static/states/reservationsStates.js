@@ -12,5 +12,18 @@ angular.module('app')
                     controller: 'reservationsController'
                 }
             }
-        });
+        })
+         .state('listOfReservations', {
+                url: '/listOfReservations',
+                views: {
+                    'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                        templateUrl: 'reservations/reservationList.html',
+                        controller: 'reservationsController'
+                    }
+                }
+            })
     });
