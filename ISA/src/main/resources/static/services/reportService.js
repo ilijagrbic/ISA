@@ -15,5 +15,12 @@ angular.module('app')
                  };
              $http(req).then(onSuccess, onError);
     	},
+    	getIncomeReport: function(dates, cineId, onSuccess, onError){
+    		var req = {
+                    method: 'GET',
+                    url: 'api/cinnemas/'+cineId+'/income'
+                };
+            $http(req).then(onSuccess, onError);
+    	}
     }
 });

@@ -16,13 +16,13 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider){
 		$httpProvider.interceptors.push('authInterceptor');
     	$urlRouterProvider.otherwise("/defaultState");
     }).run(["$rootScope", function ($rootScope) {
-    	console.log(!angular.isDefined($rootScope.USER));
-    	console.log(JSON.parse(localStorage.getItem("user")));
+    	//console.log(!angular.isDefined($rootScope.USER));
+    	//console.log(JSON.parse(localStorage.getItem("user")));
     	
         if(!angular.isDefined($rootScope.USER) && localStorage.getItem("user")){
             // UserInfo exists in localstorate but not on $rootScope. This means the page was reloaded or the user is returning.
             $rootScope.USER = JSON.parse(localStorage.getItem("user"));
-            console.log(localStorage.getItem("user"));
+            //console.log(localStorage.getItem("user"));
 
         }else if(!angular.isDefined($rootScope.USER) && !localStorage.getItem("user")){
             // User is not logged at all. Send him back to login page

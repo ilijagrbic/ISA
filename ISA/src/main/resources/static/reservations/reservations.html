@@ -49,7 +49,7 @@
 
 <h6>Sedista</h6>
 
-<span   ng-repeat="sediste in choosedProjection.sedista">
+<span ng-repeat="sediste in choosedProjection.sedista">
 		<br ng-if="!($index % choosedProjection.sala.visina)" />
 		<input ng-hide="pozivPrijatelja == true" type="checkbox"  value="{{sediste.id}}" ng-disabled="sediste.type=='CLOSED'"/>
 </span>

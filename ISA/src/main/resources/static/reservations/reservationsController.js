@@ -1,12 +1,13 @@
 angular.module('app').controller(
 		'reservationsController',
 		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService) {
-			console.log("Rezervacije");
+			//console.log("Rezervacije");
 			$scope.izabranaSedista=false;
-			console.log($scope.searchByName);
+			var projection;
+			//console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
 			if($scope.searchByName==null){
-				console.log("Prazna pretraga");
+				//console.log("Prazna pretraga");
 				cinemaTheatreService.getAll(
 						function(res){//succes function
 							$scope.cinemasAndTheathres = res.data; 
@@ -19,11 +20,11 @@ angular.module('app').controller(
 			}
 			
 				$scope.search = function(){
-					console.log("U search " + $scope.searchByName);
-					console.log("Pretraga po " + $scope.searchByName);
+					//console.log("U search " + $scope.searchByName);
+					//console.log("Pretraga po " + $scope.searchByName);
 					if($scope.searchByName!=""){
 					reservationsService.findByName($scope.searchByName, function(res) {
-								console.log(JSON.stringify(res.data));
+								//console.log(JSON.stringify(res.data));
 									$scope.cinemasAndTheathres = res.data; 
 								
 							}, function(res) {
@@ -82,6 +83,7 @@ angular.module('app').controller(
 					
 					$scope.chooseProjection = function(projekcija, idProjekcije){					
 						//alert("Bira projekciju");
+						projection = projekcija; // Projekcija odabrana
 						projekcijeService.getProjekcija(idProjekcije,
 								function(res){//succes function
 									$scope.choosedProjection = res.data; 
@@ -97,7 +99,7 @@ angular.module('app').controller(
 					$scope.selektovani = function(){
 						$scope.izabranaSedista=true;
 						$scope.numRez=0;
-						selektovane=[];
+						selektovane=[]; // sedista selektovana - value mozda da promenim
 						
 						$('input[type=checkbox]').each(function () {
 							    if(this.checked==true){
@@ -118,25 +120,25 @@ angular.module('app').controller(
 						}, function(res) {
 							alert("Error - nije mogao da pronadje prijatelje");
 						});
-						console.log(selektovane + "broj rezervacija " +$scope.numRez);
+						//console.log(selektovane + "broj rezervacija " +$scope.numRez);
 					};
 					
 					
 					$scope.posaljiPoziv = function (selectedFriend){
-						console.log("Pozivamo prijatelje");
+						//console.log("Pozivamo prijatelje");
 						var postoji = false;
 						if(prijatelji.length==0 || prijatelji==undefined ){
 							$scope.numRez = $scope.numRez - 1 ;
 							prijatelji.push(selectedFriend); 
-							console.log("Prazan");
+							//console.log("Prazan");
 						}
 						else{
 							
 							var i=0;
 							for (i = 0; i < prijatelji.length; i++) {
-								console.log(selectedFriend + " " +  prijatelji[i]);
+								//console.log(selectedFriend + " " +  prijatelji[i]);
 								if(prijatelji[i]==selectedFriend){
-									console.log("Prijatelj je vec pozvan");
+									//console.log("Prijatelj je vec pozvan");
 									postoji = true;
 									break;
 								}
@@ -144,12 +146,34 @@ angular.module('app').controller(
 							if(postoji==false){
 								$scope.numRez = $scope.numRez - 1 ;
 								prijatelji.push(selectedFriend);
-								console.log(JSON.stringify(prijatelji));
+								//console.log(JSON.stringify(prijatelji));
 								
 							}
 						}
 					
 						
+					};
+					
+					$scope.rezervacija = function(){
+						var host = {
+								"projekcija" : projection,
+								"rezervant" : $rootScope.USER.id,
+								"status" : RezervacijaStatus.ACCEPTED,
+								"isHost" : true,
+								"rezSedisteId" : selektovane[0],
+								"idHost" :  $rootScope.USER.id	
+						}
+						
+						for (i = 0; i < prijatelji.length; i++) {
+							var poziv = {
+									"projekcija" : projection,
+									"rezervant" : prijatelji[i],
+									"status" : RezervacijaStatus.WAITING,
+									"isHost" : false,
+									"rezSedisteId" : selektovane[i+1],
+									"idHost" :  null	
+							}
+						}
 					};
 					
 					
