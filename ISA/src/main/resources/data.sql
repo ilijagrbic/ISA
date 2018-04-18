@@ -54,7 +54,7 @@ INSERT INTO movie_show (id, avg_review, description, director, duration, genre, 
 (3, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
 
 
-INSERT INTO sala values(1,15151,'bROJ NAZIV', 15151,1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (1, 1, 11, 'Sala1', 1);
 
 INSERT INTO projekcija VALUES (1, 1200, '2038-01-19 03:14:07', 1, 1);
 
