@@ -45,7 +45,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(
-			value = "/api/projections/{id}/reservations",
+			value = "/api/reservations/{id}",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +53,8 @@ public class ReservationController {
 		Rezervacija rez = createMovie.getRezervacija();
 		Long sed = createMovie.getRezSedisteId();
 		Long use = createMovie.getUserId();
-		Rezervacija retVal = resevationService.postReservation(rez, id, sed, use);
+		rez.setId(id);
+		Rezervacija retVal = resevationService.putRese(rez, sed, use);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);

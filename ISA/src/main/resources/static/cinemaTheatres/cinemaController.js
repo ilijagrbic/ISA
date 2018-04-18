@@ -3,6 +3,29 @@ angular.module('app')
     	if($rootScope.USER != null){
     		$scope.korisnik=true;
     	}
+    	
+    	$scope.reserveOneClick = function(rez){
+    		reservationService.putReservation(
+    					{
+    				        "userId":$rootScope.USER.id,
+    				        "status":"ACCEPTED",
+    				        "ocenaFilm":0,
+    				        "ocenaAmbijent":0,
+    				        "isHost":true,
+    				        "hostId":$rootScope.USER.id
+    	    			},rez.id,
+    				function(info){
+    					for(i=0;i<$scope.oneClick.length;i++){
+    						if($scope.oneClick[i].id==info.data.id){
+								$scope.oneClick.splice(i,1);
+							}
+    					}
+    				},
+    				function(){
+    					
+    				}
+    		)
+    	}
     
     	cinemaTheatreService.getCinemas(
 				function(info){//succes function

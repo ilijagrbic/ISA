@@ -65,7 +65,7 @@ public class ReservationService {
 	}
 	
 	@Transactional
-	public Rezervacija putRese(Rezervacija newr, Long idProj, Long idSediste, Long idUser) {
+	public Rezervacija putRese(Rezervacija newr, Long idSediste, Long idUser) {
 		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
 		/*Projekcija pro = projRepository.findById(idProj);
 		Sediste sed = sedisteRepository.findById(idSediste);
