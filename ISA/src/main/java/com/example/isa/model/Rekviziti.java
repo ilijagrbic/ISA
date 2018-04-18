@@ -34,6 +34,8 @@ public class Rekviziti {
 	private User postavljac;
 	
 	private Date finalDate;
+	
+	
 
 	public Rekviziti() {
 		super();

@@ -9,6 +9,7 @@ import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.BioskopPozoristeType;
 import com.example.isa.model.Rekviziti;
 import com.example.isa.model.VrstaRekvizita;
+import com.example.isa.model.users.User;
 import com.example.isa.repository.RekvizitiRepository;
 
 @Service
@@ -43,6 +44,9 @@ public class RekvizitiService {
 		
 		public List<Rekviziti> getAllPolovna(){
 			return rekvizitiRepository.findByVrsta(VrstaRekvizita.POLOVNI);
+		} 
+		public List<Rekviziti> getUserRekviziti(User user){
+			return rekvizitiRepository.findByPostavljac(user);
 		} 
 
 		

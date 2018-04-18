@@ -2,16 +2,55 @@
 <tr>
 <th>naziv</th>
 <th>datum isticanja oglasa</th>
+<th>Cena</th>
+<th>Licitacija</th>
 </tr>
 <tr ng-repeat="rekvizit in polovni">
 <td>{{rekvizit.naziv}}</td>
 <td>{{rekvizit.finalDate}}</td>
+<td><input type=number ng-model="cena"></td>
+<td><button ng-click="posaljiPonudu(cena,rekvizit)">Licitiraj</button> </td>
 
 </tr>
 
 </table>
-
+		
 		Naziv:<input type=text ng-model="polovniRekvizit.naziv"><br/>
 		Datum isteka:<input type=date ng-model="polovniRekvizit.finalDate"><br/>
 
 		<button ng-click="dodajPolovniOglas()">Dodaj Polovni Oglas</button>
+		
+<button ng-click="mojiRekviziti()"> Pogledaj sve moje rekvizite</button>
+
+Moji rekviziti
+<table border="1">
+<tr>
+<th>naziv</th>
+<th>datum isticanja oglasa</th>
+<th>Pregled ponuda</th>
+</tr>
+<tr ng-repeat="mojRek in mojiRekviziti">
+<td>{{mojRek.naziv}}</td>
+<td>{{mojRek.finalDate}}</td>
+<td><button ng-click="ponudeZaRekvizit(mojRek.id)"> Pogledaj sve ponude za ovaj rekvizit</button></td>
+
+
+</tr>
+
+</table>
+<br>
+Ponude za rekvizit 
+<table border="1">
+<tr>
+<th>Ponudjac</th>
+<th>cena ponude</th>
+</tr>
+<tr ng-repeat="ponuda in ponude">
+<td>{{ponuda.ponudjac.name}}</td>
+<td>{{ponuda.price}}</td>
+<td><button ng-click="ponudeZaRekvizit(mojRek.id)"> Pogledaj sve ponude za ovaj rekvizit</button></td>
+
+
+</tr>
+
+</table>
