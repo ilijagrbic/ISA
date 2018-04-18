@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
+@org.hibernate.annotations.OptimisticLocking
 public class Rezervacija {
 	
 	@Id

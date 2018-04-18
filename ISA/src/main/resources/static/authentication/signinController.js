@@ -15,6 +15,7 @@ angular.module('app')
                         activated: res.data.activated,
                         city: res.data.city,
                         phone: res.data.phone,
+						firstTime : res.data.firstTime
                         //sifra,pozivi,rezervacije,verificationCode,bodovi,firstTime
                     };
                 	 console.log($rootScope.USER);

@@ -62,7 +62,8 @@ angular.module('app').controller(
 									email : res.data.email,
 									city : res.data.city,
 									phone : res.data.phone,
-									password : res.data.password
+									password : res.data.password,
+									firstTime : res.data.firstTime
 							//	};
 
 							}
