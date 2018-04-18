@@ -1,7 +1,8 @@
 angular.module('app').controller(
 		'reservationsController',
-		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService) {
+		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService) {
 			console.log("Rezervacije");
+			$scope.izabranaSedista=false;
 			console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
 			if($scope.searchByName==null){
@@ -44,6 +45,9 @@ angular.module('app').controller(
 				
 				
 				$scope.details = function(cinemaTheatre, index) {
+					$scope.numRez=0;
+					var prijatelji=[];
+					var selektovane = [];
 					cinemaTheatreService.getCinemaTheatreById(index,
 							function(res){
 								$scope.choosed = res.data; 
@@ -89,9 +93,69 @@ angular.module('app').controller(
 						);
 						
 					};
-			
+					
+					$scope.selektovani = function(){
+						$scope.izabranaSedista=true;
+						$scope.numRez=0;
+						selektovane=[];
+						
+						$('input[type=checkbox]').each(function () {
+							    if(this.checked==true){
+							    	selektovane.push(this.getAttribute("value"));
+							    	$scope.numRez = $scope.numRez + 1;
+							    }
+							});
+						
+						if($scope.numRez!=0){
+							$scope.pozivPrijatelja=true;
+						}
+						else{
+							$scope.greska==true;
+						}
+						
+						friendshipService.friends($rootScope.USER.id, function(res) {
+							$scope.callFriends = res.data;
+						}, function(res) {
+							alert("Error - nije mogao da pronadje prijatelje");
+						});
+						console.log(selektovane + "broj rezervacija " +$scope.numRez);
+					};
 					
 					
+					$scope.posaljiPoziv = function (selectedFriend){
+						console.log("Pozivamo prijatelje");
+						var postoji = false;
+						if(prijatelji.length==0 || prijatelji==undefined ){
+							$scope.numRez = $scope.numRez - 1 ;
+							prijatelji.push(selectedFriend); 
+							console.log("Prazan");
+						}
+						else{
+							
+							var i=0;
+							for (i = 0; i < prijatelji.length; i++) {
+								console.log(selectedFriend + " " +  prijatelji[i]);
+								if(prijatelji[i]==selectedFriend){
+									console.log("Prijatelj je vec pozvan");
+									postoji = true;
+									break;
+								}
+							}
+							if(postoji==false){
+								$scope.numRez = $scope.numRez - 1 ;
+								prijatelji.push(selectedFriend);
+								console.log(JSON.stringify(prijatelji));
+								
+							}
+						}
+					
+						
+					};
+					
+					
+					
+					
+		
 				};
 				
 				/// getProjekcijeInMovie
