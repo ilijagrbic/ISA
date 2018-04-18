@@ -3,6 +3,7 @@ angular.module('app').controller(
 		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService) {
 			//console.log("Rezervacije");
 			$scope.izabranaSedista=false;
+			var projection;
 			//console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
 			if($scope.searchByName==null){
@@ -82,6 +83,7 @@ angular.module('app').controller(
 					
 					$scope.chooseProjection = function(projekcija, idProjekcije){					
 						//alert("Bira projekciju");
+						projection = projekcija; // Projekcija odabrana
 						projekcijeService.getProjekcija(idProjekcije,
 								function(res){//succes function
 									$scope.choosedProjection = res.data; 
@@ -97,7 +99,7 @@ angular.module('app').controller(
 					$scope.selektovani = function(){
 						$scope.izabranaSedista=true;
 						$scope.numRez=0;
-						selektovane=[];
+						selektovane=[]; // sedista selektovana - value mozda da promenim
 						
 						$('input[type=checkbox]').each(function () {
 							    if(this.checked==true){
@@ -150,6 +152,28 @@ angular.module('app').controller(
 						}
 					
 						
+					};
+					
+					$scope.rezervacija = function(){
+						var host = {
+								"projekcija" : projection,
+								"rezervant" : $rootScope.USER.id,
+								"status" : RezervacijaStatus.ACCEPTED,
+								"isHost" : true,
+								"rezSedisteId" : selektovane[0],
+								"idHost" :  $rootScope.USER.id	
+						}
+						
+						for (i = 0; i < prijatelji.length; i++) {
+							var poziv = {
+									"projekcija" : projection,
+									"rezervant" : prijatelji[i],
+									"status" : RezervacijaStatus.WAITING,
+									"isHost" : false,
+									"rezSedisteId" : selektovane[i+1],
+									"idHost" :  null	
+							}
+						}
 					};
 					
 					
