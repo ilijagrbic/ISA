@@ -1,0 +1,40 @@
+<h1>Administrato bioskopa</h1>
+
+<div>
+	<h3>Osnovni podaci</h3>
+	<form name="userForm">
+		<div><label>Ime:</label>
+		<input ng-hide="notChanged" type="text" required ng-model="user.name">
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.name"></div>
+		<div><label>Prezime:</label>
+		<input ng-hide="notChanged" type="text" required ng-model="user.surname">
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.surname"></div>
+		<div><label>Email:</label>
+		<input ng-hide="notChanged" type="email" required ng-model="user.email">
+		<input ng-hide="changed" ng-readonly="true" type="email" required ng-model="user.email"></div>
+		<div><label>Telefon:</label>
+		<input ng-hide="notChanged" type="text" required ng-model="user.phone">
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.phone"></div>
+		<div><label>Grad:</label>
+		<input ng-hide="notChanged" type="text" required ng-model="user.city">
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.city"></div>
+		<button ng-hide="changed" ng-click="editUserDetails()">Izmeniti</button>
+		<button ng-hide="notChanged" ng-click="saveUserDetails()">Sacuvati</button>
+	<form name="detailsForm">
+</div>
+
+<button ng-hide="editPassword" ng-click="editPass()">Izmena sifre</button>
+<div>
+	<h3 ng-hide="editedPassword">Izmena sifre</h3>
+	<form name="passwordForm">
+		<div><label ng-hide="editedPassword">Stara sifra:</label>
+		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.oldPassword"></div>
+		<div><label ng-hide="editedPassword">Nova sifra:</label>
+		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.newPassword"></div>
+		<div><label ng-hide="editedPassword">Ponovljena:</label>
+		<input  ng-hide="editedPassword" type="password" value="" required ng-model="passwords.confirmPassword"></div>
+		<button ng-hide="editedPassword"  ng-click="savePass()">Sacuvati</button>
+	</form>
+</div>
+	
+	

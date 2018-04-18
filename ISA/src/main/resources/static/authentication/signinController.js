@@ -24,8 +24,12 @@ angular.module('app')
                 	 console.log(JSON.stringify(localStorage.getItem("user")));
                 	
                     $scope.user = {};
-                    
-                    $state.go('user'); // Ide na usera
+                    if($rootScope.USER.role!='CINEMA_THEATRE_ADMIN'){
+                    	$state.go('user'); // Ide na usera
+                    }
+                    else{
+                    	$state.go('adminLogin');
+                    }
                     
 
                 }, function (res) {

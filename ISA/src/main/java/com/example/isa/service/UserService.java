@@ -73,6 +73,7 @@ public class UserService {
         	return null;
         }
         currentUser.setPassword(changePasswordDTO.getNewPassword());
+        currentUser.setFirstTime(false);
  
         return userRepository.save(currentUser);
     }

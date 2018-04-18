@@ -18,7 +18,7 @@
 		<a ui-sref="fanZoneAdmin">aaaa Zona</a>
 				
 		</div>
-		<div ng-if="USER.role == 'CINEMA_THEATRE_ADMIN'">
+		<div ng-if="USER.role == 'CINEMA_THEATRE_ADMIN'&&USER.firstTime==false">
 		
 				<span ng-if="headerState!='home'"><a ui-sref="defaultState" value="home" ng-click="headerSwitch('home')">Home</a></span>
 				<span ng-if="headerState=='home'">Home</span>
