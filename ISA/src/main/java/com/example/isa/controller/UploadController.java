@@ -64,7 +64,7 @@ public class UploadController {
  
 	@GetMapping("/api/files/{filename}")
 	@ResponseBody
-	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+	public ResponseEntity<?> getFile(@PathVariable String filename) {
 		try{
 			Resource file = storageService.loadFile(filename);
 			return ResponseEntity.ok()
@@ -72,7 +72,7 @@ public class UploadController {
 				.body(file);
 		}
 		catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ne postoji trazena slika.");
 		}
 	}
 }

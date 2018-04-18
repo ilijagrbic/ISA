@@ -108,6 +108,9 @@ public class ProjekcijaController {
 		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
 			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
 		}
+		else if(createProjekcija.getSala().getNazivBroj()==null||createProjekcija.getSala().getNazivBroj().isEmpty()||createProjekcija.getSala().getNazivBroj().equals("")) {
+			return new ResponseEntity<String>("Naziv sale ne sme biti prazan", HttpStatus.BAD_REQUEST);
+		}
 		else {
 			Projekcija retVal = projService.create(createProjekcija.getProjekcija(), createProjekcija.getFilm());
 			
@@ -133,6 +136,9 @@ public class ProjekcijaController {
 			return new ResponseEntity<String>("Nemoguce definisati projekciju u proslosti.", HttpStatus.BAD_REQUEST);
 		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
 			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
+		}
+		else if(createProjekcija.getSala().getNazivBroj()==null||createProjekcija.getSala().getNazivBroj().isEmpty()||createProjekcija.getSala().getNazivBroj().equals("")) {
+			return new ResponseEntity<String>("Naziv sale ne sme biti prazan", HttpStatus.BAD_REQUEST);
 		}
 		else {
 			Projekcija temp = createProjekcija.getProjekcija();

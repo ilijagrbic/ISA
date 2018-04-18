@@ -1,5 +1,6 @@
 package com.example.isa.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.isa.model.Glumac;
 import com.example.isa.model.MovieShow;
+import com.example.isa.model.Projekcija;
 import com.example.isa.model.Repertoire;
 import com.example.isa.repository.GlumacRepository;
 import com.example.isa.repository.MovieShowRepository;
+import com.example.isa.repository.ProjekcijaRepository;
 import com.example.isa.repository.RepertoireRepository;
 
 @Service
@@ -23,6 +26,9 @@ public class MovieShowService {
 	
 	@Autowired
 	private GlumacRepository glumacRepository;
+	
+	@Autowired
+	private ProjekcijaRepository projRepo;
 		
 	public List<MovieShow> getAll(){
 		return movieRepository.findAll();
@@ -74,24 +80,29 @@ public class MovieShowService {
 	}
 	
 	public MovieShow create(MovieShow newMovie, long cinId) {
-		Repertoire parent = repertoarRepository.findByBioskopId(cinId);
-
-		if(parent!=null) {
-			newMovie.setRepertoar(parent);
-			for(Glumac g:newMovie.getGlumci()) {
-				if(glumacRepository.findById(g.getId())==null) {
-					glumacRepository.save(g);
+			Repertoire parent = repertoarRepository.findByBioskopId(cinId);
+	
+			if(parent!=null) {
+				newMovie.setRepertoar(parent);
+				for(Glumac g:newMovie.getGlumci()) {
+					if(glumacRepository.findById(g.getId())==null) {
+						glumacRepository.save(g);
+					}
 				}
+				return movieRepository.save(newMovie);
+			}else {
+				return null;
 			}
-			return movieRepository.save(newMovie);
-		}else {
-			return null;
-		}
+
 	}
 	
 	public Long delete(long id) {
 		MovieShow toDelete = movieRepository.findById(id);
+		ArrayList<Projekcija> doTel = (ArrayList<Projekcija>)projRepo.findByFilmId(toDelete.getId());
 		if(toDelete!=null) {
+			for(Projekcija p:doTel) {
+				projRepo.delete(p);
+			}
 			movieRepository.delete(id);
 			return id;
 		}

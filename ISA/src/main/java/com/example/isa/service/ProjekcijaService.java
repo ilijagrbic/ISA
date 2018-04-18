@@ -85,18 +85,19 @@ public class ProjekcijaService {
 	public Projekcija create(Projekcija newProj, Long movieId) {
 		MovieShow movie = movieRepository.findById(movieId);
 		Sala temp = salaPrepository.findById(newProj.getSala().getId());
-		if(movie != null) {
-			newProj.setFilm(movie);
-			if(temp==null)
-			{
-				newProj.getSala().setBioskop(movie.getRepertoar().getBioskop());
-				salaPrepository.save(newProj.getSala());
+
+			if(movie != null) {
+				newProj.setFilm(movie);
+				if(temp==null)
+				{
+					newProj.getSala().setBioskop(movie.getRepertoar().getBioskop());
+					salaPrepository.save(newProj.getSala());
+				}
+				
+				return projekcijaRepository.save(newProj);
+			}else {
+				return null;
 			}
-			
-			return projekcijaRepository.save(newProj);
-		}else {
-			return null;
-		}
 		
 	}
 	
