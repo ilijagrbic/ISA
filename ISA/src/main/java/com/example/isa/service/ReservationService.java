@@ -244,7 +244,7 @@ public class ReservationService {
 	}
 	
 	public Rezervacija reservation(ReservationDTO reservationDTO) {
-		
+		System.out.println("Rezervant " + reservationDTO.getIdRezervant());
 		Rezervacija reservation = new Rezervacija();
 		reservation.setProjekcija(reservationDTO.getProjekcija());
 		reservation.setHostId(reservationDTO.getIdHost());
@@ -262,5 +262,18 @@ public class ReservationService {
 		reservationRepository.save(reservation);
 		
 		return reservation;
+	}
+	
+	//Rezervacije
+	public List<Rezervacija> getReservations(Long id){
+		List<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		for(Rezervacija r : reservationRepository.findAll()) {
+			if(r.getRezervant().getId() == id) {
+				reservations.add(r);
+				System.out.println(r.getId());
+			}
+			
+		}
+		return reservations;
 	}
 }

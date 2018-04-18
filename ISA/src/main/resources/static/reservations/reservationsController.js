@@ -157,7 +157,7 @@ angular.module('app').controller(
 					$scope.rezervacija = function(){
 						var host = {
 								"projekcija" : projection,
-								"rezervant" : $rootScope.USER.id,
+								"idRezervant" : $rootScope.USER.id,
 								"isHost" : true,
 								"rezSedisteId" : selektovane[0],
 								"idHost" :  $rootScope.USER.id	
@@ -175,7 +175,7 @@ angular.module('app').controller(
 						for (i = 0; i < prijatelji.length; i++) {
 							var poziv = {
 									"projekcija" : projection,
-									"rezervant" : prijatelji[i],
+									"idRezervant" : prijatelji[i],
 									"isHost" : false,
 									"rezSedisteId" : selektovane[i+1],
 									"idHost" :  null	

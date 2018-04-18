@@ -22,7 +22,16 @@ angular.module('app')
 	                data: data
 	            };
 	            $http(req).then(onSuccess, onError);
-	        }
+	        },
+	        getReservations: function (id, onSuccess, onError) {
+                var req = {
+                    method: 'GET',
+                    url: '/api/getReservation/' + id,
+                };
+                console.log("Url " + req.url);
+                $http(req).then(onSuccess, onError);
+            }
+	        
 	        
 	        
      

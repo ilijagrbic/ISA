@@ -134,5 +134,15 @@ public class ReservationController {
 			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.BAD_REQUEST);
 		}
 	}
+	//Rezervacije
+	@RequestMapping(value="/api/getReservation/{id}", method=RequestMethod.GET) 
+	public ResponseEntity<Collection<Rezervacija>> getReservations(@PathVariable("id") Long id){
+		System.out.println("\n\n*** Rezervacije");
+		ArrayList<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		reservations = (ArrayList<Rezervacija>)resevationService.getReservations(id);
+		
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
 
 }

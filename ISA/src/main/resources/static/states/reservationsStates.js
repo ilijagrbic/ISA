@@ -22,7 +22,7 @@ angular.module('app')
                     },
                     'content': {
                         templateUrl: 'reservations/reservationList.html',
-                        controller: 'reservationsController'
+                        controller: 'reservationListController'
                     }
                 }
             })
