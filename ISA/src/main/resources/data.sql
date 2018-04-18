@@ -70,3 +70,6 @@ INSERT INTO sediste VALUES(8, 200, 10, 'CLOSED', 8);
 INSERT INTO sediste VALUES(9, 50, 10, 'PROMOTION', 9);
 INSERT INTO sediste VALUES(10, 200, 10, 'VIP', 8);
 INSERT INTO sediste VALUES(11, 50, 10, 'VIP', 9);
+
+
+Insert into rekviziti values (1, '2038-01-19 03:14:07','rekvizit',1 ,'ZVANICNI', 1, 1);

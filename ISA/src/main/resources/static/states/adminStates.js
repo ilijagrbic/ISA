@@ -23,6 +23,7 @@ angular.module('app')
                     },
                     'content': {
                     	templateUrl: 'fanZone/fanZoneAdmin.html',
+                    	controller: 'fanZoneAdminController'
 
                     },
                 }
@@ -40,6 +41,7 @@ angular.module('app')
                     },
                     'rekviziti': {
                     	templateUrl: 'fanZone/zvanicni.html',
+                    	controller: 'fanZoneAdminController'
                     }
                 }
             })
@@ -56,6 +58,7 @@ angular.module('app')
                     ,
                     'rekviziti': {
                     	templateUrl: 'fanZone/polovni.html',
+                    	controller: 'fanZoneAdminController'
                     }
                 }
             })

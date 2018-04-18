@@ -1,5 +1,17 @@
-Polovni
+<table border="1">
+<tr>
+<th>naziv</th>
+<th>datum isticanja oglasa</th>
+</tr>
+<tr ng-repeat="rekvizit in polovni">
+<td>{{rekvizit.naziv}}</td>
+<td>{{rekvizit.finalDate}}</td>
 
-<table>
+</tr>
 
 </table>
+
+		Naziv:<input type=text ng-model="polovniRekvizit.naziv"><br/>
+		Datum isteka:<input type=date ng-model="polovniRekvizit.finalDate"><br/>
+
+		<button ng-click="dodajPolovniOglas()">Dodaj Polovni Oglas</button>

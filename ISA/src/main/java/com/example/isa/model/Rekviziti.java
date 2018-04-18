@@ -41,6 +41,20 @@ public class Rekviziti {
 	
 	
 
+	public Rekviziti(long id, boolean odobren, String naziv, VrstaRekvizita vrsta, BioskopPozoriste proadjeu,
+			User postavljac, Date finalDate) {
+		super();
+		this.id = id;
+		this.odobren = odobren;
+		this.naziv = naziv;
+		this.vrsta = vrsta;
+		this.proadjeu = proadjeu;
+		this.postavljac = postavljac;
+		this.finalDate = finalDate;
+	}
+
+
+
 	public Rekviziti(long id, boolean odobren, String naziv, BioskopPozoriste proadjeu, User postavljac,
 			Date finalDate) {
 		super();
@@ -50,6 +64,20 @@ public class Rekviziti {
 		this.proadjeu = proadjeu;
 		this.postavljac = postavljac;
 		this.finalDate = finalDate;
+	}
+
+	
+	
+
+
+	public VrstaRekvizita getVrsta() {
+		return vrsta;
+	}
+
+
+
+	public void setVrsta(VrstaRekvizita vrsta) {
+		this.vrsta = vrsta;
 	}
 
 
