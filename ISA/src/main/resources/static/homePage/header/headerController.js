@@ -11,12 +11,6 @@ angular.module('app')
     		$scope.headerState="thea";
     	}
     	
-    	if($rootScope.USER!=undefined){
-    		console.log($rootScope.USER.firstTime)
-    	}else{
-    		console.log("shiet")
-    	}
-    	
     	//funkcije kontrolera
     	$scope.headerSwitch=function(clicked){
     		$scope.headerState=clicked;
