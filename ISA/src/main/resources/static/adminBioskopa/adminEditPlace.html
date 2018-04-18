@@ -37,9 +37,26 @@ Edit place
 	<div ng-show="izvestajiShow==true">
 	<h3>Reports</h3>
 	Prosecna ocena ambijenta:{{ambijentOcena}}<br/>
-	Prihodi u odredjenom intervalu:<br/>
-	Od:<input type=text ng-model="odPrihodi"><br/>
-	Do:<input type=text ng-model="doPrihodi"><br/>
+	Prihodi u odredjenom intervalu:{{reportIncome}}<br/>
+	<br/>
+	Od:
+      <div class="col-md-6">
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="odPrihodi" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div><br/>
+      Do:<div class="col-md-6">
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup ng-model="doPrihodi" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div><br/>
+	<button ng-click="showIncome(odPrihodi, doPrihodi)">Show income</button>
 	</div>
 	
 	<div ng-show = "enterMovieState==true">

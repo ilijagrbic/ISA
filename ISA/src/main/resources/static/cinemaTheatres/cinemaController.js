@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('cinemaController', function ($scope,$rootScope,  $sce, cinemaTheatreService) {
+    .controller('cinemaController', function ($scope,$rootScope,  $sce, cinemaTheatreService, reservationService) {
     	if($rootScope.USER != null){
     		$scope.korisnik=true;
     	}
@@ -14,6 +14,24 @@ angular.module('app')
 					
 				}
 		);
+    	$scope.showCinemas = true;
+    	
+    	$scope.showCinnema = function(cin){
+    		if($scope.showCinemas == true){
+	    		reservationService.getOneClick(
+	    				cin.id,
+	    				function(info){
+	    					$scope.oneClick = info.data;
+	    					$scope.showCinemas = false;
+	    				},
+	    				function(){
+	    					
+	    				}
+	    		)
+    		}else{
+    			$scope.showCinemas = true;
+    		}
+    	}
 		
 		$scope.trustSrc = function(url){
 			return $sce.trustAsResourceUrl(url);
