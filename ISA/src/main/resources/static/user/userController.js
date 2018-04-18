@@ -28,7 +28,7 @@ angular.module('app').controller(
 				$scope.notChanged = true;
 				$scope.changed = false;
 
-				console.log(JSON.stringify($scope.user))
+				//console.log(JSON.stringify($scope.user))
 
 				userService.update($scope.user.id, $scope.user, function(res) {
 					$scope.user = res.data;
@@ -48,10 +48,10 @@ angular.module('app').controller(
 			$scope.savePass = function() {
 				$scope.editedPassword = true;
 				$scope.editPassword = false;
-				console.log($rootScope.USER.id);
+				//console.log($rootScope.USER.id);
 				userService.updatePassword($scope.passwords,
 						$rootScope.USER.id, function(res) {
-							console.log(JSON.stringify(res.data));
+							//console.log(JSON.stringify(res.data));
 							/*if ($rootScope.USER == null) {
 								console.log("Root je null");*/
 								$rootScope.USER = {
