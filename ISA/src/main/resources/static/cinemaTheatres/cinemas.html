@@ -37,7 +37,7 @@ Cinemas
 	 
 	</div>
 	
-	<div ng-show="showCinemas == true">
+	<div ng-show="showCinemas == false">
 		<h3>Oneclick rezervacije:</h3>
 		<ol>
 			<li ng-repeat="rez in oneClick">
@@ -46,7 +46,7 @@ Cinemas
 				Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
 				Orginalna cena: {{rez.projekcija.cena}}<br/>
 				POPUST!: {{rez.rezervisanoMesto.deltaCena}}
-				<button ng-click="deleteOneClickReservation(rez.id)">Delete</button>
+				<button ng-click="reserveOneClick(rez)">Reserve</button>
 			</li>
 		</ol>
 		<button ng-show="korisnik==true" ng-click="showCinnema(cinema)">Back</button>

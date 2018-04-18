@@ -64,6 +64,33 @@ public class ReservationService {
 		
 	}
 	
+	@Transactional
+	public Rezervacija putRese(Rezervacija newr, Long idProj, Long idSediste, Long idUser) {
+		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
+		/*Projekcija pro = projRepository.findById(idProj);
+		Sediste sed = sedisteRepository.findById(idSediste);
+		*/
+		
+		/*newr.setProjekcija(pro);
+		newr.setFilm(pro.getFilm());
+		newr.setRezervisanoMesto(sed);*/
+		/*if(us==null) {
+			newr.setRezervant(null);
+		}else {
+			newr.setRezervant(us);
+		}*/
+		toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
+		toUpdate.setStatus(newr.getStatus());
+		toUpdate.setOcenaFilm(newr.getOcenaFilm());
+		toUpdate.setHostId(newr.getHostId());
+		
+		User us = userRepository.findById(idUser);
+		toUpdate.setRezervant(us);
+		
+		
+		return reservationRepository.save(toUpdate);
+	}
+	
 	public Rezervacija delete(long id) {
 		Rezervacija toDelete = reservationRepository.findById(id);
 		if(toDelete!=null) {
