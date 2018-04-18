@@ -17,15 +17,6 @@ public class ReservationDTO {
 
 	private Long idHost;
 
-	public Rezervacija addReservation(ReservationDTO reservation) {
-		Rezervacija res = new Rezervacija();
-		res.setStatus(reservation.getStatus());
-		res.setProjekcija(reservation.getProjekcija());
-		res.setHostId(reservation.getIdHost());
-		res.setIsHost(reservation.isHost);
-		return res;
-	}
-	
 	
 	public long getRezSedisteId() {
 		return rezSedisteId;

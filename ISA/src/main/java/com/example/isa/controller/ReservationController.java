@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
-import com.example.isa.model.MovieShow;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.service.ReservationService;
 
@@ -114,6 +114,19 @@ public class ReservationController {
 		else
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.BAD_REQUEST);
 		
+	}
+	
+	@RequestMapping(value="/api/reservation", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	public ResponseEntity<Rezervacija> reservation(@RequestBody ReservationDTO reservationDTO){
+		System.out.println("\n*** Rezervacija karte ");
+		Rezervacija reservation = resevationService.reservation(reservationDTO);
+		if(reservation!=null) {
+		System.out.println("Rezervisana je " + reservation);
+		return new ResponseEntity<Rezervacija>(reservation, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

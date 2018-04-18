@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.isa.controller.dataTransfer.IncomeReportDTO;
+import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
@@ -240,5 +241,18 @@ public class ReservationService {
 		}
 		
 		return rv;
+	}
+	
+	public Rezervacija reservation(ReservationDTO reservationDTO) {
+		
+		Rezervacija reservation = new Rezervacija();
+		reservation.setProjekcija(reservationDTO.getProjekcija());
+		reservation.setHostId(reservationDTO.getIdHost());
+		reservation.setIsHost(reservationDTO.getIsHost());
+		reservation.setStatus(reservationDTO.getStatus());
+		reservation.setRezervant(userRepository.findById(reservationDTO.getIdRezervant()));
+		reservation.setRezervisanoMesto(sedisteRepository.findById(reservationDTO.getRezSedisteId()));
+		
+		return reservation;
 	}
 }
