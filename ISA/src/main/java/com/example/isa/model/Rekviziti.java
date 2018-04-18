@@ -19,7 +19,9 @@ public class Rekviziti {
 	@GeneratedValue
 	private long id;
 	
-	private boolean odobren;
+	@Column(nullable=false)
+	@Enumerated(EnumType.STRING)
+	private RekvizitState odobren;
 	
 	private String naziv;
 	
@@ -43,7 +45,13 @@ public class Rekviziti {
 	
 	
 
-	public Rekviziti(long id, boolean odobren, String naziv, VrstaRekvizita vrsta, BioskopPozoriste proadjeu,
+
+
+	
+	
+
+
+	public Rekviziti(long id, RekvizitState odobren, String naziv, VrstaRekvizita vrsta, BioskopPozoriste proadjeu,
 			User postavljac, Date finalDate) {
 		super();
 		this.id = id;
@@ -57,19 +65,10 @@ public class Rekviziti {
 
 
 
-	public Rekviziti(long id, boolean odobren, String naziv, BioskopPozoriste proadjeu, User postavljac,
-			Date finalDate) {
-		super();
-		this.id = id;
-		this.odobren = odobren;
-		this.naziv = naziv;
-		this.proadjeu = proadjeu;
-		this.postavljac = postavljac;
-		this.finalDate = finalDate;
-	}
 
-	
-	
+
+
+
 
 
 	public VrstaRekvizita getVrsta() {
@@ -92,13 +91,31 @@ public class Rekviziti {
 		this.id = id;
 	}
 
-	public boolean isOdobren() {
+
+
+	public RekvizitState getOdobren() {
 		return odobren;
 	}
 
-	public void setOdobren(boolean odobren) {
+
+
+
+
+
+
+
+
+	public void setOdobren(RekvizitState odobren) {
 		this.odobren = odobren;
 	}
+
+
+
+
+
+
+
+
 
 	public BioskopPozoriste getProadjeu() {
 		return proadjeu;
