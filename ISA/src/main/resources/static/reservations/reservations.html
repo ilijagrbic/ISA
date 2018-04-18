@@ -1,14 +1,12 @@
-<div ng>
+<div>
 	<p>
 		<span><a ui-sref="user">Profil</a></span>
-		<span><a ui-sref="friendship">Prijatelji</a></span>
-		<span><a ui-sref="signin">Pozorista</a></span>
-		<span><a ui-sref="signout">Bioskopi</a></span>
+		<sdan><a ui-sref="friendship">Prijatelji</a></span>
+		<span><a ui-sref="theatres">Pozorista</a></span>
+		<span><a ui-sref="cinemas">Bioskopi</a></span>
 		<span><a ui-sref="reservations">Rezervacije</a></span>
-		<span><a ui-sref="defaultState">Nazad</a></span>
 	</p>
 </div>
-
 <h1>Rezervacije</h1>
 
 <form name="findForm">
@@ -49,9 +47,29 @@
 </table> 
 <h6><font color="red">Izabrana projekcija je: {{choosedProjection.date}}, sa id {{choosedProjection.id}} </font></h6>
 
+<h6>Sedista</h6>
 
- <input type="checkbox"  ng-repeat="sediste in choosedProjection.sedista">
+<span   ng-repeat="sediste in choosedProjection.sedista">
+		<br ng-if="!($index % choosedProjection.sala.visina)" />
+		<input ng-hide="pozivPrijatelja == true" type="checkbox"  value="{{sediste.id}}" ng-disabled="sediste.type=='CLOSED'"/>
+</span>
 
-</div>
+	<button ng-hide="pozivPrijatelja == true" ng-click="selektovani()">Dalje</button>
+	
+	<p ng-if="greska==true">Morate odabrati sediste</p>
+	
+ 	<div ng-hide=" numRez<=1 ">
+ 		<h6>Pozovi prijatelje</h6>
+	 	<select ng-model="selectedFriend" ng-options="friend.name for friend in callFriends">
+	 		<option class="placeholder" selected disabled value="">Izaberi prijatelja</option>
+		</select>
+		
+		<button ng-click="posaljiPoziv(selectedFriend.id)">Pozovi</button>
+ 	</div>
+ 	
+<button ng-if="izabranaSedista == true" ng-click="rezervacija()">Rezervisi</button>
+<button ng-click="odustanak()">Odustani</button>
+</div>	 
+
 
  

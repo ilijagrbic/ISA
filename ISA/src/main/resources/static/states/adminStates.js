@@ -1,6 +1,19 @@
 angular.module('app')
     .config(function ($stateProvider) {
         $stateProvider
+	        .state('adminLogin', {
+	            url: '/adminLogin',
+	            views: {
+	            	'header': {
+	                    templateUrl: 'homePage/header/header.html',
+	                    controller: 'headerController'
+	                },
+	                'content': {
+	                	templateUrl: 'adminLogin/adminLogin.html',
+	                    controller: 'adminLoginController'
+	                }
+	            }
+	        })
             .state('cinemasAdmin', {
                 url: '/cinemasAdmin',
                 views: {

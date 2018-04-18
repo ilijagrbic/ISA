@@ -1,5 +1,9 @@
 angular.module('app')
-    .controller('theatresController', function ($scope, $sce, cinemaTheatreService) {
+    .controller('theatresController', function ($scope, $rootScope, $sce, cinemaTheatreService) {
+    	if($rootScope.USER != null){
+    		$scope.korisnik=true;
+    	}
+    	
     	cinemaTheatreService.getTheatres(
 				function(info){//succes function
 					$scope.theatres=info.data;

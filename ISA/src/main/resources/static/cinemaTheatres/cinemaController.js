@@ -1,6 +1,10 @@
 angular.module('app')
-    .controller('cinemaController', function ($scope,  $sce, cinemaTheatreService) {
-		cinemaTheatreService.getCinemas(
+    .controller('cinemaController', function ($scope,$rootScope,  $sce, cinemaTheatreService) {
+    	if($rootScope.USER != null){
+    		$scope.korisnik=true;
+    	}
+    
+    	cinemaTheatreService.getCinemas(
 				function(info){//succes function
 					$scope.cinemas=info.data;
 					
