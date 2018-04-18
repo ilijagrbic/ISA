@@ -249,9 +249,17 @@ public class ReservationService {
 		reservation.setProjekcija(reservationDTO.getProjekcija());
 		reservation.setHostId(reservationDTO.getIdHost());
 		reservation.setIsHost(reservationDTO.getIsHost());
-		reservation.setStatus(reservationDTO.getStatus());
+		if(reservationDTO.getIsHost()==false) {
+			reservation.setStatus(RezervacijaStatus.WAITING);
+		}
+		else {
+			reservation.setStatus(RezervacijaStatus.ACCEPTED);
+		}
+		reservation.setFilm(reservationDTO.getProjekcija().getFilm());
 		reservation.setRezervant(userRepository.findById(reservationDTO.getIdRezervant()));
 		reservation.setRezervisanoMesto(sedisteRepository.findById(reservationDTO.getRezSedisteId()));
+		
+		reservationRepository.save(reservation);
 		
 		return reservation;
 	}

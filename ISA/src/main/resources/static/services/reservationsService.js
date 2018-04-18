@@ -10,7 +10,21 @@ angular.module('app')
                     }
                 };
                 $http(req).then(onSuccess, onError);
-            }
+            },
+        
+	        reservate: function (data, onSuccess, onError) {
+	            var req = {
+	                method: 'POST',
+	                url: '/api/reservation',
+	                headers: {
+	                    'Content-Type': 'application/json'
+	                },
+	                data: data
+	            };
+	            $http(req).then(onSuccess, onError);
+	        }
+	        
+	        
      
         }
     });

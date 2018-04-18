@@ -8,9 +8,7 @@ public class ReservationDTO {
 	private Projekcija projekcija;
 	
 	private Long idRezervant;
-	
-	private RezervacijaStatus status;
-	
+
 	private long rezSedisteId;
 	
 	private Boolean isHost;
@@ -56,13 +54,6 @@ public class ReservationDTO {
 		this.projekcija = projekcija;
 	}
 
-	public RezervacijaStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(RezervacijaStatus status) {
-		this.status = status;
-	}
 
 	public Boolean getIsHost() {
 		return isHost;

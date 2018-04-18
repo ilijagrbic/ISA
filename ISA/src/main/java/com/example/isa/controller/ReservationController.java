@@ -120,6 +120,11 @@ public class ReservationController {
 	@RequestMapping(value="/api/reservation", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
 	public ResponseEntity<Rezervacija> reservation(@RequestBody ReservationDTO reservationDTO){
 		System.out.println("\n*** Rezervacija karte ");
+		
+		if(reservationDTO.getIsHost()==false) {
+			// Treba da posalje mail
+			System.out.println("\nGost je treba da salje mail");
+		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {
 		System.out.println("Rezervisana je " + reservation);

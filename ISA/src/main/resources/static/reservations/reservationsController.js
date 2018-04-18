@@ -158,21 +158,36 @@ angular.module('app').controller(
 						var host = {
 								"projekcija" : projection,
 								"rezervant" : $rootScope.USER.id,
-								"status" : RezervacijaStatus.ACCEPTED,
 								"isHost" : true,
 								"rezSedisteId" : selektovane[0],
 								"idHost" :  $rootScope.USER.id	
 						}
 						
+						reservationsService.reservate(host,
+							function(res){
+							},
+							function(res){
+								alert("Eror prilikom rezervacije");
+							
+							}
+						);
+						
 						for (i = 0; i < prijatelji.length; i++) {
 							var poziv = {
 									"projekcija" : projection,
 									"rezervant" : prijatelji[i],
-									"status" : RezervacijaStatus.WAITING,
 									"isHost" : false,
 									"rezSedisteId" : selektovane[i+1],
 									"idHost" :  null	
 							}
+							reservationsService.reservate(poziv,
+								function(res){
+								},
+								function(res){
+									alert("Eror prilikom rezervacije");
+								
+								}
+							);
 						}
 					};
 					
