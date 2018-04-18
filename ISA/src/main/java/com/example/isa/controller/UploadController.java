@@ -65,9 +65,14 @@ public class UploadController {
 	@GetMapping("/api/files/{filename}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
-		Resource file = storageService.loadFile(filename);
-		return ResponseEntity.ok()
+		try{
+			Resource file = storageService.loadFile(filename);
+			return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
+		}
+		catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
 	}
 }

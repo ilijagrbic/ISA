@@ -2,6 +2,7 @@ package com.example.isa.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,13 +28,13 @@ public class ProjekcijaController {
 			value = "/api/cinnemas/{id}/projections",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Projekcija>> getProjecions(@PathVariable("id") Long id){
+	public ResponseEntity<?> getProjecions(@PathVariable("id") Long id){
 		ArrayList<Projekcija> retVal = (ArrayList<Projekcija>)projService.findAllInCinema(id);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -41,13 +42,13 @@ public class ProjekcijaController {
 			value = "/api/cinnemas/{id}/movies/{idm}/projections",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Projekcija>> getProjecionsByMovie(@PathVariable("id") Long id, @PathVariable("idm") Long idMovie){
+	public ResponseEntity<?> getProjecionsByMovie(@PathVariable("id") Long id, @PathVariable("idm") Long idMovie){
 		ArrayList<Projekcija> retVal = (ArrayList<Projekcija>)projService.findAllInCinemaByMovie(id, idMovie);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop ili film.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -55,13 +56,13 @@ public class ProjekcijaController {
 			value = "/api/projections/{id}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Projekcija> delProjecions(@PathVariable("id") Long id){
+	public ResponseEntity<?> delProjecions(@PathVariable("id") Long id){
 		Projekcija retVal = projService.delete(id);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Projekcija koju zelite da obrisete ne postoji u bazi.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -69,13 +70,13 @@ public class ProjekcijaController {
 			value = "/api/projections/{id}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Projekcija> getProjecion(@PathVariable("id") Long id){
+	public ResponseEntity<?> getProjecion(@PathVariable("id") Long id){
 		Projekcija retVal = projService.findById(id);
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazena projekcija.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -98,34 +99,52 @@ public class ProjekcijaController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Projekcija> delProjecions(@RequestBody ProjekcijaDTO createProjekcija){
-		Projekcija retVal = projService.create(createProjekcija.getProjekcija(), createProjekcija.getFilm());
-		
-		if(retVal!=null) {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> delProjecions(@RequestBody ProjekcijaDTO createProjekcija){
+		Date today = new Date();
+		if(createProjekcija.getCena()<1) {
+			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+		}else if(today.after(createProjekcija.getDate())){
+			return new ResponseEntity<String>("Nemoguce definisati projekciju u proslosti.", HttpStatus.BAD_REQUEST);
+		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
+			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
 		}
 		else {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
+			Projekcija retVal = projService.create(createProjekcija.getProjekcija(), createProjekcija.getFilm());
+			
+			if(retVal!=null) {
+				return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Ne postoji film za projekciju koju zelite.", HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
-	
-	//not sure
+
 	@RequestMapping(
 			value = "/api/projections/{id}",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Projekcija> updProjecions(@RequestBody ProjekcijaDTO createProjekcija, @PathVariable("id") Long id){
-		
-		Projekcija temp = createProjekcija.getProjekcija();
-		temp.setId(id);
-		Projekcija retVal = projService.update(temp, createProjekcija.getFilm());
-		
-		if(retVal!=null) {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> updProjecions(@RequestBody ProjekcijaDTO createProjekcija, @PathVariable("id") Long id){
+		Date today = new Date();
+		if(createProjekcija.getCena()<1) {
+			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+		}else if(today.after(createProjekcija.getDate())){
+			return new ResponseEntity<String>("Nemoguce definisati projekciju u proslosti.", HttpStatus.BAD_REQUEST);
+		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
+			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
 		}
 		else {
-			return new ResponseEntity<Projekcija>(retVal, HttpStatus.BAD_REQUEST);
+			Projekcija temp = createProjekcija.getProjekcija();
+			temp.setId(id);
+			Projekcija retVal = projService.update(temp, createProjekcija.getFilm());
+			
+			if(retVal!=null) {
+				return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Ne postoji film ili projekcija koju zelite da azurirate.", HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 }
