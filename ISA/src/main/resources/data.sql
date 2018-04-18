@@ -71,6 +71,9 @@ INSERT INTO sediste VALUES(9, 50, 10, 'PROMOTION', 90);
 INSERT INTO sediste VALUES(10, 200, 10, 'VIP', 8);
 INSERT INTO sediste VALUES(11, 50, 10, 'VIP', 9);
 
+
+Insert into rekviziti values (1, '2038-01-19 03:14:07','rekvizit',1 ,'ZVANICNI', 1, 1);
+
 INSERT INTO projekcija_sedista VALUES(1,1);
 INSERT INTO projekcija_sedista VALUES(1,2);
 INSERT INTO projekcija_sedista VALUES(1,3);
@@ -82,3 +85,4 @@ INSERT INTO projekcija_sedista VALUES(1, 8);
 INSERT INTO projekcija_sedista VALUES(1,9);
 INSERT INTO projekcija_sedista VALUES(1,10);
 INSERT INTO projekcija_sedista VALUES(1,11);
+

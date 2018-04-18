@@ -25,10 +25,27 @@ public class Licitacija {
 	
 	@ManyToOne
 	private User ponudjac;
+	
+	@ManyToOne
+	private Rekviziti rekvizit;
 
 	public Licitacija() {
 		super();
 	}
+	
+	
+
+	public Rekviziti getRekvizit() {
+		return rekvizit;
+	}
+
+
+
+	public void setRekvizit(Rekviziti rekvizit) {
+		this.rekvizit = rekvizit;
+	}
+
+
 
 	public long getId() {
 		return id;

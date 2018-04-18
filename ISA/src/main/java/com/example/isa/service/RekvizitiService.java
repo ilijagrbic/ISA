@@ -5,7 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.isa.model.BioskopPozoriste;
+import com.example.isa.model.BioskopPozoristeType;
 import com.example.isa.model.Rekviziti;
+import com.example.isa.model.VrstaRekvizita;
+import com.example.isa.model.users.User;
 import com.example.isa.repository.RekvizitiRepository;
 
 @Service
@@ -33,6 +37,17 @@ public class RekvizitiService {
 			rekvizitiRepository.delete(id);
 			
 		}
+		
+		public List<Rekviziti> getAllZvanicna(){
+			return rekvizitiRepository.findByVrsta(VrstaRekvizita.ZVANICNI);
+		}
+		
+		public List<Rekviziti> getAllPolovna(){
+			return rekvizitiRepository.findByVrsta(VrstaRekvizita.POLOVNI);
+		} 
+		public List<Rekviziti> getUserRekviziti(User user){
+			return rekvizitiRepository.findByPostavljac(user);
+		} 
 
 		
 	
