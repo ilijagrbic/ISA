@@ -1,49 +1,65 @@
 <div>
 	<h1>Movie</h1>
-	<div class="containter">
-		Naziv:<input type=text ng-model="curentMovie.name"><br/>
-		Zanr:<input type=text ng-model="curentMovie.genre"><br/>
-		Reziser:<input type=text ng-model="curentMovie.director"><br/>
-		Trajanje:<input type=text ng-model="curentMovie.duration"><br/>
-		Cena:<input type=text ng-model="curentMovie.price"><br/>
-		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description"></textarea><br/>
-		Poster:<img ng-src="/api/files/{{curentMovie.image}}"><br/>
-		Novi poster:<input type="file" file-upload="myFile"/><br/>
-	</div>
-	
-	
-	<h4>Glumci:</h4>
-	<ol>
-		<li ng-repeat="glumac in curentMovie.glumci">
-			{{glumac.ime}} {{glumac.prezime}} 
-			<button ng-click="deleteGlumac(glumac.id)">Delete</button>
-		</li>
-	</ol>
-	<br/>
-	<div>
-		<div ng-if="enterGlumac==true">
-			<div ng-show="newActroPanelActiaved==false">
-				<select  ng-model="enterGlumacVal" ng-options="x as imePrezime(x) for x in listGlumci"></select><br/>
-			</div>
-			<div ng-show="newActroPanelActiaved==true">
-				Ime: <input type=text ng-model="newActorName">
-				Prezime: <input type=text ng-model="newActorSurname">
-			</div>
-			<button ng-click="addGlumac(enterGlumacVal, newActorName, newActorSurname)">Add</button><button ng-click="dontShowNewGlumacPanel()">Back</button><button ng-click="newActorPanel()">New/Select old</button>
+	<div class="card">
+		<div class="card-body">
+			<b>Naziv:</b><br/><input type=text ng-model="curentMovie.name"><br/>
+			<b>Zanr:</b><br/><input type=text ng-model="curentMovie.genre"><br/>
+			<b>Reziser:</b><br/><input type=text ng-model="curentMovie.director"><br/>
+			<b>Trajanje:</b><br/><input type=text ng-model="curentMovie.duration"><br/>
+			<b>Cena:</b><br/><input type=text ng-model="curentMovie.price"><br/>
+			<b>Opis:</b><br/><textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description"></textarea><br/>
+			<b>Poster:</b><br/><img ng-src="/api/files/{{curentMovie.image}}"><br/>
+			<b>Novi poster:</b><br/><input type="file" file-upload="myFile"/><br/>
 		</div>
-		<button ng-click="showNewGlumacPanel()">New</button>
 	</div>
 	
-	<h4>Projekcije:</h4>
-	<ol>
-		<li ng-repeat="projekcija in listProjekcije">
-			{{date(projekcija.date)}}<br/>
-			Cena:{{projekcija.cena}}<br/>
-			<button ng-click="manageSetas(projekcija)">Manage seats/Edit</button>
-			<!--  <button ng-click="editProjekcija(projekcija)">Edit</button>  -->
-			<button ng-click="deleteProjekcija(projekcija)">Delete</button>
-		</li>
-	</ol>
+	
+	<h3>Glumci:</h3>
+	<div class="card">
+		<div class="card-body" ng-repeat="glumac in curentMovie.glumci">
+			{{glumac.ime}} {{glumac.prezime}} 
+			<button class="btn btn-primary" ng-click="deleteGlumac(glumac.id)">Ukloni glumca</button>
+		</div>
+		
+	</div>
+	<button  ng-if="!enterGlumac==true" class="btn btn-primary" ng-click="showNewGlumacPanel()">Dodaj glumca</button>
+	<br/><br/>
+	
+	<div class="card" ng-if="enterGlumac==true">
+		<div class="card-body">
+		
+			<div ng-show="newActroPanelActiaved==false">
+				<b>Izaberite postojeceg glumca:</b><br/>
+				<select  ng-model="enterGlumacVal" ng-options="x as imePrezime(x) for x in listGlumci"></select><br/><br/>
+			</div>
+			
+			<div ng-show="newActroPanelActiaved==true">
+				<b>Unesite novog glumca:</b><br/>
+				Ime: <input type=text ng-model="newActorName"><br/>
+				Prezime: <input type=text ng-model="newActorSurname"><br/><br/>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-primary" ng-click="addGlumac(enterGlumacVal, newActorName, newActorSurname)">Dodaj</button>
+				<button class="btn btn-primary" ng-click="dontShowNewGlumacPanel()">Nazad</button>
+				<button class="btn btn-primary" ng-click="newActorPanel()">{{glumacPanelText()}}</button>
+			</div>
+			
+		</div>
+		
+	</div>
+
+	<h3>Projekcije:</h3>
+	<div class="card">
+		<div class="card-body" ng-repeat="projekcija in listProjekcije">
+			<b>Datum i vreme projekcije:</b><br/>{{date(projekcija.date)}}<br/>
+			<b>Cena:</b><br/>{{projekcija.cena}}<br/>
+			<div class="btn-group">
+				<button class="btn btn-primary" ng-click="manageSetas(projekcija)">Manage seats/Edit</button>
+				<button class="btn btn-primary" ng-click="deleteProjekcija(projekcija)">Delete</button>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary" ng-click="showNewProjekcijaPanel()">New</button>
 	
 	<div>
 		<!-- new proj deo -->
@@ -72,7 +88,7 @@
 			<button ng-click="dontShowNewProjectionPanel()">Back</button>
 			<button ng-click="saveNewProj(newProjSala)">Save</button>
 		</div>
-		<button ng-click="showNewProjekcijaPanel()">New</button>
+		
 	</div>
 	
 	

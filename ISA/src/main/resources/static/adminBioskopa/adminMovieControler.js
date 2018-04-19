@@ -1,6 +1,14 @@
 angular.module('app')
     .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
     	
+    	$scope.glumacPanelText = function(){
+    		if(!$scope.newActroPanelActiaved==true){
+    			return "Unesi novog glumca";
+    		}else{
+    			return "Odaberi postojeceg glumca";
+    		}
+    	}
+    	
     	$scope.date = function(date){
     		var dat = new Date(date);
     		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
