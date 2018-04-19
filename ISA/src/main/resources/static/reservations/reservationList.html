@@ -19,7 +19,7 @@
       <td>{{ reservation.projekcija.film.name }}</td>
       <td>{{ reservation.rezervisanoMesto.id }}</td>
       <td>{{ reservation.projekcija.film.description }}</td>
-    <td ng-if="reservation.isHost==false && reservation.type!='ACCEPTED' "><button ng-click="potvrdi(reservation.id, $index)">Potvrdi</button></td>
+    <td ng-if="reservation.isHost==false && reservation.status!='ACCEPTED' "><button ng-click="potvrdi(reservation.id, $index)">Potvrdi</button></td>
     <td><button ng-click="odustani(reservation.id, $index)">Odustani</button></td>
   </tr>
 </table> 
