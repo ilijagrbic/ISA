@@ -68,6 +68,26 @@ public class ReservationController {
 		}
 		
 	}
+	@RequestMapping(
+			value = "/api/reservations/{id}/rate",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Rezervacija> editRezrate(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
+		Rezervacija rez = createMovie.getRezervacija();
+		Long sed = createMovie.getRezSedisteId();
+		Long use = createMovie.getUserId();
+		rez.setId(id);
+		Rezervacija retVal = resevationService.rateRese(rez, sed, use);
+		
+		if(retVal!=null) {
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
 	@RequestMapping(
 			value = "/api/reservations/{id}",
