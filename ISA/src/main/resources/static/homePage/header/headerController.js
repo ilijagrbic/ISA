@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('headerController', function ($scope, $state) {
+    .controller('headerController', function ($scope, $state, $rootScope) {
     	//uraditi na pocetku
     	if($state.$current=="defaultState"){
     		$scope.headerState="home";
@@ -10,8 +10,6 @@ angular.module('app')
     	else if($state.$current=="theatres"||$state.$current=="theatresAdmin"){
     		$scope.headerState="thea";
     	}
-    	
-    	
     	
     	//funkcije kontrolera
     	$scope.headerSwitch=function(clicked){

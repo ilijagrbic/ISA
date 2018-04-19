@@ -28,10 +28,12 @@ public class BioskopPozoristeController {
 			value = "/api/admin/{id}/cinnemas",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdmin(@PathVariable("id") Long id){
+	public ResponseEntity<?> getBioskopPozoristeAdmin(@PathVariable("id") Long id){
 		List<BioskopPozoriste> retVal = bioskopService.getAllAdmin(id);
-		
-		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		if(retVal!=null)
+			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -39,10 +41,12 @@ public class BioskopPozoristeController {
 			value = "/api/admin/{id}/onlycinnemas",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdminc(@PathVariable("id") Long id){
+	public ResponseEntity<?> getBioskopPozoristeAdminc(@PathVariable("id") Long id){
 		List<BioskopPozoriste> retVal = bioskopService.getAllAdminCin(id);
-		
-		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		if(retVal!=null)
+			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -50,11 +54,13 @@ public class BioskopPozoristeController {
 			value = "/api/admin/{id}/onlythe",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<BioskopPozoriste>> getBioskopPozoristeAdmint(@PathVariable("id") Long id){
+	public ResponseEntity<?> getBioskopPozoristeAdmint(@PathVariable("id") Long id){
 		List<BioskopPozoriste> retVal = bioskopService.getAllAdminThe(id);
 		
-		return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
-		
+		if(retVal!=null)
+			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
 	}
 	
 	@RequestMapping(
@@ -128,11 +134,14 @@ public class BioskopPozoristeController {
 			value = "/api/cinnemas/{id}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BioskopPozoriste> getBioskopPozoristee(@PathVariable("id") Long id){
+	public ResponseEntity<?> getBioskopPozoristee(@PathVariable("id") Long id){
 		
 		BioskopPozoriste retVal = bioskopService.getById(id);
 		
-		return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+		if(retVal!=null)
+			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Ne postoji bioskop.", HttpStatus.BAD_REQUEST);
 		
 	}
 	

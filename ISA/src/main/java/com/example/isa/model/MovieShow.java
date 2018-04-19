@@ -50,7 +50,7 @@ public class MovieShow {
 	
 	private String genre;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Projekcija> projekcije;
 	

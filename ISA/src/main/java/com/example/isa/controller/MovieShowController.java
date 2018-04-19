@@ -40,12 +40,12 @@ public class MovieShowController {
 			value = "/api/cinnemas/{id}/movies",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<MovieShow>> getMoviesFromCinema(@PathVariable("id") Long id){
+	public ResponseEntity<?> getMoviesFromCinema(@PathVariable("id") Long id){
 		ArrayList<MovieShow> retVal = (ArrayList<MovieShow>)movieService.getFromCinema(id);
 		if(retVal!=null)
 			return new ResponseEntity<Collection<MovieShow>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Collection<MovieShow>>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop.", HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -53,13 +53,13 @@ public class MovieShowController {
 			value = "/api/movies/{id}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<MovieShow> getOneMovie(@PathVariable("id") Long id){
+	public ResponseEntity<?> getOneMovie(@PathVariable("id") Long id){
 		MovieShow retVal = movieService.getOneMovie(id);
 		if(retVal!=null) {
 			return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<MovieShow>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -68,17 +68,26 @@ public class MovieShowController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<MovieShow> addMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long id){
-		MovieShow retVal = movieService.create(createMovie.getMovieShow(), id);
-		if(retVal!=null) {
-			return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> addMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long id){
+		if(createMovie.getDuration()<1) {
+			return new ResponseEntity<String>("Trajanje ne moze biti negativno.", HttpStatus.BAD_REQUEST);
+		}
+		else if(createMovie.getPrice()<1) {
+			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+		}
+		else if(createMovie.getName()==null||createMovie.getName().isEmpty()||createMovie.getName().equals("")) {
+			return new ResponseEntity<String>("Ime ne sme biti prazno", HttpStatus.BAD_REQUEST);
 		}
 		else {
-			return new ResponseEntity<MovieShow>(retVal, HttpStatus.BAD_REQUEST);
+			MovieShow retVal = movieService.create(createMovie.getMovieShow(), id);
+			if(retVal!=null) {
+				return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop ili film vec postoji.", HttpStatus.BAD_REQUEST);
+			}
 		}
 	
-		
-		//TODO Uraditi brisanje i update filma ukoliko bude potrebno.
 	}
 	
 	@RequestMapping(
@@ -86,15 +95,26 @@ public class MovieShowController {
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<MovieShow> updateMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long idMovie){
-		MovieShow temp = createMovie.getMovieShow();
-		temp.setId(createMovie.getId());
-		MovieShow retVal = movieService.update(temp, idMovie);
-		if(retVal!=null) {
-			return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> updateMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long idMovie){
+		if(createMovie.getDuration()<1) {
+			return new ResponseEntity<String>("Trajanje ne moze biti negativno.", HttpStatus.BAD_REQUEST);
+		}
+		else if(createMovie.getPrice()<1) {
+			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+		}
+		else if(createMovie.getName().isEmpty()||createMovie.getName()==null||createMovie.getName().equals("")) {
+			return new ResponseEntity<String>("Ime ne sme biti prazno", HttpStatus.BAD_REQUEST);
 		}
 		else {
-			return new ResponseEntity<MovieShow>(retVal, HttpStatus.BAD_REQUEST);
+			MovieShow temp = createMovie.getMovieShow();
+			temp.setId(createMovie.getId());
+			MovieShow retVal = movieService.update(temp, idMovie);
+			if(retVal!=null) {
+				return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 	
@@ -102,13 +122,13 @@ public class MovieShowController {
 			value = "/api/movies/{id}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Long> updateMovie(@PathVariable("id") Long idMovie){
+	public ResponseEntity<?> updateMovie(@PathVariable("id") Long idMovie){
 		Long retVal = movieService.delete(idMovie);
 		if(retVal!=null) {
 			return new ResponseEntity<Long>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<Long>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
 		}
 	}
 }

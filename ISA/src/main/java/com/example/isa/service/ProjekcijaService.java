@@ -85,18 +85,19 @@ public class ProjekcijaService {
 	public Projekcija create(Projekcija newProj, Long movieId) {
 		MovieShow movie = movieRepository.findById(movieId);
 		Sala temp = salaPrepository.findById(newProj.getSala().getId());
-		if(movie != null) {
-			newProj.setFilm(movie);
-			if(temp==null)
-			{
-				newProj.getSala().setBioskop(movie.getRepertoar().getBioskop());
-				salaPrepository.save(newProj.getSala());
+
+			if(movie != null) {
+				newProj.setFilm(movie);
+				if(temp==null)
+				{
+					newProj.getSala().setBioskop(movie.getRepertoar().getBioskop());
+					salaPrepository.save(newProj.getSala());
+				}
+				
+				return projekcijaRepository.save(newProj);
+			}else {
+				return null;
 			}
-			
-			return projekcijaRepository.save(newProj);
-		}else {
-			return null;
-		}
 		
 	}
 	
@@ -104,22 +105,12 @@ public class ProjekcijaService {
 		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
 		MovieShow mov = movieRepository.findById(id);
 		
-		
-		System.out.println("Pre updatea, da vidim dal su promene poslate na server:");
-		for(Sediste s:newProj.getSedista()) {
-			System.out.println(s.getType()+"---"+s.getDeltaCena());
-		}
-		
 		if(toUpdate==null||mov==null) {
 			return null;
 		}
 		else {
 			newProj.setFilm(mov);
 			Projekcija updated = projekcijaRepository.save(newProj);
-			System.out.println("Posle da vidim sta ima.");
-			for(Sediste s:updated.getSedista()) {
-				System.out.println(s.getType()+"---"+s.getDeltaCena());
-			}
 			return updated;
 		}
 	}

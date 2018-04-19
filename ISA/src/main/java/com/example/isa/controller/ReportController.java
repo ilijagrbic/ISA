@@ -54,8 +54,12 @@ public class ReportController {
 			method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ReportDTO> getIncome(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
-		return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
+	public ResponseEntity<?> getIncome(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
+		if(creatingCinema.getDoo().before(creatingCinema.getOd())) {
+			return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@RequestMapping(
@@ -63,8 +67,12 @@ public class ReportController {
 			method = RequestMethod.GET,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HashMap<Date, Integer>> getPosete(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
-		return new ResponseEntity<HashMap<Date, Integer>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
+	public ResponseEntity<?> getPosete(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
+		if(creatingCinema.getDoo().before(creatingCinema.getOd())) {
+			return new ResponseEntity<HashMap<Date, Integer>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 }

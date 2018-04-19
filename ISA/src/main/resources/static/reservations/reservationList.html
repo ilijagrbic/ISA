@@ -14,7 +14,12 @@
  <table>
   <tr ng-repeat="reservation in reservationList">
     <td>{{ reservation.id }}</td>
-    <td><button ng-click="potvrdi(user, user.id, $index)">Potvrdi</button></td>
-    <td><button ng-click="odustani(user, user.id, $index)">Odustani</button></td>
+     <td>{{ reservation.projekcija.date}}</td>
+     <td>{{ reservation.projekcija.sala.nazivBroj }}</td>
+      <td>{{ reservation.projekcija.film.name }}</td>
+      <td>{{ reservation.rezervisanoMesto.id }}</td>
+      <td>{{ reservation.projekcija.film.description }}</td>
+    <td ng-if="reservation.isHost==false && reservation.type!='ACCEPTED' "><button ng-click="potvrdi(reservation.id, $index)">Potvrdi</button></td>
+    <td><button ng-click="odustani(reservation.id, $index)">Odustani</button></td>
   </tr>
 </table> 

@@ -25,27 +25,36 @@ public class BioskopPozoristeService {
 	private UserRepository userRepository;
 	
 	public List<BioskopPozoriste> getAllAdmin(long id){
-		return userRepository.findById(id).getBioskopi();
+		if(userRepository.findById(id)!=null) {
+			return userRepository.findById(id).getBioskopi();
+		}
+		else return null;
 	}
 	
 	public List<BioskopPozoriste> getAllAdminCin(long id){
-		ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
-		for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
-			if(b.getType()==BioskopPozoristeType.CINNEMA) {
-				retVal.add(b);
+		if(userRepository.findById(id)!=null) {
+			ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
+			for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
+				if(b.getType()==BioskopPozoristeType.CINNEMA) {
+					retVal.add(b);
+				}
 			}
+			return retVal;
 		}
-		return retVal;
+		else return null;
 	}
 	
 	public List<BioskopPozoriste> getAllAdminThe(long id){
-		ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
-		for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
-			if(b.getType()==BioskopPozoristeType.THEATRE) {
-				retVal.add(b);
+		if(userRepository.findById(id)!=null) {
+			ArrayList<BioskopPozoriste> retVal = new ArrayList<BioskopPozoriste>();
+			for(BioskopPozoriste b:userRepository.findById(id).getBioskopi()) {
+				if(b.getType()==BioskopPozoristeType.THEATRE) {
+					retVal.add(b);
+				}
 			}
+			return retVal;
 		}
-		return retVal;
+		else return null;
 	}
 	
 	public List<BioskopPozoriste> getAll(){

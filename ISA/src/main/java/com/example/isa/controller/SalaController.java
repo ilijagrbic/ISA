@@ -58,18 +58,22 @@ public class SalaController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Sala> addMovie(@RequestBody Sala newSala, @PathVariable("id") Long id){
-		BioskopPozoriste parent = bioskopService.getById(id);
-		System.out.println(newSala.getDuzina());
-		Sala nova = new Sala(newSala.getNazivBroj(), newSala.getVisina(), newSala.getDuzina(), parent);
-		
-		Sala retVal = salaService.create(nova);
-		
-		if(retVal!=null) {
-			return new ResponseEntity<Sala>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> addMovie(@RequestBody Sala newSala, @PathVariable("id") Long id){
+		if(newSala.getVisina()<1||newSala.getDuzina()<1) {
+			BioskopPozoriste parent = bioskopService.getById(id);
+			Sala nova = new Sala(newSala.getNazivBroj(), newSala.getVisina(), newSala.getDuzina(), parent);
+			
+			Sala retVal = salaService.create(nova);
+			
+			if(retVal!=null) {
+				return new ResponseEntity<Sala>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<String>("Greska pri kreiranju sale", HttpStatus.BAD_REQUEST);
+			} 
 		}
 		else {
-			return new ResponseEntity<Sala>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Sala ne moze imate negativnu duzinu ili visinu", HttpStatus.BAD_REQUEST);
 		}
 	
 	}

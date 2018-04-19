@@ -1,7 +1,7 @@
 /* Insert za korisnike */
 INSERT INTO korisnici VALUES (0,'true', 0, 'Novi Sad', 'andjelovskiolja@gmail.com', 'true', 'Olja', 'olja', '0611626739', 'REG_USER', 'Andjelovski', '111');
 INSERT INTO korisnici VALUES (1,'true', 0, 'Futog', 'schhhhhtef@gmail.com', 'true', 'Stefan', 'stefan', '0611626739', 'REG_USER', 'Tulac', '222');
-INSERT INTO korisnici VALUES (2, 'true', 0, 'Novi Sad', 'ilijagrb.ns@gmail.com', 'true', 'Ilija', 'ilija', '06116267389', 'CINEMA_THEATRE_ADMIN', 'Grbic', '333');
+INSERT INTO korisnici VALUES (2, 'true', 0, 'Novi Sad', 'ilijagrb.ns@gmail.com', 'false', 'Ilija', 'ilija', '06116267389', 'CINEMA_THEATRE_ADMIN', 'Grbic', '333');
 INSERT INTO korisnici VALUES (3, 'true', 0, 'Beograd', 'milos@gmail.com', 'true',  'Milos', 'milos', '0637896536', 'REG_USER', 'Milosevic', '444');
 INSERT INTO korisnici VALUES (4, 'true', 0, 'Kragujevac', 'tanja@gmail.com', 'true',  'Tanja', 'tanja', '0638526536', 'REG_USER', 'Milic', '555');
 INSERT INTO korisnici VALUES (5, 'true', 0, 'Nis', 'milan@gmail.com', 'true',  'Milan', 'milan', '0637855536', 'REG_USER', 'Matic', '666');
@@ -54,7 +54,7 @@ INSERT INTO movie_show (id, avg_review, description, director, duration, genre, 
 (3, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
 
 
-INSERT INTO sala values(1,15151,'bROJ NAZIV', 15151,1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (1, 1, 11, 'Sala1', 1);
 
 INSERT INTO projekcija VALUES (1, 1200, '2038-01-19 03:14:07', 1, 1);
 

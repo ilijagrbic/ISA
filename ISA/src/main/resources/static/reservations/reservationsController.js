@@ -178,7 +178,7 @@ angular.module('app').controller(
 									"idRezervant" : prijatelji[i],
 									"isHost" : false,
 									"rezSedisteId" : selektovane[i+1],
-									"idHost" :  null	
+									"idHost" :  $rootScope.USER.id	
 							}
 							reservationsService.reservate(poziv,
 								function(res){
@@ -189,7 +189,54 @@ angular.module('app').controller(
 								}
 							);
 						}
-					};
+						
+						if(prijatelji.length!=selektovane.length){
+							for (i = 0; i < (selektovane.length-prijatelji.length); i++) {
+								
+								for (j = 0; j < selektovane.length; j++) {
+									if(prijatelji==null || prijatelji==undefined){
+										var host = {
+												"projekcija" : projection,
+												"idRezervant" : $rootScope.USER.id,
+												"isHost" : true,
+												"rezSedisteId" : selektovane[j],
+												"idHost" :  $rootScope.USER.id	
+										}
+										
+										reservationsService.reservate(host,
+											function(res){
+											},
+											function(res){
+												alert("Eror prilikom rezervacije");
+											
+											}
+										);
+										break;
+									}
+									if(!prijatelji.includes(selektovane[j])){
+										var host = {
+												"projekcija" : projection,
+												"idRezervant" : $rootScope.USER.id,
+												"isHost" : true,
+												"rezSedisteId" : selektovane[j],
+												"idHost" :  $rootScope.USER.id	
+										}
+										
+										reservationsService.reservate(host,
+											function(res){
+											},
+											function(res){
+												alert("Eror prilikom rezervacije");
+											
+											}
+										);
+										break;
+									}
+							
+							}
+							
+						}
+					}
 					
 					
 					
@@ -197,8 +244,7 @@ angular.module('app').controller(
 		
 				};
 				
-				/// getProjekcijeInMovie
 			
 			
-			
+				};
 		});
