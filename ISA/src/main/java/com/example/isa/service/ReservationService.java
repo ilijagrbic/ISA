@@ -305,4 +305,10 @@ public class ReservationService {
 		reservation.setStatus(RezervacijaStatus.ACCEPTED);
 		return getReservations(userId);
 	}
+	
+	
+	public List<Rezervacija> getAllReservations(){
+		System.out.println("Usao da pronadje");
+		return reservationRepository.findAll();
+	}
 }

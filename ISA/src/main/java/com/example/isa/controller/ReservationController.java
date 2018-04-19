@@ -161,5 +161,17 @@ public class ReservationController {
 		
 		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/api/getAllReservations", method=RequestMethod.GET) 
+	public ResponseEntity<Collection<Rezervacija>> getAllReservations(){
+		System.out.println("\n\n*** Uzimanje svih rezervacija");
+		ArrayList<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		reservations = (ArrayList<Rezervacija>)resevationService.getAllReservations();
+		for(Rezervacija res : reservations) {
+			System.out.println("Usao uopste?");
+			System.out.println(res.getId()); 
+		}
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
 
 }

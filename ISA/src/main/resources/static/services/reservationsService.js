@@ -11,6 +11,14 @@ angular.module('app')
                 };
                 $http(req).then(onSuccess, onError);
             },
+            getAllReservations(onSuccess, onError) {
+                var req = {
+                        method: 'GET',
+                        url: '/api/getAllReservations' ,
+                    };
+                    console.log("Url " + req.url);
+                    $http(req).then(onSuccess, onError);
+                },
         
 	        reservate: function (data, onSuccess, onError) {
 	            var req = {
