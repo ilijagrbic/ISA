@@ -52,26 +52,31 @@ angular.module('app')
     	}
     	
     	$scope.saveSeats = function(){
-    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
-    		var DTO = {
-					"date": datumVreme,//$scope.curentlyEditedProj.date,
-					"sala":$scope.curentlyEditedProj.sala,
-					"cena":$scope.curentlyEditedProj.cena,
-					"film":$stateParams.movieId,
-					"sedista":$scope.curentlyEditedProj.sedista
-				}
-    		projekcijeService.putProjekcija($scope.curentlyEditedProj.id, DTO,
-    				function(info){
-    					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
-    				},
-    				function(info){
-    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
-    						alert("Greska u unosu!")
-    					}else{
-    						alert(info.data.err);
-    					}
-    				}
-    		)
+    		if($scope.curentlyEditedProj.date!=undefined&&$scope.fff!=undefined){
+	    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
+	    		var DTO = {
+						"date": datumVreme,//$scope.curentlyEditedProj.date,
+						"sala":$scope.curentlyEditedProj.sala,
+						"cena":$scope.curentlyEditedProj.cena,
+						"film":$stateParams.movieId,
+						"sedista":$scope.curentlyEditedProj.sedista
+					}
+	    		projekcijeService.putProjekcija($scope.curentlyEditedProj.id, DTO,
+	    				function(info){
+	    					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
+	    				},
+	    				function(info){
+	    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+	    						alert("Greska u unosu!")
+	    					}else{
+	    						alert(info.data.err);
+	    					}
+	    				}
+	    		)
+    		}
+    		else{
+    			alert("Unesite datum i vreme.")
+    		}
     	}
     	
     	$scope.stringSala = function(x){
