@@ -30,6 +30,17 @@ angular.module('app')
 	        };
 	        $http(req).then(onSuccess, onError);
 	    },
+	    rateReservation: function (data, rezId,  onSuccess, onError) {
+	        var req = {
+	            method: 'PUT',
+	            url: '/api/reservations/'+rezId+'/rate',
+	            headers: {
+	                 'Content-Type': 'application/json'
+	             },
+	             data: data
+	        };
+	        $http(req).then(onSuccess, onError);
+	    },
 	    getOneClick: function(cinId, onSuccess, onError){
 	    	var req = {
 	                method: 'GET',
