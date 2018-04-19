@@ -24,19 +24,19 @@ INSERT INTO invite VALUES (5, 'false', 5, 0);
 /* Dodavanje bioskopa */
 INSERT INTO repertoire (id, bioskop_id) values (1, null);
 INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
-							  (1, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  (1, 'Bulevar Mihajla Pupina 3', 50, 10, 'Najbolje ponude u vasem omiljenom bioskopu.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
 							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
 update repertoire set bioskop_id=1 where id=1;
 
 INSERT INTO repertoire (id, bioskop_id) values (2, null);
 INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
-							  (2, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
-							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
+							  (2, 'Sentandrejskiput 11', 50, 10, 'Najveci izbor filmova.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  100, 20, 'CineStar', 150, 30, 'CINNEMA', 1);
 update repertoire set bioskop_id=2 where id=2;
 
 INSERT INTO repertoire (id, bioskop_id) values (3, null);
 INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
-							  (3, 'Bulevar neki', 50, 10, 'Ovo je test bioskop. Opis nije bitan al samo kucam nesto da ima', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  (3, 'Visnjicka 84', 50, 10, 'Vas omiljeni bioskop, sa najpovoljnijim kartama.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
 							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
 update repertoire set bioskop_id=3 where id=3;
 
@@ -45,13 +45,13 @@ INSERT INTO korisnici_bioskopi(user_id, bioskopi_id) values(2,1);
 
 /* Dodavanje filmova*/
 INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
-(1, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+(1, 0, 'Akcioni triler iz 2002. baziran na romanu Roberta Ladluma.', 'Dag Lajman', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Bornov identitet', 400, 1, 'MOVIE');
 
 INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
-(2, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+(2, 0, ' Trojanski rat opisan u Homerovoj Ilijadi', 'Volfang Petersen', 150, 'Istorijski', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Troja', 400, 1, 'MOVIE');
 
 INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
-(3, 0, 'film neki', 'reziser neki', 150, 'Akcioni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Film', 400, 1, 'MOVIE');
+(3, 0, 'Filmska drama iz 1995. o otporu Vilijama Volasa engleskoj okupaciji Škotske. ', 'Mel Gibson', 150, 'Istorijski', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Hrabro srce', 400, 1, 'MOVIE');
 
 
 insert into sala (id, bioskop, duzina, naziv_broj, visina) values (1, 1, 11, 'Sala1', 1);
