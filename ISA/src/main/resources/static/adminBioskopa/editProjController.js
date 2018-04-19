@@ -1,6 +1,14 @@
 angular.module('app')
     .controller('editProjController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService, reservationService) {
     	
+    	$scope.salaPanelText = function(){
+    		if($scope.opdNewSalaEditing==true){
+    			return "Unesi novu salu";
+    		}else{
+    			return "Odaberi postojecu salu";
+    		}
+    	}
+    	
     	$scope.date = function(date){
     		var dat = new Date(date);
     		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
