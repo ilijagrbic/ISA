@@ -97,9 +97,25 @@ angular.module('app')
 		var something = this;
 		$scope.enterMovie = false;
 		$scope.types = ["MOVIE", "PERFORMANCE"];
-		$scope.showOneClick = true;
+		$scope.showOneClick = false;
 		$scope.izvestajiShow =false;
 		$scope.reportIncome = 0;
+		
+		$scope.showOneClickLabel = function(){
+			if(!$scope.showOneClick){
+				return "Prikazi brze rezervacije"
+			}else{
+				return "Sakriji brze rezervacije"
+			}
+		}
+		
+		$scope.showIzvestajiButtonData = function(){
+			if(!$scope.izvestajiShow){
+				return "Prikazi izvestaje"
+			}else{
+				return "Sakriji izvestaje"
+			}
+		}
 		
 		$scope.showIncome = function(od, doo){
 			reportService.getIncomeReport(

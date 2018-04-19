@@ -2,44 +2,50 @@
 Edit place
 </h1>
 <div>
-	<div class="containter">
-		Naziv:<input type=text ng-model="curentCinemaTheatre.name"><br/>
-		Adresa:<input type=text ng-model="curentCinemaTheatre.address"><br/>
-		Opis:<input type=text ng-model="curentCinemaTheatre.description"><br/>
-		Tip:{{curentCinemaTheatre.type}}<br/>
-		Gmaps url:<input type=text ng-model="curentCinemaTheatre.gmapsUrl"><br/>
-		Bronzana granica:<input type=text ng-model="curentCinemaTheatre.bronzeTreshold"><br/>
-		Srebrena granica:<input type=text ng-model="curentCinemaTheatre.silverTreshold"><br/>
-		Zlatna granica:<input type=text ng-model="curentCinemaTheatre.goldTreshold"><br/>
-		Bronzani popust:<input type=text ng-model="curentCinemaTheatre.bronzeSale"><br/>
-		Srebreni popust:<input type=text ng-model="curentCinemaTheatre.silverSale"><br/>
-		Zlatni popust:<input type=text ng-model="curentCinemaTheatre.goldSale"><br/>
-		<!-- promotivne karte -->
-		<button ng-click="backToTheatres()">Back</button>
-		<button ng-click="commitChanges()">Save</button>
-		<button ng-click="showReports()">Reports</button>
-		<button ng-click="showHideOneClick()">Show/Hide oneclick</button>
+	<div class="card">
+		<div class="card-body">
+			Naziv:<br/><input type=text ng-model="curentCinemaTheatre.name"><br/>
+			Adresa:<br/><input type=text ng-model="curentCinemaTheatre.address"><br/>
+			Opis:<br/><textarea name="Text1" cols="20" rows="5" ng-model="curentCinemaTheatre.description"></textarea><br/>			
+			Link za lokaciju:<br/><input type=text ng-model="curentCinemaTheatre.gmapsUrl"><br/>
+			Bronzana granica:<input type=text ng-model="curentCinemaTheatre.bronzeTreshold"><br/>
+			Srebrena granica:<input type=text ng-model="curentCinemaTheatre.silverTreshold"><br/>
+			Zlatna granica:<input type=text ng-model="curentCinemaTheatre.goldTreshold"><br/>
+			Bronzani popust:<input type=text ng-model="curentCinemaTheatre.bronzeSale"><br/>
+			Srebreni popust:<input type=text ng-model="curentCinemaTheatre.silverSale"><br/>
+			Zlatni popust:<input type=text ng-model="curentCinemaTheatre.goldSale"><br/><br/>
+			<!-- promotivne karte -->
+			<div class="btn-group">
+				<button class="btn btn-primary" ng-click="backToTheatres()">Nazad</button>
+				<button class="btn btn-primary" ng-click="commitChanges()">Sacuvaj</button>
+				<button class="btn btn-primary" ng-click="showReports()">{{showIzvestajiButtonData()}}</button>
+				<button class="btn btn-primary" ng-click="showHideOneClick()">{{showOneClickLabel()}}</button>
+			</div>
+		</div>
 	</div>
 	
 	
 	<div ng-show="izvestajiShow==false">
-	<ol >
-		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
-			Naziv filma:{{movie.name}} <br/>
-			Id:{{movie.id}} <br/>
-			<img ng-src="/api/files/{{movie.image}}"><br/>		
-			<button ng-click="editMovie(movie)">Edit</button>
-			<button ng-click="deleteMovie(movie.id)">Delete</button>	
-			<button ng-click="viewMovie(movie)">View</button>
-		</li>
-	</ol>
-	<button ng-click="newMovie()">New</button>
+	<h3>Filmovi u ponudi:</h3>
+	<div class="card">
+		<div class="card-body" ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
+			<b>Naziv filma:</b><br/>{{movie.name}} <br/>
+			<img ng-src="/api/files/{{movie.image}}"><br/>
+			<div class="btn-group">	
+				<button class="btn btn-primary" ng-click="editMovie(movie)">Izmeni</button>
+				<button class="btn btn-primary" ng-click="deleteMovie(movie.id)">Ukloni</button>	
+				<button class="btn btn-primary" ng-click="viewMovie(movie)">Prikazi detalje</button>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary" ng-click="newMovie()" ng-show = "!enterMovieState==true">Novi film</button>
 	</div>
 	
+	
 	<div ng-show="izvestajiShow==true">
-	<h3>Reports</h3>
-	Prosecna ocena ambijenta:{{ambijentOcena}}<br/>
-	Prihodi u odredjenom intervalu:{{reportIncome}}<br/>
+	<h3>Izvestaji</h3>
+	<b>Prosecna ocena ambijenta:</b><br/>{{ambijentOcena}}<br/>
+	<b>Prihodi u odredjenom intervalu:</b><br/>{{reportIncome}}<br/>
 	<br/>
 	Od:
       <div class="col-md-6">
@@ -69,35 +75,40 @@ Edit place
 	
 	</div>
 	
-	<div ng-show = "enterMovieState==true">
-		Naziv:<input type=text ng-model="enterMoviename"><br/>
-		Zanr:<input type=text ng-model="enterMoviegenre"><br/>
-		Tip:<select ng-model="enterMovietype" ng-options="x for x in types"></select><br/>
-		Reziser:<input type=text ng-model="enterMoviedirector"><br/>
-		Trajanje:<input type=text ng-model="enterMovieduration"><br/>
-		Cena:<input type=text ng-model="enterMovieprice"><br/>
-		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="enterMoviedescription"></textarea><br/>
-		Poster:
-		<input type="file" file-upload="something.myFile"/>
-		<br/>
-              
-		<!-- Sale, termini, poster, glumci-->
-		<button ng-click="cancelEntery()">Cancel entry</button>
-		<button ng-click="saveEntery()">Save entry</button>
+	<div ng-show = "enterMovieState==true" class="card">
+	<h3>Unos novog filma</h3>
+		<div class="card-body">
+			Naziv:<br/><input type=text ng-model="enterMoviename"><br/>
+			Zanr:<br/><input type=text ng-model="enterMoviegenre"><br/>
+			Tip:<br/><select ng-model="enterMovietype" ng-options="x for x in types"></select><br/>
+			Reziser:<br/><input type=text ng-model="enterMoviedirector"><br/>
+			Trajanje:<br/><input type=text ng-model="enterMovieduration"><br/>
+			Cena:<br/><input type=text ng-model="enterMovieprice"><br/>
+			Opis:<br/><textarea name="Text1" cols="20" rows="5" ng-model="enterMoviedescription"></textarea><br/>
+			Poster:
+			<input type="file" file-upload="something.myFile"/>
+			<br/>
+	              
+			<!-- Sale, termini, poster, glumci-->
+			<div class="btn-group">
+				<button class="btn btn-primary" ng-click="cancelEntery()">Prekini unos</button>
+				<button class="btn btn-primary" ng-click="saveEntery()">Sacuvaj unos</button>
+			</div>
+		</div>
 	</div>
 	
 	
 	<div ng-show="showOneClick == true&&izvestajiShow==false">
-		<h3>Oneclick rezervacije:</h3>
-		<ol>
-			<li ng-repeat="rez in oneClick">
-				Naziv filma: {{rez.film.name}}<br/>
-				Datum: {{date(rez.projekcija.date)}}<br/>
-				Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
-				Orginalna cena: {{rez.projekcija.cena}}<br/>
-				POPUST!: {{rez.rezervisanoMesto.deltaCena}}
-				<button ng-click="deleteOneClickReservation(rez.id)">Delete</button>
-			</li>
-		</ol>
+		<h3>Brze rezervacije:</h3>
+		<div class="card">
+			<div ng-repeat="rez in oneClick" class="card-body">
+				<b>Naziv filma:</b><br/> {{rez.film.name}}<br/>
+				<b>Datum:</b> <br/>{{date(rez.projekcija.date)}}<br/>
+				<b>Sala:</b> <br/>{{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
+				<b>Orginalna cena:</b> <br/>{{rez.projekcija.cena}}<br/>
+				<b>POPUST!: </b><br/>{{rez.rezervisanoMesto.deltaCena}}<br/>
+				<button class="btn btn-primary" ng-click="deleteOneClickReservation(rez.id)">Ukloni rezervaciju</button>
+			</div>
+		</div>
 	</div>
 </div>
