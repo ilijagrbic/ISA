@@ -4,12 +4,14 @@ angular.module('app').controller(
 			//console.log("Rezervacije");
 			$scope.existsInRez = function(sed){
 				if(sed!=undefined){
-	    		for(i=0;i<$scope.rezervacijeUtrenutnoSelektovanojProjekciji.length;i++){
-	    			if(sed.id==$scope.rezervacijeUtrenutnoSelektovanojProjekciji[i].rezervisanoMesto.id){
-	    				return false;
-	    			}
-	    		}
-	    		return true;
+					if($scope.rezervacijeUtrenutnoSelektovanojProjekciji!=undefined){
+		    		for(i=0;i<$scope.rezervacijeUtrenutnoSelektovanojProjekciji.length;i++){
+		    			if(sed.id==$scope.rezervacijeUtrenutnoSelektovanojProjekciji[i].rezervisanoMesto.id){
+		    				return false;
+		    			}
+		    		}
+		    		return true;
+					}
 				}
 
 	    	}
@@ -250,7 +252,7 @@ angular.module('app').controller(
 						
 						console.log("Zauzete od stane prijatelja: " + JSON.stringify(zauzetaOdStranePrijatelja));
 						
-						
+						if(zauzetaOdStranePrijatelja.length!=0){
 						if(zauzetaOdStranePrijatelja.length!=selektovane.length-1){
 							console.log("Imamo visak sedista");
 							
@@ -279,7 +281,7 @@ angular.module('app').controller(
 									
 								}
 								
-								
+						}
 							
 							
 							
