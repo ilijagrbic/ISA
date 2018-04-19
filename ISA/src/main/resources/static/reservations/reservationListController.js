@@ -1,6 +1,8 @@
 angular.module('app').controller(
 		'reservationListController',
 		function($rootScope, $scope, $state, reservationsService, reservationService) {
+			
+			if ($rootScope.USER != null){
 			$scope.showOceniPanel=true;
 			$scope.showOceni = function(res){
 				$scope.showOceniPanel=false;
@@ -70,6 +72,10 @@ angular.module('app').controller(
 					alert("Error - nije mogao da pronadje rezervacije");
 				});
 				
+			}
+			}
+			else{
+				$state.go('signin');
 			}
 
 });

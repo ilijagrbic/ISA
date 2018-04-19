@@ -149,7 +149,7 @@ public class ReservationController {
 		if(reservationDTO.getIsHost()==false) {
 			// Treba da posalje mail
 			System.out.println("\nGost je treba da salje mail");
-			mailService.sendReservationMail("http://localhost:8133/reservations/reservationList.html", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
+			mailService.sendReservationMail("http://localhost:8133/#!/listOfReservations", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
 		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {
