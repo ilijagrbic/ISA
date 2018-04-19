@@ -95,12 +95,12 @@ public class ReservationController {
 			value = "/api/reservations/{id}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Rezervacija> deleteReserv(@PathVariable("id") Long id){
+	public ResponseEntity<?> deleteReserv(@PathVariable("id") Long id){
 		Rezervacija retVal = (Rezervacija)resevationService.delete(id);
 		if(retVal!=null)
 			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Greska u brisanju rezervacije."), HttpStatus.BAD_REQUEST);
 		
 	}
 	

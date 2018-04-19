@@ -18,8 +18,8 @@ angular.module('app')
     			function(info){
     				$scope.curentlyEditedProj = info.data;
     			},
-    			function(){
-    				
+    			function(info){
+    				alert(info.data.err);
     			}
     	)
     	
@@ -27,8 +27,8 @@ angular.module('app')
 				function(info){
 					$scope.listSale = info.data;
 				},
-				function(){
-		
+				function(info){
+					alert(info.data.err);	
 				}
 			)
 		
@@ -36,8 +36,8 @@ angular.module('app')
 				function(info){
 					$scope.rezervacije = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 			    	
@@ -64,8 +64,8 @@ angular.module('app')
     				function(info){
     					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
     				},
-    				function(){
-    					
+    				function(info){
+    					alert(info.data.err);
     				}
     		)
     	}
@@ -119,8 +119,8 @@ angular.module('app')
     				function(info){
     					$scope.rezervacije.splice($scope.rezervacije.length, "0", info.data);
     				},
-    				function(){
-    					
+    				function(info){
+    					alert(info.data.err);
     				}
     			)
     			

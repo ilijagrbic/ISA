@@ -25,8 +25,8 @@ angular.module('app')
 							}
     					}
     				},
-    				function(){
-    					
+    				function(info){
+    					alert(info.data.err);
     				}
     		)
     	}
@@ -38,7 +38,7 @@ angular.module('app')
 				},
 				function(info){//fail function
 					$scope.cinemas=[];
-					
+					alert(info.data.err);
 				}
 		);
     	$scope.showCinemas = true;
@@ -51,8 +51,8 @@ angular.module('app')
 	    					$scope.oneClick = info.data;
 	    					$scope.showCinemas = false;
 	    				},
-	    				function(){
-	    					
+	    				function(info){
+	    					alert(info.data.err);
 	    				}
 	    		)
     		}else{

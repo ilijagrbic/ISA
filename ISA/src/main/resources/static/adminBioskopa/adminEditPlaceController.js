@@ -47,25 +47,25 @@ angular.module('app')
 					function(info){//succes function
 						$scope.curentCinemaTheatre=info.data;				
 					},
-					function(){//fail function
+					function(info){//fail function
 						$scope.curentCinemaTheatre=null;
-						
+						alert(info.data.err);
 					}
 			);
 			reservationService.getOneClick($stateParams.cinemaTheatreId,
 					function(info){
 						$scope.oneClick=info.data;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			);
 			reportService.getAmbijentReport($stateParams.cinemaTheatreId,
 					function(info){
 						$scope.ambijentOcena=info.data.avgOcena;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					})
 			
 		}
@@ -128,7 +128,7 @@ angular.module('app')
 					$scope.reportIncome=info.data.avgOcena;
 				},
 				function(info){
-					
+					alert(info.data.err);
 					
 				})
 		}
@@ -146,8 +146,8 @@ angular.module('app')
 							}
 						}
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			)
 		}
@@ -166,8 +166,8 @@ angular.module('app')
 					function(info){
 						goBack();
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			)
 				
@@ -187,7 +187,7 @@ angular.module('app')
 					}
 				},
 				function(){
-					
+					alert(info.data.err);
 				}
 			)
 		}
@@ -213,14 +213,14 @@ angular.module('app')
 		    				function(info){
 		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
 		    				},
-		    				function(){
-		    					
+		    				function(info){
+		    					alert(info.data.err);
 		    				}
 		    			);
 		              
 	          }, 
 	          function (response) {
-	        	  console.log(response.data)
+	        	  //TODO
 	          });
 		}
 		

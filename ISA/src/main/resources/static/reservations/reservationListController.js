@@ -30,8 +30,8 @@ angular.module('app').controller(
 	    	    				}
 	    	    				
 	    	    			},
-	    				function(){
-	    					
+	    				function(info){
+	    	    				alert(info.data.err);
 	    				}
 	    		)
 			}

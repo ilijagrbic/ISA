@@ -10,8 +10,9 @@ angular.module('app')
 				function(info){
 					$scope.curentMovie = info.data;
 				},
-				function(){
+				function(info){
 					$scope.curentMovie = null;
+					alert(info.data.err);
 				}
 		)
 		
@@ -19,8 +20,8 @@ angular.module('app')
 				function(info){
 					$scope.listProjekcije = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -28,8 +29,8 @@ angular.module('app')
 				function(info){
 					$scope.listSale = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -37,8 +38,8 @@ angular.module('app')
 					function(info){
 						$scope.ocenaMovie=info.data.avgOcena;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 		)
 		

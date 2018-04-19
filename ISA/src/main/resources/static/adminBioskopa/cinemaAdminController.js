@@ -7,7 +7,7 @@ angular.module('app')
 				},
 				function(info){//fail function
 					$scope.cinemas=[];
-					
+					alert(info.data.err);
 				}
 		);
 		

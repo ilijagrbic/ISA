@@ -123,7 +123,7 @@ public class BioskopPozoristeController {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno."), HttpStatus.BAD_REQUEST);
 		}
 		else if(updateCinema.getAddress()==null||updateCinema.getAddress().isEmpty()||updateCinema.getAddress().equals("")) {
-			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno."), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Adresa ne sme biti prazna."), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			updateCinema.setId(id);
