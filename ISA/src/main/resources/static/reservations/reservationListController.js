@@ -6,6 +6,11 @@ angular.module('app').controller(
 				$scope.showOceniPanel=false;
 				$scope.rateingReservation = res;
 			}
+
+			$scope.date = function(date){
+	    		var dat = new Date(date);
+	    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+	    	}
 			$scope.commitRate = function(){
 
 	    		reservationService.rateReservation(

@@ -1,7 +1,17 @@
 angular.module('app').controller(
 		'reservationsController',
 		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService, reservationService) {
-			//console.log("Rezervacije");
+			
+			
+			$scope.odustanak = function(){
+				console.log("Odustanak");
+				$state.go('user');
+			};
+			$scope.zaDalje=true;
+			$scope.odabranaProjekcija = false;
+			$scope.sakrijTabeluIPretragu = false;
+			$scope.pozivPrijatelja = true;
+			$scope.numRez=0;
 			$scope.existsInRez = function(sed){
 				if(sed!=undefined){
 					if($scope.rezervacijeUtrenutnoSelektovanojProjekciji!=undefined){
@@ -61,6 +71,7 @@ angular.module('app').controller(
 				
 				$scope.details = function(cinemaTheatre, index) {
 					$scope.numRez=0;
+					$scope.sakrijTabeluIPretragu = true;
 					var prijatelji=[];
 					var selektovane = [];
 					cinemaTheatreService.getCinemaTheatreById(index,
@@ -83,6 +94,9 @@ angular.module('app').controller(
 					}
 					);
 					
+					
+				
+					
 					$scope.listProjection = function(idMovie){
 						$scope.list="izlistaj";
 						projekcijeService.getProjekcijeInMovie(index,idMovie,
@@ -95,7 +109,10 @@ angular.module('app').controller(
 						}
 					);}
 					
-					$scope.chooseProjection = function(projekcija, idProjekcije){					
+					$scope.chooseProjection = function(projekcija, idProjekcije){
+						$scope.zaDalje = false;
+						$scope.pozivPrijatelja = true; // Ne znma
+						$scope.odabranaProjekcija = true;
 						//alert("Bira projekciju");
 						projection = projekcija; // Projekcija odabrana
 						projekcijeService.getProjekcija(idProjekcije,
@@ -120,7 +137,9 @@ angular.module('app').controller(
 					};
 					
 					$scope.selektovani = function(){
+						$scope.pozivPrijatelja = false;
 						$scope.izabranaSedista=true;
+						
 						$scope.numRez=0;
 						selektovane=[]; // sedista selektovana - value mozda da promenim
 						
@@ -132,9 +151,11 @@ angular.module('app').controller(
 							});
 						
 						if($scope.numRez!=0){
-							$scope.pozivPrijatelja=true;
+							$scope.zaDalje = false;
+							//$scope.pozivPrijatelja=true; //
 						}
 						else{
+							$scope.pozivPrijatelja=true;
 							$scope.greska==true;
 						}
 						
@@ -145,6 +166,12 @@ angular.module('app').controller(
 						});
 						//console.log(selektovane + "broj rezervacija " +$scope.numRez);
 					};
+					
+					friendshipService.friends($rootScope.USER.id, function(res) {
+						$scope.callFriends = res.data;
+					}, function(res) {
+						alert("Error - nije mogao da pronadje prijatelje");
+					});
 					
 					
 					$scope.posaljiPoziv = function (selectedFriend){
@@ -177,6 +204,11 @@ angular.module('app').controller(
 						
 					};
 					
+					$scope.date = function(date){
+			    		var dat = new Date(date);
+			    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+			    	}
+					
 					$scope.rezervacija = function(){
 						// Selektovane - sedista 
 						
@@ -185,7 +217,8 @@ angular.module('app').controller(
 								"idRezervant" : $rootScope.USER.id,
 								"isHost" : true,
 								"rezSedisteId" : selektovane[0],
-								"idHost" :  $rootScope.USER.id	
+								"idHost" :  $rootScope.USER.id,
+								"movie" : $rootScope.selectedMovie
 						}
 						
 						reservationsService.reservate(host,
@@ -209,7 +242,8 @@ angular.module('app').controller(
 										"idRezervant" : prijatelji[i],
 										"isHost" : false,
 										"rezSedisteId" : selektovane[i+1],
-										"idHost" :  $rootScope.USER.id	
+										"idHost" :  $rootScope.USER.id,
+										"movie" : $rootScope.selectedMovie
 								}
 								
 								reservationsService.reservate(poziv,
@@ -233,7 +267,8 @@ angular.module('app').controller(
 											"idRezervant" : $rootScope.USER.id,
 											"isHost" : true,
 											"rezSedisteId" : selektovane[j],
-											"idHost" :  $rootScope.USER.id	
+											"idHost" :  $rootScope.USER.id,
+											"movie" : $rootScope.selectedMovie
 									}
 									
 									reservationsService.reservate(host,
@@ -265,7 +300,8 @@ angular.module('app').controller(
 												"idRezervant" : $rootScope.USER.id,
 												"isHost" : true,
 												"rezSedisteId" : selektovane[j],
-												"idHost" :  $rootScope.USER.id	
+												"idHost" :  $rootScope.USER.id,
+												"movie" : $rootScope.selectedMovie
 										}
 										
 										reservationsService.reservate(host,
