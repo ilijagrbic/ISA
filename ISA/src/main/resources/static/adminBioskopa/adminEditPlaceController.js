@@ -220,7 +220,16 @@ angular.module('app')
 		              
 	          }, 
 	          function (response) {
-	        	  //TODO
+	        	  $scope.imgPath = "";
+		            getMovieDTO();
+		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
+		    				function(info){
+		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
+		    				},
+		    				function(info){
+		    					alert(info.data.err);
+		    				}
+		    			);
 	          });
 		}
 		

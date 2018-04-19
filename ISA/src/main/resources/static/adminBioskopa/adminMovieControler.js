@@ -221,7 +221,16 @@ angular.module('app')
 			              
 		          }, 
 		          function (error) {
-		        	  //TODO
+		        	  $scope.imgPath = "";
+			            getMovieDTO();
+			            movieShowService.putMovieShow($stateParams.cinemaId, $scope.curentMovie.id, getMovieDTO(),
+			    				function(info){
+			            			goBack();
+			    				},
+			    				function(info){
+			    					alert(info.data.err);
+			    				}
+			    			);
 		          });
 		}
 		
