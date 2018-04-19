@@ -12,6 +12,21 @@ angular.module('app')
 				}
 		);
     	
+
+		fanZoneService.getOglasiZaOdobravanje(
+			function(info){//succes function
+				$scope.odobrenje=info.data;
+				console.log($scope.odobrenje);
+				
+			},
+			function(info){//fail function
+				$scope.oglasiZaOdobravanje=[];
+				
+			}
+
+			
+	);
+    	
     	fanZoneService.getPolovnaPonuda(
 				function(info){//succes function
 					$scope.polovni=info.data;
@@ -22,7 +37,11 @@ angular.module('app')
 					$scope.polovni=[];
 					
 				}
+
+				
 		);
+
+
     	
     	$scope.dodajZvanicniOglas=function(){
     		fanZoneService.saveZvanicni(
@@ -125,6 +144,37 @@ angular.module('app')
     		
     		
     	}
-       	
+    	$scope.prihvatiOglas=function(id){
+    		fanZoneService.prihvatiOglas(
+    		id,
+    		function(info){//succes function
+    			$scope.odobrenje=info.data;
+				
+			},
+			function(info){//fail function
+				
+			}
+    				
+    		
+    		);
+    		
+    		
+		}
+		$scope.odbiOglas=function(id){
+    		fanZoneService.odbiOglas(
+    		id,
+    		function(info){//succes function
+    			$scope.odobrenje=info.data;
+				
+			},
+			function(info){//fail function
+				
+			}
+    				
+    		
+    		);
+    		
+    		
+    	}
        	
     });

@@ -54,3 +54,26 @@ Ponude za rekvizit
 </tr>
 
 </table>
+
+<br>
+
+
+OGLASI ZA ODOBRAVANJE
+<table border="1">
+<tr>
+<th>naziv</th>
+<th>Ponudjac</th>
+<th></th>
+<th></th>
+</tr>
+<tr ng-repeat="oglas in odobrenje">
+<td>{{oglas.naziv}}</td>
+<td>{{oglas.postavljac.name}}</td>
+<td><button ng-click="prihvatiOglas(oglas.id)"> Prihvati</button></td>
+<td><button ng-click="odbiOglas(oglas.id)"> Odbi</button></td>
+
+
+
+</tr>
+
+</table>

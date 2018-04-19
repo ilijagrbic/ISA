@@ -72,7 +72,7 @@ INSERT INTO sediste VALUES(10, 200, 10, 'VIP', 8);
 INSERT INTO sediste VALUES(11, 50, 10, 'VIP', 9);
 
 
-Insert into rekviziti values (1, '2038-01-19 03:14:07','rekvizit',1 ,'ZVANICNI', 1, 1);
+Insert into rekviziti values (1, '2038-01-19 03:14:07','rekvizit','NEOBRADJEN','ZVANICNI', 1, 1);
 
 INSERT INTO projekcija_sedista VALUES(1,1);
 INSERT INTO projekcija_sedista VALUES(1,2);

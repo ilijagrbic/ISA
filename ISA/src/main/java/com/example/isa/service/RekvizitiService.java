@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.BioskopPozoristeType;
+import com.example.isa.model.RekvizitState;
 import com.example.isa.model.Rekviziti;
 import com.example.isa.model.VrstaRekvizita;
 import com.example.isa.model.users.User;
@@ -47,6 +48,14 @@ public class RekvizitiService {
 		} 
 		public List<Rekviziti> getUserRekviziti(User user){
 			return rekvizitiRepository.findByPostavljac(user);
+		} 
+		
+		public List<Rekviziti> getNeobredjeni(){
+			return rekvizitiRepository.findByOdobren(RekvizitState.NEOBRADJEN);
+		} 
+		
+		public List<Rekviziti> getOdobreni(){
+			return rekvizitiRepository.findByOdobren(RekvizitState.PRIHVACEN);
 		} 
 
 		

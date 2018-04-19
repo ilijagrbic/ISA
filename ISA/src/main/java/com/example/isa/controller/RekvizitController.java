@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.model.Licitacija;
+import com.example.isa.model.LicitacijaStatus;
+import com.example.isa.model.RekvizitState;
 import com.example.isa.model.Rekviziti;
 import com.example.isa.model.VrstaRekvizita;
 import com.example.isa.model.users.User;
@@ -41,7 +43,7 @@ public class RekvizitController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/polovni")
 	public ResponseEntity<List<Rekviziti>> getRekvizitiPolovni(){
-		List<Rekviziti> rekviziti = rekvizitiService.getAllPolovna();
+		List<Rekviziti> rekviziti = rekvizitiService.getOdobreni();
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
 		
 	}
@@ -58,6 +60,7 @@ public class RekvizitController {
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/polovni")
 	public ResponseEntity<List<Rekviziti>> saveRekvizitPolovni(@RequestBody Rekviziti rekvizit){
 		rekvizit.setVrsta(VrstaRekvizita.POLOVNI);
+		rekvizit.setOdobren(RekvizitState.NEOBRADJEN);
 		rekvizitiService.save(rekvizit);
 		List<Rekviziti> rekviziti = rekvizitiService.getAllPolovna();
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
@@ -91,6 +94,33 @@ public class RekvizitController {
 		
 		List<Licitacija> licitacije = licitacijaService.findAll(rekvizit);
 		return new ResponseEntity<>(licitacije, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/ponude/neobradjeni")
+	public ResponseEntity<List<Rekviziti>> getPonudeNeobradjene(){
+		List<Rekviziti> rekviziti = rekvizitiService.getNeobredjeni();
+		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
+		
+	}
+	
+
+	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/ponude/odobrenje/{id}")
+	public ResponseEntity<List<Rekviziti>> odobrenje(@PathVariable long id){
+		Rekviziti rekvizit = rekvizitiService.findOne(id);
+		rekvizit.setOdobren(RekvizitState.PRIHVACEN);
+		rekvizitiService.save(rekvizit);
+		List<Rekviziti> rekviziti = rekvizitiService.getNeobredjeni();
+		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
+		
+	}
+	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/ponude/odbijanje/{id}")
+	public ResponseEntity<List<Rekviziti>> odbijanje(@PathVariable long id){
+		Rekviziti rekvizit = rekvizitiService.findOne(id);
+		rekvizit.setOdobren(RekvizitState.ODBIJEN);
+		rekvizitiService.save(rekvizit);
+		List<Rekviziti> rekviziti = rekvizitiService.getNeobredjeni();
+		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
 		
 	}
 }

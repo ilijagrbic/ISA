@@ -54,5 +54,26 @@ angular.module('app')
                     };
                     $http(req).then(onSuccess, onError);
             },
+            getOglasiZaOdobravanje: function(onSuccess, onError){
+                var req = {
+                        method: 'GET',
+                        url: 'api/rekvizit/ponude/neobradjeni',
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
+            prihvatiOglas : function(id,onSuccess, onError){
+                var req = {
+                        method: 'POST',
+                        url: 'api/rekvizit/ponude/odobrenje/' + id,
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
+            odbiOglas: function(id,onSuccess, onError){
+                var req = {
+                        method: 'POST',
+                        url: 'api/rekvizit/ponude/odbijanje/' + id,
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
         }
     });

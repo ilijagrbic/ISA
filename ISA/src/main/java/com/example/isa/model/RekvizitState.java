@@ -2,8 +2,8 @@ package com.example.isa.model;
 
 public enum RekvizitState {
 	
-	ODOBREN,
+	NEOBRADJEN,
 	ODBIJEN,
-	PRIHVACN,
+	PRIHVACEN,
 
 }
