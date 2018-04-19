@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.MovieShowDTO;
+import com.example.isa.model.Glumac;
 import com.example.isa.model.MovieShow;
 import com.example.isa.service.MovieShowService;
 
@@ -103,10 +104,15 @@ public class MovieShowController {
 		else if(createMovie.getPrice()<1) {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}
-		else if(createMovie.getName().isEmpty()||createMovie.getName()==null||createMovie.getName().equals("")) {
+		else if(createMovie.getName()==null||createMovie.getName().isEmpty()||createMovie.getName().equals("")) {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno"), HttpStatus.BAD_REQUEST);
 		}
 		else {
+			for(Glumac g:createMovie.getGlumci()) {
+				if( (g.getIme()==null||g.getIme().isEmpty()||g.getIme().equals(""))||(g.getPrezime()==null||g.getPrezime().isEmpty()||g.getPrezime().equals(""))) {
+					return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Glumac mora imati neprazno ime i prezime."), HttpStatus.BAD_REQUEST);
+				}
+			}
 			MovieShow temp = createMovie.getMovieShow();
 			temp.setId(createMovie.getId());
 			MovieShow retVal = movieService.update(temp, idMovie);
