@@ -65,7 +65,11 @@ angular.module('app')
     					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
     				},
     				function(info){
-    					alert(info.data.err);
+    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+    						alert("Greska u unosu!")
+    					}else{
+    						alert(info.data.err);
+    					}
     				}
     		)
     	}
@@ -120,7 +124,11 @@ angular.module('app')
     					$scope.rezervacije.splice($scope.rezervacije.length, "0", info.data);
     				},
     				function(info){
-    					alert(info.data.err);
+    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+    						alert("Greska u unosu!")
+    					}else{
+    						alert(info.data.err);
+    					}
     				}
     			)
     			

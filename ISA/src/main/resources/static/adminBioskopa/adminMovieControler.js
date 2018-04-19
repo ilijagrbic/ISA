@@ -113,7 +113,11 @@ angular.module('app')
 						$scope.listProjekcije.splice($scope.listProjekcijelength, "0", info.data);
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+    						alert("Greska u unosu!")
+    					}else{
+    						alert(info.data.err);
+    					}
 					}
 			)
 		}
@@ -215,7 +219,11 @@ angular.module('app')
 			            			goBack();
 			    				},
 			    				function(info){
-			    					alert(info.data.err);
+			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+			    						alert("Greska u unosu!")
+			    					}else{
+			    						alert(info.data.err);
+			    					}
 			    				}
 			    			);
 			              
@@ -228,7 +236,11 @@ angular.module('app')
 			            			goBack();
 			    				},
 			    				function(info){
-			    					alert(info.data.err);
+			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+			    						alert("Greska u unosu!")
+			    					}else{
+			    						alert(info.data.err);
+			    					}
 			    				}
 			    			);
 		          });
