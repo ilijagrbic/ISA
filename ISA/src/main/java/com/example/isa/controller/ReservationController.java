@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
+import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.service.MailService;
 import com.example.isa.service.ReservationService;
@@ -197,6 +198,17 @@ public class ReservationController {
 			System.out.println(res.getId()); 
 		}
 		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/api/getHistory/{id}", method=RequestMethod.GET) 
+	public ResponseEntity<Collection<BioskopPozoriste>> getHistory(@PathVariable("id") Long id){
+		System.out.println("\n\n*** Poseceni bioskopi");
+		ArrayList<BioskopPozoriste> bioskopi = (ArrayList<BioskopPozoriste>) resevationService.getHistory(id);
+		
+		for(BioskopPozoriste bp : bioskopi) {
+			System.out.println(bp.getId());
+		}
+		return new ResponseEntity<Collection<BioskopPozoriste>>(bioskopi, HttpStatus.OK);
 	}
 
 }

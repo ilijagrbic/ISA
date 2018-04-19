@@ -15,12 +15,14 @@ import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
+import com.example.isa.model.Repertoire;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.RezervacijaStatus;
 import com.example.isa.model.Sediste;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.ProjekcijaRepository;
+import com.example.isa.repository.RepertoireRepository;
 import com.example.isa.repository.RezervacijaRepository;
 import com.example.isa.repository.SedisteRepository;
 import com.example.isa.repository.UserRepository;
@@ -30,6 +32,9 @@ public class ReservationService {
 	
 	@Autowired
 	private BioskopPozoristeRepository bioskoRepository;
+	
+	@Autowired
+	private  RepertoireRepository repertoireRepository;
 	
 	@Autowired
 	private RezervacijaRepository reservationRepository;
@@ -334,5 +339,18 @@ public class ReservationService {
 	public List<Rezervacija> getAllReservations(){
 		System.out.println("Usao da pronadje");
 		return reservationRepository.findAll();
+	}
+	
+	public List<BioskopPozoriste> getHistory(Long id){
+		ArrayList<BioskopPozoriste> bioskopi = new ArrayList<BioskopPozoriste>(); 
+		
+		for(Rezervacija r : reservationRepository.findByRezervantId(id)) {
+			for (Repertoire rep : repertoireRepository.findAll()) {
+				if(rep.getMovies().contains(r.getFilm())) {
+					bioskopi.add(rep.getBioskop());
+				}
+			}
+		}
+		return bioskopi;
 	}
 }

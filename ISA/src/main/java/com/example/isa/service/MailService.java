@@ -85,6 +85,38 @@ public class MailService {
 			e.printStackTrace();
 		}
 	}
+	
+	// Mail sa rezervacijom
+	@Async
+	public void sendCreatedReservationMail(String url, Long id, Long idHost) {
+		// final SimpleMailMessage message = new SimpleMailMessage();
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		
+		final String username = "mail.isaprojekat@gmail.com";
+		final String password = "projekatisa";
+		
+		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage message = new MimeMessage(session);
+
+		try {
+			message.setSubject(userRepository.findById(idHost).getName() + " Vas je pozvao na dogadjaj , kliknite na link za potvrdu rezervacije ");
+			message.setFrom(new InternetAddress("mail.isaprojekat@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(userRepository.findById(id).getEmail()));
+			message.setText(url);
+
+			Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 }

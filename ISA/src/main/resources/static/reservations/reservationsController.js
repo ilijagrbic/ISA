@@ -180,7 +180,6 @@ angular.module('app').controller(
 					$scope.rezervacija = function(){
 						// Selektovane - sedista 
 						
-						
 						var host = {
 								"projekcija" : projection,
 								"idRezervant" : $rootScope.USER.id,
@@ -286,6 +285,8 @@ angular.module('app').controller(
 							
 							
 						}
+						
+					
 					}
 
 				

@@ -6,6 +6,7 @@
 		<span><a ui-sref="cinemas">Bioskopi</a></span>
 		<span><a ui-sref="reservations">Rezervacije</a></span>
 		<span><a ui-sref="listOfReservations">Lista rezervacija</a></span>
+		<span><a ui-sref="history">Istorija poseta</a></span>
 	</p>
 </div>
 
@@ -13,7 +14,6 @@
 
  <table>
   <tr ng-repeat="reservation in reservationList">
-    <td>{{ reservation.id }}</td>
      <td>{{ reservation.projekcija.date}}</td>
      <td>{{ reservation.projekcija.sala.nazivBroj }}</td>
       <td>{{ reservation.projekcija.film.name }}</td>

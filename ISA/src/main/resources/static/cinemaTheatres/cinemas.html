@@ -6,6 +6,7 @@
 		<span><a ui-sref="cinemas">Bioskopi</a></span>
 		<span><a ui-sref="reservations">Rezervacije</a></span>
 		<span><a ui-sref="listOfReservations">Lista rezervacija</a></span>
+		<span><a ui-sref="history">Istorija poseta</a></span>
 	</p>
 </div>
 
@@ -13,7 +14,7 @@
 Cinemas
 </h1>
 <div>
-	<div class="container" ng-repeat="cinema in cinemas" ng-show="showCinemas == true">
+	<div class="container" ng-repeat="cinema in cinemas | orderBy:['name','addres']" ng-show="showCinemas == true">
 	
 	  <div class="row">
 	    <div class="col-sm">

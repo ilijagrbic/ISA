@@ -61,7 +61,7 @@ public class AuthenticationController {
 	
 	
 	// Odjavljivanje
-	@RequestMapping(value="signout", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	@RequestMapping(value="signout", method=RequestMethod.DELETE) 
 	public ResponseEntity<String> signout() {
 		SecurityContextHolder.clearContext();
         return new ResponseEntity<String>(HttpStatus.OK);

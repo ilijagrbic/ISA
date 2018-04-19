@@ -26,4 +26,18 @@ angular.module('app')
                     }
                 }
             })
+            
+            .state('history', {
+                url: '/history',
+                views: {
+                    'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                        templateUrl: 'history/history.html',
+                        controller: 'historyController'
+                    }
+                }
+            })
     });

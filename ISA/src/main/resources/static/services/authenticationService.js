@@ -26,7 +26,7 @@ angular.module('app')
             },
             signout: function (onSuccess, onError) {
                 var req = {
-                    method: 'POST',
+                    method: 'DELETE',
                     url: '/api/authentication/signout'
                 };
                 $http(req).then(onSuccess, onError);
