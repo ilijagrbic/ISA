@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.ProjekcijaDTO;
 import com.example.isa.model.Projekcija;
 import com.example.isa.service.ProjekcijaService;
@@ -34,7 +35,7 @@ public class ProjekcijaController {
 		if(retVal!=null) {
 			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeno pozoriste/bioskop."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -48,7 +49,7 @@ public class ProjekcijaController {
 		if(retVal!=null) {
 			return new ResponseEntity<Collection<Projekcija>>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop ili film.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeno pozoriste/bioskop ili film."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class ProjekcijaController {
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Projekcija koju zelite da obrisete ne postoji u bazi.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Projekcija koju zelite da obrisete ne postoji u bazi."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -76,7 +77,7 @@ public class ProjekcijaController {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<String>("Ne postoji trazena projekcija.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazena projekcija."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -102,14 +103,14 @@ public class ProjekcijaController {
 	public ResponseEntity<?> delProjecions(@RequestBody ProjekcijaDTO createProjekcija){
 		Date today = new Date();
 		if(createProjekcija.getCena()<1) {
-			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}else if(today.after(createProjekcija.getDate())){
-			return new ResponseEntity<String>("Nemoguce definisati projekciju u proslosti.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nemoguce definisati projekciju u proslosti."), HttpStatus.BAD_REQUEST);
 		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
-			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nova sala ne moze imati negativnu dimenziju."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createProjekcija.getSala().getNazivBroj()==null||createProjekcija.getSala().getNazivBroj().isEmpty()||createProjekcija.getSala().getNazivBroj().equals("")) {
-			return new ResponseEntity<String>("Naziv sale ne sme biti prazan", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Naziv sale ne sme biti prazan"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			Projekcija retVal = projService.create(createProjekcija.getProjekcija(), createProjekcija.getFilm());
@@ -118,7 +119,7 @@ public class ProjekcijaController {
 				return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Ne postoji film za projekciju koju zelite.", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji film za projekciju koju zelite."), HttpStatus.BAD_REQUEST);
 			}
 		}
 	}
@@ -131,14 +132,14 @@ public class ProjekcijaController {
 	public ResponseEntity<?> updProjecions(@RequestBody ProjekcijaDTO createProjekcija, @PathVariable("id") Long id){
 		Date today = new Date();
 		if(createProjekcija.getCena()<1) {
-			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}else if(today.after(createProjekcija.getDate())){
-			return new ResponseEntity<String>("Nemoguce definisati projekciju u proslosti.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nemoguce definisati projekciju u proslosti."), HttpStatus.BAD_REQUEST);
 		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
-			return new ResponseEntity<String>("Nova sala ne moze imati negativnu dimenziju.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nova sala ne moze imati negativnu dimenziju."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createProjekcija.getSala().getNazivBroj()==null||createProjekcija.getSala().getNazivBroj().isEmpty()||createProjekcija.getSala().getNazivBroj().equals("")) {
-			return new ResponseEntity<String>("Naziv sale ne sme biti prazan", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Naziv sale ne sme biti prazan"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			Projekcija temp = createProjekcija.getProjekcija();
@@ -149,7 +150,7 @@ public class ProjekcijaController {
 				return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Ne postoji film ili projekcija koju zelite da azurirate.", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji film ili projekcija koju zelite da azurirate."), HttpStatus.BAD_REQUEST);
 			}
 		}
 	}

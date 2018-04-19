@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.BioskopDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.service.BioskopPozoristeService;
@@ -33,7 +34,7 @@ public class BioskopPozoristeController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji admin."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -46,7 +47,7 @@ public class BioskopPozoristeController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji admin."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -60,7 +61,7 @@ public class BioskopPozoristeController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<BioskopPozoriste>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji admin.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji admin."), HttpStatus.BAD_REQUEST);
 	}
 	
 	@RequestMapping(
@@ -119,10 +120,10 @@ public class BioskopPozoristeController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){
 		if(updateCinema.getName()==null||updateCinema.getName().isEmpty()||updateCinema.getName().equals("")) {
-			return new ResponseEntity<String>("Ime ne sme biti prazno.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno."), HttpStatus.BAD_REQUEST);
 		}
 		else if(updateCinema.getAddress()==null||updateCinema.getAddress().isEmpty()||updateCinema.getAddress().equals("")) {
-			return new ResponseEntity<String>("Ime ne sme biti prazno.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno."), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			updateCinema.setId(id);
@@ -133,7 +134,7 @@ public class BioskopPozoristeController {
 			if(retVal!=null) {
 				return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
 			}else {
-				return new ResponseEntity<String>("Ne postoji bioskop.", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji bioskop."), HttpStatus.BAD_REQUEST);
 			}
 		}
 	}
@@ -149,7 +150,7 @@ public class BioskopPozoristeController {
 		if(retVal!=null)
 			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji bioskop.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji bioskop."), HttpStatus.BAD_REQUEST);
 		
 	}
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.MovieShowDTO;
 import com.example.isa.model.MovieShow;
 import com.example.isa.service.MovieShowService;
@@ -45,7 +46,7 @@ public class MovieShowController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<MovieShow>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeno pozoriste/bioskop."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -59,7 +60,7 @@ public class MovieShowController {
 			return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeni film."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -70,13 +71,13 @@ public class MovieShowController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long id){
 		if(createMovie.getDuration()<1) {
-			return new ResponseEntity<String>("Trajanje ne moze biti negativno.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Trajanje ne moze biti negativno."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createMovie.getPrice()<1) {
-			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createMovie.getName()==null||createMovie.getName().isEmpty()||createMovie.getName().equals("")) {
-			return new ResponseEntity<String>("Ime ne sme biti prazno", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			MovieShow retVal = movieService.create(createMovie.getMovieShow(), id);
@@ -84,7 +85,7 @@ public class MovieShowController {
 				return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Ne postoji trazeno pozoriste/bioskop ili film vec postoji.", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeno pozoriste/bioskop ili film vec postoji."), HttpStatus.BAD_REQUEST);
 			}
 		}
 	
@@ -97,13 +98,13 @@ public class MovieShowController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateMovie(@RequestBody MovieShowDTO createMovie, @PathVariable("id") Long idMovie){
 		if(createMovie.getDuration()<1) {
-			return new ResponseEntity<String>("Trajanje ne moze biti negativno.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Trajanje ne moze biti negativno."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createMovie.getPrice()<1) {
-			return new ResponseEntity<String>("Cena ne moze biti negativna.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}
 		else if(createMovie.getName().isEmpty()||createMovie.getName()==null||createMovie.getName().equals("")) {
-			return new ResponseEntity<String>("Ime ne sme biti prazno", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ne sme biti prazno"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			MovieShow temp = createMovie.getMovieShow();
@@ -113,7 +114,7 @@ public class MovieShowController {
 				return new ResponseEntity<MovieShow>(retVal, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeni film."), HttpStatus.BAD_REQUEST);
 			}
 		}
 	}
@@ -128,7 +129,7 @@ public class MovieShowController {
 			return new ResponseEntity<Long>(retVal, HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<String>("Ne postoji trazeni film.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji trazeni film."), HttpStatus.BAD_REQUEST);
 		}
 	}
 }

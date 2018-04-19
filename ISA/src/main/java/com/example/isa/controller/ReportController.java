@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.GrafikDTO;
 import com.example.isa.controller.dataTransfer.IncomeReportDTO;
 import com.example.isa.controller.dataTransfer.ReportDTO;
@@ -58,7 +59,7 @@ public class ReportController {
 		if(!creatingCinema.getDoo().before(creatingCinema.getOd())) {
 			return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Od vece od Do"), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -71,7 +72,7 @@ public class ReportController {
 		if(!creatingCinema.getDoo().before(creatingCinema.getOd())) {
 			return new ResponseEntity<List<GrafikDTO>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Od vece od Do"), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

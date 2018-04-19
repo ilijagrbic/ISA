@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.model.Glumac;
 import com.example.isa.service.GlumciService;
 
@@ -53,7 +54,7 @@ public class GlumciController {
 		if(creatingGlumac.getIme()==null||creatingGlumac.getPrezime()==null||creatingGlumac.getIme().isEmpty()||creatingGlumac.getIme().equals("")
 				||creatingGlumac.getPrezime().isEmpty()||creatingGlumac.getPrezime().equals("")
 				) {
-			return new ResponseEntity<String>("Ime ili prezime ne smeju biti prazni", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ili prezime ne smeju biti prazni"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			Glumac retVal = glumciService.create(new Glumac(creatingGlumac.getIme(), creatingGlumac.getPrezime()));
@@ -76,7 +77,7 @@ public class GlumciController {
 		if(creatingGlumac.getIme()==null||creatingGlumac.getPrezime()==null||creatingGlumac.getIme().isEmpty()||creatingGlumac.getIme().equals("")
 				||creatingGlumac.getPrezime().isEmpty()||creatingGlumac.getPrezime().equals("")
 				) {
-			return new ResponseEntity<String>("Ime ili prezime ne smeju biti prazni", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ime ili prezime ne smeju biti prazni"), HttpStatus.BAD_REQUEST);
 		}
 		else {
 			Glumac retVal = glumciService.update(creatingGlumac);

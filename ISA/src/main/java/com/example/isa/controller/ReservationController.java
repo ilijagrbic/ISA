@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
 import com.example.isa.model.BioskopPozoriste;
@@ -112,7 +113,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji korisnik sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji korisnik sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -125,7 +126,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji projekcija sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji projekcija sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -138,7 +139,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji pozoriste sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji pozoriste sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
