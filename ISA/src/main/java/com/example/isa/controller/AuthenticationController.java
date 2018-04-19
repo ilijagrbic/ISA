@@ -43,7 +43,7 @@ public class AuthenticationController {
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {
-			if (!user.isActiaved()) {
+			if (!user.isActivated()) {
 				System.out.println("Nije aktiviran");
 				return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
 				

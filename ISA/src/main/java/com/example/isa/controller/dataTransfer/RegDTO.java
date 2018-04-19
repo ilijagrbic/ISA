@@ -31,7 +31,7 @@ public class RegDTO {
 		user.setCity(source.getCity());
 		user.setPhone(source.getPhone());
 		user.setPassword(source.getPassword());
-		user.setActiaved(false);
+		user.setActivated(false);
 		user.setRole(Role.REG_USER);
 		return user;
 	}

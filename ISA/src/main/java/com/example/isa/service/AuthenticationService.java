@@ -19,7 +19,7 @@ public class AuthenticationService {
 	// Verifikacija na osnovu maila
 	public User verifyUser(String verificationCode) {
 		User user = userRepository.findByVerificationCode(verificationCode);
-		user.setActiaved(true);
+		user.setActivated(true);
 		userRepository.save(user);
 		return user;
 	}

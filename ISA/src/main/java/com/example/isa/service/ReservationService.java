@@ -268,9 +268,11 @@ public class ReservationService {
 	public List<Rezervacija> getReservations(Long id){
 		List<Rezervacija> reservations = new ArrayList<Rezervacija>();
 		for(Rezervacija r : reservationRepository.findAll()) {
-			if(r.getRezervant().getId() == id) {
-				reservations.add(r);
-				System.out.println(r.getId());
+			if(r.getRezervant()!=null) {
+				if(r.getRezervant().getId() == id) {
+					reservations.add(r);
+					System.out.println(r.getId());
+				}
 			}
 			
 		}
@@ -280,15 +282,17 @@ public class ReservationService {
 	public List<Rezervacija> cancelReservation(Long userId, Long reservationId){
 		List<Rezervacija> deletedReservations = new ArrayList<Rezervacija>();
 		for(Rezervacija r : reservationRepository.findAll()) {
-			if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
-				deletedReservations.add(r);
-				System.out.println(r.getId());
-				reservationRepository.delete(r);
-			}	
-			else if(r.getHostId()==userId && r.getId() == reservationId) {
-				// Brisem one koje mogu
-				deletedReservations.add(r);
-				reservationRepository.delete(r);
+			if(r.getRezervant()!=null&&r.getHostId()!=null) {
+				if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
+					deletedReservations.add(r);
+					System.out.println(r.getId());
+					reservationRepository.delete(r);
+				}	
+				else if(r.getHostId()==userId && r.getId() == reservationId) {
+					// Brisem one koje mogu
+					deletedReservations.add(r);
+					reservationRepository.delete(r);
+				}
 			}
 		}
 		return getReservations(userId);
