@@ -17,8 +17,12 @@ angular.module('app')
     	},
     	getIncomeReport: function(dates, cineId, onSuccess, onError){
     		var req = {
-                    method: 'GET',
-                    url: 'api/cinnemas/'+cineId+'/income'
+                    method: 'POST',
+                    url: 'api/cinnemas/'+cineId+'/income',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:dates
                 };
             $http(req).then(onSuccess, onError);
     	}

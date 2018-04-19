@@ -56,6 +56,10 @@ Edit place
           </span>
         </p>
       </div><br/>
+      
+      <canvas id="myChart"></canvas>
+      
+      <!-- <highchart class="inputReportGraph" id="chart1" config="chartConfig"></highchart> -->
 	<button ng-click="showIncome(odPrihodi, doPrihodi)">Show income</button>
 	</div>
 	
@@ -82,7 +86,7 @@ Edit place
 		<ol>
 			<li ng-repeat="rez in oneClick">
 				Naziv filma: {{rez.film.name}}<br/>
-				Datum: {{rez.projekcija.date}}<br/>
+				Datum: {{date(rez.projekcija.date)}}<br/>
 				Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
 				Orginalna cena: {{rez.projekcija.cena}}<br/>
 				POPUST!: {{rez.rezervisanoMesto.deltaCena}}

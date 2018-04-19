@@ -4,6 +4,11 @@ angular.module('app')
     		$scope.korisnik=true;
     	}
     	
+    	
+    	$scope.date = function(date){
+    		var dat = new Date(date);
+    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+    	}
     	cinemaTheatreService.getTheatres(
 				function(info){//succes function
 					$scope.theatres=info.data;

@@ -51,11 +51,11 @@ public class ReportController {
 	
 	@RequestMapping(
 			value = "/cinnemas/{id}/income",
-			method = RequestMethod.GET,
+			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getIncome(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
-		if(creatingCinema.getDoo().before(creatingCinema.getOd())) {
+		if(!creatingCinema.getDoo().before(creatingCinema.getOd())) {
 			return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);

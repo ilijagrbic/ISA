@@ -3,6 +3,10 @@ angular.module('app')
     	if($rootScope.USER != null){
     		$scope.korisnik=true;
     	}
+    	$scope.date = function(date){
+    		var dat = new Date(date);
+    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+    	}
     	
     	$scope.reserveOneClick = function(rez){
     		reservationService.putReservation(
