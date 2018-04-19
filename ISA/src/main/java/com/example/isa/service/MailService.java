@@ -14,12 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.example.isa.model.Rezervacija;
+import com.example.isa.repository.RezervacijaRepository;
 import com.example.isa.repository.UserRepository;
 
 @Service
 public class MailService {
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RezervacijaRepository reservationRepository;
 	
 	public MailService() {}
 
@@ -117,6 +122,40 @@ public class MailService {
 			e.printStackTrace();
 		}
 	}
+	
+	// Slanje rezervacije
+	@Async
+	public void sendReservation(Rezervacija reservation, String res) {
+		// final SimpleMailMessage message = new SimpleMailMessage();
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.auth", "true");
+		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		
+		final String username = "mail.isaprojekat@gmail.com";
+		final String password = "projekatisa";
+		
+		Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		MimeMessage message = new MimeMessage(session);
+
+		try {
+			message.setSubject("Rezervacija");
+			
+			message.setFrom(new InternetAddress("mail.isaprojekat@gmail.com"));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(userRepository.findById(reservation.getHostId()).getEmail()));
+			message.setText(userRepository.findById(reservation.getHostId()).getName() + ", upravo ste kreirali rezervaciju za sledeci dogadjaj " + reservation.getFilm().getName()+".");
+
+			Transport.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 
 }
