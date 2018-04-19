@@ -1,6 +1,14 @@
 angular.module('app')
     .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
     	
+    	$scope.salaPanelText = function(){
+    		if($scope.opdNewSala==true){
+    			return "Unesi novu salu";
+    		}else{
+    			return "Odaberi postojecu salu";
+    		}
+    	}
+    	
     	$scope.glumacPanelText = function(){
     		if(!$scope.newActroPanelActiaved==true){
     			return "Unesi novog glumca";

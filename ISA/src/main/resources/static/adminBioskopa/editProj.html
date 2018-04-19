@@ -1,5 +1,5 @@
 <div>
-<h3>Edit projection and seats.</h3>
+<h3>Izmeni projekciju i raspored sedista</h3>
 	<span  ng-repeat="sed in curentlyEditedProj.sedista">
 		<br ng-if="!($index % curentlyEditedProj.sala.visina)" />
 		<button ng-click="handleButton(sed)" ng-if="sed.type=='ODRINARY'" ng-click="">O-{{handleSeatBtn(sed)}}<!-- ({{sed.visKord}},{{sed.duzKord}}) --></button>
