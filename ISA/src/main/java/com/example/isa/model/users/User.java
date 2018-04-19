@@ -28,7 +28,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	protected long id;
+	protected Long id;
 
 	protected String name;
 
@@ -80,22 +80,12 @@ public class User {
 		this.phone = u.phone;
 
 	}
-	
-	
 
-	public List<BioskopPozoriste> getBioskopi() {
-		return bioskopi;
-	}
-
-	public void setBioskopi(List<BioskopPozoriste> bioskopi) {
-		this.bioskopi = bioskopi;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -123,12 +113,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getCity() {
+		return city;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getPhone() {
@@ -139,20 +129,20 @@ public class User {
 		this.phone = phone;
 	}
 
-	public boolean isActiaved() {
+	public boolean isActivated() {
 		return activated;
 	}
 
-	public void setActiaved(boolean actiaved) {
-		this.activated = actiaved;
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 
-	public String getCity() {
-		return city;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Role getRole() {
@@ -194,5 +184,14 @@ public class User {
 	public void setFirstTime(boolean firstTime) {
 		this.firstTime = firstTime;
 	}
+
+	public List<BioskopPozoriste> getBioskopi() {
+		return bioskopi;
+	}
+
+	public void setBioskopi(List<BioskopPozoriste> bioskopi) {
+		this.bioskopi = bioskopi;
+	}
+	
 
 }

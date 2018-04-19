@@ -1,0 +1,18 @@
+<div>
+	<p>
+		<span><a ui-sref="user">Profil</a></span>
+		<sdan><a ui-sref="friendship">Prijatelji</a></span>
+		<span><a ui-sref="theatres">Pozorista</a></span>
+		<span><a ui-sref="cinemas">Bioskopi</a></span>
+		<span><a ui-sref="reservations">Rezervacije</a></span>
+		<span><a ui-sref="listOfReservations">Lista rezervacija</a></span>
+		<span><a ui-sref="history">Istorija poseta</a></span>
+	</p>
+</div>
+<h1>Istorija</h1>
+
+<table border="1">
+  <tr ng-repeat="cinemaTheatre in cinemasAndTheathres">
+    <td>{{ cinemaTheatre.name }}</td>
+  </tr>
+</table> 

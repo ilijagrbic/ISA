@@ -43,7 +43,7 @@ public class AuthenticationController {
 		User user = authenticationService.findUser(loginDTO.getUserFromLogin(loginDTO));
 
 		if(user!=null) {
-			if (!user.isActiaved()) {
+			if (!user.isActivated()) {
 				System.out.println("Nije aktiviran");
 				return new ResponseEntity<User>(user, HttpStatus.UNAUTHORIZED);
 				
@@ -61,7 +61,7 @@ public class AuthenticationController {
 	
 	
 	// Odjavljivanje
-	@RequestMapping(value="signout", method=RequestMethod.POST, consumes="application/json", produces="application/json") 
+	@RequestMapping(value="signout", method=RequestMethod.DELETE) 
 	public ResponseEntity<String> signout() {
 		SecurityContextHolder.clearContext();
         return new ResponseEntity<String>(HttpStatus.OK);

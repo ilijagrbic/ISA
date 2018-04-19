@@ -50,6 +50,9 @@ public class FriendshipService {
 			if (i.getPrimalac().getId() == id && i.isPrihvatio() == true) {
 				friends.add(i.getPosaljilac());
 			}
+			else if(i.getPosaljilac().getId() == id && i.isPrihvatio() == true) {
+				friends.add(i.getPrimalac());
+			}
 		}
 		return friends;
 	}

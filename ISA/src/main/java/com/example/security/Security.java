@@ -57,7 +57,7 @@ public class Security extends WebSecurityConfigurerAdapter {
             .httpBasic()
         .and()
             .logout()
-                .logoutUrl("/api/signout")
+                .logoutUrl("/api/authentication/signout")
                 .deleteCookies("JSESSIONID")
         .and()
             .authorizeRequests()

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
+import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Rezervacija;
+import com.example.isa.service.MailService;
 import com.example.isa.service.ReservationService;
 
 @RestController
@@ -23,7 +25,10 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationService resevationService;
-
+	
+	@Autowired
+	private  MailService mailService;
+	
 	@RequestMapping(
 			value = "/api/projections/{id}/reservations",
 			method = RequestMethod.POST,
@@ -55,6 +60,26 @@ public class ReservationController {
 		Long use = createMovie.getUserId();
 		rez.setId(id);
 		Rezervacija retVal = resevationService.putRese(rez, sed, use);
+		
+		if(retVal!=null) {
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	@RequestMapping(
+			value = "/api/reservations/{id}/rate",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Rezervacija> editRezrate(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
+		Rezervacija rez = createMovie.getRezervacija();
+		Long sed = createMovie.getRezSedisteId();
+		Long use = createMovie.getUserId();
+		rez.setId(id);
+		Rezervacija retVal = resevationService.rateRese(rez, sed, use);
 		
 		if(retVal!=null) {
 			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
@@ -124,6 +149,7 @@ public class ReservationController {
 		if(reservationDTO.getIsHost()==false) {
 			// Treba da posalje mail
 			System.out.println("\nGost je treba da salje mail");
+			mailService.sendReservationMail("http://localhost:8133/reservations/reservationList.html", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
 		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {
@@ -160,6 +186,29 @@ public class ReservationController {
 		reservations = (ArrayList<Rezervacija>)resevationService.acceptReservation(userId, idReservation);
 		
 		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/api/getAllReservations", method=RequestMethod.GET) 
+	public ResponseEntity<Collection<Rezervacija>> getAllReservations(){
+		System.out.println("\n\n*** Uzimanje svih rezervacija");
+		ArrayList<Rezervacija> reservations = new ArrayList<Rezervacija>();
+		reservations = (ArrayList<Rezervacija>)resevationService.getAllReservations();
+		for(Rezervacija res : reservations) {
+			System.out.println("Usao uopste?");
+			System.out.println(res.getId()); 
+		}
+		return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/api/getHistory/{id}", method=RequestMethod.GET) 
+	public ResponseEntity<Collection<BioskopPozoriste>> getHistory(@PathVariable("id") Long id){
+		System.out.println("\n\n*** Poseceni bioskopi");
+		ArrayList<BioskopPozoriste> bioskopi = (ArrayList<BioskopPozoriste>) resevationService.getHistory(id);
+		
+		for(BioskopPozoriste bp : bioskopi) {
+			System.out.println(bp.getId());
+		}
+		return new ResponseEntity<Collection<BioskopPozoriste>>(bioskopi, HttpStatus.OK);
 	}
 
 }

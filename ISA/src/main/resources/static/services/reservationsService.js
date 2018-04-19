@@ -11,6 +11,14 @@ angular.module('app')
                 };
                 $http(req).then(onSuccess, onError);
             },
+            getAllReservations(onSuccess, onError) {
+                var req = {
+                        method: 'GET',
+                        url: '/api/getAllReservations' ,
+                    };
+                    console.log("Url " + req.url);
+                    $http(req).then(onSuccess, onError);
+                },
         
 	        reservate: function (data, onSuccess, onError) {
 	            var req = {
@@ -36,7 +44,7 @@ angular.module('app')
                     method: 'DELETE',
                     url: '/api/reservations/' + userId + '/cancelReservation/' + reservationId,
                 };
-                console.log("Url " + req.url);
+            
                 $http(req).then(onSuccess, onError);
             },
             acceptReservation: function (userId, reservationId, onSuccess, onError) {
@@ -44,9 +52,17 @@ angular.module('app')
                     method: 'PUT',
                     url: '/api/reservations/' + userId + '/acceptReservation/' + reservationId,
                 };
-                console.log("Url " + req.url);
+               
                 $http(req).then(onSuccess, onError);
-            }     
+            },
+            getHistory: function (userId, onSuccess, onError) {
+                var req = {
+                    method: 'GET',
+                    url: '/api/getHistory/' + userId,
+                };
+          
+                $http(req).then(onSuccess, onError);
+            }
 	        
 	        
 	        

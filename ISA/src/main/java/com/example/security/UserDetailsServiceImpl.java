@@ -63,7 +63,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             @Override
             public boolean isEnabled() {
-                return user.isActiaved();
+                return user.isActivated();
             }
 
         };

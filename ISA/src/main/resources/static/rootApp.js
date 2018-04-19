@@ -15,7 +15,7 @@ app.factory('authInterceptor', ['$q', '$injector', function ($q, $injector) {
 app.config(function($stateProvider, $urlRouterProvider,$httpProvider){
 		$httpProvider.interceptors.push('authInterceptor');
     	$urlRouterProvider.otherwise("/defaultState");
-    }).run(["$rootScope", function ($rootScope) {
+    }).run(["$rootScope", "$state", function ($rootScope,$state) {
     	//console.log(!angular.isDefined($rootScope.USER));
     	//console.log(JSON.parse(localStorage.getItem("user")));
     	
@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider){
 
         }else if(!angular.isDefined($rootScope.USER) && !localStorage.getItem("user")){
             // User is not logged at all. Send him back to login page
-        	//$state.go("signin");
+        	$state.go("defaultState");
         
         }else if(angular.isDefined($rootScope.USER)){
             // User is logged in. You can run some extra validations in here.

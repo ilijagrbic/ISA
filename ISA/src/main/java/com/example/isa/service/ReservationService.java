@@ -15,12 +15,14 @@ import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
+import com.example.isa.model.Repertoire;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.RezervacijaStatus;
 import com.example.isa.model.Sediste;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.ProjekcijaRepository;
+import com.example.isa.repository.RepertoireRepository;
 import com.example.isa.repository.RezervacijaRepository;
 import com.example.isa.repository.SedisteRepository;
 import com.example.isa.repository.UserRepository;
@@ -30,6 +32,9 @@ public class ReservationService {
 	
 	@Autowired
 	private BioskopPozoristeRepository bioskoRepository;
+	
+	@Autowired
+	private  RepertoireRepository repertoireRepository;
 	
 	@Autowired
 	private RezervacijaRepository reservationRepository;
@@ -87,6 +92,32 @@ public class ReservationService {
 		
 		User us = userRepository.findById(idUser);
 		toUpdate.setRezervant(us);
+		
+		
+		return reservationRepository.save(toUpdate);
+	}
+	
+	public Rezervacija rateRese(Rezervacija newr, Long idSediste, Long idUser) {
+		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
+		/*Projekcija pro = projRepository.findById(idProj);
+		Sediste sed = sedisteRepository.findById(idSediste);
+		*/
+		
+		/*newr.setProjekcija(pro);
+		newr.setFilm(pro.getFilm());
+		newr.setRezervisanoMesto(sed);*/
+		/*if(us==null) {
+			newr.setRezervant(null);
+		}else {
+			newr.setRezervant(us);
+		}*/
+		toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
+		toUpdate.setStatus(newr.getStatus());
+		toUpdate.setOcenaFilm(newr.getOcenaFilm());
+		//toUpdate.setHostId(newr.getHostId());
+		
+		/*User us = userRepository.findById(idUser);
+		toUpdate.setRezervant(us);*/
 		
 		
 		return reservationRepository.save(toUpdate);
@@ -268,9 +299,11 @@ public class ReservationService {
 	public List<Rezervacija> getReservations(Long id){
 		List<Rezervacija> reservations = new ArrayList<Rezervacija>();
 		for(Rezervacija r : reservationRepository.findAll()) {
-			if(r.getRezervant().getId() == id) {
-				reservations.add(r);
-				System.out.println(r.getId());
+			if(r.getRezervant()!=null) {
+				if(r.getRezervant().getId() == id) {
+					reservations.add(r);
+					System.out.println(r.getId());
+				}
 			}
 			
 		}
@@ -279,16 +312,15 @@ public class ReservationService {
 	
 	public List<Rezervacija> cancelReservation(Long userId, Long reservationId){
 		List<Rezervacija> deletedReservations = new ArrayList<Rezervacija>();
+	
 		for(Rezervacija r : reservationRepository.findAll()) {
-			if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
-				deletedReservations.add(r);
-				System.out.println(r.getId());
-				reservationRepository.delete(r);
-			}	
-			else if(r.getHostId()==userId && r.getId() == reservationId) {
-				// Brisem one koje mogu
-				deletedReservations.add(r);
-				reservationRepository.delete(r);
+			if(r.getRezervant()!=null&&r.getHostId()!=null) {
+				if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
+					deletedReservations.add(r);
+					System.out.println(r.getId());
+					reservationRepository.delete(r);
+				}	
+				
 			}
 		}
 		return getReservations(userId);
@@ -296,9 +328,29 @@ public class ReservationService {
 	
 	
 	public List<Rezervacija> acceptReservation(Long userId, Long reservationId){
-		Rezervacija reservation = new Rezervacija();
+		Rezervacija reservation = reservationRepository.findById(reservationId);
 		reservation = reservationRepository.findById(reservationId);
 		reservation.setStatus(RezervacijaStatus.ACCEPTED);
+		reservationRepository.save(reservation);
 		return getReservations(userId);
+	}
+	
+	
+	public List<Rezervacija> getAllReservations(){
+		System.out.println("Usao da pronadje");
+		return reservationRepository.findAll();
+	}
+	
+	public List<BioskopPozoriste> getHistory(Long id){
+		ArrayList<BioskopPozoriste> bioskopi = new ArrayList<BioskopPozoriste>(); 
+		
+		for(Rezervacija r : reservationRepository.findByRezervantId(id)) {
+			for (Repertoire rep : repertoireRepository.findAll()) {
+				if(rep.getMovies().contains(r.getFilm())) {
+					bioskopi.add(rep.getBioskop());
+				}
+			}
+		}
+		return bioskopi;
 	}
 }

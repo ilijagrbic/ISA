@@ -1,9 +1,23 @@
 angular.module('app').controller(
 		'reservationsController',
-		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService) {
+		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService, reservationService) {
 			//console.log("Rezervacije");
+			$scope.existsInRez = function(sed){
+				if(sed!=undefined){
+					if($scope.rezervacijeUtrenutnoSelektovanojProjekciji!=undefined){
+		    		for(i=0;i<$scope.rezervacijeUtrenutnoSelektovanojProjekciji.length;i++){
+		    			if(sed.id==$scope.rezervacijeUtrenutnoSelektovanojProjekciji[i].rezervisanoMesto.id){
+		    				return false;
+		    			}
+		    		}
+		    		return true;
+					}
+				}
+
+	    	}
 			$scope.izabranaSedista=false;
 			var projection;
+			$scope.rez=[];
 			//console.log($scope.searchByName);
 			// Ovaj deo treba da se proveri
 			if($scope.searchByName==null){
@@ -87,6 +101,15 @@ angular.module('app').controller(
 						projekcijeService.getProjekcija(idProjekcije,
 								function(res){//succes function
 									$scope.choosedProjection = res.data; 
+									reservationService.getAllInProj(
+											idProjekcije,
+											function(info){
+												$scope.rezervacijeUtrenutnoSelektovanojProjekciji = info.data;
+											},
+											function(){
+												
+											}
+									);
 								},
 								function(res){//fail function
 									alert("Eror biranja projekcije");
@@ -155,6 +178,8 @@ angular.module('app').controller(
 					};
 					
 					$scope.rezervacija = function(){
+						// Selektovane - sedista 
+						
 						var host = {
 								"projekcija" : projection,
 								"idRezervant" : $rootScope.USER.id,
@@ -165,86 +190,108 @@ angular.module('app').controller(
 						
 						reservationsService.reservate(host,
 							function(res){
+								// Rezervacija uspesna
 							},
 							function(res){
 								alert("Eror prilikom rezervacije");
 							
 							}
 						);
-						
-						for (i = 0; i < prijatelji.length; i++) {
-							var poziv = {
-									"projekcija" : projection,
-									"idRezervant" : prijatelji[i],
-									"isHost" : false,
-									"rezSedisteId" : selektovane[i+1],
-									"idHost" :  $rootScope.USER.id	
-							}
-							reservationsService.reservate(poziv,
-								function(res){
-								},
-								function(res){
-									alert("Eror prilikom rezervacije");
+						zauzetaOdStranePrijatelja = [];
+						if(prijatelji.length!=0){
+							for (i = 0; i < prijatelji.length; i++) {
 								
+								console.log("USLO U PRIJATELJE " + JSON.stringify(prijatelji) + " selektovane " + selektovane[i+1]);
+								sediste = selektovane[i+1];
+								zauzetaOdStranePrijatelja.push(sediste);
+								var poziv = {
+										"projekcija" : projection,
+										"idRezervant" : prijatelji[i],
+										"isHost" : false,
+										"rezSedisteId" : selektovane[i+1],
+										"idHost" :  $rootScope.USER.id	
 								}
-							);
+								
+								reservationsService.reservate(poziv,
+									function(res){
+										// Rezervacija uspesna
+										console.log("Od prijatelja " + sediste);
+										
+									},
+									function(res){
+										alert("Eror prilikom rezervacije");
+									
+									}
+								);
+							}
+						}
+						else{
+							for (j = 1; j < selektovane.length; j++) {
+									console.log("Nedefinisani");
+									var host = {
+											"projekcija" : projection,
+											"idRezervant" : $rootScope.USER.id,
+											"isHost" : true,
+											"rezSedisteId" : selektovane[j],
+											"idHost" :  $rootScope.USER.id	
+									}
+									
+									reservationsService.reservate(host,
+										function(res){
+										},
+										function(res){
+											alert("Eror prilikom rezervacije");
+										
+										}
+									);
+									//break;
+								}
+							
 						}
 						
-						if(prijatelji.length!=selektovane.length){
-							for (i = 0; i < (selektovane.length-prijatelji.length); i++) {
-								
-								for (j = 0; j < selektovane.length; j++) {
-									if(prijatelji==null || prijatelji==undefined){
-										var host = {
-												"projekcija" : projection,
-												"idRezervant" : $rootScope.USER.id,
-												"isHost" : true,
-												"rezSedisteId" : selektovane[j],
-												"idHost" :  $rootScope.USER.id	
-										}
-										
-										reservationsService.reservate(host,
-											function(res){
-											},
-											function(res){
-												alert("Eror prilikom rezervacije");
-											
-											}
-										);
-										break;
-									}
-									if(!prijatelji.includes(selektovane[j])){
-										var host = {
-												"projekcija" : projection,
-												"idRezervant" : $rootScope.USER.id,
-												"isHost" : true,
-												"rezSedisteId" : selektovane[j],
-												"idHost" :  $rootScope.USER.id	
-										}
-										
-										reservationsService.reservate(host,
-											function(res){
-											},
-											function(res){
-												alert("Eror prilikom rezervacije");
-											
-											}
-										);
-										break;
-									}
+						console.log("Zauzete od stane prijatelja: " + JSON.stringify(zauzetaOdStranePrijatelja));
+						
+						if(zauzetaOdStranePrijatelja.length!=0){
+						if(zauzetaOdStranePrijatelja.length!=selektovane.length-1){
+							console.log("Imamo visak sedista");
 							
-							}
+							for (j = 1; j < selektovane.length; j++) {
+								
+								
+									if(!zauzetaOdStranePrijatelja.includes(selektovane[j])){
+										
+										var host = {
+												"projekcija" : projection,
+												"idRezervant" : $rootScope.USER.id,
+												"isHost" : true,
+												"rezSedisteId" : selektovane[j],
+												"idHost" :  $rootScope.USER.id	
+										}
+										
+										reservationsService.reservate(host,
+											function(res){
+											},
+											function(res){
+												alert("Eror prilikom rezervacije");
+											
+											}
+										);
+									}
+									
+								}
+								
+						}
+							
+							
 							
 						}
+						
+					
 					}
-					
-					
-					
-					
-		
-				};
+
 				
 			
 			
 				};
+			
 		});
