@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
 import com.example.isa.model.Rezervacija;
+import com.example.isa.service.MailService;
 import com.example.isa.service.ReservationService;
 
 @RestController
@@ -23,7 +24,10 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationService resevationService;
-
+	
+	@Autowired
+	private  MailService mailService;
+	
 	@RequestMapping(
 			value = "/api/projections/{id}/reservations",
 			method = RequestMethod.POST,
@@ -124,6 +128,7 @@ public class ReservationController {
 		if(reservationDTO.getIsHost()==false) {
 			// Treba da posalje mail
 			System.out.println("\nGost je treba da salje mail");
+			mailService.sendReservationMail("http://localhost:8133/reservations/reservationList.html", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
 		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {

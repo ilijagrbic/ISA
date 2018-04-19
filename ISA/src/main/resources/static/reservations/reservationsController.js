@@ -286,39 +286,6 @@ angular.module('app').controller(
 							
 							
 						}
-						/*if(zauzetaOdStranePrijatelja.length!=selektovane.length-1){
-							console.log("Imamo visak sedista");
-							
-							for (j = 1; j < selektovane.length; j++) {
-								
-								
-									if(!zauzetaOdStranePrijatelja.includes(selektovane[j])){
-										
-										var host = {
-												"projekcija" : projection,
-												"idRezervant" : $rootScope.USER.id,
-												"isHost" : true,
-												"rezSedisteId" : selektovane[j],
-												"idHost" :  $rootScope.USER.id	
-										}
-										
-										reservationsService.reservate(host,
-											function(res){
-											},
-											function(res){
-												alert("Eror prilikom rezervacije");
-											
-											}
-										);
-									}
-									
-								}
-								
-								
-							
-							
-							
-						}*/
 					}
 
 				
