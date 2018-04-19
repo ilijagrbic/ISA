@@ -1,7 +1,18 @@
 angular.module('app').controller(
 		'reservationsController',
-		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService) {
+		function($rootScope, $scope, $state, reservationsService, cinemaTheatreService, movieShowService, projekcijeService, friendshipService, reservationService) {
 			//console.log("Rezervacije");
+			$scope.existsInRez = function(sed){
+				if(sed!=undefined){
+	    		for(i=0;i<$scope.rezervacijeUtrenutnoSelektovanojProjekciji.length;i++){
+	    			if(sed.id==$scope.rezervacijeUtrenutnoSelektovanojProjekciji[i].rezervisanoMesto.id){
+	    				return false;
+	    			}
+	    		}
+	    		return true;
+				}
+
+	    	}
 			$scope.izabranaSedista=false;
 			var projection;
 			$scope.rez=[];
@@ -88,6 +99,15 @@ angular.module('app').controller(
 						projekcijeService.getProjekcija(idProjekcije,
 								function(res){//succes function
 									$scope.choosedProjection = res.data; 
+									reservationService.getAllInProj(
+											idProjekcije,
+											function(info){
+												$scope.rezervacijeUtrenutnoSelektovanojProjekciji = info.data;
+											},
+											function(){
+												
+											}
+									);
 								},
 								function(res){//fail function
 									alert("Eror biranja projekcije");
@@ -303,4 +323,5 @@ angular.module('app').controller(
 			
 			
 				};
+			
 		});
