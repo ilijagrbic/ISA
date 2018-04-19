@@ -1,0 +1,21 @@
+<div>
+	<div class="containter">
+		Naziv:<input type=text ng-model="curentCinemaTheatre.name"><br/>
+		Adresa:<input type=text ng-model="curentCinemaTheatre.address"><br/>
+		Opis:<input type=text ng-model="curentCinemaTheatre.description"><br/>
+		Tip:<select ng-model="curentCinemaTheatre.type">
+				<option value="CINNEMA">CINEMA</option>
+    			<option value="THEATRE">THEATRE</option>
+
+  			</select><br>
+		Gmaps url:<input type=text ng-model="curentCinemaTheatre.gmapsUrl"><br/>
+		Bronzana granica:<input type=text ng-model="curentCinemaTheatre.bronzeTreshold"><br/>
+		Srebrena granica:<input type=text ng-model="curentCinemaTheatre.silverTreshold"><br/>
+		Zlatna granica:<input type=text ng-model="curentCinemaTheatre.goldTreshold"><br/>
+		Bronzani popust:<input type=text ng-model="curentCinemaTheatre.bronzeSale"><br/>
+		Srebreni popust:<input type=text ng-model="curentCinemaTheatre.silverSale"><br/>
+		Zlatni popust:<input type=text ng-model="curentCinemaTheatre.goldSale"><br/>
+		<!-- promotivne karte -->
+		<button ng-click="dodajUstanovu()">Dodaj Ustanovu</button>
+	</div>
+	

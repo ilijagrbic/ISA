@@ -7,7 +7,7 @@ angular.module('app')
 					
 				},
 				function(info){//fail function
-					$scope.polovni=[];
+					$scope.zvanicna=[];
 					
 				}
 		);
@@ -165,6 +165,22 @@ angular.module('app')
     		id,
     		function(info){//succes function
     			$scope.odobrenje=info.data;
+				
+			},
+			function(info){//fail function
+				
+			}
+    				
+    		
+    		);
+    		
+    		
+    	}
+		
+		$scope.prihvatiPonudu=function(ponuda){
+    		fanZoneService.saveCinemaTheatre(
+    				ponuda,
+    		function(info){//succes function
 				
 			},
 			function(info){//fail function

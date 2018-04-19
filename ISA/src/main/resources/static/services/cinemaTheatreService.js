@@ -54,5 +54,13 @@ angular.module('app')
                     };
                 $http(req).then(onSuccess, onError);
             },
+            saveCinemaTheatre: function (data, onSuccess, onError) {
+                var req = {
+                        method: 'POST',
+                        url: '/api/cinnemas/',
+                        data: data,
+                    };
+                $http(req).then(onSuccess, onError);
+            },
         }
     });

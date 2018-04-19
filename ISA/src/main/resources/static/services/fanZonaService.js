@@ -75,5 +75,13 @@ angular.module('app')
                     };
                     $http(req).then(onSuccess, onError);
             },
+            prihvatiPonudu: function(data,onSuccess, onError){
+                var req = {
+                        method: 'POST',
+                        url: 'api/rekvizit/ponude/prihvati',
+                        data : data,
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
         }
     });

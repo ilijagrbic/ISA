@@ -1,5 +1,6 @@
 package com.example.isa.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +45,20 @@ public class RekvizitController {
 	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/polovni")
 	public ResponseEntity<List<Rekviziti>> getRekvizitiPolovni(){
 		List<Rekviziti> rekviziti = rekvizitiService.getOdobreni();
-		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
+		List<Rekviziti> rekviziti1 = new ArrayList<>();
+		for (Rekviziti rekvizit : rekviziti) {
+			if(rekvizit.getVrsta().equals(VrstaRekvizita.POLOVNI)) {
+				rekviziti1.add(rekvizit);
+			}
+		}
+		return new ResponseEntity<>(rekviziti1, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/zvanicni")
 	public ResponseEntity<List<Rekviziti>> saveRekvizitZvanicni(@RequestBody Rekviziti rekvizit){
 		rekvizit.setVrsta(VrstaRekvizita.ZVANICNI);
+		rekvizit.setOdobren(RekvizitState.PRIHVACEN);
 		rekvizitiService.save(rekvizit);
 		List<Rekviziti> rekviziti = rekvizitiService.getAllZvanicna();
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
@@ -123,4 +131,13 @@ public class RekvizitController {
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
 		
 	}
+	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/ponude/prihvati")
+	public ResponseEntity<List<Rekviziti>> prihvatiPonudu(@RequestBody Licitacija licitacija){
+		licitacija.setStatus(LicitacijaStatus.ACCEPTED);
+		licitacijaService.save(licitacija);
+		return new ResponseEntity<>( HttpStatus.OK);
+		
+	}
 }
+
+

@@ -15,6 +15,11 @@ angular.module('app')
 			$state.go("adminEditPlace", {cinemaTheatreId: id});
 			
 		}
+		$scope.addPlace = function(){
+			$state.go("adminAddPlace");
+			
+		}
+		
 		
 		$scope.trustSrc = function(url){
 			return $sce.trustAsResourceUrl(url);

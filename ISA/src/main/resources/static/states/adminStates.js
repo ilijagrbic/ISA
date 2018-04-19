@@ -101,6 +101,20 @@ angular.module('app')
                     }
                 }
             })
+            
+               .state('adminAddPlace', {
+                url: '/adminAddPlace',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'adminBioskopa/addPlace.html',
+                        controller: 'adminAddPlaceController'
+                    }
+                }
+            })
             .state('adminEditMovie', {
                 url: '/adminEditMovie/:movieId/cinema/:cinemaId/type/:cinType',
                 views: {
