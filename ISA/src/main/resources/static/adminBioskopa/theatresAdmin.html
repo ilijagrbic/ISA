@@ -5,8 +5,8 @@ Pozorista
 	<div>
 		<div class="card" ng-repeat="cinema in cinemas">
 			<div class="card-body">
-		      <b>Naziv pozorista:</b><br/>{{cinema.name}}<br/>
-		      <b>Adresa pozorista:</b><br/>{{cinema.address}}<br/>
+		      <b>Naziv bioskopa:</b><br/>{{cinema.name}}<br/>
+		      <b>Adresa bioskopa:</b><br/>{{cinema.address}}<br/>
 		      <b>Promotivni opis:</b><br/>{{cinema.description}}<br/>
 		      <button type="button" class="btn btn-primary" ng-click="editPlace(cinema.id)">Izmeni</button><br/>
 		      <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
