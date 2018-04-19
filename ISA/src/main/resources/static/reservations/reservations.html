@@ -11,14 +11,14 @@
 </div>
 <h1>Rezervacije</h1>
 
-<form name="findForm">
+<form ng-hide="sakrijTabeluIPretragu == true" name="findForm">
 	<div>
 		<input type="text" ng-model="searchByName">
 		<button ng-click="search()">Pretrazi</button>
 	</div>
 </form>
 
-<table border="1">
+<table ng-hide="sakrijTabeluIPretragu == true" border="1">
   <tr ng-repeat="cinemaTheatre in cinemasAndTheathres | orderBy:['name']">
     <td>{{ cinemaTheatre.name }}</td>
    <!--  <td>{{ cinemaTheatre.gmapsUrl }}</td>-->
@@ -30,48 +30,52 @@
 
 
 <div>
-<h6><font color="red">Naziv bioskopa {{choosed.name}}, {{choosed.id}}</font></h6>
 
-<select ng-model="selectedMovie" ng-options="movie.name for movie in movies">
+
+<select ng-hide="sakrijTabeluIPretragu == false" ng-model="selectedMovie" ng-options="movie.name for movie in movies">
  <option class="placeholder" selected disabled value="">Izaberi fim</option>
 </select>
 
-<h6 ><font color="red">Izabran je film: {{selectedMovie.name}}, sa id {{selectedMovie.id}} </font></h6>
 
-<button ng-click="listProjection(selectedMovie.id)">Izlistaj projekcije</button>
+
+<button ng-hide="selectedMovie==null" ng-click="listProjection(selectedMovie.id)">Izlistaj projekcije</button>
 <table ng-if="list=='izlistaj' " border="1">
   <tr ng-repeat="projekcija in projekcije">
-    <td>{{ projekcija.date }}</td>
+    <td>{{ date(projekcija.date) }}</td>
     <td>{{ projekcija.sala.nazivBroj }}</td>
     <td>{{ projekcija.cena }}</td>
     <td><button ng-click="chooseProjection(projekcija, projekcija.id)">Odaberi projekciju</button></td>
   </tr>
 </table> 
-<h6><font color="red">Izabrana projekcija je: {{choosedProjection.date}}, sa id {{choosedProjection.id}} </font></h6>
 
-<h6>Sedista</h6>
+<div ng-hide="pozivPrijatelja == false">
 
 <span ng-repeat="sediste in choosedProjection.sedista">
 		<br ng-if="!($index % choosedProjection.sala.visina)" />
-		<input ng-hide="pozivPrijatelja == true" type="checkbox"  value="{{sediste.id}}" ng-disabled="!existsInRez(sediste)"/>
+		<input  type="checkbox"  value="{{sediste.id}}" ng-disabled="!existsInRez(sediste)"/>
 </span>
 
-	<button ng-hide="pozivPrijatelja == true" ng-click="selektovani()">Dalje</button>
+</div>
+
+	
 	
 	<p ng-if="greska==true">Morate odabrati sediste</p>
 	
  	<div ng-hide=" numRez<=1 ">
- 		<h6>Pozovi prijatelje</h6>
+ 		<h6>Pozovi prijatelje, mozete pozvati {{numRez - 1}} prijatelja</h6>
 	 	<select ng-model="selectedFriend" ng-options="friend.name for friend in callFriends">
 	 		<option class="placeholder" selected disabled value="">Izaberi prijatelja</option>
 		</select>
 		
-		<button ng-click="posaljiPoziv(selectedFriend.id)">Pozovi</button>
+		<button ng-click="posaljiPoziv(selectedFriend.id)" ng-disabled="selectedFriend==null">Pozovi</button>
  	</div>
  	
-<button ng-if="izabranaSedista == true" ng-click="rezervacija()">Rezervisi</button>
-<button ng-click="odustanak()">Odustani</button>
-</div>	 
+<button ng-hide="zaDalje == true" ng-disabled="numRez!=0" ng-click="selektovani()">Dalje</button>
+<button ng-if="numRez!=0" ng-click="rezervacija()">Rezervisi</button>
+
+</div>
+
+<button ng-click="odustanak()">Odustani</button>	 
 
 
  

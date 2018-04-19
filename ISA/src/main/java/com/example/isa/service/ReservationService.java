@@ -286,7 +286,8 @@ public class ReservationService {
 		else {
 			reservation.setStatus(RezervacijaStatus.ACCEPTED);
 		}
-		reservation.setFilm(reservationDTO.getProjekcija().getFilm());
+		reservation.setFilm(reservationDTO.getMovie());
+
 		reservation.setRezervant(userRepository.findById(reservationDTO.getIdRezervant()));
 		reservation.setRezervisanoMesto(sedisteRepository.findById(reservationDTO.getRezSedisteId()));
 		
