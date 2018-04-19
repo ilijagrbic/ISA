@@ -22,8 +22,8 @@ Edit place
 	</div>
 	
 	
-	
-	<ol ng-show="izvestajiShow==false">
+	<div ng-show="izvestajiShow==false">
+	<ol >
 		<li ng-repeat="movie in curentCinemaTheatre.repertoire.movies">
 			Naziv filma:{{movie.name}} <br/>
 			Id:{{movie.id}} <br/>
@@ -33,6 +33,8 @@ Edit place
 			<button ng-click="viewMovie(movie)">View</button>
 		</li>
 	</ol>
+	<button ng-click="newMovie()">New</button>
+	</div>
 	
 	<div ng-show="izvestajiShow==true">
 	<h3>Reports</h3>
@@ -57,10 +59,14 @@ Edit place
         </p>
       </div><br/>
       
-      <canvas id="myChart"></canvas>
+      <button ng-click="showIncome(odPrihodi, doPrihodi)">Show income</button><br/>
+   	<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    	<canvas id="myChart"></canvas>
+	</div>
+	 
       
       <!-- <highchart class="inputReportGraph" id="chart1" config="chartConfig"></highchart> -->
-	<button ng-click="showIncome(odPrihodi, doPrihodi)">Show income</button>
+	
 	</div>
 	
 	<div ng-show = "enterMovieState==true">
@@ -79,9 +85,9 @@ Edit place
 		<button ng-click="cancelEntery()">Cancel entry</button>
 		<button ng-click="saveEntery()">Save entry</button>
 	</div>
-	<button ng-click="newMovie()">New</button>
 	
-	<div ng-show="showOneClick == true">
+	
+	<div ng-show="showOneClick == true&&izvestajiShow==false">
 		<h3>Oneclick rezervacije:</h3>
 		<ol>
 			<li ng-repeat="rez in oneClick">
