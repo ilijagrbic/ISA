@@ -1,6 +1,9 @@
 package com.example.isa.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,6 +19,7 @@ public class Licitacija {
 	
 	private double price;
 	
+	@Enumerated(EnumType.STRING)
 	private LicitacijaStatus status;
 	
 	private boolean notified;
@@ -28,6 +32,8 @@ public class Licitacija {
 	
 	@ManyToOne
 	private Rekviziti rekvizit;
+	
+	
 
 	public Licitacija() {
 		super();

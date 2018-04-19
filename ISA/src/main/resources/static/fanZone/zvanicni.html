@@ -2,11 +2,12 @@
 <tr>
 <th>naziv</th>
 <th>datum isticanja oglasa</th>
+<th></th>
 </tr>
 <tr ng-repeat="rekvizit in zvanicna">
 <td>{{rekvizit.naziv}}</td>
 <td>{{rekvizit.finalDate}}</td>
-
+<td><button ng-click="posaljiPonudu(cena,rekvizit)">Rezervisi Rekvizit</button> </td>
 </tr>
 
 </table>
