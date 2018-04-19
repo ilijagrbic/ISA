@@ -1,29 +1,17 @@
 <h1>
-Cinemas
+Bioskopi
 </h1>
-	  <button ng-click="addPlace()">Dodaj Bioskop</button><br/>
 <div>
-	<div class="container" ng-repeat="cinema in cinemas">
-	
-	  <div class="row">
-	    <div class="col-sm">
-	      {{cinema.name}}
-	    </div>
-	    <div class="col-sm">
-	      {{cinema.address}}
-	    </div>
-	  </div>
-	  
-	  <div class="row">
-	    <div class="col-sm">
-	      {{cinema.description}}
-	    </div>
-	  </div>
-	  <button ng-click="editPlace(cinema.id)">Edit</button><br/>
-	  
-	  <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-	  
-	  
+	<div>
+		<div class="card" ng-repeat="cinema in cinemas">
+			<div class="card-body">
+		      <b>Naziv bioskopa:</b><br/>{{cinema.name}}<br/>
+		      <b>Adresa bioskopa:</b><br/>{{cinema.address}}<br/>
+		      <b>Promotivni opis:</b><br/>{{cinema.description}}<br/>
+		      <button type="button" class="btn btn-primary" ng-click="editPlace(cinema.id)">Izmeni</button><br/>
+		      <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div>  
 	</div>
+	
 </div>
