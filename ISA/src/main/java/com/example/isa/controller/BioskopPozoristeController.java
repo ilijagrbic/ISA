@@ -117,16 +117,24 @@ public class BioskopPozoristeController {
 			method = RequestMethod.PUT,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BioskopPozoriste> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){		
-		updateCinema.setId(id);
-		
-		BioskopPozoriste temp = updateCinema.getBioskop();
-		temp.setId(id);
-		BioskopPozoriste retVal = bioskopService.update(temp);
-		if(retVal!=null) {
-			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
-		}else {
-			return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> updateCinnema(@RequestBody BioskopDTO updateCinema, @PathVariable("id") Long id){
+		if(updateCinema.getName()==null||updateCinema.getName().isEmpty()||updateCinema.getName().equals("")) {
+			return new ResponseEntity<String>("Ime ne sme biti prazno.", HttpStatus.BAD_REQUEST);
+		}
+		else if(updateCinema.getAddress()==null||updateCinema.getAddress().isEmpty()||updateCinema.getAddress().equals("")) {
+			return new ResponseEntity<String>("Ime ne sme biti prazno.", HttpStatus.BAD_REQUEST);
+		}
+		else {
+			updateCinema.setId(id);
+			
+			BioskopPozoriste temp = updateCinema.getBioskop();
+			temp.setId(id);
+			BioskopPozoriste retVal = bioskopService.update(temp);
+			if(retVal!=null) {
+				return new ResponseEntity<BioskopPozoriste>(retVal, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<String>("Ne postoji bioskop.", HttpStatus.BAD_REQUEST);
+			}
 		}
 	}
 	

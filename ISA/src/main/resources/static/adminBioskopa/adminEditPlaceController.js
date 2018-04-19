@@ -127,7 +127,8 @@ angular.module('app')
 				function(info){
 					$scope.reportIncome=info.data.avgOcena;
 				},
-				function(){
+				function(info){
+					
 					
 				})
 		}
