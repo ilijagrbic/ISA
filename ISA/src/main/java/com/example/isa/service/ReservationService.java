@@ -160,13 +160,18 @@ public class ReservationService {
 			for(Projekcija p:projRepository.findByFilmId(m.getId())) {
 				temp = (ArrayList<Rezervacija>)getFromProj(p.getId());
 				for(Rezervacija r:temp) {
-					if(r.getStatus()==RezervacijaStatus.ONECLICK) {
+					if(r.getStatus()==RezervacijaStatus.ONECLICK/*&&checkTime(r.getProjekcija().getDate())*/) {
 						retVal.add(r);
 					}
 				}
 			}
 		}
 		return retVal;
+	}
+
+	public boolean checkTime(Date checking) {
+		Date today = new Date();
+		return checking.after(today);
 	}
 	
 	public List<Rezervacija> getInCinnema(long id){

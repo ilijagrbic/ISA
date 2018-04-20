@@ -81,18 +81,25 @@ public class ReservationController {
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Rezervacija> editRezrate(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
-		Rezervacija rez = createMovie.getRezervacija();
-		Long sed = createMovie.getRezSedisteId();
-		Long use = createMovie.getUserId();
-		rez.setId(id);
-		Rezervacija retVal = resevationService.rateRese(rez, sed, use);
+	public ResponseEntity<?> editRezrate(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
+		Date today = new Date();
+		Date termin = resRpository.findById(id).getProjekcija().getDate();
 		
-		if(retVal!=null) {
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+		if(today.after(termin)) {
+			Rezervacija rez = createMovie.getRezervacija();
+			Long sed = createMovie.getRezSedisteId();
+			Long use = createMovie.getUserId();
+			rez.setId(id);
+			Rezervacija retVal = resevationService.rateRese(rez, sed, use);
+			
+			if(retVal!=null) {
+				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+			}
+		}else {
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Prvo pogledajte film pa ocenite."), HttpStatus.BAD_REQUEST);
 		}
 		
 	}
