@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.controller.dataTransfer.RezervacijaDTO;
 import com.example.isa.model.BioskopPozoriste;
@@ -94,12 +95,12 @@ public class ReservationController {
 			value = "/api/reservations/{id}",
 			method = RequestMethod.DELETE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Rezervacija> deleteReserv(@PathVariable("id") Long id){
+	public ResponseEntity<?> deleteReserv(@PathVariable("id") Long id){
 		Rezervacija retVal = (Rezervacija)resevationService.delete(id);
 		if(retVal!=null)
 			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Greska u brisanju rezervacije."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -112,7 +113,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji korisnik sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji korisnik sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -125,7 +126,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji projekcija sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji projekcija sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -138,7 +139,7 @@ public class ReservationController {
 		if(retVal!=null)
 			return new ResponseEntity<Collection<Rezervacija>>(retVal, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("Ne postoji pozoriste sa trazenim id-em.", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ne postoji pozoriste sa trazenim id-em."), HttpStatus.BAD_REQUEST);
 		
 	}
 	
@@ -149,12 +150,15 @@ public class ReservationController {
 		if(reservationDTO.getIsHost()==false) {
 			// Treba da posalje mail
 			System.out.println("\nGost je treba da salje mail");
-			mailService.sendReservationMail("http://localhost:8133/reservations/reservationList.html", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
+			mailService.sendReservationMail("http://localhost:8133/#!/listOfReservations", reservationDTO.getIdRezervant(), reservationDTO.getIdHost());
 		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {
-		System.out.println("Rezervisana je " + reservation);
-		return new ResponseEntity<Rezervacija>(reservation, HttpStatus.OK);
+			System.out.println("Rezervisana je " + reservation);
+			if(reservationDTO.getIdHost()==reservationDTO.getIdRezervant()) {
+				mailService.sendReservation(reservation,reservationDTO.getGuests());
+			}
+			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.BAD_REQUEST);

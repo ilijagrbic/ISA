@@ -1,6 +1,22 @@
 angular.module('app')
     .controller('adminMovieEditController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService) {
     	
+    	$scope.salaPanelText = function(){
+    		if($scope.opdNewSala==true){
+    			return "Unesi novu salu";
+    		}else{
+    			return "Odaberi postojecu salu";
+    		}
+    	}
+    	
+    	$scope.glumacPanelText = function(){
+    		if(!$scope.newActroPanelActiaved==true){
+    			return "Unesi novog glumca";
+    		}else{
+    			return "Odaberi postojeceg glumca";
+    		}
+    	}
+    	
     	$scope.date = function(date){
     		var dat = new Date(date);
     		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
@@ -11,8 +27,9 @@ angular.module('app')
 				function(info){
 					$scope.curentMovie = info.data;
 				},
-				function(){
+				function(info){
 					$scope.curentMovie = null;
+					alert(info.data.err);
 				}
 		)
 		
@@ -20,8 +37,8 @@ angular.module('app')
 				function(info){
 					$scope.listProjekcije = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -29,8 +46,8 @@ angular.module('app')
 				function(info){
 					$scope.listGlumci = info.data
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -38,8 +55,8 @@ angular.module('app')
 				function(info){
 					$scope.listSale = info.data;
 				},
-				function(){
-		
+				function(info){
+					alert(info.data.err);
 				}
 			)
 		
@@ -67,38 +84,46 @@ angular.module('app')
 		}
 		
 		$scope.saveNewProj = function(x){
-			var sala;
-			if($scope.opdNewSala == false){
-				sala = {
-						"id":null,
-						"nazivBroj":$scope.newProjSalaNaziv,
-						"duzina":$scope.newProjSalaDuz,
-						"visina":$scope.newProjSalaVis
-					}
-			}
-			else{
-				sala = x;
-			}
-			//console.log($scope.newProjDate.getFullYear()+"---"+$scope.newProjDate.getMonth()+"---"+$scope.newProjDate.getDate());
-			//console.log($scope.newProjTime.getHours()+"---"+$scope.newProjTime.getMinutes());
-			var datumVreme = new Date($scope.newProjDate.getFullYear(), $scope.newProjDate.getMonth(), $scope.newProjDate.getDate(), $scope.newProjTime.getHours(), $scope.newProjTime.getMinutes(), 0, 0);
-			var sedista = getArrSedista(sala);
-			var DTO = {
-					"date": datumVreme,
-					"sala":sala,
-					"cena":$scope.newProjCena,
-					"film":$stateParams.movieId,
-					"sedista":sedista
+			if($scope.newProjDate!=undefined&&$scope.newProjTime!=undefined){
+				var sala;
+				if($scope.opdNewSala == false){
+					sala = {
+							"id":null,
+							"nazivBroj":$scope.newProjSalaNaziv,
+							"duzina":$scope.newProjSalaDuz,
+							"visina":$scope.newProjSalaVis
+						}
 				}
-			
-			projekcijeService.postProjekcija(DTO,
-					function(info){
-						$scope.listProjekcije.splice($scope.listProjekcijelength, "0", info.data);
-					},
-					function(){
-						
+				else{
+					sala = x;
+				}
+				//console.log($scope.newProjDate.getFullYear()+"---"+$scope.newProjDate.getMonth()+"---"+$scope.newProjDate.getDate());
+				//console.log($scope.newProjTime.getHours()+"---"+$scope.newProjTime.getMinutes());
+				var datumVreme = new Date($scope.newProjDate.getFullYear(), $scope.newProjDate.getMonth(), $scope.newProjDate.getDate(), $scope.newProjTime.getHours(), $scope.newProjTime.getMinutes(), 0, 0);
+				var sedista = getArrSedista(sala);
+				var DTO = {
+						"date": datumVreme,
+						"sala":sala,
+						"cena":$scope.newProjCena,
+						"film":$stateParams.movieId,
+						"sedista":sedista
 					}
-			)
+				
+				projekcijeService.postProjekcija(DTO,
+						function(info){
+							$scope.listProjekcije.splice($scope.listProjekcijelength, "0", info.data);
+						},
+						function(info){
+							if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+	    						alert("Greska u unosu!")
+	    					}else{
+	    						alert(info.data.err);
+	    					}
+						}
+				)
+			}else{
+				alert("Unesite datum i vreme.")
+			}
 		}
 		
 		getArrSedista = function(x){
@@ -145,8 +170,8 @@ angular.module('app')
 							}
 						}
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			)
 		}
@@ -197,14 +222,31 @@ angular.module('app')
 			    				function(info){
 			            			goBack();
 			    				},
-			    				function(){
-			    					
+			    				function(info){
+			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+			    						alert("Greska u unosu!")
+			    					}else{
+			    						alert(info.data.err);
+			    					}
 			    				}
 			    			);
 			              
 		          }, 
 		          function (error) {
-		        	  
+		        	  $scope.imgPath = "";
+			            getMovieDTO();
+			            movieShowService.putMovieShow($stateParams.cinemaId, $scope.curentMovie.id, getMovieDTO(),
+			    				function(info){
+			            			goBack();
+			    				},
+			    				function(info){
+			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+			    						alert("Greska u unosu!")
+			    					}else{
+			    						alert(info.data.err);
+			    					}
+			    				}
+			    			);
 		          });
 		}
 		

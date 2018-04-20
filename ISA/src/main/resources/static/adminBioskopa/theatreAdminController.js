@@ -2,12 +2,12 @@ angular.module('app')
     .controller('theatreAdminController', function ($scope, $state, $sce, $rootScope, cinemaTheatreService) {
 		cinemaTheatreService.getAdminTheatres($rootScope.USER.id,
 				function(info){//succes function
-					$scope.theatres=info.data;
+					$scope.cinemas=info.data;
 					
 				},
 				function(info){//fail function
-					$scope.theatres=[];
-					
+					$scope.cinemas=[];
+					alert(info.data.err);
 				}
 		);
 

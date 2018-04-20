@@ -1,11 +1,18 @@
 angular.module('app').controller(
 		'reservationListController',
 		function($rootScope, $scope, $state, reservationsService, reservationService) {
+			
+			if ($rootScope.USER != null){
 			$scope.showOceniPanel=true;
 			$scope.showOceni = function(res){
 				$scope.showOceniPanel=false;
 				$scope.rateingReservation = res;
 			}
+
+			$scope.date = function(date){
+	    		var dat = new Date(date);
+	    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+	    	}
 			$scope.commitRate = function(){
 
 	    		reservationService.rateReservation(
@@ -23,8 +30,8 @@ angular.module('app').controller(
 	    	    				}
 	    	    				
 	    	    			},
-	    				function(){
-	    					
+	    				function(info){
+	    	    				alert(info.data.err);
 	    				}
 	    		)
 			}
@@ -65,6 +72,10 @@ angular.module('app').controller(
 					alert("Error - nije mogao da pronadje rezervacije");
 				});
 				
+			}
+			}
+			else{
+				$state.go('signin');
 			}
 
 });

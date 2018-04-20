@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.Sala;
 import com.example.isa.service.BioskopPozoristeService;
@@ -69,11 +70,11 @@ public class SalaController {
 				return new ResponseEntity<Sala>(retVal, HttpStatus.OK);
 			}
 			else {
-				return new ResponseEntity<String>("Greska pri kreiranju sale", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Greska pri kreiranju sale"), HttpStatus.BAD_REQUEST);
 			} 
 		}
 		else {
-			return new ResponseEntity<String>("Sala ne moze imate negativnu duzinu ili visinu", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>( new AlertMessageDTO("Sala ne moze imate negativnu duzinu ili visinu"), HttpStatus.BAD_REQUEST);
 		}
 	
 	}

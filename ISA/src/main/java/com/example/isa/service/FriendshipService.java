@@ -92,5 +92,6 @@ public class FriendshipService {
 		}
 		return findFriendshipRequest(idReceiver);
 	}
-
+	
+	
 }

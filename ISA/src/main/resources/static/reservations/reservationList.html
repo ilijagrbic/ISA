@@ -12,9 +12,9 @@
 
 <h2> Lista rezervacija </h2>
 
- <table>
+ <table border="1">
   <tr ng-repeat="reservation in reservationList">
-     <td>{{ reservation.projekcija.date}}</td>
+     <td>{{ date(reservation.projekcija.date)}}</td>
      <td>{{ reservation.projekcija.sala.nazivBroj }}</td>
       <td>{{ reservation.projekcija.film.name }}</td>
       <td>{{ reservation.rezervisanoMesto.id }}</td>

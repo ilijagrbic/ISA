@@ -1,29 +1,17 @@
 <h1>
-Theatres
+Pozorista
 </h1>
-
 <div>
-	<div class="container" ng-repeat="theatre in theatres">
-	
-	  <div class="row">
-	    <div class="col-sm">
-	      {{theatre.name}}
-	    </div>
-	    <div class="col-sm">
-	      {{theatre.address}}
-	    </div>
-	  </div>
-	  
-	  <div class="row">
-	    <div class="col-sm">
-	      {{theatre.description}}
-	    </div>
-	  </div>
-	  <button ng-click="editPlace(theatre.id)">Edit</button><br/>
-
-	  <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-	  
-	  
+	<div>
+		<div class="card" ng-repeat="cinema in cinemas">
+			<div class="card-body">
+		      <b>Naziv bioskopa:</b><br/>{{cinema.name}}<br/>
+		      <b>Adresa bioskopa:</b><br/>{{cinema.address}}<br/>
+		      <b>Promotivni opis:</b><br/>{{cinema.description}}<br/>
+		      <button type="button" class="btn btn-primary" ng-click="editPlace(cinema.id)">Izmeni</button><br/>
+		      <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div>  
 	</div>
+	
 </div>

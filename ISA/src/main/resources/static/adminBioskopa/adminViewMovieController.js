@@ -1,11 +1,18 @@
 angular.module('app')
     .controller('adminMovieViewController', function ($scope, $state, $stateParams, movieShowService, uploadService, projekcijeService, salaService, reportService) {
+    	
+    	$scope.date = function(date){
+    		var dat = new Date(date);
+    		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+    	}
+    	
     	movieShowService.getMovieShow($stateParams.cinemaId, $stateParams.movieId,
 				function(info){
 					$scope.curentMovie = info.data;
 				},
-				function(){
+				function(info){
 					$scope.curentMovie = null;
+					alert(info.data.err);
 				}
 		)
 		
@@ -13,8 +20,8 @@ angular.module('app')
 				function(info){
 					$scope.listProjekcije = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -22,8 +29,8 @@ angular.module('app')
 				function(info){
 					$scope.listSale = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 		
@@ -31,8 +38,8 @@ angular.module('app')
 					function(info){
 						$scope.ocenaMovie=info.data.avgOcena;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 		)
 		

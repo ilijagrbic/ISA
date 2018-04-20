@@ -1,6 +1,14 @@
 angular.module('app')
     .controller('editProjController', function ($scope, $state, $stateParams, movieShowService, uploadService, actorService, projekcijeService, salaService, reservationService) {
     	
+    	$scope.salaPanelText = function(){
+    		if($scope.opdNewSalaEditing==true){
+    			return "Unesi novu salu";
+    		}else{
+    			return "Odaberi postojecu salu";
+    		}
+    	}
+    	
     	$scope.date = function(date){
     		var dat = new Date(date);
     		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
@@ -10,8 +18,8 @@ angular.module('app')
     			function(info){
     				$scope.curentlyEditedProj = info.data;
     			},
-    			function(){
-    				
+    			function(info){
+    				alert(info.data.err);
     			}
     	)
     	
@@ -19,8 +27,8 @@ angular.module('app')
 				function(info){
 					$scope.listSale = info.data;
 				},
-				function(){
-		
+				function(info){
+					alert(info.data.err);	
 				}
 			)
 		
@@ -28,8 +36,8 @@ angular.module('app')
 				function(info){
 					$scope.rezervacije = info.data;
 				},
-				function(){
-					
+				function(info){
+					alert(info.data.err);
 				}
 		)
 			    	
@@ -44,22 +52,31 @@ angular.module('app')
     	}
     	
     	$scope.saveSeats = function(){
-    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
-    		var DTO = {
-					"date": datumVreme,//$scope.curentlyEditedProj.date,
-					"sala":$scope.curentlyEditedProj.sala,
-					"cena":$scope.curentlyEditedProj.cena,
-					"film":$stateParams.movieId,
-					"sedista":$scope.curentlyEditedProj.sedista
-				}
-    		projekcijeService.putProjekcija($scope.curentlyEditedProj.id, DTO,
-    				function(info){
-    					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
-    				},
-    				function(){
-    					
-    				}
-    		)
+    		if($scope.curentlyEditedProj.date!=undefined&&$scope.fff!=undefined){
+	    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
+	    		var DTO = {
+						"date": datumVreme,//$scope.curentlyEditedProj.date,
+						"sala":$scope.curentlyEditedProj.sala,
+						"cena":$scope.curentlyEditedProj.cena,
+						"film":$stateParams.movieId,
+						"sedista":$scope.curentlyEditedProj.sedista
+					}
+	    		projekcijeService.putProjekcija($scope.curentlyEditedProj.id, DTO,
+	    				function(info){
+	    					$state.go("adminEditMovie", {movieId: $stateParams.movieId, cinemaId: $stateParams.cinemaId, cinType: $stateParams.cinType});
+	    				},
+	    				function(info){
+	    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+	    						alert("Greska u unosu!")
+	    					}else{
+	    						alert(info.data.err);
+	    					}
+	    				}
+	    		)
+    		}
+    		else{
+    			alert("Unesite datum i vreme.")
+    		}
     	}
     	
     	$scope.stringSala = function(x){
@@ -111,8 +128,12 @@ angular.module('app')
     				function(info){
     					$scope.rezervacije.splice($scope.rezervacije.length, "0", info.data);
     				},
-    				function(){
-    					
+    				function(info){
+    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+    						alert("Greska u unosu!")
+    					}else{
+    						alert(info.data.err);
+    					}
     				}
     			)
     			

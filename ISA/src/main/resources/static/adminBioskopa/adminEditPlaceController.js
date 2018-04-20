@@ -47,28 +47,49 @@ angular.module('app')
 					function(info){//succes function
 						$scope.curentCinemaTheatre=info.data;				
 					},
-					function(){//fail function
+					function(info){//fail function
 						$scope.curentCinemaTheatre=null;
-						
+						alert(info.data.err);
 					}
 			);
 			reservationService.getOneClick($stateParams.cinemaTheatreId,
 					function(info){
 						$scope.oneClick=info.data;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			);
 			reportService.getAmbijentReport($stateParams.cinemaTheatreId,
 					function(info){
 						$scope.ambijentOcena=info.data.avgOcena;	
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					})
 			
 		}
+		
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'line',
+
+		    // The data for our dataset
+		    data: {
+		        labels: ["January", "February", "March", "April", "May", "June", "July"],
+		        datasets: [{
+		            label: "Posecenost bioskopa",
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: [0, 10, 5, 2, 20, 30, 45],
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {}
+		});
+		
 		/*
 		 * Utility functions
 		 */
@@ -76,12 +97,40 @@ angular.module('app')
 		var something = this;
 		$scope.enterMovie = false;
 		$scope.types = ["MOVIE", "PERFORMANCE"];
-		$scope.showOneClick = true;
+		$scope.showOneClick = false;
 		$scope.izvestajiShow =false;
 		$scope.reportIncome = 0;
 		
+		$scope.showOneClickLabel = function(){
+			if(!$scope.showOneClick){
+				return "Prikazi brze rezervacije"
+			}else{
+				return "Sakriji brze rezervacije"
+			}
+		}
+		
+		$scope.showIzvestajiButtonData = function(){
+			if(!$scope.izvestajiShow){
+				return "Prikazi izvestaje"
+			}else{
+				return "Sakriji izvestaje"
+			}
+		}
+		
 		$scope.showIncome = function(od, doo){
-			
+			reportService.getIncomeReport(
+				{
+					"od":od,
+					"doo":doo
+				},
+				$stateParams.cinemaTheatreId,
+				function(info){
+					$scope.reportIncome=info.data.avgOcena;
+				},
+				function(info){
+					alert(info.data.err);
+					
+				})
 		}
 		
 		$scope.showReports = function(){
@@ -97,8 +146,8 @@ angular.module('app')
 							}
 						}
 					},
-					function(){
-						
+					function(info){
+						alert(info.data.err);
 					}
 			)
 		}
@@ -117,8 +166,12 @@ angular.module('app')
 					function(info){
 						goBack();
 					},
-					function(){
-						
+					function(info){
+						if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+    						alert("Greska u unosu!")
+    					}else{
+    						alert(info.data.err);
+    					}
 					}
 			)
 				
@@ -138,7 +191,7 @@ angular.module('app')
 					}
 				},
 				function(){
-					
+					alert(info.data.err);
 				}
 			)
 		}
@@ -164,14 +217,27 @@ angular.module('app')
 		    				function(info){
 		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
 		    				},
-		    				function(){
-		    					
+		    				function(info){
+		    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
+		    						alert("Greska u unosu!")
+		    					}else{
+		    						alert(info.data.err);
+		    					}
 		    				}
 		    			);
 		              
 	          }, 
 	          function (response) {
-	        	  console.log(response.data)
+	        	  $scope.imgPath = "";
+		            getMovieDTO();
+		            movieShowService.postMovieShow($scope.curentCinemaTheatre.id, getMovieDTO(),
+		    				function(info){
+		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
+		    				},
+		    				function(info){
+		    					alert(info.data.err);
+		    				}
+		    			);
 	          });
 		}
 		
@@ -288,7 +354,10 @@ angular.module('app')
     return '';
   }
 		 /**/
-		
+  $scope.date = function(date){
+		var dat = new Date(date);
+		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
+	}
 		
     }).directive('fileUpload', fileUpload);
 

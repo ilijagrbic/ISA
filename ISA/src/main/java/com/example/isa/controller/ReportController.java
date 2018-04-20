@@ -1,7 +1,6 @@
 package com.example.isa.controller;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
+import com.example.isa.controller.dataTransfer.GrafikDTO;
 import com.example.isa.controller.dataTransfer.IncomeReportDTO;
 import com.example.isa.controller.dataTransfer.ReportDTO;
 import com.example.isa.service.ReservationService;
@@ -51,27 +52,27 @@ public class ReportController {
 	
 	@RequestMapping(
 			value = "/cinnemas/{id}/income",
-			method = RequestMethod.GET,
+			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getIncome(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
-		if(creatingCinema.getDoo().before(creatingCinema.getOd())) {
+		if(!creatingCinema.getDoo().before(creatingCinema.getOd())) {
 			return new ResponseEntity<ReportDTO>(new ReportDTO(reservationService.getIncome(id,creatingCinema)), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Od vece od Do"), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@RequestMapping(
 			value = "/cinnemas/{id}/posete",
-			method = RequestMethod.GET,
+			method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getPosete(@RequestBody IncomeReportDTO creatingCinema, @PathVariable("id") Long id){
-		if(creatingCinema.getDoo().before(creatingCinema.getOd())) {
-			return new ResponseEntity<HashMap<Date, Integer>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
+		if(!creatingCinema.getDoo().before(creatingCinema.getOd())) {
+			return new ResponseEntity<List<GrafikDTO>>(reservationService.getPosete(id,creatingCinema), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>("Od vece od Do", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Od vece od Do"), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

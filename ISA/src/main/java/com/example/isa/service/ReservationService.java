@@ -1,8 +1,7 @@
 package com.example.isa.service;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.isa.controller.dataTransfer.GrafikDTO;
 import com.example.isa.controller.dataTransfer.IncomeReportDTO;
 import com.example.isa.controller.dataTransfer.ReservationDTO;
 import com.example.isa.model.BioskopPozoriste;
@@ -85,16 +85,21 @@ public class ReservationService {
 		}else {
 			newr.setRezervant(us);
 		}*/
-		toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
-		toUpdate.setStatus(newr.getStatus());
-		toUpdate.setOcenaFilm(newr.getOcenaFilm());
-		toUpdate.setHostId(newr.getHostId());
-		
-		User us = userRepository.findById(idUser);
-		toUpdate.setRezervant(us);
-		
-		
-		return reservationRepository.save(toUpdate);
+		if(toUpdate.getHostId()==null&&toUpdate.getRezervant()==null) {
+			toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
+			toUpdate.setStatus(newr.getStatus());
+			toUpdate.setOcenaFilm(newr.getOcenaFilm());
+			toUpdate.setHostId(newr.getHostId());
+			
+			User us = userRepository.findById(idUser);
+			toUpdate.setRezervant(us);
+			
+			
+			return reservationRepository.save(toUpdate);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	public Rezervacija rateRese(Rezervacija newr, Long idSediste, Long idUser) {
@@ -259,8 +264,10 @@ public class ReservationService {
 		
 	}
 	
-	public HashMap<Date, Integer> getPosete(long id, IncomeReportDTO datumi){
-		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
+	public List<GrafikDTO> getPosete(long id, IncomeReportDTO datumi){
+		//GrafikDTO pocetak = new GrafikDTO(datumi.getOd().getDate()-1, datumi.getOd().getMonth()+1, datumi.getOd().getYear()+1900, 0);
+		//System.out.println(pocetak);
+		/*ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
 		HashMap<Date, Integer> rv = new HashMap<Date, Integer>();
 		
 		double sum = 0;
@@ -271,7 +278,13 @@ public class ReservationService {
 			}
 		}
 		
-		return rv;
+		return rv;*/
+		
+		GrafikDTO pocetak = new GrafikDTO(0,0);
+		ArrayList<GrafikDTO> retVal = new ArrayList<GrafikDTO>();
+		
+		
+		return null;
 	}
 	
 	public Rezervacija reservation(ReservationDTO reservationDTO) {
@@ -286,7 +299,8 @@ public class ReservationService {
 		else {
 			reservation.setStatus(RezervacijaStatus.ACCEPTED);
 		}
-		reservation.setFilm(reservationDTO.getProjekcija().getFilm());
+		reservation.setFilm(projRepository.findById(reservationDTO.getProjekcija().getId()).getFilm());
+
 		reservation.setRezervant(userRepository.findById(reservationDTO.getIdRezervant()));
 		reservation.setRezervisanoMesto(sedisteRepository.findById(reservationDTO.getRezSedisteId()));
 		

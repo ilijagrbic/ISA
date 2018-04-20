@@ -1,18 +1,20 @@
 <div>
-	<h1>Movie</h1>
-	<div class="containter">
-		Naziv:{{curentMovie.name}}<br/>
-		Zanr:{{curentMovie.genre}}<br/>
-		Reziser:{{curentMovie.director}}<br/>
-		Trajanje:{{curentMovie.duration}}<br/>
-		Prosecna osena izvestaj:{{ocenaMovie}}<br/>
-		Cena:{{curentMovie.price}}<br/>
-		Opis:<textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description"></textarea><br/>
-		Poster:<img ng-src="/api/files/{{curentMovie.image}}"><br/>
-		<button ng-click="backToParentMovie()">Back</button>
+	<h1>Film</h1>
+	<div class="card">
+		<div class="card-body">
+			<b>Naziv:</b><br/>{{curentMovie.name}}<br/>
+			<b>Zanr:</b><br/>{{curentMovie.genre}}<br/>
+			<b>Reziser:</b><br/>{{curentMovie.director}}<br/>
+			<b>Trajanje:</b><br/>{{curentMovie.duration}}<br/>
+			<b>Prosecna ocena:</b><br/>{{ocenaMovie}}<br/>
+			<b>Cena:</b><br/>{{curentMovie.price}}<br/>
+			<b>Opis:</b><br/><textarea name="Text1" cols="40" rows="5" ng-model="curentMovie.description" disabled></textarea><br/>
+			<b>Poster:</b><br/><img ng-src="/api/files/{{curentMovie.image}}"><br/>
+			<button class="btn btn-primary" ng-click="backToParentMovie()">Back</button>
+		</div>
 	</div>
 	
-	<h4>Glumci</h4>
+	<h3>Glumci</h3>
 	<ol>
 		<li ng-repeat="glumac in curentMovie.glumci">
 			{{glumac.ime}} {{glumac.prezime}} 
@@ -20,22 +22,22 @@
 		
 	</ol>
 	
-	<h4>Projekcije:</h4>
-	<ol>
-		<li ng-repeat="projekcija in listProjekcije">
-			{{projekcija.date}}<br/>
-			Cena:{{projekcija.cena}}<br/>
-		</li>
-	</ol>
+	<h3>Termini projekcija:</h3>
+	<div class="card">
+		<div class="card-body" ng-repeat="projekcija in listProjekcije">
+			<b>Datum i vreme projekcije:</b><br/>{{date(projekcija.date)}}<br/>
+			<b>Cena:</b><br/>{{projekcija.cena}}<br/>
+		</div>
+	</div>
 	
-	<h4>Sale:</h4>
-	<ol>
-		<li ng-repeat="sala in listSale">
-			Naziv:{{sala.nazivBroj}}<br/>
-			Visina:{{sala.visina}}<br/>
-			Duzina:{{sala.duzina}}<br/>
-		</li>
-	</ol>
+	<h3>Sale u kojima se vrse projekcije:</h3>
+	<div class="card">
+		<div class="card-body" ng-repeat="sala in listSale">
+			<b>Naziv sale:</b><br/>{{sala.nazivBroj}}<br/>
+			<b>Broj kolona:</b><br/>{{sala.visina}}<br/>
+			<b>Broj redova:</b><br/>{{sala.duzina}}<br/>
+		</div>
+	</div>
 	
 	<!-- Sale, termini, poster, glumci-->
 </div>

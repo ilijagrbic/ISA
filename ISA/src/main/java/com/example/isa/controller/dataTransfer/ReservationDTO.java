@@ -1,8 +1,7 @@
 package com.example.isa.controller.dataTransfer;
 
+import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
-import com.example.isa.model.Rezervacija;
-import com.example.isa.model.RezervacijaStatus;
 
 public class ReservationDTO {
 	private Projekcija projekcija;
@@ -14,6 +13,10 @@ public class ReservationDTO {
 	private Boolean isHost;
 
 	private Long idHost;
+	
+	private MovieShow movie;
+	
+	private String guests;
 
 	
 	public long getRezSedisteId() {
@@ -61,6 +64,26 @@ public class ReservationDTO {
 
 	public void setIsHost(Boolean isHost) {
 		this.isHost = isHost;
+	}
+
+
+	public MovieShow getMovie() {
+		return movie;
+	}
+
+
+	public void setMovie(MovieShow movie) {
+		this.movie = movie;
+	}
+
+
+	public String getGuests() {
+		return guests;
+	}
+
+
+	public void setGuests(String guests) {
+		this.guests = guests;
 	}
 	
 	

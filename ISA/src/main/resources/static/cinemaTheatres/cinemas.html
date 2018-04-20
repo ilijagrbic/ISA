@@ -14,45 +14,35 @@
 Cinemas
 </h1>
 <div>
-	<div class="container" ng-repeat="cinema in cinemas | orderBy:['name','addres']" ng-show="showCinemas == true">
 	
-	  <div class="row">
-	    <div class="col-sm">
-	      {{cinema.name}}
-	    </div>
-	    <div class="col-sm">
-	      {{cinema.address}}
-	    </div>
-	  </div>
-	  
-	  <div class="row">
-	    <div class="col-sm">
-	      {{cinema.description}}
-	    </div>
-	  </div>
-	   <button ng-show="korisnik==true" ng-click="showCinnema(cinema)">View</button>
-	  <div class="row">
-	    <div class="col-sm">
-	      <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-	    </div>
-	  </div>
-	 
-	</div>
+		
+		<div class="card" ng-repeat="cinema in cinemas | orderBy:['name','addres']" ng-show="showCinemas == true">
+			<div class="card-body">
+		      <b>Naziv bioskopa:</b><br/>{{cinema.name}}<br/>
+		      <b>Adresa bioskopa:</b><br/>{{cinema.address}}<br/>
+		      <b>Promotivni opis:</b><br/>{{cinema.description}}<br/>
+		      <button ng-if="korisnik!=null" type="button" class="btn btn-primary" ng-click="showCinnema(cinema)">Vise detalja</button><br/>
+		      <iframe ng-src="{{trustSrc(cinema.gmapsUrl)}}" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div> 
+
+
+	
 	
 	<div ng-show="showCinemas == false">
-		<h3>Oneclick rezervacije:</h3>
-		<ol>
-			<li ng-repeat="rez in oneClick">
-				Naziv filma: {{rez.film.name}}<br/>
-				Datum: {{rez.projekcija.date}}<br/>
-				Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
-				Orginalna cena: {{rez.projekcija.cena}}<br/>
-				POPUST!: {{rez.rezervisanoMesto.deltaCena}}
-				<button ng-click="reserveOneClick(rez)">Reserve</button>
-			</li>
-		</ol>
-		<button ng-show="korisnik==true" ng-click="showCinnema(cinema)">Back</button>
+		<h3>Brze rezervacije:</h3>
+		<div class="card">
+			<div ng-repeat="rez in oneClick" class="card-body">
+				<b>Naziv filma:</b><br/> {{rez.film.name}}<br/>
+				<b>Datum:</b> <br/>{{date(rez.projekcija.date)}}<br/>
+				<b>Sala:</b> <br/>{{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
+				<b>Orginalna cena:</b> <br/>{{rez.projekcija.cena}}<br/>
+				<b>POPUST!!!: </b><br/>{{rez.rezervisanoMesto.deltaCena}}<br/>
+				<button class="btn btn-primary" ng-click="reserveOneClick(rez)">Reserve</button>
+			</div>
+		</div>
 	</div>
+	<button class="btn btn-primary" ng-show="showCinemas == false" ng-click="showCinnema(cinema)">Back</button>
 	
 	
 </div>

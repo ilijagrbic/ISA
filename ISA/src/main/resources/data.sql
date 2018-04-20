@@ -24,7 +24,7 @@ INSERT INTO invite VALUES (5, 'false', 5, 0);
 /* Dodavanje bioskopa */
 INSERT INTO repertoire (id, bioskop_id) values (1, null);
 INSERT INTO bioskop_pozoriste (id, address, bronze_sale, bronze_treshold, description, gmaps_url, gold_sale, gold_treshold, name, silver_sale, silver_treshold, type, repertoar) VALUES 
-							  (1, 'Bulevar Mihajla Pupina 3', 50, 10, 'Najbolje ponude u vasem omiljenom bioskopu.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2809.1092174864743!2d19.83506441555019!3d45.245584179099005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1015b93d3229%3A0xe7b7f1b2bf36ec57!2z0JvQsNGB0LvQsCDQk9Cw0LvQsCAyMywg0J3QvtCy0Lgg0KHQsNC0IDIxMDAw!5e0!3m2!1ssr!2srs!4v1523445804304', 
+							  (1, 'Bulevar Mihajla Pupina 3', 50, 10, 'Najbolje ponude u vasem omiljenom bioskopu.', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2808.6982904757137!2d19.840478015955338!3d45.253893479099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475b1069ec9deca9%3A0xd7dc4b85b5fc753!2z0JHRg9C70LXQstCw0YAg0JzQuNGF0LDRmNC70LAg0J_Rg9C_0LjQvdCwIDMsINCd0L7QstC4INCh0LDQtA!5e0!3m2!1ssr!2srs!4v1524158968044', 
 							  100, 20, 'Arena cineplex', 150, 30, 'CINNEMA', 1);
 update repertoire set bioskop_id=1 where id=1;
 
@@ -53,11 +53,25 @@ INSERT INTO movie_show (id, avg_review, description, director, duration, genre, 
 INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
 (3, 0, 'Filmska drama iz 1995. o otporu Vilijama Volasa engleskoj okupaciji Škotske. ', 'Mel Gibson', 150, 'Istorijski', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Hrabro srce', 400, 1, 'MOVIE');
 
+INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
+(4, 0, 'Bila je to prva velika bitka u Vijetnamskom ratu kojoj su učestvovale američke snage.', 'Randal Volas', 150, 'Ratni', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Bili smo vojnici', 500, 2, 'MOVIE');
 
-insert into sala (id, bioskop, duzina, naziv_broj, visina) values (1, 1, 11, 'Sala1', 1);
 
-INSERT INTO projekcija VALUES (1, 1200, '2038-01-19 03:14:07', 1, 1);
+INSERT INTO movie_show (id, avg_review, description, director, duration, genre, image, name, price, repertoar, type) values 
+(5, 0, 'Istorijski epski film', 'Ridli Skot', 150, 'Drama', '7ce6ee93-3636-4e07-b08b-722c706a1e7a', 'Gladijator', 500, 3, 'MOVIE');
 
+
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (1, 1, 11, 'Sala 1', 1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (2, 1, 50, 'Sala 2', 1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (3, 1, 12, 'Sala 3', 1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (4, 2, 15, 'Sala 4', 1);
+insert into sala (id, bioskop, duzina, naziv_broj, visina) values (5, 3, 15, 'Sala 5', 1);
+
+INSERT INTO projekcija VALUES (1, 1200, '2016-09-19 03:14:07', 1, 1);
+INSERT INTO projekcija VALUES (2, 1200, '2018-08-19 05:12:07', 2, 2);
+INSERT INTO projekcija VALUES (3, 1200, '2018-06-19 08:14:07', 3, 3);
+INSERT INTO projekcija VALUES (4, 1200, '2019-09-19 05:14:07', 4, 4);
+INSERT INTO projekcija VALUES (5, 1200, '2018-06-19 04:14:07', 5, 5);
 
 INSERT INTO sediste VALUES(1, 100, 10, 'VIP', 5);
 INSERT INTO sediste VALUES(2, 200, 15, 'ODRINARY', 6);
@@ -70,7 +84,8 @@ INSERT INTO sediste VALUES(8, 200, 10, 'CLOSED', 8);
 INSERT INTO sediste VALUES(9, 50, 10, 'PROMOTION', 90);
 INSERT INTO sediste VALUES(10, 200, 10, 'VIP', 8);
 INSERT INTO sediste VALUES(11, 50, 10, 'VIP', 9);
-
+INSERT INTO sediste VALUES(12, 200, 10, 'ODRINARY', 8);
+INSERT INTO sediste VALUES(13, 50, 10, 'ODRINARY', 9);
 
 Insert into rekviziti values (1, '2038-01-19 03:14:07','rekvizit','NEOBRADJEN','ZVANICNI', 1, 1);
 
@@ -78,11 +93,19 @@ INSERT INTO projekcija_sedista VALUES(1,1);
 INSERT INTO projekcija_sedista VALUES(1,2);
 INSERT INTO projekcija_sedista VALUES(1,3);
 INSERT INTO projekcija_sedista VALUES(1,4);
-INSERT INTO projekcija_sedista VALUES(1,5);
-INSERT INTO projekcija_sedista VALUES(1,6);
-INSERT INTO projekcija_sedista VALUES(1,7);
-INSERT INTO projekcija_sedista VALUES(1, 8);
-INSERT INTO projekcija_sedista VALUES(1,9);
-INSERT INTO projekcija_sedista VALUES(1,10);
-INSERT INTO projekcija_sedista VALUES(1,11);
+INSERT INTO projekcija_sedista VALUES(2,5);
+INSERT INTO projekcija_sedista VALUES(2,6);
+INSERT INTO projekcija_sedista VALUES(2,7);
+INSERT INTO projekcija_sedista VALUES(2, 8);
+INSERT INTO projekcija_sedista VALUES(3,9);
+INSERT INTO projekcija_sedista VALUES(3,10);
+INSERT INTO projekcija_sedista VALUES(3,11);
+INSERT INTO projekcija_sedista VALUES(4,12);
+INSERT INTO projekcija_sedista VALUES(5,13);
+
+INSERT INTO movie_show_projekcije VALUES(1,1);
+INSERT INTO movie_show_projekcije VALUES(2,2);
+INSERT INTO movie_show_projekcije VALUES(3,3);
+INSERT INTO movie_show_projekcije VALUES(4,4);
+INSERT INTO movie_show_projekcije VALUES(5,5);
 
