@@ -335,7 +335,7 @@ angular.module('app')
   function disabled(data) {
     var date = data.date,
       mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    return false;//mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
   }
 
   $scope.toggleMin = function() {
