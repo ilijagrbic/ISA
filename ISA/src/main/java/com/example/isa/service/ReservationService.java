@@ -10,10 +10,12 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.isa.controller.dataTransfer.GrafikDTO;
 import com.example.isa.controller.dataTransfer.IncomeReportDTO;
@@ -33,6 +35,7 @@ import com.example.isa.repository.RepertoireRepository;
 import com.example.isa.repository.RezervacijaRepository;
 import com.example.isa.repository.SedisteRepository;
 import com.example.isa.repository.UserRepository;
+
 
 @Service
 public class ReservationService {
@@ -58,7 +61,7 @@ public class ReservationService {
 	@Autowired
 	private MovieShowService movieShowService;
 	
-	@Transactional
+	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public Rezervacija postReservation(Rezervacija newr, Long idProj, Long idSediste, Long idUser) {
 		Projekcija pro = projRepository.findById(idProj);
 		Sediste sed = sedisteRepository.findById(idSediste);
@@ -77,7 +80,7 @@ public class ReservationService {
 		
 	}
 	
-	@Transactional
+	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
 	public Rezervacija putRese(Rezervacija newr, Long idSediste, Long idUser) {
 		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
 		/*Projekcija pro = projRepository.findById(idProj);
