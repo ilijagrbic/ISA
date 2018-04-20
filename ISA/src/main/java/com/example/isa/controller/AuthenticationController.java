@@ -1,5 +1,7 @@
 package com.example.isa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
+import com.example.isa.model.Rekviziti;
 import com.example.isa.model.users.User;
 import com.example.isa.service.AuthenticationService;
 import com.example.isa.service.MailService;
@@ -96,6 +99,13 @@ public class AuthenticationController {
 		}
 		
 		return new ResponseEntity<String>("Korisnik vec postoji", HttpStatus.OK);
+	}
+	@RequestMapping(value="regAdmin", method=RequestMethod.POST)
+	public ResponseEntity<List<User>> regAdmin(@RequestBody User user) {
+		korisnikService.createNewUser(user);
+		List<User> users = korisnikService.findAll();
+		return new ResponseEntity<>(users, HttpStatus.OK);
+		
 	}
 	
 	// Proveri za front

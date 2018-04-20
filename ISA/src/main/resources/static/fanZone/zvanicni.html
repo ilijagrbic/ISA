@@ -7,12 +7,14 @@
 <tr ng-repeat="rekvizit in zvanicna">
 <td>{{rekvizit.naziv}}</td>
 <td>{{rekvizit.finalDate}}</td>
-<td><button ng-click="posaljiPonudu(cena,rekvizit)">Rezervisi Rekvizit</button> </td>
+<td><button ng-click="zakaziZvanicni(rekvizit)">Rezervisi Rekvizit</button> </td>
 </tr>
 
 </table>
-
+<div ng-if="USER.role=='FAN_ZONE_ADMIN'">
 		Naziv:<input type=text ng-model="novRekvizit.naziv"><br/>
 		Datum isteka:<input type=date ng-model="novRekvizit.finalDate"><br/>
 
 		<button ng-click="dodajZvanicniOglas()">Dodaj Novi Oglas</button>
+		
+		</div>

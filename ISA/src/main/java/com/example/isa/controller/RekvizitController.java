@@ -70,18 +70,27 @@ public class RekvizitController {
 		rekvizit.setVrsta(VrstaRekvizita.POLOVNI);
 		rekvizit.setOdobren(RekvizitState.NEOBRADJEN);
 		rekvizitiService.save(rekvizit);
-		List<Rekviziti> rekviziti = rekvizitiService.getAllPolovna();
+		List<Rekviziti> rekviziti = rekvizitiService.getOdobreni();
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/licitacija")
 	public ResponseEntity<List<Rekviziti>> savePonuda(@RequestBody Licitacija licitacija){
+		licitacija.setStatus(LicitacijaStatus.NEW);
 		licitacijaService.save(licitacija);
 		List<Rekviziti> rekviziti = rekvizitiService.getAllPolovna();
 		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
 		
 	}
+	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/licitacija/zvanicni")
+	public ResponseEntity<List<Rekviziti>> savePonudaZvanicni(@RequestBody Licitacija licitacija){
+		licitacijaService.save(licitacija);
+		List<Rekviziti> rekviziti = rekvizitiService.getAllZvanicna();
+		return new ResponseEntity<>(rekviziti, HttpStatus.OK);
+		
+	}
+
 	
 	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/{id}")
 	public ResponseEntity<List<Rekviziti>> getUserRekviziti(@PathVariable long id){
@@ -112,6 +121,14 @@ public class RekvizitController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/licitacije/{id}")
+	public ResponseEntity<List<Licitacija>> getPonudeNeobradjene(@PathVariable long id){
+		User user = userService.findById(id);
+		
+		List<Licitacija> licitacije = licitacijaService.findAll(user);
+		return new ResponseEntity<>(licitacije, HttpStatus.OK);
+		
+	}
 
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/ponude/odobrenje/{id}")
 	public ResponseEntity<List<Rekviziti>> odobrenje(@PathVariable long id){
@@ -133,10 +150,21 @@ public class RekvizitController {
 	}
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/ponude/prihvati")
 	public ResponseEntity<List<Rekviziti>> prihvatiPonudu(@RequestBody Licitacija licitacija){
-		licitacija.setStatus(LicitacijaStatus.ACCEPTED);
-		licitacijaService.save(licitacija);
-		return new ResponseEntity<>( HttpStatus.OK);
+		List<Licitacija> licitacijeZaRekvizit = licitacijaService.findAll(licitacija.getRekvizit());
+		for (Licitacija licitacija2 : licitacijeZaRekvizit) {
+			if(licitacija2.getId() == licitacija.getId()) {
+				System.out.println(licitacija.getId() + licitacija2.getId());
+				licitacija.setStatus(LicitacijaStatus.ACCEPTED);
+				licitacijaService.save(licitacija);
+		}
+			else {
+				licitacija2.setStatus(LicitacijaStatus.DECLINED);
+				licitacijaService.save(licitacija2);
+			}
+
 		
+	}
+		return new ResponseEntity<>( HttpStatus.OK);
 	}
 }
 

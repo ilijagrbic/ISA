@@ -11,5 +11,7 @@ import com.example.isa.model.users.User;
 public interface LicitacijaRepository extends JpaRepository<Licitacija, Long>{
 	public List<Licitacija> findByRekvizit(Rekviziti rekvizit);//TESTED
 	
+	public List<Licitacija> findByPonudjac(User user);//TESTED
+	
 
 }

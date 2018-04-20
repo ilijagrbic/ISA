@@ -40,6 +40,9 @@ public class LicitacijaService {
 			
 		}
 		
+		public List<Licitacija> findAll(User user) {
+			return licitacijaRepository.findByPonudjac(user);
+		}
 
 
 		

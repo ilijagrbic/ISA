@@ -102,19 +102,33 @@ angular.module('app')
                 }
             })
             
-               .state('adminAddPlace', {
-                url: '/adminAddPlace',
+               .state('placesCrud', {
+                url: '/placesCrud',
                 views: {
                 	'header': {
                         templateUrl: 'homePage/header/header.html',
                         controller: 'headerController'
                     },
                     'content': {
-                    	templateUrl: 'adminBioskopa/addPlace.html',
+                    	templateUrl: 'adminBioskopa/placesCrud.html',
                         controller: 'adminAddPlaceController'
                     }
                 }
             })
+                .state('korisniciSistem', {
+                url: '/korisniciSistem',
+                views: {
+                	'header': {
+                        templateUrl: 'homePage/header/header.html',
+                        controller: 'headerController'
+                    },
+                    'content': {
+                    	templateUrl: 'adminBioskopa/korisniciCrud.html',
+                        controller: 'adminKorisniciController'
+                    }
+                }
+            })
+            
             .state('adminEditMovie', {
                 url: '/adminEditMovie/:movieId/cinema/:cinemaId/type/:cinType',
                 views: {

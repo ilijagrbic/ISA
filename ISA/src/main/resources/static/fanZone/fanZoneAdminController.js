@@ -4,6 +4,8 @@ angular.module('app')
 				function(info){//succes function
 					$scope.zvanicna=info.data;
 					console.log(info.data);
+					$scope.novRekvizit={};
+					$scope.polovniRekvizit={};
 					
 				},
 				function(info){//fail function
@@ -11,6 +13,20 @@ angular.module('app')
 					
 				}
 		);
+    	
+    	fanZoneService.getmyLicitacije(
+    			JSON.parse(localStorage.getItem("user")).id,
+				function(info){//succes function
+    				$scope.mojePonude = info.data;
+					
+				},
+				function(info){//fail function
+					$scope.zvanicna=[];
+					
+				}
+		);
+    	
+
     	
 
 		fanZoneService.getOglasiZaOdobravanje(
@@ -44,6 +60,7 @@ angular.module('app')
 
     	
     	$scope.dodajZvanicniOglas=function(){
+    		console.log($scope.novRekvizit);
     		fanZoneService.saveZvanicni(
     				
     		$scope.novRekvizit,
@@ -65,6 +82,7 @@ angular.module('app')
     	}
     	
     	$scope.dodajPolovniOglas=function(){
+    		console.log($scope.polovniRekvizit);
     		$scope.polovniRekvizit.postavljac = JSON.parse(localStorage.getItem("user"));
     		console.log($scope.polovniRekvizit);
     		fanZoneService.savePolovni(
@@ -178,7 +196,7 @@ angular.module('app')
     	}
 		
 		$scope.prihvatiPonudu=function(ponuda){
-    		fanZoneService.saveCinemaTheatre(
+    		fanZoneService.prihvatiPonudu(
     				ponuda,
     		function(info){//succes function
 				
@@ -190,7 +208,23 @@ angular.module('app')
     		
     		);
     		
+    	}
+		$scope.zakaziZvanicni=function(rekvizit){
+    		$scope.ponuda= {};
+    		$scope.ponuda.rekvizit = rekvizit;
+    		$scope.ponuda.ponudjac = JSON.parse(localStorage.getItem("user"));
+    		fanZoneService.zakaziZvanicni(
+    				$scope.ponuda,
+    		function(info){//succes function
+				
+			},
+			function(info){//fail function
+				
+			}
+    				
+    		
+    		);
     		
     	}
-       	
+
     });

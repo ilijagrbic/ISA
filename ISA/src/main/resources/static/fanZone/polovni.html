@@ -1,3 +1,5 @@
+<div ng-if="USER.role=='REG_USER'">
+
 <table border="1">
 <tr>
 <th>naziv</th>
@@ -55,10 +57,10 @@ Ponude za rekvizit
 </tr>
 
 </table>
-
+</div>
 <br>
 
-
+<div ng-if="USER.role=='FAN_ZONE_ADMIN'">
 OGLASI ZA ODOBRAVANJE
 <table border="1">
 <tr>
@@ -78,3 +80,26 @@ OGLASI ZA ODOBRAVANJE
 </tr>
 
 </table>
+</div>
+
+
+<div ng-if="USER.role=='REG_USER'">
+Moje ponude
+<table border="1">
+<tr>
+<th>naziv</th>
+<th>cena</th>
+<th>Status</th>
+</tr>
+<tr ng-repeat="ponuda in mojePonude">
+<td>{{ponuda.rekvizit.naziv}}</td>
+<td>{{ponuda.price}}</td>
+<td>{{ponuda.status}}</td>
+
+
+
+
+</tr>
+
+</table>
+</div>

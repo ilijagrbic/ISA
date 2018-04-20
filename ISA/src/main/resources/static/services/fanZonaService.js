@@ -40,6 +40,14 @@ angular.module('app')
                     };
                     $http(req).then(onSuccess, onError);
             },
+            zakaziZvanicni: function(data,onSuccess, onError){
+                var req = {
+                        method: 'POST',
+                        url: 'api/rekvizit/licitacija/zvanicni',
+                        data: data
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
             getuserRekviziti: function(id,onSuccess, onError){
                 var req = {
                         method: 'GET',
@@ -83,5 +91,13 @@ angular.module('app')
                     };
                     $http(req).then(onSuccess, onError);
             },
+            getmyLicitacije: function(id,onSuccess, onError){
+                var req = {
+                        method: 'GET',
+                        url: 'api/rekvizit/licitacije/'+id,
+                    };
+                    $http(req).then(onSuccess, onError);
+            },
+            
         }
     });

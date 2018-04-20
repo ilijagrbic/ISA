@@ -18,4 +18,30 @@
 		<!-- promotivne karte -->
 		<button ng-click="dodajUstanovu()">Dodaj Ustanovu</button>
 	</div>
+
+<br>
+	Bioskopi i pozorista 
+	<table border="1">
+		<tr>
+			<th>Nazvi</th>
+			<th>Adresa</th>
+			<th>opis</th>
+			<th>Tip</th>
+			<th>Bronzana Granica</th>
+			<th>Srebrana Granica</th>
+			<th>Zlatna Granica</th>
+		</tr>
+	<tr ng-repeat="ustanova in ustanove">
+		<td>{{ustanova.name}}</td>
+		<td>{{ustanova.address}}</td>
+		<td>{{ustanova.description}}</td>
+		<td>{{ustanova.type}}</td>
+		<td>{{ustanova.bronzeTreshold}}</td>
+		<td>{{ustanova.silverTreshold}}</td>
+		<td>{{ustanova.goldTreshold}}</td>
+		
+	</tr>
+
+</table>
+
 	

@@ -31,6 +31,16 @@ angular.module('app')
                 };
                 $http(req).then(onSuccess, onError);
             },
+            
+            regAdmin: function (data,onSuccess, onError) {
+                var req = {
+                    method: 'POST',
+                    url: '/api/authentication/regAdmin',
+                    data: data,
+                };
+                $http(req).then(onSuccess, onError);
+            },
             getuser: null
         }
+        
     });

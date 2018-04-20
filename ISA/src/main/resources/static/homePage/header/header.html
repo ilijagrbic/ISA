@@ -28,7 +28,6 @@
 				<span ng-if="headerState!='thea'"><a ui-sref="theatresAdmin" value="thea" ng-click="headerSwitch('thea')">Pozorista</a></span>
 				<span ng-if="headerState=='thea'">Pozorista</span>
 				
-				<a ui-sref="fanZoneAdmin">Fan Zona</a>
 
 		</div>
 		
@@ -37,11 +36,30 @@
 				<span ng-if="headerState!='home'"><a ui-sref="adminLogin" value="home" ng-click="headerSwitch('home')">Profil</a></span>
 				<span ng-if="headerState=='home'">Profil</span>
 				
-				<a ui-sref="fanZoneAdmin">Bioskopi</a>
-				<a ui-sref="fanZoneAdmin">Pozorista</a>
-				<a ui-sref="fanZoneAdmin">Korisnici</a>
+				<a ui-sref="placesCrud">Mesta Crud</a>
+				<a ui-sref="korisniciSistem">Korisnici</a>
 				
 
 		</div>
+		
+		</div>
+		
+				<div ng-if="USER.role == 'REG_USER' || USER.role == 'FAN_ZONE_ADMIN'">
+		
+				<span ng-if="headerState!='home'"><a ui-sref="adminLogin" value="home" ng-click="headerSwitch('home')">Profil</a></span>
+				<span ng-if="headerState=='home'">Profil</span>
+				
+				<span ng-if="headerState!='cine'"><a ui-sref="cinemasAdmin" value="cine" ng-click="headerSwitch('cine')">Bioskopi</a></span>
+				<span ng-if="headerState=='cine'">Bioskopi</span>
+				
+				<span ng-if="headerState!='thea'"><a ui-sref="theatresAdmin" value="thea" ng-click="headerSwitch('thea')">Pozorista</a></span>
+				<span ng-if="headerState=='thea'">Pozorista</span>
+				<a ui-sref="fanZoneAdmin">Fan Zona</a>
+				
+
+		</div>
+		
+		
+						
 	</p>
 </div>
