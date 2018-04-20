@@ -103,9 +103,5 @@ INSERT INTO projekcija_sedista VALUES(3,11);
 INSERT INTO projekcija_sedista VALUES(4,12);
 INSERT INTO projekcija_sedista VALUES(5,13);
 
-INSERT INTO movie_show_projekcije VALUES(1,1);
-INSERT INTO movie_show_projekcije VALUES(2,2);
-INSERT INTO movie_show_projekcije VALUES(3,3);
-INSERT INTO movie_show_projekcije VALUES(4,4);
-INSERT INTO movie_show_projekcije VALUES(5,5);
+
 
