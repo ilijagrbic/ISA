@@ -67,7 +67,7 @@ insert into sala (id, bioskop, duzina, naziv_broj, visina) values (3, 1, 12, 'Sa
 insert into sala (id, bioskop, duzina, naziv_broj, visina) values (4, 2, 15, 'Sala 4', 1);
 insert into sala (id, bioskop, duzina, naziv_broj, visina) values (5, 3, 15, 'Sala 5', 1);
 
-INSERT INTO projekcija VALUES (1, 1200, '2016-09-19 15:30:00', 1, 1);
+INSERT INTO projekcija VALUES (1, 1200, '2018-04-20 15:30:00', 1, 1);
 INSERT INTO projekcija VALUES (2, 1200, '2018-08-19 05:12:07', 2, 2);
 INSERT INTO projekcija VALUES (3, 1200, '2018-06-19 08:14:07', 3, 3);
 INSERT INTO projekcija VALUES (4, 1200, '2019-09-19 05:14:07', 4, 4);

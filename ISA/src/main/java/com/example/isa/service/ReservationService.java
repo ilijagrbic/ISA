@@ -362,7 +362,7 @@ public class ReservationService {
 	        return cal.getTime();
 	    }
 
-	
+	@Transactional
 	public Rezervacija reservation(ReservationDTO reservationDTO) {
 		System.out.println("Rezervant " + reservationDTO.getIdRezervant());
 		Rezervacija reservation = new Rezervacija();
