@@ -73,6 +73,7 @@ angular.module('app').controller(
 					$scope.numRez=0;
 					$scope.sakrijTabeluIPretragu = true;
 					var prijatelji=[];
+					var friendsPush=[];
 					var selektovane = [];
 					cinemaTheatreService.getCinemaTheatreById(index,
 							function(res){
@@ -179,7 +180,8 @@ angular.module('app').controller(
 						var postoji = false;
 						if(prijatelji.length==0 || prijatelji==undefined ){
 							$scope.numRez = $scope.numRez - 1 ;
-							prijatelji.push(selectedFriend); 
+							prijatelji.push(selectedFriend);
+							friendsPush.push(selectedFriend.name);
 							//console.log("Prazan");
 						}
 						else{
@@ -196,6 +198,7 @@ angular.module('app').controller(
 							if(postoji==false){
 								$scope.numRez = $scope.numRez - 1 ;
 								prijatelji.push(selectedFriend);
+								friendsPush.push(selectedFriend.name);
 								//console.log(JSON.stringify(prijatelji));
 								
 							}
@@ -219,6 +222,7 @@ angular.module('app').controller(
 								"rezSedisteId" : selektovane[0],
 								"idHost" :  $rootScope.USER.id,
 								"movie" : $rootScope.selectedMovie
+								//"guests" : friendsPush,
 						}
 						
 						reservationsService.reservate(host,
@@ -244,6 +248,7 @@ angular.module('app').controller(
 										"rezSedisteId" : selektovane[i+1],
 										"idHost" :  $rootScope.USER.id,
 										"movie" : $rootScope.selectedMovie
+										//"guests" : ''
 								}
 								
 								reservationsService.reservate(poziv,
@@ -269,6 +274,7 @@ angular.module('app').controller(
 											"rezSedisteId" : selektovane[j],
 											"idHost" :  $rootScope.USER.id,
 											"movie" : $rootScope.selectedMovie
+											//"guests" : ''
 									}
 									
 									reservationsService.reservate(host,
@@ -302,6 +308,7 @@ angular.module('app').controller(
 												"rezSedisteId" : selektovane[j],
 												"idHost" :  $rootScope.USER.id,
 												"movie" : $rootScope.selectedMovie
+												//"guests" : ''
 										}
 										
 										reservationsService.reservate(host,

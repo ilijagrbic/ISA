@@ -85,16 +85,21 @@ public class ReservationService {
 		}else {
 			newr.setRezervant(us);
 		}*/
-		toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
-		toUpdate.setStatus(newr.getStatus());
-		toUpdate.setOcenaFilm(newr.getOcenaFilm());
-		toUpdate.setHostId(newr.getHostId());
-		
-		User us = userRepository.findById(idUser);
-		toUpdate.setRezervant(us);
-		
-		
-		return reservationRepository.save(toUpdate);
+		if(toUpdate.getHostId()==null&&toUpdate.getRezervant()==null) {
+			toUpdate.setOcenaAmbijent(newr.getOcenaAmbijent());
+			toUpdate.setStatus(newr.getStatus());
+			toUpdate.setOcenaFilm(newr.getOcenaFilm());
+			toUpdate.setHostId(newr.getHostId());
+			
+			User us = userRepository.findById(idUser);
+			toUpdate.setRezervant(us);
+			
+			
+			return reservationRepository.save(toUpdate);
+		}
+		else {
+			return null;
+		}
 	}
 	
 	public Rezervacija rateRese(Rezervacija newr, Long idSediste, Long idUser) {

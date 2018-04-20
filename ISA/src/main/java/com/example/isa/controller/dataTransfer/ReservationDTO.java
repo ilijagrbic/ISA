@@ -15,6 +15,8 @@ public class ReservationDTO {
 	private Long idHost;
 	
 	private MovieShow movie;
+	
+	private String guests;
 
 	
 	public long getRezSedisteId() {
@@ -72,6 +74,16 @@ public class ReservationDTO {
 
 	public void setMovie(MovieShow movie) {
 		this.movie = movie;
+	}
+
+
+	public String getGuests() {
+		return guests;
+	}
+
+
+	public void setGuests(String guests) {
+		this.guests = guests;
 	}
 	
 	

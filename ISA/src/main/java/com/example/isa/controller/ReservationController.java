@@ -154,8 +154,11 @@ public class ReservationController {
 		}
 		Rezervacija reservation = resevationService.reservation(reservationDTO);
 		if(reservation!=null) {
-		System.out.println("Rezervisana je " + reservation);
-		return new ResponseEntity<Rezervacija>(reservation, HttpStatus.OK);
+			System.out.println("Rezervisana je " + reservation);
+			if(reservationDTO.getIdHost()==reservationDTO.getIdRezervant()) {
+				mailService.sendReservation(reservation,reservationDTO.getGuests());
+			}
+			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<Rezervacija>(reservation, HttpStatus.BAD_REQUEST);
