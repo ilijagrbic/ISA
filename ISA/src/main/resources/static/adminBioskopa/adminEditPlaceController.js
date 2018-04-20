@@ -111,8 +111,8 @@ angular.module('app')
 		        labels: [],
 		        datasets: [{
 		            label: "Posecenost bioskopa",
-		            backgroundColor: 'rgb(132, 99, 255)',
-		            borderColor: 'rgb(132, 99, 255)',
+		            backgroundColor: 'rgb(66,139,202)',
+		            borderColor: 'rgb(66,139,202)',
 		            data: [0],
 		        }]
 		    },
@@ -141,8 +141,8 @@ angular.module('app')
 						        labels: [],
 						        datasets: [{
 						            label: "Posecenost bioskopa",
-						            backgroundColor: 'rgb(255, 99, 132)',
-						            borderColor: 'rgb(255, 99, 132)',
+						            backgroundColor: 'rgb(66,139,202)',
+						            borderColor: 'rgb(66,139,202)',
 						            data: getNumbers($scope.poseteInfo, $scope.izvestajSelectedType)
 						        }]
 						    },
