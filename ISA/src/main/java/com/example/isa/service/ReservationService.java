@@ -63,13 +63,23 @@ public class ReservationService {
 	
 	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED)
 	public Rezervacija postReservation(Rezervacija newr, Long idProj, Long idSediste, Long idUser) {
+		ArrayList<Rezervacija> rezs = (ArrayList<Rezervacija>) reservationRepository.findAll();
+		
 		Projekcija pro = projRepository.findById(idProj);
 		Sediste sed = sedisteRepository.findById(idSediste);
 		User us = userRepository.findById(idUser);
-		
 		newr.setProjekcija(pro);
 		newr.setFilm(pro.getFilm());
 		newr.setRezervisanoMesto(sed);
+		for(Rezervacija r:rezs) {
+			if(newr.getProjekcija().getId()==r.getProjekcija().getId()&&newr.getRezervisanoMesto().getVisKord()==r.getRezervisanoMesto().getVisKord()&&newr.getRezervisanoMesto().getDuzKord()==r.getRezervisanoMesto().getDuzKord()) {
+				return null;
+				
+			}
+		}
+		
+		
+		
 		if(us==null) {
 			newr.setRezervant(null);
 		}else {
