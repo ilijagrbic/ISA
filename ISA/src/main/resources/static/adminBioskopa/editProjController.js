@@ -14,9 +14,33 @@ angular.module('app')
     		return dat.toLocaleDateString()+" "+dat.toLocaleTimeString();
     	}
     	
+   	
+    	rearangeSeats = function (a, vis, duz)
+    	{
+    	    var swapped;
+    	    do {
+    	        swapped = false;
+    	        for (var i=0; i < a.length-1; i++) {
+    	            if (sortCondition(a[i], a[i+1], vis, duz)) {
+    	                var temp = a[i];
+    	                a[i] = a[i+1];
+    	                a[i+1] = temp;
+    	                swapped = true;
+    	            }
+    	        }
+    	    } while (swapped);
+    	}
+    	
+    	sortCondition = function(seat1, seat2, vis, duz){
+    		s1val = seat1.duzKord*vis+seat1.visKord;
+    		s2val = seat2.duzKord*vis+seat2.visKord;
+    		return s1val<s2val;
+    	}
+    	
     	projekcijeService.getProjekcija($stateParams.projId,
     			function(info){
     				$scope.curentlyEditedProj = info.data;
+    				rearangeSeats($scope.curentlyEditedProj.sedista, $scope.curentlyEditedProj.sala.visina, $scope.curentlyEditedProj.sala.duzina);
     			},
     			function(info){
     				alert(info.data.err);

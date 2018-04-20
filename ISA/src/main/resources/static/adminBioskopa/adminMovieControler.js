@@ -176,6 +176,9 @@ angular.module('app')
 			)
 		}
 		
+		$scope.newActorName="";
+		$scope.newActorSurname="";
+		
 		$scope.addGlumac = function(x, ime, prezime){
 			if($scope.newActroPanelActiaved==false){
 				if(x==null){
