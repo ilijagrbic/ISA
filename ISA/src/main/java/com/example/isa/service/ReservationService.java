@@ -61,7 +61,7 @@ public class ReservationService {
 	@Autowired
 	private MovieShowService movieShowService;
 	
-	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED)
 	public Rezervacija postReservation(Rezervacija newr, Long idProj, Long idSediste, Long idUser) {
 		Projekcija pro = projRepository.findById(idProj);
 		Sediste sed = sedisteRepository.findById(idSediste);
@@ -80,7 +80,7 @@ public class ReservationService {
 		
 	}
 	
-	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED)
 	public Rezervacija putRese(Rezervacija newr, Long idSediste, Long idUser) {
 		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
 		/*Projekcija pro = projRepository.findById(idProj);
@@ -298,7 +298,7 @@ public class ReservationService {
 	    }
 	    
 	    for(Rezervacija rez:uBisokopu) {
-	    	if(rez.getProjekcija().getDate().after(datumi.getOd())&&rez.getProjekcija().getDate().before(datumi.getDoo())&&today.after(rez.getProjekcija().getDate())) {
+	    	if(rez.getProjekcija().getDate().after(datumi.getOd())&&rez.getProjekcija().getDate().before(datumi.getDoo())/*&&today.after(rez.getProjekcija().getDate())*/) {
 		    	Date dan = setToZeroTime(rez.getProjekcija().getDate());
 		    	Integer posete = grafik.get(dan);
 		    	if(posete==null) {

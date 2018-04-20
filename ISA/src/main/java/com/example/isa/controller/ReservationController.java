@@ -90,13 +90,18 @@ public class ReservationController {
 			Long sed = createMovie.getRezSedisteId();
 			Long use = createMovie.getUserId();
 			rez.setId(id);
-			Rezervacija retVal = resevationService.rateRese(rez, sed, use);
-			
-			if(retVal!=null) {
-				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+			if(rez.getOcenaAmbijent()<1||rez.getOcenaAmbijent()>5||rez.getOcenaFilm()<1||rez.getOcenaFilm()>5) {
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Ocena mora biti celobrojna i od 1 do 5."), HttpStatus.BAD_REQUEST);
+			}else
+			{
+				Rezervacija retVal = resevationService.rateRese(rez, sed, use);
+				
+				if(retVal!=null) {
+					return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+				}
 			}
 		}else {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Prvo pogledajte film pa ocenite."), HttpStatus.BAD_REQUEST);
@@ -207,7 +212,7 @@ public class ReservationController {
 			
 			return new ResponseEntity<Collection<Rezervacija>>(reservations, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Previse kasno jbg"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Previse kasno za odjavljivanje."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	

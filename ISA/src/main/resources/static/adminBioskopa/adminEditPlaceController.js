@@ -79,6 +79,8 @@ angular.module('app')
 		var something = this;
 		$scope.enterMovie = false;
 		$scope.types = ["MOVIE", "PERFORMANCE"];
+		$scope.izvestajTypes = ["Dan", "Nedelja", "Mesec"];
+		$scope.izvestajSelectedType = "Dan";
 		$scope.showOneClick = false;
 		$scope.izvestajiShow =false;
 		$scope.reportIncome = 0;
@@ -109,8 +111,8 @@ angular.module('app')
 		        labels: [],
 		        datasets: [{
 		            label: "Posecenost bioskopa",
-		            backgroundColor: 'rgb(255, 99, 132)',
-		            borderColor: 'rgb(255, 99, 132)',
+		            backgroundColor: 'rgb(132, 99, 255)',
+		            borderColor: 'rgb(132, 99, 255)',
 		            data: [0],
 		        }]
 		    },
@@ -141,7 +143,7 @@ angular.module('app')
 						            label: "Posecenost bioskopa",
 						            backgroundColor: 'rgb(255, 99, 132)',
 						            borderColor: 'rgb(255, 99, 132)',
-						            data: getNumbers($scope.poseteInfo),
+						            data: getNumbers($scope.poseteInfo, $scope.izvestajSelectedType)
 						        }]
 						    },
 
@@ -158,11 +160,41 @@ angular.module('app')
 		
 		}
 		
-		getNumbers = function(niz){
-			var nov =[];
-			for(i=0;i<niz.length;i++){
-				nov.splice(nov.length, 0, niz[i].value)
-			}return nov;
+		getNumbers = function(niz, mode){
+			if(mode=="Dan"){
+				var nov =[];
+				for(i=0;i<niz.length;i++){
+					nov.splice(nov.length, 0, niz[i].value)
+				}return nov;
+			}
+			else if(mode=="Nedelja"){
+				var nov =[];
+				var sumNedelja = 0;
+				for(i=0;i<niz.length;i++){
+					sumNedelja+=niz[i].value;
+					if((i+1)%7==0){
+						nov.splice(nov.length, 0, sumNedelja);
+						sumNedelja = 0;
+					}
+					
+				}
+				nov.splice(nov.length, 0, sumNedelja);
+				return nov;
+			}
+			else if(mode=="Mesec"){
+				var nov =[];
+				var sumNedelja = 0;
+				for(i=0;i<niz.length;i++){
+					sumNedelja+=niz[i].value;
+					if((i+1)%30==0){
+						nov.splice(nov.length, 0, sumNedelja);
+						sumNedelja = 0;
+					}
+					
+				}
+				nov.splice(nov.length, 0, sumNedelja);
+				return nov;
+			}
 		}
 		
 		$scope.showIncome = function(od, doo){

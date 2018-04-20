@@ -46,6 +46,10 @@ Izmeni pozoriste/bioskop
 	<h3>Izvestaji</h3>
 	<b>Prosecna ocena ambijenta:</b><br/>{{ambijentOcena}}<br/>
 	<b>Prihodi u odredjenom intervalu:</b><br/>{{reportIncome}}<br/>
+	<b>Prikaz po</b><br/>
+	<select ng-model="izvestajSelectedType" ng-options="x for x in izvestajTypes"></select>
+	
+	<br/>
 	<br/>
 	Od:
       <div class="col-md-6">
