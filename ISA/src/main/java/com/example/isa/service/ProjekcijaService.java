@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Repertoire;
+import com.example.isa.model.Rezervacija;
 import com.example.isa.model.Sala;
-import com.example.isa.model.Sediste;
 import com.example.isa.repository.MovieShowRepository;
 import com.example.isa.repository.ProjekcijaRepository;
 import com.example.isa.repository.RepertoireRepository;
+import com.example.isa.repository.RezervacijaRepository;
 import com.example.isa.repository.SalaRepository;
 
 @Service
@@ -30,6 +31,9 @@ public class ProjekcijaService {
 	
 	@Autowired
 	private SalaRepository salaPrepository;
+	
+	@Autowired
+	private RezervacijaRepository reserRepository;
 	
 	public Projekcija findById(long id) {
 		return projekcijaRepository.findById(id);
@@ -74,11 +78,20 @@ public class ProjekcijaService {
 	
 	public Projekcija delete(long id) {
 		Projekcija temp = projekcijaRepository.findById(id);
-		if(temp==null) {
-			return null;
+		
+		ArrayList<Rezervacija> rez = (ArrayList<Rezervacija>)reserRepository.findByProjekcijaId(id);
+		
+		if(rez.isEmpty()) {
+		
+			if(temp==null) {
+				return null;
+			}else {
+				projekcijaRepository.delete(id);
+				return temp;
+			}
+		
 		}else {
-			projekcijaRepository.delete(id);
-			return temp;
+			return null;
 		}
 	}
 	

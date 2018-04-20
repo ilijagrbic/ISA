@@ -102,4 +102,3 @@ INSERT INTO projekcija_sedista VALUES(3,10);
 INSERT INTO projekcija_sedista VALUES(3,11);
 INSERT INTO projekcija_sedista VALUES(4,12);
 INSERT INTO projekcija_sedista VALUES(5,13);
-

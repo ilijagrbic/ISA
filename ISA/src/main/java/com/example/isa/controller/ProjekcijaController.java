@@ -63,7 +63,7 @@ public class ProjekcijaController {
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Projekcija koju zelite da obrisete ne postoji u bazi."), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Projekcija koju zelite da obrisete ne postoji u bazi ili ima vec rezervacija."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
