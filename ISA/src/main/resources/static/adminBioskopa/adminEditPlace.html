@@ -64,8 +64,11 @@ Izmeni pozoriste/bioskop
           </span>
         </p>
       </div><br/>
-      
-      <button ng-click="showIncome(odPrihodi, doPrihodi)">Show income</button><br/>
+      <div class="btn-group">	
+	      <button class="btn btn-primary" ng-click="showIncome(odPrihodi, doPrihodi)">Prikazi prihode</button>
+	      <button class="btn btn-primary" ng-click="showPosete(odPrihodi, doPrihodi)">Prikazi posete</button>
+      </div>
+      <br/>
    	<div class="chart-container" style="position: relative; height:40vh; width:80vw">
     	<canvas id="myChart"></canvas>
 	</div>

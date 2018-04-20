@@ -15,7 +15,6 @@
 				<span ng-if="headerState!='thea'"><a ui-sref="theatres" value="thea" ng-click="headerSwitch('thea')">Theatres</a></span>
 				<span ng-if="headerState=='thea'">Theatres</span>
 				
-		<a ui-sref="fanZoneAdmin">Fan Zona</a>
 				
 		</div>
 		<div ng-if="USER.role == 'CINEMA_THEATRE_ADMIN'&&USER.firstTime==false">
@@ -29,7 +28,18 @@
 				<span ng-if="headerState!='thea'"><a ui-sref="theatresAdmin" value="thea" ng-click="headerSwitch('thea')">Pozorista</a></span>
 				<span ng-if="headerState=='thea'">Pozorista</span>
 				
-				<a ui-sref="fanZoneAdmin">Fan Zona</a>
+
+		</div>
+		
+				<div ng-if="USER.role == 'SYSTEM_ADMIN'">
+		
+				<span ng-if="headerState!='home'"><a ui-sref="adminLogin" value="home" ng-click="headerSwitch('home')">Profil</a></span>
+				<span ng-if="headerState=='home'">Profil</span>
+				
+				<a ui-sref="fanZoneAdmin">Bioskopi</a>
+				<a ui-sref="fanZoneAdmin">Pozorista</a>
+				<a ui-sref="fanZoneAdmin">Korisnici</a>
+				
 
 		</div>
 	</p>
