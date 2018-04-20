@@ -31,7 +31,7 @@ angular.module('app')
                     
 
                 }, function (res) {
-                	alert("User je null");
+                	alert("Logovanje nije uspelo, proverite da li ste dobro uneli lozinku i email.");
                     $rootScope.USER = null;
                 });
         };

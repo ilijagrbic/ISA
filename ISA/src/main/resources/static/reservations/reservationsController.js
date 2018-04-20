@@ -37,7 +37,7 @@ angular.module('app').controller(
 							$scope.cinemasAndTheathres = res.data; 
 						},
 						function(res){//fail function
-							alert("Eror prilikom ucitavanja bioskopa i pozorista");
+							alert("Greska prilikom ucitavanja bioskopa i pozorista.");
 							
 						}
 				);
@@ -61,7 +61,7 @@ angular.module('app').controller(
 									$scope.cinemasAndTheathres = res.data; 
 								},
 								function(res){//fail function
-									alert("Eror prilikom ucitavanja bioskopa i pozorista");
+									alert("Greska prilikom ucitavanja bioskopa i pozorista.");
 									
 								}
 						);
@@ -80,7 +80,7 @@ angular.module('app').controller(
 								$scope.choosed = res.data; 
 							},
 							function(res){
-								alert("Eror detalja o bioskopu ili pozoristu");
+								alert("Greska prilikom ucitavanja detalja.");
 								
 							}
 					);
@@ -90,7 +90,7 @@ angular.module('app').controller(
 						$scope.movies = res.data; 
 					},
 					function(res){//fail function
-						alert("Eror izlistavanje filmova");
+						alert("Greska prilikom izlistavanja filmova.");
 						
 					}
 					);
@@ -105,7 +105,7 @@ angular.module('app').controller(
 							$scope.projekcije = res.data; 
 						},
 						function(res){//fail function
-							alert("Eror izlistavanje projekcija");
+							alert("Greska prilikom izlistavanja projekcija");
 							
 						}
 					);}
@@ -130,7 +130,7 @@ angular.module('app').controller(
 									);
 								},
 								function(res){//fail function
-									alert("Eror biranja projekcije");
+									alert("Greska prilikom biranja projekcije.");
 									
 								}
 						);
@@ -163,7 +163,7 @@ angular.module('app').controller(
 						friendshipService.friends($rootScope.USER.id, function(res) {
 							$scope.callFriends = res.data;
 						}, function(res) {
-							alert("Error - nije mogao da pronadje prijatelje");
+							alert("Greska pri pronalasku prijatelja.");
 						});
 						//console.log(selektovane + "broj rezervacija " +$scope.numRez);
 					};
@@ -171,7 +171,7 @@ angular.module('app').controller(
 					friendshipService.friends($rootScope.USER.id, function(res) {
 						$scope.callFriends = res.data;
 					}, function(res) {
-						alert("Error - nije mogao da pronadje prijatelje");
+						alert("Greska pri pronalasku prijatelja.");
 					});
 					
 					
@@ -227,10 +227,11 @@ angular.module('app').controller(
 						
 						reservationsService.reservate(host,
 							function(res){
+							
 								// Rezervacija uspesna
 							},
 							function(res){
-								alert("Eror prilikom rezervacije");
+								alert("Greska prilikom rezervacije.");
 							
 							}
 						);
@@ -258,7 +259,7 @@ angular.module('app').controller(
 										
 									},
 									function(res){
-										alert("Eror prilikom rezervacije");
+										alert("Greska prilikom rezervacije.");
 									
 									}
 								);
@@ -281,7 +282,7 @@ angular.module('app').controller(
 										function(res){
 										},
 										function(res){
-											alert("Eror prilikom rezervacije");
+											alert("Greska prilikom rezervacije.");
 										
 										}
 									);
@@ -315,7 +316,7 @@ angular.module('app').controller(
 											function(res){
 											},
 											function(res){
-												alert("Eror prilikom rezervacije");
+												alert("Greska prilikom rezervacije");
 											
 											}
 										);
@@ -329,7 +330,7 @@ angular.module('app').controller(
 							
 						}
 						
-					
+					$state.go('listOfReservations');
 					}
 
 				

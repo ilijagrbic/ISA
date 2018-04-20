@@ -38,7 +38,7 @@ angular.module('app').controller(
 			reservationsService.getReservations($rootScope.USER.id, function(res) {
 				$scope.reservationList = res.data;
 			}, function(res) {
-				alert("Error - nije mogao da pronadje rezervacije");
+				alert("Greska prilikom ucitavanja rezervacija.");
 			});
 			
 			
@@ -60,7 +60,7 @@ angular.module('app').controller(
 				reservationsService.getReservations($rootScope.USER.id,idReservation, function(res) {
 					$scope.reservationList = res.data;
 				}, function(res) {
-					alert("Error - nije mogao da pronadje rezervacije");
+					alert("Greska prilikom ucitavanja rezervacija.");
 				});
 				
 			}
@@ -70,7 +70,7 @@ angular.module('app').controller(
 				reservationsService.acceptReservation($rootScope.USER.id,idReservation, function(res) {
 					$scope.reservationList = res.data;
 				}, function(res) {
-					alert("Error - nije mogao da pronadje rezervacije");
+					alert("Greska prilikom prihvatanja rezervacije.");
 				});
 				
 			}

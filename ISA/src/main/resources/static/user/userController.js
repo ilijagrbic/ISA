@@ -32,9 +32,10 @@ angular.module('app').controller(
 
 				userService.update($scope.user.id, $scope.user, function(res) {
 					$scope.user = res.data;
+					alert("Uspesno azurirani podaci");
 
 				}, function(res) {
-
+					alert("Greska pirlikom azuriranja podataka.");
 					// console.log(res.data.error);
 				});
 			};
@@ -69,7 +70,11 @@ angular.module('app').controller(
 							}
 							$scope.user = res.data;
 							$scope.passwords={};
+							
+							alert("Uspesno promenjena sifra.");
+							
 						}, function(res) {
+							alert("Greska pri promeni sifre, pokusajte ponovo");
 							console.log("Error neki");
 						});
 

@@ -8,7 +8,7 @@ angular.module('app').controller(
 								$scope.cinemasAndTheathres = res.data; 
 							},
 							function(res){//fail function
-								alert("Eror prilikom ucitavanja bioskopa i pozorista");
+								alert("Greska prilikom ucitavanja istorije.");
 								
 							}
 					);

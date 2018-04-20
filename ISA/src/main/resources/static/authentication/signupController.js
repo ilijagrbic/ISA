@@ -6,8 +6,8 @@ angular.module('app')
     	            function () {
     	                $scope.user = {}; // Uspesno smo izvrsili vracamo korisnika praznog za dalje popunjavanje
     	                $state.go("signin");
-    	            }, function () {
-    	                // Greska
+    	            }, function (info) {
+    	            	alert(info.data.err);
     	            });
     	    };
     	});

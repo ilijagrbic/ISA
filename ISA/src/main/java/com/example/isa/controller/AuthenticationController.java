@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.isa.controller.dataTransfer.AlertMessageDTO;
 import com.example.isa.controller.dataTransfer.LoginDTO;
 import com.example.isa.controller.dataTransfer.RegDTO;
 import com.example.isa.model.Rekviziti;
@@ -80,10 +81,10 @@ public class AuthenticationController {
 		
 		if(user==null) {
 			if(!regDTO.populatedFields()) {
-				return new ResponseEntity<String>("Nisu popunjena polja!", HttpStatus.BAD_REQUEST); 
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nisu popunjena polja!"), HttpStatus.BAD_REQUEST); 
 			}
 			if(!regDTO.passwordMatch()){
-				return new ResponseEntity<String>("Sifre se ne poklapaju!", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Sifre se ne poklapaju!"), HttpStatus.BAD_REQUEST);
 			}
 			User addedUser = korisnikService.createNewUser(regDTO.createUser(regDTO));
 			
