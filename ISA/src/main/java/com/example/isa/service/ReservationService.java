@@ -2,7 +2,12 @@ package com.example.isa.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +24,7 @@ import com.example.isa.model.Repertoire;
 import com.example.isa.model.Rezervacija;
 import com.example.isa.model.RezervacijaStatus;
 import com.example.isa.model.Sediste;
+import com.example.isa.model.SedisteType;
 import com.example.isa.model.users.User;
 import com.example.isa.repository.BioskopPozoristeRepository;
 import com.example.isa.repository.ProjekcijaRepository;
@@ -184,7 +190,10 @@ public class ReservationService {
 		
 		for(Rezervacija r:retVal) {
 			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())) {
-				sum+=r.getProjekcija().getCena();
+				sum+=r.getProjekcija().getCena(); 
+				if(r.getRezervisanoMesto().getType()==SedisteType.PROMOTION) {
+					sum-=r.getRezervisanoMesto().getDeltaCena();
+				}
 			}
 		}
 		
@@ -265,27 +274,91 @@ public class ReservationService {
 	}
 	
 	public List<GrafikDTO> getPosete(long id, IncomeReportDTO datumi){
-		//GrafikDTO pocetak = new GrafikDTO(datumi.getOd().getDate()-1, datumi.getOd().getMonth()+1, datumi.getOd().getYear()+1900, 0);
-		//System.out.println(pocetak);
-		/*ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
-		HashMap<Date, Integer> rv = new HashMap<Date, Integer>();
-		
-		double sum = 0;
-		
-		for(Rezervacija r:retVal) {
-			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())) {
-				rv.put(r.getProjekcija().getDate(), rv.get(r.getProjekcija().getDate())+1);
-			}
-		}
-		
-		return rv;*/
-		
-		GrafikDTO pocetak = new GrafikDTO(0,0);
-		ArrayList<GrafikDTO> retVal = new ArrayList<GrafikDTO>();
-		
-		
-		return null;
+	    Map<Date, Integer> grafik = new HashMap<>();
+	    //grafik = popuniInverval(grafik, datumi.getOd(),	datumi.getDoo());
+	    
+	    ArrayList<Rezervacija> temp = (ArrayList<Rezervacija>)reservationRepository.findAll();
+	    ArrayList<Rezervacija> uBisokopu = new ArrayList<Rezervacija>();
+	    
+	    for(Rezervacija rez:temp) {
+	    	if(rez.getFilm().getRepertoar().getBioskop().getId()==id) {
+	    		uBisokopu.add(rez);
+	    	}
+	    }
+	    
+	    for(Rezervacija rez:uBisokopu) {
+	    	if(rez.getProjekcija().getDate().after(datumi.getOd())&&rez.getProjekcija().getDate().before(datumi.getDoo())) {
+		    	Date dan = setToZeroTime(rez.getProjekcija().getDate());
+		    	Integer posete = grafik.get(dan);
+		    	if(posete==null) {
+		    		grafik.put(dan, 1);
+		    	}else {
+		    		grafik.put(dan, posete+1);
+		    	}
+	    	}
+	    }
+	    
+		return generateDTOList(popuniInverval(grafik, datumi.getOd(),	datumi.getDoo()), datumi.getOd(),	datumi.getDoo());
+
 	}
+	
+	private List<GrafikDTO> generateDTOList(Map<Date,Integer> grafik, Date od, Date doo){
+        List<GrafikDTO> lista = new ArrayList<GrafikDTO>();
+        Map<Date, Integer> treeMap = new TreeMap<>(grafik);
+        
+        for (Date dTemp : treeMap.keySet()) {
+          //  System.out.println(dTemp);
+            lista.add(new GrafikDTO(dTemp,grafik.get(dTemp)));
+        }
+        return lista;
+
+}
+	
+	private Map<Date, Integer> popuniInverval(Map<Date, Integer> grafik, Date od, Date doo){
+        Map<Date, Integer> popunjeno = new HashMap<>();
+        Date odDan = setToZeroTime(od);
+        Date doDan = setToZeroTime(doo);
+        long diff = doDan.getTime() - odDan.getTime();
+        long dani = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        Date trenutni = odDan;
+        for(int i=0; i<dani; i++){
+            trenutni = dayAfter(trenutni);
+            Integer j = grafik.get(trenutni);
+            if(j==null){
+                grafik.put(trenutni, 0);
+            }
+
+        }
+
+        Integer test = grafik.get(doDan);
+        if(test==null){
+            grafik.put(doDan, 0);
+        }
+
+
+
+        return grafik;
+}
+	
+	private Date dayAfter(Date d){
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        c.add(Calendar.DATE, 1);
+        return c.getTime();
+
+	}
+	
+	 private Date setToZeroTime(Date d){
+	        Calendar cal = Calendar.getInstance();
+	        cal.setTime(d);
+	        cal.set(Calendar.MILLISECOND, 0);
+	        cal.set(Calendar.SECOND, 0);
+	        cal.set(Calendar.MINUTE, 0);
+	        cal.set(Calendar.HOUR_OF_DAY, 0);
+	        return cal.getTime();
+	    }
+
 	
 	public Rezervacija reservation(ReservationDTO reservationDTO) {
 		System.out.println("Rezervant " + reservationDTO.getIdRezervant());
