@@ -1,7 +1,7 @@
 package com.example.isa.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -321,10 +321,14 @@ public class ReservationService {
 	
 	public List<Rezervacija> cancelReservation(Long userId, Long reservationId){
 		List<Rezervacija> deletedReservations = new ArrayList<Rezervacija>();
+		
+
+	    
 	
 		for(Rezervacija r : reservationRepository.findAll()) {
 			if(r.getRezervant()!=null&&r.getHostId()!=null) {
 				if(r.getRezervant().getId() == userId && r.getId() == reservationId) {
+				
 					deletedReservations.add(r);
 					System.out.println(r.getId());
 					reservationRepository.delete(r);

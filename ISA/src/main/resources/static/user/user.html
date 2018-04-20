@@ -9,42 +9,117 @@
 		<span><a ui-sref="history">Istorija poseta</a></span>
 	</p>
 </div>
-<h1>Registrovan korisnik</h1>
 <div>
-	<h3>Osnovni podaci</h3>
+	<h2>Osnovni podaci</h2>
 	<form name="userForm">
-		<div><label>Ime:</label>
+		<label>Ime:</label><br>
 		<input ng-hide="notChanged" type="text" required ng-model="user.name">
-		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.name"></div>
-		<div><label>Prezime:</label>
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.name">
+		<br><label>Prezime:</label><br>
 		<input ng-hide="notChanged" type="text" required ng-model="user.surname">
-		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.surname"></div>
-		<div><label>Email:</label>
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.surname">
+		<br><label>Email:</label><br>
 		<input ng-hide="notChanged" type="email" required ng-model="user.email">
-		<input ng-hide="changed" ng-readonly="true" type="email" required ng-model="user.email"></div>
-		<div><label>Telefon:</label>
+		<input ng-hide="changed" ng-readonly="true" type="email" required ng-model="user.email">
+		<br><label>Telefon:</label><br>
 		<input ng-hide="notChanged" type="text" required ng-model="user.phone">
-		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.phone"></div>
-		<div><label>Grad:</label>
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.phone">
+		<br><label>Grad:</label><br>
 		<input ng-hide="notChanged" type="text" required ng-model="user.city">
-		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.city"></div>
-		<button ng-hide="changed" ng-click="editUserDetails()">Izmeniti</button>
-		<button ng-hide="notChanged" ng-click="saveUserDetails()">Sacuvati</button>
+		<input ng-hide="changed" ng-readonly="true" type="text" required ng-model="user.city">
+		<button class="butt" ng-hide="changed" ng-click="editUserDetails()">Izmeniti</button>
+		<button class="butt" ng-disabled="userForm.$invalid" ng-hide="notChanged" ng-click="saveUserDetails()">Sacuvati</button>
 	<form name="detailsForm">
 </div>
+<hr>
 
-<button ng-hide="editPassword" ng-click="editPass()">Izmena sifre</button>
+<button class="butt" ng-hide="editPassword" ng-click="editPass()">Izmena sifre</button>
 <div>
-	<h3 ng-hide="editedPassword">Izmena sifre</h3>
+	<h2 ng-hide="editedPassword">Izmena sifre</h2>
 	<form name="passwordForm">
-		<div><label ng-hide="editedPassword">Stara sifra:</label>
-		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.oldPassword"></div>
-		<div><label ng-hide="editedPassword">Nova sifra:</label>
-		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.newPassword"></div>
-		<div><label ng-hide="editedPassword">Ponovljena:</label>
-		<input  ng-hide="editedPassword" type="password" value="" required ng-model="passwords.confirmPassword"></div>
-		<button ng-hide="editedPassword"  ng-click="savePass()">Sacuvati</button>
+		<br><label ng-hide="editedPassword">Stara sifra:</label><br>
+		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.oldPassword">
+		<br><label ng-hide="editedPassword">Nova sifra:</label><br>
+		<input ng-hide="editedPassword" type="password" value="" required ng-model="passwords.newPassword">
+		<br><label ng-hide="editedPassword">Ponovljena:</label><br>
+		<input  ng-hide="editedPassword" type="password" value="" required ng-model="passwords.confirmPassword"><br>
+		<br><button class="butt" ng-disabled="passwordForm.$invalid" ng-hide="editedPassword"  ng-click="savePass()">Sacuvati</button>
 	</form>
 </div>
+
+<style>
+
+	label{
+	margin-top: 10px;
+			-webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 17px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	h2 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 25px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	input {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 5px 22px 5px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 3px 5px 5px 3px;
+  border-radius: 3px 5px 5px 3px;
+  font: normal 15px/normal "Trebuchet MS", Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  text-indent: -14px;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(208,242,239,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.butt {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 90px;
+  cursor: pointer;
+  margin: -1px;
+  padding: 0 20px 2px;
+  border: 2px solid #018dc4;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal 18px/normal "Times New Roman", Times, serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(178,230,255,0.9);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+</style>
 	
 	

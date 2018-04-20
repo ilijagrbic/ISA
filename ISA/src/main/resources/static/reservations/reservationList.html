@@ -12,18 +12,27 @@
 
 <h2> Lista rezervacija </h2>
 
- <table border="1">
+ <table class="blueTable">
+ <tr>
+ 	<th>Datum</th>
+ 	<th>Sala</th>
+ 	<th>Rezervisano mesto</th>
+ 	<th>Ocena ambijenta</th>
+ 	<th>Ocena filma</th>
+ 	<th></th>
+ 	<th></th>
+ </tr>
   <tr ng-repeat="reservation in reservationList">
      <td>{{ date(reservation.projekcija.date)}}</td>
      <td>{{ reservation.projekcija.sala.nazivBroj }}</td>
-      <td>{{ reservation.projekcija.film.name }}</td>
+      <!--  <td>{{ reservation.projekcija.film.name }}</td>-->
       <td>{{ reservation.rezervisanoMesto.id }}</td>
-      <td>{{ reservation.projekcija.film.description }}</td>
+       <!-- <td>{{ reservation.projekcija.film.description }}</td>-->
       <td>Ambijent:{{ reservation.ocenaAmbijent}}</td>
       <td>Film:{{ reservation.ocenaFilm}}</td>
     <td ng-if="reservation.isHost==false && reservation.status!='ACCEPTED' "><button ng-click="potvrdi(reservation.id, $index)">Potvrdi</button></td>
-    <td><button ng-click="odustani(reservation.id, $index)">Odustani</button></td>
-     <td><button ng-click="showOceni(reservation)">Oceni</button></td>
+    <td align="center"><button ng-click="odustani(reservation.id, $index)">Odustani</button></td>
+     <td align="center"><button ng-click="showOceni(reservation)">Oceni</button></td>
   </tr>
 </table> 
 
@@ -33,3 +42,101 @@ Ambijent:<input type=text ng-model="ambijent"><br/>
 Film:<input type=text ng-model="ocena"><br/>
 <button ng-click="commitRate()">Oceni</button>
 </div>
+
+
+<style>
+	table.blueTable {
+	  border: 1px solid #A41C7A;
+	  background-color: #EEEEEE;
+	  table-layout: fixed;
+	  width: 85%;
+	  text-align: left;
+	  border-collapse: collapse;
+	}
+	table.blueTable td, table.blueTable th {
+	  border: 1px solid #AAAAAA;
+	  padding: 5px 2px;
+	}
+	table.blueTable tbody td {
+	  font-size: 16px;
+	  color: #330E18;
+	}
+	table.blueTable tr:nth-child(even) {
+	  background: #D0E4F5;
+	}
+	table.blueTable thead {
+	  background: #3664C6;
+	  background: -moz-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: -webkit-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: linear-gradient(to bottom, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  border-bottom: 2px solid #444444;
+	}
+	table.blueTable tr, th{
+		height: 15px;
+		width: 5px;
+	}
+	
+	.but{
+		aligment: center;
+		width: 0.5px;
+	}
+	table.blueTable td{
+		height: 20px;
+		width: 2px;
+	}
+	table.blueTable thead th {
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  border-left: 2px solid #D0E4F5;
+	}
+	table.blueTable thead th:first-child {
+	  border-left: none;
+	}
+	
+	table.blueTable tfoot {
+	  font-size: 14px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  background: #D0E4F5;
+	  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  border-top: 2px solid #444444;
+	}
+	table.blueTable tfoot td {
+	  font-size: 14px;
+	}
+	table.blueTable tfoot .links {
+	  text-align: right;
+	}
+	table.blueTable tfoot .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 2px 8px;
+	  border-radius: 5px;
+	}
+	
+	h2 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 25px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	.lab{
+			-webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 15px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+</style>
