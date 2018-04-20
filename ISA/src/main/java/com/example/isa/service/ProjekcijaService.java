@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.isa.model.BioskopPozoriste;
 import com.example.isa.model.MovieShow;
 import com.example.isa.model.Projekcija;
 import com.example.isa.model.Repertoire;
@@ -116,19 +117,24 @@ public class ProjekcijaService {
 	
 	public Projekcija update(Projekcija newProj, long id) {
 		Sala s = salaPrepository.findById(newProj.getSala().getId());
+		MovieShow mov = movieRepository.findById(id);
+		BioskopPozoriste bp = mov.getRepertoar().getBioskop();
 		Sala nva = null;
 		if(s==null) {
+			newProj.getSala().setBioskop(bp);
 			nva = salaPrepository.save(newProj.getSala());
 			s = nva;
 		}
 		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
-		toUpdate.setSala(s);
-		MovieShow mov = movieRepository.findById(id);
 		
-		ArrayList<Rezervacija> rez = (ArrayList<Rezervacija>)reserRepository.findByProjekcijaId(id);
+		
+		
+		ArrayList<Rezervacija> rez = (ArrayList<Rezervacija>)reserRepository.findByProjekcijaId(newProj.getId());
 		
 		if(newProj.getSala().getId()!=toUpdate.getSala().getId()&&!rez.isEmpty()) {
 			return null;
+		}else {
+			toUpdate.setSala(s);
 		}
 		
 		if(toUpdate==null||mov==null) {
