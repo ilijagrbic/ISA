@@ -9,73 +9,223 @@
 		<span><a ui-sref="history">Istorija poseta</a></span>
 	</p>
 </div>
-<h1>Rezervacije</h1>
+<h2>Rezervacije</h2>
 
 <form ng-hide="sakrijTabeluIPretragu == true" name="findForm">
 	<div>
+		<label class="lab">Naziv:</label>
 		<input type="text" ng-model="searchByName">
 		<button ng-click="search()">Pretrazi</button>
 	</div>
 </form>
 
-<table ng-hide="sakrijTabeluIPretragu == true" border="1">
+<table class="blueTable" ng-hide="sakrijTabeluIPretragu == true" border="1">
+<tr>
+<th>Naziv</th>
+<th>Adresa</th>
+<th>Detalji</th>
+<td></td>
+</tr>
   <tr ng-repeat="cinemaTheatre in cinemasAndTheathres | orderBy:['name']">
     <td>{{ cinemaTheatre.name }}</td>
    <!--  <td>{{ cinemaTheatre.gmapsUrl }}</td>-->
     <td>{{ cinemaTheatre.address }}</td>
     <td>{{ cinemaTheatre.description }}</td>
-    <td><button ng-click="details(cinemaTheatre, cinemaTheatre.id)">Detalji</button></td>
+    <td align="center"><button ng-click="details(cinemaTheatre, cinemaTheatre.id)">Detalji</button></td>
   </tr>
 </table> 
 
 
 <div>
 
+	<select ng-hide="sakrijTabeluIPretragu == false" ng-model="selectedMovie" ng-options="movie.name for movie in movies">
+		<option class="placeholder" selected disabled value="">Izaberi fim</option>
+	</select>
 
-<select ng-hide="sakrijTabeluIPretragu == false" ng-model="selectedMovie" ng-options="movie.name for movie in movies">
- <option class="placeholder" selected disabled value="">Izaberi fim</option>
-</select>
+	<button ng-hide="selectedMovie==null" ng-click="listProjection(selectedMovie.id)">Izlistaj projekcije</button>
+	<hr>
+	<table class="blueTable" ng-if="list=='izlistaj' " border="1">
+		<tr>
+			<th>Datum</th>
+			<th>Sala</th>
+			<th>Cena projekcije</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="projekcija in projekcije">
+			<td>{{ date(projekcija.date) }}</td>
+		    <td>{{ projekcija.sala.nazivBroj }}</td>
+		    <td>{{ projekcija.cena }}</td>
+		    <td align="center"><button ng-click="chooseProjection(projekcija, projekcija.id)">Odaberi projekciju</button></td>
+		</tr>
+	</table> 
 
-
-
-<button ng-hide="selectedMovie==null" ng-click="listProjection(selectedMovie.id)">Izlistaj projekcije</button>
-<table ng-if="list=='izlistaj' " border="1">
-  <tr ng-repeat="projekcija in projekcije">
-    <td>{{ date(projekcija.date) }}</td>
-    <td>{{ projekcija.sala.nazivBroj }}</td>
-    <td>{{ projekcija.cena }}</td>
-    <td><button ng-click="chooseProjection(projekcija, projekcija.id)">Odaberi projekciju</button></td>
-  </tr>
-</table> 
-
-<div ng-hide="pozivPrijatelja == false">
-
-<span ng-repeat="sediste in choosedProjection.sedista">
-		<br ng-if="!($index % choosedProjection.sala.visina)" />
-		<input  type="checkbox"  value="{{sediste.id}}" ng-disabled="!existsInRez(sediste)"/>
-</span>
-
-</div>
+<hr>
+	<div class="card" ng-hide="pozivPrijatelja == false">
+		<div class="card-body">
+			<span ng-repeat="sediste in choosedProjection.sedista">
+				<br ng-if="!($index % choosedProjection.sala.visina)" />
+				<label><input  type="checkbox"  value="{{sediste.id}}" ng-disabled="!existsInRez(sediste) || sediste.type=='CLOSED'"/>  {{sediste.type}}, rbr. {{sediste.id}}, cena {{sediste.deltaCena}}</label>
+			</span>
+		</div>
+	</div>
 
 	
 	
 	<p ng-if="greska==true">Morate odabrati sediste</p>
 	
  	<div ng-hide=" numRez<=1 ">
- 		<h6>Pozovi prijatelje, mozete pozvati {{numRez - 1}} prijatelja</h6>
+ 		<h3>Pozovi prijatelje, mozete pozvati {{numRez - 1}} prijatelja</h3>
 	 	<select ng-model="selectedFriend" ng-options="friend.name for friend in callFriends">
 	 		<option class="placeholder" selected disabled value="">Izaberi prijatelja</option>
 		</select>
-		
-		<button ng-click="posaljiPoziv(selectedFriend.id)" ng-disabled="selectedFriend==null">Pozovi</button>
+		<button class="butt" ng-click="posaljiPoziv(selectedFriend.id)" ng-disabled="selectedFriend==null">Pozovi</button>
  	</div>
- 	
-<button ng-hide="zaDalje == true" ng-disabled="numRez!=0" ng-click="selektovani()">Dalje</button>
-<button ng-if="numRez!=0" ng-click="rezervacija()">Rezervisi</button>
-
+	 	
+	<button class="butt" ng-hide="zaDalje == true" ng-disabled="numRez!=0" ng-click="selektovani()">Dalje</button>
+	<button class="butt" ng-if="numRez!=0" ng-click="rezervacija()">Rezervisi</button>
+<button class="butt" ng-click="odustanak()">Odustani</button>
 </div>
 
-<button ng-click="odustanak()">Odustani</button>	 
+		 
+
+	<style>
+	table.blueTable {
+	  border: 1px solid #A41C7A;
+	  background-color: #EEEEEE;
+	  table-layout: fixed;
+	  width: 100%;
+	  text-align: left;
+	  border-collapse: collapse;
+	}
+	table.blueTable td, table.blueTable th {
+	  border: 1px solid #AAAAAA;
+	  padding: 3px 2px;
+	}
+	table.blueTable tbody td {
+	  font-size: 16px;
+	  color: #330E18;
+	}
+	table.blueTable tr:nth-child(even) {
+	  background: #D0E4F5;
+	}
+	table.blueTable thead {
+	  background: #3664C6;
+	  background: -moz-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: -webkit-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: linear-gradient(to bottom, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  border-bottom: 2px solid #444444;
+	}
+	table.blueTable tr, th{
+		height: 15px;
+		width: 5px;
+	}
+	
+	.but{
+		aligment: center;
+		width: 0.5px;
+	}
+	table.blueTable td{
+		height: 20px;
+		width: 2px;
+	}
+	table.blueTable thead th {
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  border-left: 2px solid #D0E4F5;
+	}
+	table.blueTable thead th:first-child {
+	  border-left: none;
+	}
+	
+	table.blueTable tfoot {
+	  font-size: 14px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  background: #D0E4F5;
+	  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  border-top: 2px solid #444444;
+	}
+	table.blueTable tfoot td {
+	  font-size: 14px;
+	}
+	table.blueTable tfoot .links {
+	  text-align: right;
+	}
+	table.blueTable tfoot .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 2px 8px;
+	  border-radius: 5px;
+	}
+	
+	h2 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 25px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	h3 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 15px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	.lab{
+			-webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 17px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	
+	
+.butt {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 90px;
+  cursor: pointer;
+  margin: -1px;
+  padding: 0 20px 2px;
+  border: 2px solid #018dc4;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal 18px/normal "Times New Roman", Times, serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(178,230,255,0.9);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+	
+
+	
+</style>
 
 
  

@@ -38,9 +38,9 @@
 			
 			<b>Sala:</b><br/><select ng-show="opdNewSalaEditing==true" ng-model="curentlyEditedProj.sala" ng-options="x as stringSala(x) for x in listSale"></select>
 			<div ng-show="opdNewSalaEditing==false">
-				Naziv: <input type=text ng-model="curentlyEditedProj.sala.nazivBroj">
-				Duzina: <input type=text ng-model="curentlyEditedProj.sala.duzina">
-				Visina: <input type=text ng-model="curentlyEditedProj.sala.visina">
+				<b>Naziv: </b><br/><input type=text ng-model="novSalanazivBroj"><br/>
+				<b>Duzina: </b><br/><input type=text ng-model="novSaladuzina"><br/>
+				<b>Visina: </b><br/><input type=text ng-model="novSalavisina"><br/>
 			</div><br/><br/>
 			<button class="btn btn-primary" ng-click="dontShowOldSalaEditing()">{{salaPanelText()}}</button><br/>
 		</div>

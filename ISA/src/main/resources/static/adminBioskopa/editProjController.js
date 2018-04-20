@@ -51,15 +51,49 @@ angular.module('app')
     		$scope.opdNewSalaEditing=!$scope.opdNewSalaEditing;
     	}
     	
+    	getArrSedista = function(x){
+			var retVal = [];
+			var defSed = {
+					"visKord":0,
+					"duzKord":0,
+					"type":"ODRINARY",
+					"deltaCena":0
+			}
+			for(i=0;i<x.visina;i++){
+				for(j=0;j<x.duzina;j++){
+					var temp = {
+							"visKord":i,
+							"duzKord":j,
+							"type":"ODRINARY",
+							"deltaCena":0
+					};
+					retVal.splice(retVal, "0", temp);
+				}
+			}
+			
+			return retVal;
+		}
+    	
     	$scope.saveSeats = function(){
+    		var sala = $scope.curentlyEditedProj.sala;
+    		var sedista=$scope.curentlyEditedProj.sedista;
+    		if($scope.opdNewSalaEditing==false){
+    			sala = {
+    					"nazivBroj":	$scope.novSalanazivBroj,
+    					"visina":	$scope.novSaladuzina,
+    					"duzina":	$scope.novSalavisina
+    			}
+    			sedista = getArrSedista (sala);
+    			
+    		}
     		if($scope.curentlyEditedProj.date!=undefined&&$scope.fff!=undefined){
 	    		var datumVreme = new Date($scope.curentlyEditedProj.date.getFullYear(), $scope.curentlyEditedProj.date.getMonth(), $scope.curentlyEditedProj.date.getDate(), $scope.fff.getHours(), $scope.fff.getMinutes(), 0, 0);
 	    		var DTO = {
 						"date": datumVreme,//$scope.curentlyEditedProj.date,
-						"sala":$scope.curentlyEditedProj.sala,
+						"sala":sala,
 						"cena":$scope.curentlyEditedProj.cena,
 						"film":$stateParams.movieId,
-						"sedista":$scope.curentlyEditedProj.sedista
+						"sedista":sedista
 					}
 	    		projekcijeService.putProjekcija($scope.curentlyEditedProj.id, DTO,
 	    				function(info){

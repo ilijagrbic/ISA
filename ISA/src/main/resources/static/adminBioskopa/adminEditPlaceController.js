@@ -70,25 +70,7 @@ angular.module('app')
 			
 		}
 		
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var chart = new Chart(ctx, {
-		    // The type of chart we want to create
-		    type: 'line',
-
-		    // The data for our dataset
-		    data: {
-		        labels: ["January", "February", "March", "April", "May", "June", "July"],
-		        datasets: [{
-		            label: "Posecenost bioskopa",
-		            backgroundColor: 'rgb(255, 99, 132)',
-		            borderColor: 'rgb(255, 99, 132)',
-		            data: [0, 10, 5, 2, 20, 30, 45],
-		        }]
-		    },
-
-		    // Configuration options go here
-		    options: {}
-		});
+		
 		
 		/*
 		 * Utility functions
@@ -115,6 +97,72 @@ angular.module('app')
 			}else{
 				return "Sakriji izvestaje"
 			}
+		}
+		
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'line',
+
+		    // The data for our dataset
+		    data: {
+		        labels: [],
+		        datasets: [{
+		            label: "Posecenost bioskopa",
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: [0],
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {}
+		});
+		
+		$scope.showPosete = function(od, doo){
+			reportService.getPosete(
+					{
+						"od":od,
+						"doo":doo
+					},
+					$stateParams.cinemaTheatreId,
+					function(info){
+						$scope.poseteInfo=info.data;
+						
+						var ctx = document.getElementById('myChart').getContext('2d');
+						var chart = new Chart(ctx, {
+						    // The type of chart we want to create
+						    type: 'line',
+
+						    // The data for our dataset
+						    data: {
+						        labels: [],
+						        datasets: [{
+						            label: "Posecenost bioskopa",
+						            backgroundColor: 'rgb(255, 99, 132)',
+						            borderColor: 'rgb(255, 99, 132)',
+						            data: getNumbers($scope.poseteInfo),
+						        }]
+						    },
+
+						    // Configuration options go here
+						    options: {}
+						});
+						
+					},
+					function(info){
+						alert(info.data.err);
+						
+					})
+
+		
+		}
+		
+		getNumbers = function(niz){
+			var nov =[];
+			for(i=0;i<niz.length;i++){
+				nov.splice(nov.length, 0, niz[i].value)
+			}return nov;
 		}
 		
 		$scope.showIncome = function(od, doo){
@@ -287,7 +335,7 @@ angular.module('app')
   function disabled(data) {
     var date = data.date,
       mode = data.mode;
-    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    return false;//mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
   }
 
   $scope.toggleMin = function() {

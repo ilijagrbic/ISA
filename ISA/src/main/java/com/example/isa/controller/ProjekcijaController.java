@@ -63,7 +63,7 @@ public class ProjekcijaController {
 		if(retVal!=null) {
 			return new ResponseEntity<Projekcija>(retVal, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Projekcija koju zelite da obrisete ne postoji u bazi."), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Projekcija koju zelite da obrisete ne postoji u bazi ili ima vec rezervacija."), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -134,7 +134,7 @@ public class ProjekcijaController {
 		if(createProjekcija.getCena()<1) {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Cena ne moze biti negativna."), HttpStatus.BAD_REQUEST);
 		}else if(today.after(createProjekcija.getDate())){
-			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nemoguce definisati projekciju u proslosti."), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nemoguce menjati projekciju u proslosti."), HttpStatus.BAD_REQUEST);
 		}else if(createProjekcija.getSala().getId()==null&&(createProjekcija.getSala().getVisina()<1||createProjekcija.getSala().getDuzina()<1)) {
 			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Nova sala ne moze imati negativnu dimenziju."), HttpStatus.BAD_REQUEST);
 		}

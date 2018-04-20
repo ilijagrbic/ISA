@@ -1,25 +1,105 @@
+
 <form name="signupForm">			
 	<h2>Registracija</h2>
-	<div><Label>E-mail</Label>
-	<input type="email" required ng-model="user.email"></div>
+	<br><Label>E-mail</Label><br>
+	<input type="email" required ng-model="user.email">
 
-	<div><Label>Lozinka</Label>
-	<input type="password" required ng-model="user.password"></div>
+	<br><Label>Lozinka</Label><br>
+	<input type="password" required ng-model="user.password">
 
-	<div><Label>Ponovi lozinku</Label>
-	<input type="password" required ng-model="user.confPassword"></div>
+	<br><Label>Ponovi lozinku</Label><br>
+	<input type="password" required ng-model="user.confPassword">
 
-	<div><Label>Ime</Label>
-	<input type="text" required ng-model="user.name"></div>
+	<br><Label>Ime</Label><br>
+	<input type="text" required ng-model="user.name">
 
-	<div><Label>Prezime</Label>
-	<input type="text" required ng-model="user.surname"></div>
+	<br><Label>Prezime</Label><br>
+	<input type="text" required ng-model="user.surname">
 
-	<div><Label>Grad</Label>
-	<input type="text" required ng-model="user.city"></div>
+	<br><Label>Grad</Label><br>
+	<input type="text" required ng-model="user.city">
 
-	<div><Label>Telefon</Label>
-	<input type="text" required ng-model="user.phone"></div>
+	<br><Label>Telefon</Label><br>
+	<input type="text" required ng-model="user.phone">
 
-	<button ng-disabled="signupForm.$invalid" ng-click="signup()">Registruj se</button>
+	<button  class="butt" ng-disabled="signupForm.$invalid" ng-click="signup()">Registruj se</button>
 </form>
+
+
+<style>
+
+	label{
+	margin-top: 10px;
+			-webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 17px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	h2 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 25px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	input {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 5px 22px 5px 20px;
+  border: 1px solid #b7b7b7;
+  -webkit-border-radius: 3px 5px 5px 3px;
+  border-radius: 3px 5px 5px 3px;
+  font: normal 15px/normal "Trebuchet MS", Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  text-indent: -14px;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(208,242,239,1);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
+  -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.butt {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 90px;
+  cursor: pointer;
+  margin: -1px;
+  padding: 0 20px 2px;
+  border: 2px solid #018dc4;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  font: normal 18px/normal "Times New Roman", Times, serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: rgba(178,230,255,0.9);
+  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+  text-shadow: -1px -1px 0 rgba(15,73,168,0.66) ;
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+}
+</style>
+	
+	
+

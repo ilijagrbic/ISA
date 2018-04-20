@@ -25,6 +25,17 @@ angular.module('app')
                     data:dates
                 };
             $http(req).then(onSuccess, onError);
-    	}
+    	},
+    	getPosete: function(dates, cineId, onSuccess, onError){
+    		var req = {
+                    method: 'POST',
+                    url: 'api/cinnemas/'+cineId+'/posete',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:dates
+                };
+            $http(req).then(onSuccess, onError);
+    	},
     }
 });

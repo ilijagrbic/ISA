@@ -44,11 +44,12 @@ angular.module('app').controller(
 			
 			$scope.odustani = function(idReservation, $index){
 				
-				$scope.reservationList = [];
+				
 				reservationsService.cancelReservation($rootScope.USER.id,idReservation, function(res) {
+					$scope.reservationList = [];
 					$scope.reservationList = res.data;
 				}, function(res) {
-					alert("Error - nije mogao da pronadje rezervacije");
+					alert(res.data.err);
 				});
 				
 			}

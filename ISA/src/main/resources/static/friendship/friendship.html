@@ -10,44 +10,146 @@
 	</p>
 </div>
 
-<h2> Prijatelji </h2>
-
-<form ng-hide="sakrijTabeluIPretragu == true" name="findForm">
-	<label>Pretaga: </label>
-	<div>
-		<label>Ime:</label>
+<h2> Pretraga </h2>
+<div>
+<form name="findForm">
+	
+	
+		<label class="lab">Ime:</label>
 		<input type="text" ng-model="search.name">
-	</div>
-	<div>
-		<label>Prezime:</label>
-		<input type="text" ng-model="search.surname">
-	</div>
-</form>
 
- <table>
+		<label class="lab">Prezime:</label>
+		<input type="text" ng-model="search.surname">
+	
+</form>
+</div>
+<hr>
+<h2> Prijatelji </h2>
+ <table class="blueTable">
   <tr ng-repeat="user in friends | orderBy:['name', 'surname'] | filter:{name: search.name, surname: search.surname}">
     <td>{{ user.name }}</td>
     <td>{{ user.surname }}</td>
-    <td><button ng-click="deleteFriend(user, user.id, $index)">Obrisi</button></td>
+    <td align="center"><button ng-click="deleteFriend(user, user.id, $index)">Obrisi</button></td>
   </tr>
 </table> 
-
+<hr>
 <h2> Posalji zahtev </h2>
- <table>
+ <table class="blueTable">
   <tr ng-repeat="user in nonFriends | orderBy:['name', 'surname'] | filter:{name: search.name, surname: search.surname}">
     <td>{{ user.name }}</td>
     <td>{{ user.surname }}</td>
-    <td><button ng-click="sendRequest(user, user.id, $index)">Posalji</button></td>
+    <td align="center"><button ng-click="sendRequest(user, user.id, $index)">Posalji</button></td>
   </tr>
 </table> 
 
+<hr>
 <h2> Primljeni zahtevi </h2>
- <table>
+ <table class="blueTable">
   <tr ng-repeat="user in requests | orderBy:['name', 'surname'] | filter:{name: search.name, surname: search.surname}">
     <td>{{ user.name }}</td>
     <td>{{ user.surname }}</td>
-    <td><button ng-click="cancelRequest(user.id, user, $index)">Obrisi</button></td>
-    <td><button ng-click="acceptRequest(user.id, user, $index)">Prihvati</button></td>
+    <td align="center"><button ng-click="cancelRequest(user.id, user, $index)">Obrisi</button></td>
+    <td align="center"><button ng-click="acceptRequest(user.id, user, $index)">Prihvati</button></td>
   </tr>
 </table> 
 
+
+<style>
+	table.blueTable {
+	  border: 1px solid #A41C7A;
+	  background-color: #EEEEEE;
+	  table-layout: fixed;
+	  width: 50%;
+	  text-align: left;
+	  border-collapse: collapse;
+	}
+	table.blueTable td, table.blueTable th {
+	  border: 1px solid #AAAAAA;
+	  padding: 3px 2px;
+	}
+	table.blueTable tbody td {
+	  font-size: 16px;
+	  color: #330E18;
+	}
+	table.blueTable tr:nth-child(even) {
+	  background: #D0E4F5;
+	}
+	table.blueTable thead {
+	  background: #3664C6;
+	  background: -moz-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: -webkit-linear-gradient(top, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  background: linear-gradient(to bottom, #688bd4 0%, #4a73cb 66%, #3664C6 100%);
+	  border-bottom: 2px solid #444444;
+	}
+	table.blueTable tr, th{
+		height: 15px;
+		width: 3px;
+	}
+	
+	.but{
+		aligment: center;
+		width: 0.5px;
+	}
+	table.blueTable td{
+		height: 20px;
+		width: 2px;
+	}
+	table.blueTable thead th {
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  border-left: 2px solid #D0E4F5;
+	}
+	table.blueTable thead th:first-child {
+	  border-left: none;
+	}
+	
+	table.blueTable tfoot {
+	  font-size: 14px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  background: #D0E4F5;
+	  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+	  border-top: 2px solid #444444;
+	}
+	table.blueTable tfoot td {
+	  font-size: 14px;
+	}
+	table.blueTable tfoot .links {
+	  text-align: right;
+	}
+	table.blueTable tfoot .links a{
+	  display: inline-block;
+	  background: #1C6EA4;
+	  color: #FFFFFF;
+	  padding: 2px 8px;
+	  border-radius: 5px;
+	}
+	
+	h2 {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 25px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+	.lab{
+			-webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  border: none;
+		  font: italic normal bold 17px/1 "Trebuchet MS", Helvetica, sans-serif;
+		  color: rgba(53,53,158,1);
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+	}
+	
+
+	
+</style>
