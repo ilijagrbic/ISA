@@ -90,4 +90,18 @@ Edit place
 			</li>
 		</ol>
 	</div>
+	
+		<di>
+		<h3>Admini </h3>
+		<ol>
+			<li ng-repeat="rez in oneClick">
+				Naziv filma: {{rez.film.name}}<br/>
+				Datum: {{rez.projekcija.date}}<br/>
+				Sala: {{rez.projekcija.sala.nazivBroj}}({{rez.rezervisanoMesto.visKord}},{{rez.rezervisanoMesto.duzKord}})<br/>
+				Orginalna cena: {{rez.projekcija.cena}}<br/>
+				POPUST!: {{rez.rezervisanoMesto.deltaCena}}
+				<button ng-click="deleteOneClickReservation(rez.id)">Delete</button>
+			</li>
+		</ol>
+	</div>
 </div>
