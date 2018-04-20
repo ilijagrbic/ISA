@@ -185,12 +185,13 @@ public class ReservationService {
 	}
 	
 	public double getIncome(long id, IncomeReportDTO datumi) {
+		Date today = new Date();
 		ArrayList<Rezervacija> retVal = (ArrayList<Rezervacija>)getInCinnema(id);
 		
 		double sum = 0;
 		
 		for(Rezervacija r:retVal) {
-			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())) {
+			if(datumi.getOd().before(r.getProjekcija().getDate())&&datumi.getDoo().after(r.getProjekcija().getDate())&&today.after(r.getProjekcija().getDate())) {
 				sum+=r.getProjekcija().getCena(); 
 				if(r.getRezervisanoMesto().getType()==SedisteType.PROMOTION) {
 					sum-=r.getRezervisanoMesto().getDeltaCena();
@@ -275,6 +276,7 @@ public class ReservationService {
 	}
 	
 	public List<GrafikDTO> getPosete(long id, IncomeReportDTO datumi){
+		Date today = new Date();
 	    Map<Date, Integer> grafik = new HashMap<>();
 	    //grafik = popuniInverval(grafik, datumi.getOd(),	datumi.getDoo());
 	    
@@ -288,7 +290,7 @@ public class ReservationService {
 	    }
 	    
 	    for(Rezervacija rez:uBisokopu) {
-	    	if(rez.getProjekcija().getDate().after(datumi.getOd())&&rez.getProjekcija().getDate().before(datumi.getDoo())) {
+	    	if(rez.getProjekcija().getDate().after(datumi.getOd())&&rez.getProjekcija().getDate().before(datumi.getDoo())&&today.after(rez.getProjekcija().getDate())) {
 		    	Date dan = setToZeroTime(rez.getProjekcija().getDate());
 		    	Integer posete = grafik.get(dan);
 		    	if(posete==null) {
