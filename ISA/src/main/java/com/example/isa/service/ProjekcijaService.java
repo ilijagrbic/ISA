@@ -115,8 +115,21 @@ public class ProjekcijaService {
 	}
 	
 	public Projekcija update(Projekcija newProj, long id) {
+		Sala s = salaPrepository.findById(newProj.getSala().getId());
+		Sala nva = null;
+		if(s==null) {
+			nva = salaPrepository.save(newProj.getSala());
+			s = nva;
+		}
 		Projekcija toUpdate = projekcijaRepository.findById(newProj.getId());
+		toUpdate.setSala(s);
 		MovieShow mov = movieRepository.findById(id);
+		
+		ArrayList<Rezervacija> rez = (ArrayList<Rezervacija>)reserRepository.findByProjekcijaId(id);
+		
+		if(newProj.getSala().getId()!=toUpdate.getSala().getId()&&!rez.isEmpty()) {
+			return null;
+		}
 		
 		if(toUpdate==null||mov==null) {
 			return null;

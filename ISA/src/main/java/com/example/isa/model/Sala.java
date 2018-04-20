@@ -100,7 +100,33 @@ public class Sala {
 		this.bioskop = bioskop;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sala other = (Sala) obj;
+		if (duzina != other.duzina)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nazivBroj == null) {
+			if (other.nazivBroj != null)
+				return false;
+		} else if (!nazivBroj.equals(other.nazivBroj))
+			return false;
+		if (visina != other.visina)
+			return false;
+		return true;
+	}
 
+	
 	
 	
 	
