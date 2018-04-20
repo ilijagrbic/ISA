@@ -44,6 +44,7 @@ public class RekvizitController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="api/rekvizit/polovni")
 	public ResponseEntity<List<Rekviziti>> getRekvizitiPolovni(){
+		System.out.println("Dobijanje polovnih rekvizita");
 		List<Rekviziti> rekviziti = rekvizitiService.getOdobreni();
 		List<Rekviziti> rekviziti1 = new ArrayList<>();
 		for (Rekviziti rekvizit : rekviziti) {
@@ -57,6 +58,7 @@ public class RekvizitController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="api/rekvizit/zvanicni")
 	public ResponseEntity<List<Rekviziti>> saveRekvizitZvanicni(@RequestBody Rekviziti rekvizit){
+		System.out.println("Cuvanje rekvizita");
 		rekvizit.setVrsta(VrstaRekvizita.ZVANICNI);
 		rekvizit.setOdobren(RekvizitState.PRIHVACEN);
 		rekvizitiService.save(rekvizit);

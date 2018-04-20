@@ -1,5 +1,9 @@
 angular.module('app')
     .controller('fanZoneAdminController', function ($scope, fanZoneService) {
+    	
+    	
+    	
+    	
     	fanZoneService.getZvanicnaPonuda(
 				function(info){//succes function
 					$scope.zvanicna=info.data;
@@ -66,10 +70,11 @@ angular.module('app')
     		$scope.novRekvizit,
     		function(info){//succes function
     			$scope.zvanicna=info.data;
+    			alert("Dodat je zvanicni oglas");
 				
 			},
 			function(info){//fail function
-				
+				alert("Neuspesno dodavanje oglasa");
 				
 			}
     				
@@ -167,10 +172,10 @@ angular.module('app')
     		id,
     		function(info){//succes function
     			$scope.odobrenje=info.data;
-				
+				alert("Uspesno prihvacen oglas");
 			},
 			function(info){//fail function
-				
+				alert("Nije prihvacen oglas");
 			}
     				
     		
@@ -183,10 +188,11 @@ angular.module('app')
     		id,
     		function(info){//succes function
     			$scope.odobrenje=info.data;
+    			alert("Oglas je uspesno odbijen!");
 				
 			},
 			function(info){//fail function
-				
+				alert("Odbijanje oglasa nije uspelo");
 			}
     				
     		
@@ -199,10 +205,10 @@ angular.module('app')
     		fanZoneService.prihvatiPonudu(
     				ponuda,
     		function(info){//succes function
-				
+				alert("Ponuda je prihvacena");
 			},
 			function(info){//fail function
-				
+				alert("Nije uspela ponuda");
 			}
     				
     		
@@ -216,10 +222,10 @@ angular.module('app')
     		fanZoneService.zakaziZvanicni(
     				$scope.ponuda,
     		function(info){//succes function
-				
+				alert("Uspesno izvrsena rezervacija.");
 			},
 			function(info){//fail function
-				
+				alert("Nije uspela rezervacija.");
 			}
     				
     		
