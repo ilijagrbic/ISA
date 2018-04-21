@@ -49,7 +49,11 @@ angular.module('app')
 					},
 					function(info){//fail function
 						$scope.curentCinemaTheatre=null;
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 					}
 			);
 			reservationService.getOneClick($stateParams.cinemaTheatreId,
@@ -57,7 +61,11 @@ angular.module('app')
 						$scope.oneClick=info.data;	
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 					}
 			);
 			reportService.getAmbijentReport($stateParams.cinemaTheatreId,
@@ -65,7 +73,11 @@ angular.module('app')
 						$scope.ambijentOcena=info.data.avgOcena;	
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 					})
 			
 		}
@@ -153,7 +165,11 @@ angular.module('app')
 						
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 						
 					})
 
@@ -208,7 +224,11 @@ angular.module('app')
 					$scope.reportIncome=info.data.avgOcena;
 				},
 				function(info){
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 					
 				})
 		}
@@ -227,7 +247,11 @@ angular.module('app')
 						}
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 					}
 			)
 		}
@@ -250,7 +274,11 @@ angular.module('app')
 						if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
     						alert("Greska u unosu!")
     					}else{
-    						alert(info.data.err);
+    						if(info.data.err!=undefined){
+    							alert(info.data.err);
+    						}else{
+    							alert("Doslo je do greske.");
+    						}
     					}
 					}
 			)
@@ -271,7 +299,11 @@ angular.module('app')
 					}
 				},
 				function(){
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 			)
 		}
@@ -301,7 +333,11 @@ angular.module('app')
 		    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
 		    						alert("Greska u unosu!")
 		    					}else{
-		    						alert(info.data.err);
+		    						if(info.data.err!=undefined){
+		    							alert(info.data.err);
+		    						}else{
+		    							alert("Doslo je do greske.");
+		    						}
 		    					}
 		    				}
 		    			);
@@ -315,7 +351,11 @@ angular.module('app')
 		    					$scope.curentCinemaTheatre.repertoire.movies.splice($scope.curentCinemaTheatre.repertoire.movies.length, "0", info.data);
 		    				},
 		    				function(info){
-		    					alert(info.data.err);
+		    					if(info.data.err!=undefined){
+									alert(info.data.err);
+								}else{
+									alert("Doslo je do greske.");
+								}
 		    				}
 		    			);
 	          });

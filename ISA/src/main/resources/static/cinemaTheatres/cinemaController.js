@@ -26,7 +26,11 @@ angular.module('app')
     					}
     				},
     				function(info){
-    					alert(info.data.err);
+    					if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
     				}
     		)
     	}
@@ -38,7 +42,11 @@ angular.module('app')
 				},
 				function(info){//fail function
 					$scope.cinemas=[];
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 		);
     	$scope.showCinemas = true;
@@ -52,7 +60,11 @@ angular.module('app')
 	    					$scope.showCinemas = false;
 	    				},
 	    				function(info){
-	    					alert(info.data.err);
+	    					if(info.data.err!=undefined){
+								alert(info.data.err);
+							}else{
+								alert("Doslo je do greske.");
+							}
 	    				}
 	    		)
     		}else{

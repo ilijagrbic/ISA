@@ -90,7 +90,7 @@ public class ReservationService {
 		
 	}
 	
-	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED, isolation=Isolation.READ_UNCOMMITTED)
+	 @Transactional( readOnly = false, propagation = Propagation.REQUIRED)
 	public Rezervacija putRese(Rezervacija newr, Long idSediste, Long idUser) {
 		Rezervacija toUpdate = reservationRepository.findById(newr.getId());
 		/*Projekcija pro = projRepository.findById(idProj);

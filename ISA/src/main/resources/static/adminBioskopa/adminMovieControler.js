@@ -29,7 +29,11 @@ angular.module('app')
 				},
 				function(info){
 					$scope.curentMovie = null;
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 		)
 		
@@ -38,7 +42,11 @@ angular.module('app')
 					$scope.listProjekcije = info.data;
 				},
 				function(info){
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 		)
 		
@@ -47,7 +55,11 @@ angular.module('app')
 					$scope.listGlumci = info.data
 				},
 				function(info){
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 		)
 		
@@ -56,7 +68,11 @@ angular.module('app')
 					$scope.listSale = info.data;
 				},
 				function(info){
-					alert(info.data.err);
+					if(info.data.err!=undefined){
+						alert(info.data.err);
+					}else{
+						alert("Doslo je do greske.");
+					}
 				}
 			)
 		
@@ -117,7 +133,11 @@ angular.module('app')
 							if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
 	    						alert("Greska u unosu!")
 	    					}else{
-	    						alert(info.data.err);
+	    						if(info.data.err!=undefined){
+	    							alert(info.data.err);
+	    						}else{
+	    							alert("Doslo je do greske.");
+	    						}
 	    					}
 						}
 				)
@@ -171,7 +191,11 @@ angular.module('app')
 						}
 					},
 					function(info){
-						alert(info.data.err);
+						if(info.data.err!=undefined){
+							alert(info.data.err);
+						}else{
+							alert("Doslo je do greske.");
+						}
 					}
 			)
 		}
@@ -229,7 +253,11 @@ angular.module('app')
 			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
 			    						alert("Greska u unosu!")
 			    					}else{
-			    						alert(info.data.err);
+			    						if(info.data.err!=undefined){
+			    							alert(info.data.err);
+			    						}else{
+			    							alert("Doslo je do greske.");
+			    						}
 			    					}
 			    				}
 			    			);
@@ -246,7 +274,11 @@ angular.module('app')
 			    					if(info.data.exception=="org.springframework.http.converter.HttpMessageNotReadableException"){
 			    						alert("Greska u unosu!")
 			    					}else{
-			    						alert(info.data.err);
+			    						if(info.data.err!=undefined){
+			    							alert(info.data.err);
+			    						}else{
+			    							alert("Doslo je do greske.");
+			    						}
 			    					}
 			    				}
 			    			);

@@ -31,7 +31,11 @@ angular.module('app').controller(
 	    	    				
 	    	    			},
 	    				function(info){
-	    	    				alert(info.data.err);
+	    	    				if(info.data.err!=undefined){
+	    							alert(info.data.err);
+	    						}else{
+	    							alert("Doslo je do greske.");
+	    						}
 	    				}
 	    		)
 			}
