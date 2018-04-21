@@ -44,7 +44,7 @@
 		
 		</div>
 					
-				<div ng-if="USER.role == 'REG_USER' || USER.role == 'FAN_ZONE_ADMIN'">
+				<div ng-if="USER.role == 'FAN_ZONE_ADMIN'">
 		
 				<span ng-if="headerState!='home'"><a ui-sref="adminLogin" value="home" ng-click="headerSwitch('home')">Profil</a></span>
 				<span ng-if="headerState=='home'">Profil</span>
@@ -56,7 +56,7 @@
 				<span ng-if="headerState=='thea'">Pozorista</span>
 				
 				
-				<a ui-sref="fanZoneAdmin">Fan Zona</a>
+				
 				
 				
 				
@@ -64,7 +64,9 @@
 
 		</div>
 		
-		
+		<div ng-if="USER.role == 'REG_USER'">
+		<a ui-sref="fanZoneAdmin">Fan Zona</a>
+		</div>
 						
 	</p>
 </div>

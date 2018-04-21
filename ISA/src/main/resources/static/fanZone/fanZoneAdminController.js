@@ -95,6 +95,7 @@ angular.module('app')
     		$scope.polovniRekvizit,
     		function(info){//succes function
     			$scope.polovni=info.data;
+    			alert("Dodat polovan oglas");
 				
 			},
 			function(info){//fail function

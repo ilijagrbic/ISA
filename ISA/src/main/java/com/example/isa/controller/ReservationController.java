@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.OptimisticLockException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,18 +63,24 @@ public class ReservationController {
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Rezervacija> editRez(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
-		Rezervacija rez = createMovie.getRezervacija();
-		Long sed = createMovie.getRezSedisteId();
-		Long use = createMovie.getUserId();
-		rez.setId(id);
-		Rezervacija retVal = resevationService.putRese(rez, sed, use);
-		
-		if(retVal!=null) {
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+	public ResponseEntity<?> editRez(@RequestBody RezervacijaDTO createMovie, @PathVariable("id") Long id){
+		try{
+			Rezervacija rez = createMovie.getRezervacija();
+
+			Long sed = createMovie.getRezSedisteId();
+			Long use = createMovie.getUserId();
+			rez.setId(id);
+			Rezervacija retVal = resevationService.putRese(rez, sed, use);
+			
+			if(retVal!=null) {
+				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+			}
 		}
-		else {
-			return new ResponseEntity<Rezervacija>(retVal, HttpStatus.BAD_REQUEST);
+		catch(OptimisticLockException e) {
+			return new ResponseEntity<AlertMessageDTO>(new AlertMessageDTO("Neko vec rezervisao"), HttpStatus.BAD_REQUEST);
 		}
 		
 	}
